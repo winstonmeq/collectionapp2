@@ -1,7 +1,12 @@
 import { Box, Flex, Text, IconButton, Button, Stack,
-  Collapse,Grid, GridItem, Icon, Link, Popover, PopoverTrigger,PopoverContent,
+  Collapse,Grid, GridItem, Icon, Popover, PopoverTrigger,PopoverContent,
   useColorModeValue, useBreakpointValue, useDisclosure,
 } from '@chakra-ui/react';
+import Link from "next/link";
+
+
+
+
 
 const Header = () => {
 
@@ -25,11 +30,14 @@ const Header = () => {
 
 <Stack direction={'row'}>
 
-<Link href={'/components/login/signIn'} _hover="none">
+<Button size={'sm'}>
+<Link href={'/components/login/signIn'} >
 <Text fontWeight={'bold'} fontSize={'md'}>Sign In</Text>
 </Link>
-
+</Button>
+<Button size={'sm'}>  
 <Text fontSize={'md'}>Sign Up </Text>
+</Button>
 </Stack>
      
 

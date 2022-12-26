@@ -1,150 +1,448 @@
+import {
+  Flex,
+  Avatar,
+  Box,
+  Button,
+  Text,
+  Spacer,
+  Input,
+  Stack,
+  
+} from "@chakra-ui/react";
+import Link from "next/link";
+import { useRef } from "react";
+import { addCedula } from "../../../axios/cedula_request";
+import { useState } from "react";
+import { useRouter } from "next/router";
 
-import { Flex, Avatar, Box, Button, Text, Spacer } from '@chakra-ui/react';
-import Link from 'next/link';
 
-import { useRef } from 'react';
-import ReactToPrint from 'react-to-print';
-import Print_cedula from './printcedula';
-import { useState } from 'react';
+
+
+// Input.defaultProps = { borderColor: 'gray.300',   };
+
+
 
 
 const Cedula = () => {
+  const tableRef = useRef(null);
 
-    const [modalopen, setmodalopen] = useState(false);
+  const router = useRouter();
 
+  const currentDate = new Date();
+  const dateToday = `${currentDate.getDate()}/${
+    currentDate.getMonth() + 1
+  }/${currentDate.getFullYear()}`;
 
+  const [modalopen, setmodalopen] = useState(false);
 
+  const [cedula_no, setcedula_no] = useState("");
+  const [year, setyear] = useState("23");
+  const [date, setdate] = useState(dateToday);
+  const [place_issue, setplace_issue] = useState("President Roxas, Cotabato");
+  const [full_name, setfull_name] = useState("");
+  const [full_add, setfull_add] = useState("");
+  const [place_birth, setplace_birth] = useState("");
+  const [date_birth, setdate_birth] = useState("");
+  const [nationality, setnationlity] = useState("");
+  const [height, setheight] = useState("");
+  const [weight, setweight] = useState("");
+  const [male, setmale] = useState("");
+  const [female, setfemale] = useState("");
+  const [single, setsingle] = useState("");
+  const [married, setmarried] = useState("");
+  const [widow, setwidow] = useState("");
+  const [divorced, setdivorced] = useState("");
+  const [profession, setprofession] = useState("");
+  const [amount1, setamount1] = useState(0);
+  const [amount2, setamount2] = useState(0);
+  const [amount3, setamount3] = useState(0);
+  const [amount4, setamount4] = useState(0);
+  const [interest, setinterest] = useState(0);
+  const [total, settotal] = useState(0);
+  const [num_word, setnum_word] = useState("");
+  const [res_interest,setres_interest] = useState(0)
 
-    const openmodal = () => {
-        setmodalopen(true);      
-
-    }
-
-
-
-
-    const tableRef = useRef(null);
-
-return (
-    <Flex direction={'column'} align={'center'} width={"100vw"}>
-
-<Box>
-<ReactToPrint 
-       trigger={() => 
-        <Button >Print this out!</Button>}
-        content={() => tableRef.current}
-        />
-</Box>
-
-<Box bg={'red'} ref={tableRef} align={'left'} >
-    
-<table   style={{ width:'500px', marginLeft:'35px'}} >
-   
-   <tbody>
-   <tr>
-        <td><br/><br/></td>
-       
-    </tr>
-       <tr>
-       <td style={{width: "8.8994%" , fontSize:"13px"}}><Box align={'right'}><input type="text" value={'22'} placeholder='Year' style={{width: "55%"}} /></Box></td>
-       <td colspan="2" style={{width: "10.9765%;" , fontSize:"13px"}}><input type="text" value={'President Roxas, Cot.'}  style={{width: "100%"}} /></td>
-       <td style={{width: " 16.8439%;" , fontSize:"13px"}}><Box align={'center'}><input type="text" value={'2022-11-12'} style={{width: "80%"}} /></Box></td>
-       <td style={{width: "6.9693%;" , fontSize:"13px"}}></td>
-       <td style={{width: "11.9587%;" , fontSize:"13px"}}></td>
-       <td style={{width: "17.1854%;" , fontSize:"13px"}}></td>
-       </tr>
-       <tr>
-           <td colspan="4" style={{width: "61.6898%;" , fontSize:"13px"}}><Box align={"right"}><input type="text" placeholder='Full name' style={{width: "80%"}} /></Box></td>
-           <td style={{width: "6.9693%;" , fontSize:"13px"}}></td>
-           <td style={{width: "13.9587%;" , fontSize:"13px"}}></td>
-           <td style={{width: "17.1854%;" , fontSize:"13px"}}></td>
-       </tr>
-       <tr>
-           <td colspan="5" style={{width: " 68.6857%;" , fontSize:"13px"}}><Box align={'right'}><input type="text" placeholder='Full Address' style={{width: "80%"}} /></Box></td>
-           <td style={{width: "1.9587%;" , fontSize:"13px"}}><Box align={'right'}><input type="text"   style={{width: "60%"}} /></Box></td>
-           <td style={{width: "1.1854%;" , fontSize:"13px"}}><Box align={'right'}><input type="text"  style={{width: "80%"}} /></Box></td>
-       </tr>
-       <tr>
-           <td colspan="2" style={{width: "24.0245%;" , fontSize:"13px"}}><Box align={'right'}><input type="text" placeholder='Nationality' style={{width: "80%"}} /></Box></td>
-           <td style={{width: "19.8214%;" , fontSize:"13px"}}><Box align={'right'}><input type="text" style={{width: "80%"}} /></Box></td>
-           <td colspan="3" style={{width: "38.8315%;" , fontSize:"12px"}}><Box align={'right'}><input type="text" placeholder='Place of Birth' style={{width: "70%"}} /></Box></td>
-           <td style={{width: "17.1854%;" , fontSize:"11px"}}><Box align={'right'}><input type="text" placeholder='Height' style={{width: "35%"}} /></Box></td>
-       </tr>
-       <tr>
-           <td colspan="3" style={{width: "68.6857%;" , fontSize:"8px" , fontWeight:"bolder"}}>
-            <Flex justify={'center'} direction={'row'}><Box textAlign={'center'} ><input type="text" placeholder='Status' style={{width: "20%"}}/><br/> <input type="text" placeholder='Status' style={{width: "20%"}}/></Box>
-            <Box textAlign={'center'} ><input type="text" placeholder='Status' style={{width: "20%"}}/><br/><input type="text" placeholder='Status' style={{width: "20%"}}/></Box>
-            </Flex>
-            
-            
-            </td>
-           <td colspan="3" style={{width: "13.9587%;" , fontSize:"11px"}}><Box align={'right'}><input type="text" placeholder='Birth Date' style={{width: "35%"}} /></Box></td>
-           <td style={{width: "17.1854%;" , fontSize:"11px"}}><Box align={'right'}><input type="text" placeholder='Weight' style={{width: "35%"}} /></Box></td>
-       </tr>
-       <tr>
-           <td colspan="5" style={{width: "68.6857%;" , fontSize:"13px"}}><Box align={'right'}><input type="text" placeholder='Profession' style={{width: "60%"}} /></Box></td>
-           <td style={{width: "13.9587%;" , fontSize:"13px"}}></td>
-           <td style={{width: "17.1854%;" , fontSize:"13px"}}></td>
-       </tr>
-       <tr>
-           <td colspan="5" style={{width: "68.6857%;" , fontSize:"13px"}}>.</td>
-           <td style={{width: "13.9587%;" , fontSize:"13px"}}>.</td>
-           <td style={{width: "17.1854%;" , fontSize:"13px"}}><Box align={'right'}><input type="text" placeholder='Amount 1' style={{width: "70%"}} /></Box></td>
-       </tr>
-       <tr>
-           <td colspan="5" style={{width: " 68.6857%;" , fontSize:"13px"}}></td>
-           <td style={{width: " 13.9587%;" , fontSize:"13px"}}>-</td>
-           <td style={{width: "17.1854%;" , fontSize:"13px"}}></td>
-       </tr>
-       <tr>
-           <td colspan="5" style={{width: "68.6857%;" , fontSize:"13px"}}></td>
-           <td style={{width: "13.9587%;" , fontSize:"13px"}}><Box align={'right'}><input type="text" placeholder='Amount 2' style={{width: "70%"}} /></Box></td>
-           <td style={{width: "17.1854%;" , fontSize:"13px"}}><Box align={'right'}><input type="text" placeholder='Amount 3' style={{width: "70%"}} /></Box></td>
-       </tr>
-       <tr>
-           <td colspan="5" style={{width: " 68.6857%;" , fontSize:"13px"}}></td>
-           <td style={{width: "13.9587%;" , fontSize:"13px"}}><Box align={'right'}><input type="text" placeholder='Amount 2' style={{width: "70%"}} /></Box></td>
-           <td style={{width: "17.1854%;", fontSize:"13px" }}><Box align={'right'}><input type="text" placeholder='Amount 4' style={{width: "70%"}} /></Box></td>
-       </tr>
-       <tr>
-           <td colspan="5" style={{width: "68.6857%;" , fontSize:"13px"}}></td>
-           <td style={{width: " 13.9587%;" , fontSize:"13px"}}><Box align={'right'}><input type="text" placeholder='Amount 2' style={{width: "70%"}} /></Box></td>
-           <td style={{width: "17.1854%;", fontSize:"13px"}}><Box align={'right'}><input type="text" placeholder='Amount 5' style={{width: "70%"}} /></Box></td>
-       </tr>
-       <tr>
-           <td colspan="2" style={{width: "26.0245%;" , fontSize:"13px"}}></td>
-           <td colspan="3" style={{width: "42.6337%;" , fontSize:"13px"}}></td>
-           <td style={{width: "13.9587%;", fontSize:"13px" }}></td>
-           <td style={{width: "17.1854%;", fontSize:"13px"}}><Box align={'right'}><input type="text" placeholder='Total' style={{width: "70%"}} /></Box></td>
-       </tr>
-       <tr>
-           <td colspan="2" style={{width: "26.0245%;" , fontSize:"13px"}}></td>
-           <td colspan="3" style={{width: "42.6337%;" , fontSize:"13px"}}></td>
-           <td style={{width: "13.9587%;", fontSize:"13px" }}></td>
-           <td style={{width: "17.1854%;" , fontSize:"13px"}}><Box align={'right'}><input type="text" placeholder='Interest' style={{width: "70%"}} /></Box></td>
-       </tr>
-       <tr>
-           <td colspan="5" style={{width: "42.6337%;" , fontSize:"13px"}}></td>
-           <td style={{width: "13.9587%;" , fontSize:"13px"}}></td>
-           <td style={{width: "7.1854%;" , fontSize:"13px"}}><Box align={'right'}><input type="text" placeholder='Total Amount' style={{width: "70%"}} /></Box></td>
-       </tr>
-       <tr>
-         <td colspan="2" style={{width: "10.6337%;" , fontSize:"13px"}}></td>
-           <td colspan="3"style={{width: "13.9587%;" , fontSize:"13px"}}><Box align={'center'}>MARIA FE. DALISAY</Box></td>
-           <td colspan="2" style={{width: "31.1771%;" , fontSize:"13px"}}><input type="text" placeholder='In Words' style={{width: "100%"}} /></td>
-           
-       </tr>
-   </tbody>
-  
-</table>
-</Box>
+  const openmodal = () => {
+    setmodalopen(true);
+  };
 
 
-    </Flex>
-)
+
+  var converter = require('number-to-words');
 
 
+
+
+
+const savedata = () => {
+
+  setinterest(((Number(amount1) + Number(amount2) + Number(amount3) + Number(amount4)) * 0.01).toFixed(2))
+  settotal((((Number(amount1) + Number(amount2) + Number(amount3) + Number(amount4)) * 0.01) + 
+           Number(amount1) + Number(amount2) + Number(amount3) + Number(amount4)).toFixed(2) )
+  setnum_word(converter.toWords(((Number(amount1) + Number(amount2) + Number(amount3) + Number(amount4)) * 0.01) + 
+  Number(amount1) + Number(amount2) + Number(amount3) + Number(amount4) ))
 
 }
+
+
+
+
+  const addCedulaHandler = async (e) => {
+    e.preventDefault();
+
+    const payload = {
+      cedula_no,
+      date,
+      year,
+      place_issue,
+      full_name,
+      full_add,
+      place_birth,
+      date_birth,
+      nationality,     
+      height,
+      weight,
+      male,
+      female,
+      married,
+      single,
+      widow,
+      divorced,
+      profession,
+      amount1,
+      amount2,
+      amount3,
+      amount4,     
+      interest,
+      total,     
+      num_word,
+    };
+
+    const result = await addCedula(payload);
+
+    console.log(result);
+
+    if (result.hasError == true) {
+      console.log("successfully save!");
+    } else {
+      router.push("/");
+    }
+  };
+
+  return (
+    <Flex direction={"column"} align={"center"} width={"100vw"}>
+ 
+      <Box>
+        <form onSubmit={addCedulaHandler}>
+         <Flex justify={'right'}>
+         <Box align={"right"}>
+            <Input
+              type="text"  
+              borderColor={'gray.800'}
+              placeholder="Cedula Number"
+              onChange={(e) => {
+                setcedula_no(e.target.value);
+              }}
+            />
+          </Box>
+         </Flex>
+          <Flex direction={"row"}>
+            <Box width={'80px'} align={"right"}>
+              <Input
+                type="text"
+                value="23"
+              
+                onChange={(e) => {
+                  setyear(e.target.value);
+                }}
+              />
+            </Box>
+            <Box w={'50%'} align={"right"}>
+              <Input
+                type="text"
+                value="President Roxas, Cotabato"
+                onChange={(e) => {
+                  setplace_issue(e.target.value);
+                }}
+              />
+            </Box>
+            <Box align={"right"}>
+              <Input
+                type="text"
+                value={dateToday}
+                onChange={(e) => {
+                  setdate(e.target.value);
+                }}
+              />
+            </Box>
+          </Flex>
+
+          <Box align={"right"}>
+            <Input
+              type="text"
+              placeholder="Full Name"
+              onChange={(e) => {
+                setfull_name(e.target.value);
+              }}
+            />
+          </Box>
+          <Flex direction={'row'} >
+          <Box w={'80%'} align={"right"}>
+            <Input
+              type="text"
+              placeholder="Full Address"
+              onChange={(e) => {
+                setfull_add(e.target.value);
+              }}
+            />
+          </Box>
+          <Box align={"right"}>
+            <Input
+              type="text"
+              placeholder="Male"
+              onChange={(e) => {
+                setmale(e.target.value);
+              }}
+            />
+          </Box>
+          <Box align={"right"}>
+            <Input
+              type="text"
+              placeholder="Female"
+              onChange={(e) => {
+                setfemale(e.target.value);
+              }}
+            />
+          </Box>
+          </Flex>
+         <Flex direction={'row'} gridColumn={2}>
+         <Box align={"right"}>
+            <Input
+              type="text"
+              placeholder="Nationality"
+              onChange={(e) => {
+                setnationlity(e.target.value);
+              }}
+            />
+          </Box>
+          <Box flex='1' align={"right"}>
+            <Input
+              type="text"
+              placeholder="Place of birth"
+              onChange={(e) => {
+                setplace_birth(e.target.value);
+              }}
+            />
+          </Box>
+         </Flex>
+         <Flex direction={'row'}>
+          <Box align={"right"}>
+            <Input
+              type="text"
+              placeholder="Single"
+              onChange={(e) => {
+                setsingle(e.target.value);
+              }}
+            />
+          </Box>
+          <Box align={"right"}>
+            <Input
+              type="text"
+              placeholder="Married"
+              onChange={(e) => {
+                setmarried(e.target.value);
+              }}
+            />
+          </Box>
+          <Box align={"right"}>
+            <Input
+              type="text"
+              placeholder="Widow"
+              onChange={(e) => {
+                setwidow(e.target.value);
+              }}
+            />
+          </Box>
+          <Box align={"right"}>
+            <Input
+              type="text"
+              placeholder="Divorced"
+              onChange={(e) => {
+                setdivorced(e.target.value);
+              }}
+            />
+          </Box>
+          </Flex>
+          <Flex direction={'row'}>
+          <Box align={"right"}>
+            <Input
+              type="date"
+              placeholder="Date of Birth"
+              onChange={(e) => {
+                setdate_birth(e.target.value);
+              }}
+            />
+          </Box>
+          <Box align={"right"}>
+            <Input
+              type="text"
+              placeholder="Height"
+              onChange={(e) => {
+                setheight(e.target.value);
+              }}
+            />
+          </Box>
+          <Box align={"right"}>
+            <Input
+              type="text"
+              placeholder="Weight"
+              onChange={(e) => {
+                setweight(e.target.value);
+              }}
+            />
+          </Box>
+          </Flex>
+         
+          <Box align={"right"}>
+            <Input
+              type="text"
+              placeholder="Profession"
+              onChange={(e) => {
+                setprofession(e.target.value);
+              }}
+            />
+          </Box>
+          <Flex justify={'right'}>
+          <Box>
+            <Input
+              type="number"
+              placeholder="Amount1"
+              onChange={(e) => {
+                setamount1(e.target.value);
+              }}
+            />
+          </Box>
+          </Flex>
+         <Flex direction={'row'} justify={'right'}>
+         <Box align={"right"}>
+            <Input
+                type="number"
+              placeholder="Amount2"
+              onChange={(e) => {
+                setamount2(e.target.value);
+              }}
+            />
+          </Box>
+          <Box align={"right"}>
+            <Input
+              type="number"
+              readOnly= {true}
+              placeholder="Amount2"
+              value={amount2}
+              onChange={(e) => {
+                setamount2(e.target.value);
+              }}
+            />
+          </Box>
+         </Flex>
+         <Flex direction={'row'} justify={'right'}>
+         <Box align={"right"}>
+            <Input
+            type="number"
+              placeholder="Amount3"
+              onChange={(e) => {
+                setamount3(e.target.value);
+              }}
+            />
+          </Box>
+          <Box align={"right"}>
+            <Input
+            type="number"
+            readOnly= {true}
+              placeholder="Amount3"
+              value={amount3}
+              onChange={(e) => {
+                setamount3(e.target.value);
+              }}
+            />
+          </Box>
+         </Flex>
+         <Flex direction={'row'} justify={'right'}>
+         <Box align={"right"}>
+            <Input
+              type="number"
+              placeholder="Amount4"
+              onChange={(e) => {
+                setamount4(e.target.value);
+              }}
+             
+            />
+          </Box>
+          <Box align={"right"}>
+            <Input
+               type="number"
+               readOnly= {true}
+              placeholder="Amount4"
+              value={amount4}
+              onChange={(e) => {
+                setamount4(e.target.value);
+              }}
+            />
+          </Box>
+         </Flex>
+         <Flex justify={'right'}>
+          <Box>
+            <Input
+                type="number"
+                readOnly= {true}
+              placeholder="Interest"
+              value={((Number(amount1) + Number(amount2) + Number(amount3) + Number(amount4)) * 0.01).toFixed(2)}
+              onChange={(e) => {
+                setinterest(value);
+              }}
+            />
+          </Box>
+          </Flex>
+          <Flex justify={'right'}>
+          <Box>
+            <Input
+            type="number"
+            readOnly= {true}
+              placeholder="Total"
+              value={(((Number(amount1) + Number(amount2) + Number(amount3) + Number(amount4)) * 0.01) + 
+                    Number(amount1) + Number(amount2) + Number(amount3) + Number(amount4)).toFixed(2) }
+              onChange={(e) => {
+                settotal(value);
+              }}
+             
+              
+            />
+          </Box>
+          </Flex>
+         
+          <Flex  justify={'right'}>
+          <Box w='50%'>
+            <Input
+              type="text"
+              placeholder="In words"
+              value={converter.toWords(((Number(amount1) + Number(amount2) + Number(amount3) + Number(amount4)) * 0.01) + 
+                    Number(amount1) + Number(amount2) + Number(amount3) + Number(amount4) )}
+              onChange={(e) => {
+                setnum_word(e.target.value);
+              }}
+          />
+          </Box>
+          </Flex>
+          <Flex  justify={'right'}>
+          <Box>
+          <Button onClick={savedata} type="submit">Save</Button>
+          </Box>
+          </Flex>
+         
+        </form>
+      </Box>
+    </Flex>
+  );
+};
 
 export default Cedula;

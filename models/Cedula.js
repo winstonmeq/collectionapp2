@@ -10,144 +10,135 @@ const CedulaSchema = mongoose.Schema({
     },    
     year:{
         type:Number,
-        required:true,
         trim:true
 
     },
     place_issue:{
         type:String,
-        required:true,      
         trim:true
     },
     
     date:{
         type:String,
-        required:true,      
         trim:true
     },
     full_name:{
         type:String,
-        required:true,      
         trim:true
     },
-    full_address:{
+    full_add:{
         type:String,
-        required:true,      
         trim:true
     },
+
+    male:{
+        type:String,
+        trim:true
+    },
+
+
+    female:{
+        type:String,
+        trim:true
+    },
+
     nationality:{
         type:String,
-        required:true,      
         trim:true
     },
+
     icr_no:{
-        type:String,
-        required:true,      
+        type:String,            
         trim:true
     },
     place_birth:{
         type:String,
-        required:true,      
         trim:true
     },
 
-    place_birth:{
+   
+
+    single:{
         type:String,
-        required:true,      
         trim:true
     },
-
-
-    height:{
+    married:{
         type:String,
-        required:true,      
         trim:true
     },
 
-
-    status:{
+    widow:{
         type:String,
-        required:true,      
         trim:true
     },
+
+    divorced:{
+        type:String,
+        trim:true
+    },
+
 
 
     date_birth:{
         type:String,
-        required:true,      
         trim:true
     },
 
+     
+    height:{
+        type:String,
+        trim:true
+    },
 
     weight:{
         type:String,
-        required:true,      
         trim:true
     },
+   
 
     profession:{
         type:String,
-        required:true,      
         trim:true
     },
 
 
     amount1:{
         type:Number,
-        required:true,      
         trim:true
     },
 
     amount2:{
-        type:Number,
-        required:true,      
+        type:Number,     
         trim:true
     },
 
 
     amount3:{
         type:Number,
-        required:true,      
         trim:true
     },
 
 
     amount4:{
         type:Number,
-        required:true,      
         trim:true
     },
 
-
-    amount5:{
-        type:Number,
-        required:true,      
-        trim:true
-    },
 
     total:{
         type:Number,
-        required:true,      
         trim:true
     },
 
 
     interest:{
         type:Number,
-        required:true,      
-        trim:true
-    },
-
-    total_amount:{
-        type:Number,
-        required:true,      
         trim:true
     },
  
 
-    num_words:{
+    num_word:{
         type:String,
-        required:true,      
         trim:true
     },
    

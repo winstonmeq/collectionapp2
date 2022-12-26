@@ -1,31 +1,65 @@
+import {
+  Flex,
+  Avatar,
+  Box,
+  Button,
+  Text,
+  Input,
+  Spacer,
+} from "@chakra-ui/react";
 
-import { Flex, Avatar, Box, Button, Text,Input, Spacer } from '@chakra-ui/react';
+import { useRef } from "react";
+import ReactToPrint from "react-to-print";
+import { getCedulaNo } from "../../../axios/cedula_request";
+import { useState } from "react";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
-import { useRef } from 'react';
-import ReactToPrint from 'react-to-print';
+const Printcedula2 = () => {
+  const [data, setdata] = useState([]);
+  const [userId, setuserId] = useState("635684a1d9f90d0fed02ca51");
 
+  const router = useRouter();
 
-const Printcedula = ({year, date, add, fullname,fulladd, nationality, female, male, height, weight,amount1,amount2,amount3,amount4,total,grandtol}) => {
+  const { id } = router.query;
 
+  console.log("mao nih id", id);
 
-    
-const tableRef = useRef(null);
+  useEffect(() => {
+    const getListCedula = async (id) => {
+      const cedulaId = await getCedulaNo(id);
 
+      if (!cedulaId.hasError == true) {
+        console.log(cedulaId.body);
 
-return (
-<div>
+        setdata(cedulaId.body);
+      } else {
+        console.log("wala data");
+      }
+    };
 
-<ReactToPrint 
-       trigger={() => 
-        <Button>Print this out!</Button>}
+    if (router.isReady) {
+      getListCedula(id);
+    }
+  }, [id]);
+
+  const tableRef = useRef(null);
+
+  return (
+    <Flex direction={"column"} align={"center"} width={"100vw"}>
+      <ReactToPrint
+        trigger={() => <Button>Print this out!</Button>}
         content={() => tableRef.current}
-        
-        />
+      />
 
-<Box ref={tableRef} align={"left"}>
+      <Box ref={tableRef} align={"left"}>
         <table style={{ width: "500px", marginLeft: "35px" }}>
-          <tbody>
-            <tr>
+        {data.map((item,i) => {
+
+        return (
+
+            <tbody>
+            <tr key={i}>
               <td>
                 <br />
                 <br />
@@ -33,39 +67,35 @@ return (
             </tr>
             <tr>
               <td style={{ width: "8.8994%", fontSize: "13px" }}>
-                <Box align={"right"} border={"1px"}>
-                  <input
+                <Box align={"right"} >
+                  <Input
                     type="text"
-                    readOnly="true"
-                    placeholder="23"
-                    onChange={(e) => {
-                      setyear(e.target.value);
-                    }}
-                    style={{ width: "55%" }}
+                    size="xs"
+                    variant="none"
+                    value={item.year}                  
+                    style={{ fontSize: "12px", width: "100%" }}
                   />
                 </Box>
               </td>
               <td colspan="2" style={{ width: "10.9765%;", fontSize: "13px" }}>
-                <Box align={"center"} border={"1px"}>
-                  <input
+                <Box align={"center"} >
+                  <Input
                     type="text"
-                    placeholder="LGU-Pres. Roxas, Cot."
-                    onChange={(e) => {
-                      setadd(e.target.value);
-                    }}
-                    style={{ width: "100%" }}
+                    size="xs"
+                    variant="none"
+                    value={item.place_issue}
+                    style={{ fontSize: "12px", width: "100%" }}
                   />
                 </Box>
               </td>
               <td style={{ width: " 16.8439%;", fontSize: "13px" }}>
-                <Box align={"center"} border={"1px"}>
-                  <input
+                <Box align={"center"} >
+                  <Input
                     type="text"
-                    placeholder="2023/12/2"
-                    onChange={(e) => {
-                      setdate(e.target.value);
-                    }}
-                    style={{ width: "80%" }}
+                    size="xs"
+                    variant="none"
+                    value={item.date}
+                    style={{ fontSize: "10px", width: "100%" }}
                   />
                 </Box>
               </td>
@@ -75,10 +105,10 @@ return (
             </tr>
             <tr>
               <td colspan="4" style={{ width: "61.6898%;", fontSize: "13px" }}>
-                <Box align={"right"} border={"1px"}>
+                <Box align={"right"} >
                   <input
                     type="text"
-                    placeholder="Full Name"
+                    value={item.full_name}
                     style={{ width: "80%" }}
                   />
                 </Box>
@@ -89,31 +119,31 @@ return (
             </tr>
             <tr>
               <td colspan="5" style={{ width: " 68.6857%;", fontSize: "13px" }}>
-                <Box align={"right"} border={"1px"}>
+                <Box align={"right"} >
                   <input
                     type="text"
-                    placeholder="Full address"
+                    value={item.full_add}
                     style={{ width: "80%" }}
                   />
                 </Box>
               </td>
               <td style={{ width: "1.9587%;", fontSize: "13px" }}>
-                <Box align={"right"} border={"1px"}>
-                  <input type="text" style={{ width: "60%" }} />
+                <Box align={"right"} >
+                  <input type="text" value={item.male} style={{ width: "60%" }} />
                 </Box>
               </td>
               <td style={{ width: "1.1854%;", fontSize: "13px" }}>
-                <Box align={"right"} border={"1px"}>
-                  <input type="text"  placeholder="female" style={{ width: "80%" }} />
+                <Box align={"right"} >
+                  <input type="text" value={item.female} style={{ width: "80%" }} />
                 </Box>
               </td>
             </tr>
             <tr>
               <td colspan="2" style={{ width: "24.0245%;", fontSize: "13px" }}>
-                <Box align={"right"} border={"1px"}>
+                <Box align={"right"} >
                   <input
                     type="text"
-                    placeholder="Nationality"
+                    value={item.nationality}
                     style={{ width: "80%" }}
                   />
                 </Box>
@@ -124,10 +154,10 @@ return (
                 </Box>
               </td>
               <td colspan="3" style={{ width: "38.8315%;", fontSize: "12px" }}>
-                <Box align={"right"} border={"1px"}>
+                <Box align={"right"} >
                   <input
                     type="text"
-                    placeholder="Place of Birth"
+                    value={item.place_birth}
                     style={{ width: "70%" }}
                   />
                 </Box>
@@ -137,8 +167,8 @@ return (
                   <Input
                     type="text"
                     size="xs"
-                    variant="outline"
-                    placeholder="Height"
+                    variant="none"
+                    value={item.height}
                     style={{ fontSize: "10px", width: "45%" }}
                   />
                 </Box>
@@ -159,8 +189,8 @@ return (
                       <Input
                         type="text"
                         size="xs"
-                        variant="outline"
-                        placeholder="Single"
+                        variant="none"
+                        value={item.single}
                         style={{ height: "40%" }}
                       />
                     </Box>
@@ -169,8 +199,8 @@ return (
                       <Input
                         type="text"
                         size="xs"
-                        variant="outline"
-                        placeholder="Married"
+                        variant="none"
+                        value={item.married}
                         style={{ height: "40%" }}
                       />
                     </Box>
@@ -181,8 +211,8 @@ return (
                       <Input
                         type="text"
                         size="xs"
-                        variant="filled"
-                        placeholder="Widow"
+                        variant="none"
+                        value={item.widow}
                         style={{ fontSize: "11px", height: "40%" }}
                       />
                     </Box>
@@ -191,8 +221,8 @@ return (
                       <Input
                         type="text"
                         size="xs"
-                        variant="outline"
-                        placeholder="Divorced"
+                        variant="none"
+                        value={item.divorced}
                         style={{ fontSize: "11px", height: "10%" }}
                       />
                     </Box>
@@ -202,10 +232,10 @@ return (
               <td colspan="3" style={{ width: "13.9587%;", fontSize: "11px" }}>
                 <Box align={"right"}>
                   <Input
-                    type="date"
+                    type="text"
                     size="xs"
-                    variant="outline"
-                    placeholder="Birth Date"
+                    variant="none"
+                    value={item.date_birth}
                     style={{ fontSize: "11px", width: "55%" }}
                   />
                 </Box>
@@ -215,8 +245,8 @@ return (
                   <Input
                     type="text"
                     size="xs"
-                    variant="outline"
-                    placeholder="Weight"
+                    variant="none"
+                    value={item.weight}
                     style={{ fontSize: "10px", width: "45%" }}
                   />
                 </Box>
@@ -228,8 +258,8 @@ return (
                   <Input
                     type="text"
                     size="xs"
-                    variant="outline"
-                    placeholder="Profession"
+                    variant="none"
+                    value={item.profession}
                     style={{ width: "70%" }}
                   />
                 </Box>
@@ -247,8 +277,8 @@ return (
                   <Input
                     type="text"
                     size="xs"
-                    variant="outline"
-                    placeholder="Amount 1"
+                    variant="none"
+                    value={item.amount1}
                     style={{ width: "70%" }}
                   />
                 </Box>
@@ -272,8 +302,8 @@ return (
                   <Input
                     type="text"
                     size="xs"
-                    variant="outline"
-                    placeholder="Amount 2"
+                    variant="none"
+                    value={item.amount2}
                     style={{ width: "90%" }}
                   />
                 </Box>
@@ -283,8 +313,8 @@ return (
                   <Input
                     type="text"
                     size="xs"
-                    variant="outline"
-                    placeholder="Amount 3"
+                    variant="none"
+                    value={item.amount2}
                     style={{ width: "80%" }}
                   />
                 </Box>
@@ -300,8 +330,8 @@ return (
                   <Input
                     type="text"
                     size="xs"
-                    variant="outline"
-                    placeholder="Amount 2"
+                    variant="none"
+                    value={item.amount3}
                     style={{ width: "90%" }}
                   />
                 </Box>
@@ -311,8 +341,8 @@ return (
                   <Input
                     type="text"
                     size="xs"
-                    variant="outline"
-                    placeholder="Amount 4"
+                    variant="none"
+                    value={item.amount3}
                     style={{ width: "80%" }}
                   />
                 </Box>
@@ -328,8 +358,8 @@ return (
                   <Input
                     type="text"
                     size="xs"
-                    variant="outline"
-                    placeholder="Amount 2"
+                    variant="none"
+                    value={item.amount4}
                     style={{ width: "90%" }}
                   />
                 </Box>
@@ -339,8 +369,8 @@ return (
                   <Input
                     type="text"
                     size="xs"
-                    variant="outline"
-                    placeholder="Amount 5"
+                    variant="none"
+                    value={item.amount4}
                     style={{ width: "80%" }}
                   />
                 </Box>
@@ -361,9 +391,9 @@ return (
                   <Input
                     type="text"
                     size="xs"
-                    variant="outline"
-                    placeholder="Total"
-                    style={{ width: "70%" }}
+                    variant="none"
+                    value={item.interest}
+                    style={{ width: "90%" }}
                   />
                 </Box>
               </td>
@@ -383,31 +413,14 @@ return (
                   <Input
                     type="text"
                     size="xs"
-                    variant="outline"
-                    placeholder="Interest"
-                    style={{ width: "70%" }}
+                    variant="none"
+                    value={item.total}
+                    style={{ width: "90%" }}
                   />
                 </Box>
               </td>
             </tr>
-            <tr>
-              <td
-                colspan="5"
-                style={{ width: "42.6337%;", fontSize: "13px" }}
-              ></td>
-              <td style={{ width: "13.9587%;", fontSize: "13px" }}></td>
-              <td style={{ width: "7.1854%;", fontSize: "13px" }}>
-                <Box align={"right"}>
-                  <Input
-                    type="text"
-                    size="xs"
-                    variant="outline"
-                    placeholder="Total Amount"
-                    style={{ width: "70%" }}
-                  />
-                </Box>
-              </td>
-            </tr>
+          
             <tr>
               <td
                 colspan="2"
@@ -419,19 +432,23 @@ return (
               <td colspan="2" style={{ width: "31.1771%;", fontSize: "13px" }}>
                 <input
                   type="text"
-                  placeholder="In Words"
+                  value={item.num_word}
                   style={{ width: "100%" }}
                 />
               </td>
             </tr>
           </tbody>
+
+
+
+        )
+
+        })}
+          
         </table>
       </Box>
-</div>
+   </Flex>
+  );
+};
 
-)
-
-
-}
-
-export default Printcedula;
+export default Printcedula2;
