@@ -55,8 +55,11 @@ const Cedula = () => {
   const [profession, setprofession] = useState("");
   const [amount1, setamount1] = useState(0);
   const [amount2, setamount2] = useState(0);
+  const [amount2R, setamount2R] = useState(0);
   const [amount3, setamount3] = useState(0);
+  const [amount3R, setamount3R] = useState(0);
   const [amount4, setamount4] = useState(0);
+  const [amount4R, setamount4R] = useState(0);
   const [interest, setinterest] = useState(0);
   const [total, settotal] = useState(0);
   const [num_word, setnum_word] = useState("");
@@ -76,11 +79,14 @@ const Cedula = () => {
 
 const savedata = () => {
 
-  setinterest(((Number(amount1) + Number(amount2) + Number(amount3) + Number(amount4)) * 0.01).toFixed(2))
-  settotal((((Number(amount1) + Number(amount2) + Number(amount3) + Number(amount4)) * 0.01) + 
-           Number(amount1) + Number(amount2) + Number(amount3) + Number(amount4)).toFixed(2) )
-  setnum_word(converter.toWords(((Number(amount1) + Number(amount2) + Number(amount3) + Number(amount4)) * 0.01) + 
-  Number(amount1) + Number(amount2) + Number(amount3) + Number(amount4) ))
+  setinterest(((Number(amount1) + Number(amount2 * 0.001 ) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001)) * 0.01).toFixed(2))
+
+  settotal((((Number(amount1) + Number(amount2 * 0.001) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001)) * 0.01) + 
+  Number(amount1) + Number(amount2 * 0.001) + Number(amount3 * 0.001) + Number(amount4 * 0.001)).toFixed(2) )
+
+
+  setnum_word(converter.toWords(((Number(amount1) + Number(amount2 * 0.001) + Number(amount3 * 0.001) + Number(amount4 * 0.001)) * 0.01) + 
+                    Number(amount1) + Number(amount2 * 0.001) + Number(amount3 * 0.001) + Number(amount4 * 0.001) ))
 
 }
 
@@ -88,7 +94,8 @@ const savedata = () => {
 
 
   const addCedulaHandler = async (e) => {
-    e.preventDefault();
+   
+    e.preventDefault()
 
     const payload = {
       cedula_no,
@@ -111,8 +118,11 @@ const savedata = () => {
       profession,
       amount1,
       amount2,
+      amount2R,
       amount3,
-      amount4,     
+      amount3R,
+      amount4,  
+      amount4R,     
       interest,
       total,     
       num_word,
@@ -219,7 +229,7 @@ const savedata = () => {
          <Box align={"right"}>
             <Input
               type="text"
-              placeholder="Nationality"
+              value={'Filipino'}
               onChange={(e) => {
                 setnationlity(e.target.value);
               }}
@@ -338,9 +348,9 @@ const savedata = () => {
               type="number"
               readOnly= {true}
               placeholder="Amount2"
-              value={amount2}
+              value={(amount2 * 0.001).toFixed(2)}
               onChange={(e) => {
-                setamount2(e.target.value);
+                setamount2R((amount2 * 0.001).toFixed(2));
               }}
             />
           </Box>
@@ -360,9 +370,9 @@ const savedata = () => {
             type="number"
             readOnly= {true}
               placeholder="Amount3"
-              value={amount3}
+              value={(amount3 * 0.001).toFixed(2)}
               onChange={(e) => {
-                setamount3(e.target.value);
+                setamount3R((amount3 * 0.001).toFixed(2));
               }}
             />
           </Box>
@@ -383,9 +393,9 @@ const savedata = () => {
                type="number"
                readOnly= {true}
               placeholder="Amount4"
-              value={amount4}
+              value={(amount4 * 0.001).toFixed(2)}
               onChange={(e) => {
-                setamount4(e.target.value);
+                setamount4R(e.target.value);
               }}
             />
           </Box>
@@ -396,9 +406,9 @@ const savedata = () => {
                 type="number"
                 readOnly= {true}
               placeholder="Interest"
-              value={((Number(amount1) + Number(amount2) + Number(amount3) + Number(amount4)) * 0.01).toFixed(2)}
+              value={((Number(amount1) + Number(amount2 * 0.001 ) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001)) * 0.01).toFixed(2)}
               onChange={(e) => {
-                setinterest(value);
+                setinterest(e.target.value);
               }}
             />
           </Box>
@@ -409,10 +419,10 @@ const savedata = () => {
             type="number"
             readOnly= {true}
               placeholder="Total"
-              value={(((Number(amount1) + Number(amount2) + Number(amount3) + Number(amount4)) * 0.01) + 
-                    Number(amount1) + Number(amount2) + Number(amount3) + Number(amount4)).toFixed(2) }
+              value={(((Number(amount1) + Number(amount2 * 0.001) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001)) * 0.01) + 
+                    Number(amount1) + Number(amount2 * 0.001) + Number(amount3 * 0.001) + Number(amount4 * 0.001)).toFixed(2) }
               onChange={(e) => {
-                settotal(value);
+                settotal(e.target.value);
               }}
              
               
@@ -425,8 +435,8 @@ const savedata = () => {
             <Input
               type="text"
               placeholder="In words"
-              value={converter.toWords(((Number(amount1) + Number(amount2) + Number(amount3) + Number(amount4)) * 0.01) + 
-                    Number(amount1) + Number(amount2) + Number(amount3) + Number(amount4) )}
+              value={converter.toWords(((Number(amount1) + Number(amount2 * 0.001) + Number(amount3 * 0.001) + Number(amount4 * 0.001)) * 0.01) + 
+                    Number(amount1) + Number(amount2 * 0.001) + Number(amount3 * 0.001) + Number(amount4 * 0.001) )}
               onChange={(e) => {
                 setnum_word(e.target.value);
               }}
@@ -435,7 +445,7 @@ const savedata = () => {
           </Flex>
           <Flex  justify={'right'}>
           <Box>
-          <Button onClick={savedata} type="submit">Save</Button>
+          <Button onClick={savedata}  type="submit">Save</Button>
           </Box>
           </Flex>
          

@@ -112,17 +112,34 @@ const CedulaSchema = mongoose.Schema({
         trim:true
     },
 
+    amount2R:{
+        type:Number,     
+        trim:true
+    },
+
 
     amount3:{
         type:Number,
         trim:true
     },
 
+    amount3R:{
+        type:Number,
+        trim:true
+    },
+
+
 
     amount4:{
         type:Number,
         trim:true
     },
+
+    amount4R:{
+        type:Number,
+        trim:true
+    },
+
 
 
     total:{
