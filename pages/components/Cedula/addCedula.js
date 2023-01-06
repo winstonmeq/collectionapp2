@@ -43,7 +43,7 @@ const Cedula = () => {
   const [full_add, setfull_add] = useState("");
   const [place_birth, setplace_birth] = useState("");
   const [date_birth, setdate_birth] = useState("");
-  const [nationality, setnationlity] = useState("");
+  const [nationality, setnationlity] = useState("Filipino");
   const [height, setheight] = useState("");
   const [weight, setweight] = useState("");
   const [male, setmale] = useState("");
@@ -84,6 +84,12 @@ const savedata = () => {
   settotal((((Number(amount1) + Number(amount2 * 0.001) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001)) * 0.01) + 
   Number(amount1) + Number(amount2 * 0.001) + Number(amount3 * 0.001) + Number(amount4 * 0.001)).toFixed(2) )
 
+
+  setamount2R(amount2 * 0.001)
+  
+  setamount3R(amount3 * 0.001)
+  
+  setamount4R(amount4 * 0.001)
 
   setnum_word(converter.toWords(((Number(amount1) + Number(amount2 * 0.001) + Number(amount3 * 0.001) + Number(amount4 * 0.001)) * 0.01) + 
                     Number(amount1) + Number(amount2 * 0.001) + Number(amount3 * 0.001) + Number(amount4 * 0.001) ))
@@ -231,7 +237,7 @@ const savedata = () => {
               type="text"
               value={'Filipino'}
               onChange={(e) => {
-                setnationlity(e.target.value);
+                setnationlity('Filipino');
               }}
             />
           </Box>
