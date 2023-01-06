@@ -18,7 +18,6 @@ import { useRouter } from "next/router";
 
 
 
-// Input.defaultProps = { borderColor: 'gray.300',   };
 
 
 
@@ -138,7 +137,7 @@ const savedata = () => {
          <Box align={"right"}>
             <Input
               type="text"  
-              borderColor={'gray.800'}
+             
               placeholder="Cedula Number"
               onChange={(e) => {
                 setcedula_no(e.target.value);
