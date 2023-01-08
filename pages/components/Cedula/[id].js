@@ -95,7 +95,7 @@ const Printcedula2 = () => {
                     size="xs"
                     variant="none"
                     value={item.date}
-                    style={{ fontSize: "10px", width: "100%" }}
+                    style={{ fontSize: "13px", width: "100%" }}
                   />
                 </Box>
               </td>
@@ -139,26 +139,26 @@ const Printcedula2 = () => {
               </td>
             </tr>
             <tr>
-              <td colspan="2" style={{ width: "24.0245%;", fontSize: "13px" }}>
+              <td colspan="2" style={{ width: "24.0245%;"}}>
                 <Box align={"right"} >
                   <input
                     type="text"
                     value={item.nationality}
-                    style={{ width: "80%" }}
+                    style={{ width: "80%", fontSize: "13px" }}
                   />
                 </Box>
               </td>
-              <td style={{ width: "19.8214%;", fontSize: "13px" }}>
+              <td style={{ width: "19.8214%;" }}>
                 <Box align={"right"}>
                   <input type="text" style={{ width: "80%" }} />
                 </Box>
               </td>
-              <td colspan="3" style={{ width: "38.8315%;", fontSize: "12px" }}>
-                <Box align={"right"} >
+              <td colspan="3" style={{ width: "38.8315%;", fontSize: "10px" }}>
+                <Box align={"center"} >
                   <input
                     type="text"
                     value={item.place_birth}
-                    style={{ width: "70%" }}
+                    style={{ width: "80%" }}
                   />
                 </Box>
               </td>
@@ -183,47 +183,47 @@ const Printcedula2 = () => {
                   fontWeight: "bolder",
                 }}
               >
-                <Flex justify={"center"} direction={"row"}>
-                  <Box textAlign={"center"}>
-                    <Box marginLeft={10}>
+                <Flex justify={"center"} direction={"row"} height = {"10%"}>
+                  <Box textAlign={"center"} >
+                    <Box marginLeft={50} >
                       <Input
                         type="text"
                         size="xs"
                         variant="none"
                         value={item.single}
-                        style={{ height: "40%" }}
+                        style={{ fontSize: "5px", height: "10%" }}
                       />
                     </Box>
 
-                    <Box marginLeft={10}>
+                    <Box marginLeft={50} >
                       <Input
                         type="text"
                         size="xs"
                         variant="none"
                         value={item.married}
-                        style={{ height: "40%" }}
+                        style={{  fontSize: "5px", height: "10%" }}
                       />
                     </Box>
                   </Box>
 
                   <Box textAlign={"center"}>
-                    <Box marginLeft={10}>
+                    <Box marginLeft={10} >
                       <Input
                         type="text"
                         size="xs"
                         variant="none"
-                        value={item.widow}
-                        style={{ fontSize: "11px", height: "40%" }}
+                        value={item.widow }
+                        style={{ fontSize: "5px", height: "10%" }}
                       />
                     </Box>
 
-                    <Box marginLeft={10}>
+                    <Box marginLeft={10} >
                       <Input
                         type="text"
                         size="xs"
                         variant="none"
                         value={item.divorced}
-                        style={{ fontSize: "11px", height: "10%" }}
+                        style={{ fontSize: "5px", height: "10%" }}
                       />
                     </Box>
                   </Box>
@@ -304,7 +304,7 @@ const Printcedula2 = () => {
                     size="xs"
                     variant="none"
                     value={item.amount2}
-                    style={{ width: "90%" }}
+                    style={{ width: "100%" }}
                   />
                 </Box>
               </td>
@@ -314,7 +314,7 @@ const Printcedula2 = () => {
                     type="text"
                     size="xs"
                     variant="none"
-                    value={item.amount2}
+                    value={item.amount2R}
                     style={{ width: "80%" }}
                   />
                 </Box>
@@ -342,7 +342,7 @@ const Printcedula2 = () => {
                     type="text"
                     size="xs"
                     variant="none"
-                    value={item.amount3}
+                    value={item.amount3R}
                     style={{ width: "80%" }}
                   />
                 </Box>
@@ -370,7 +370,7 @@ const Printcedula2 = () => {
                     type="text"
                     size="xs"
                     variant="none"
-                    value={item.amount4}
+                    value={item.amount4R}
                     style={{ width: "80%" }}
                   />
                 </Box>
