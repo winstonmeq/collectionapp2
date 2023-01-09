@@ -152,6 +152,11 @@ const CedulaSchema = mongoose.Schema({
         type:Number,
         trim:true
     },
+
+    total_paid:{
+        type:Number,
+        trim:true
+    },
  
 
     num_word:{

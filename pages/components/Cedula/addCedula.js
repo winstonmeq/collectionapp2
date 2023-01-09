@@ -59,10 +59,10 @@ const Cedula = () => {
   const [amount3R, setamount3R] = useState(0);
   const [amount4, setamount4] = useState(0);
   const [amount4R, setamount4R] = useState(0);
-  const [interest, setinterest] = useState(0);
   const [total, settotal] = useState(0);
+  const [interest, setinterest] = useState(0);
+  const [total_paid, settotal_paid] = useState(0);
   const [num_word, setnum_word] = useState("");
-  const [res_interest,setres_interest] = useState(0)
 
   const openmodal = () => {
     setmodalopen(true);
@@ -78,9 +78,11 @@ const Cedula = () => {
 
 const savedata = () => {
 
-  setinterest(((Number(amount1) + Number(amount2 * 0.001 ) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001)) * 0.01).toFixed(2))
+  settotal((((Number(amount1) + Number(amount2 * 0.001) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001)))).toFixed(2) )
 
-  settotal((((Number(amount1) + Number(amount2 * 0.001) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001)) * 0.01) + 
+  setinterest(((Number(amount1) + Number(amount2 * 0.001 ) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001)) * 0.01).toFixed(2))
+  
+  settotal_paid((((Number(amount1) + Number(amount2 * 0.001) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001)) * 0.01) + 
   Number(amount1) + Number(amount2 * 0.001) + Number(amount3 * 0.001) + Number(amount4 * 0.001)).toFixed(2) )
 
 
@@ -104,7 +106,7 @@ const savedata = () => {
 
     const payload = {
       cedula_no,
-      date,
+      date,      
       year,
       place_issue,
       full_name,
@@ -127,9 +129,10 @@ const savedata = () => {
       amount3,
       amount3R,
       amount4,  
-      amount4R,     
+      amount4R,   
+      total,   
       interest,
-      total,     
+      total_paid,   
       num_word,
     };
 
@@ -408,6 +411,21 @@ const savedata = () => {
          <Flex justify={'right'}>
           <Box>
             <Input
+            type="number"
+            readOnly= {true}
+              placeholder="Total"
+              value={(((Number(amount1) + Number(amount2 * 0.001) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001)))).toFixed(2) }
+              onChange={(e) => {
+                settotal(e.target.value);
+              }}
+             
+              
+            />
+          </Box>
+          </Flex>
+         <Flex justify={'right'}>
+          <Box>
+            <Input
                 type="number"
                 readOnly= {true}
               placeholder="Interest"
@@ -423,11 +441,11 @@ const savedata = () => {
             <Input
             type="number"
             readOnly= {true}
-              placeholder="Total"
+              placeholder="Total Paid"
               value={(((Number(amount1) + Number(amount2 * 0.001) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001)) * 0.01) + 
                     Number(amount1) + Number(amount2 * 0.001) + Number(amount3 * 0.001) + Number(amount4 * 0.001)).toFixed(2) }
               onChange={(e) => {
-                settotal(e.target.value);
+                settotal_paid(e.target.value);
               }}
              
               

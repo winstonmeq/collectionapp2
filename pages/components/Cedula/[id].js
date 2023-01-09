@@ -53,7 +53,7 @@ const Printcedula2 = () => {
       />
 
       <Box ref={tableRef} align={"left"}>
-        <table style={{ width: "500px", marginLeft: "35px", fontWeight:'bolder' }}>
+        <table style={{ width: "500px", marginLeft: "35px", fontSize:'12px' }}>
           {data.map((item, i) => {
             return (
               <tbody>
@@ -61,17 +61,19 @@ const Printcedula2 = () => {
                   <td>
                     <br />
                     <br />
+                    <br />
                   </td>
                 </tr>
 
                 <tr>
-                  <td style={{ width: "30px" }}>{item.year}</td>
-                  <td colspan="2" style={{ width: "120px" }}>
-                    {item.place_issue}
+                  <td style={{ width: "30px" }}><Box textAlign={'right'} >{item.year}</Box></td>
+                  <td colspan="1" style={{ width: "90px" }}>
+                  <Box textAlign={'center'} >{item.place_issue}</Box>
                   </td>
-                  <td style={{ width: "60px" }}><Box textAlign={'right'}>{item.date}</Box></td>
-                  <td style={{ width: "60px" }}></td>
-                  <td style={{ width: "60px" }}></td>
+                  <td style={{ width: "10px" }}></td>
+                  <td style={{ width: "50px" }}><Box textAlign={'left'} >{item.date}</Box></td>
+                  <td style={{ width: "50px" }}></td>
+                  <td style={{ width: "50px" }}></td>
                 </tr>
 
                 
@@ -81,22 +83,24 @@ const Printcedula2 = () => {
                   <td style={{ width: "60px" }}></td>
                 </tr>
                 <tr>                  
-                  <td colspan="4" style={{ width: "240px" }}><Box marginLeft={'60px'}>{item.full_add}</Box></td>
-                  <td style={{ width: "60px" }}><Box  textAlign={'right'}>{item.male}</Box></td>
-                  <td style={{ width: "60px" }}><Box  textAlign={'right'}>{item.female}</Box></td>
+                  <td colspan="3" style={{ width: "240px" }}><Box marginLeft={'60px'}>{item.full_add}</Box></td>
+                  <td></td>
+                  <td style={{ width: "60px" }}><Box  textAlign={'center'}>{item.male}</Box></td>
+                  <td style={{ width: "60px" }}><Box  textAlign={'center'}>{item.female}</Box></td>
+                 
                 </tr>
                 <tr>                  
-                  <td colspan="2" style={{ width: "120px" }}><Box textAlign={'center'}>{item.nationality}</Box></td>
+                  <td colspan="2" style={{ width: "120px" }}><Box textAlign={'left'} marginLeft={'50px'}>{item.nationality}</Box></td>
                   <td colspan="3" style={{ width: "180px" }}><Box textAlign={'right'}>{item.place_birth}</Box></td>
                   <td style={{ width: "60px" }}><Box textAlign={'right'}>{item.height}</Box></td>
                 </tr>
                 <tr>   
                   <td></td>             
-                  <td colspan="2" style={{ width: "180px", fontSize: "10px", fontWeight:'bolder'}}>
-                  <Flex direction='row'><Box marginLeft={'40px'}>{item.single}</Box>
-                                        <Box marginLeft={'60px'}>{item.widow} </Box></Flex>
-                  <Flex direction='row'><Box marginLeft={'40px'}>{item.married}</Box>
-                                        <Box marginLeft={'60px'}>{item.divorced} </Box></Flex>
+                  <td colspan="2" style={{ width: "180px", fontSize:"8px"}}>
+                  <Flex direction='row'><Box marginLeft={'30px'}>{item.single}</Box>
+                                        <Box marginLeft={'70px'}>{item.widow} </Box></Flex>
+                  <Flex direction='row'><Box marginLeft={'30px'}>{item.married}</Box>
+                                        <Box marginLeft={'70px'}>{item.divorced} </Box></Flex>
                   </td>
                   <td colspan="2" style={{ width: "120px" }}><Box textAlign={'right'}>{item.date_birth}</Box></td>
                   <td style={{ width: "60px" }}><Box  textAlign={'right'}>{item.weight}</Box></td>
@@ -115,8 +119,8 @@ const Printcedula2 = () => {
                   <td></td>
                   <td><Box textAlign={'right'}>{item.amount1}</Box></td>
                 </tr>
-                <tr style={{fontSize:'8px'}}>
-                  <td></td>
+                <tr style={{ fontSize:"15px"}}>
+                  <td ></td>
                   <td></td>
                   <td></td>
                   <td></td>
@@ -128,7 +132,7 @@ const Printcedula2 = () => {
                   <td></td>
                   <td></td>
                   <td></td>
-                  <td><Box textAlign={'right'}>{item.amount2}</Box></td>
+                  <td><Box textAlign={'center'}>{item.amount2}</Box></td>
                   <td><Box textAlign={'right'}>{item.amount2R}</Box></td>
                 </tr>
                 <tr>
@@ -136,7 +140,7 @@ const Printcedula2 = () => {
                   <td></td>
                   <td></td>
                   <td></td>
-                  <td><Box textAlign={'right'}>{item.amount3}</Box></td>
+                  <td><Box textAlign={'center'}>{item.amount3}</Box></td>
                   <td><Box textAlign={'right'}>{item.amount3R}</Box></td>
                 </tr>
                 <tr>
@@ -144,8 +148,24 @@ const Printcedula2 = () => {
                   <td></td>
                   <td></td>
                   <td></td>
-                  <td><Box  textAlign={'right'}>{item.amount4}</Box></td>
+                  <td><Box  textAlign={'center'}>{item.amount4}</Box></td>
                   <td><Box  textAlign={'right'}>{item.amount4R}</Box></td>
+                </tr>
+                <tr style={{ fontSize:"5px"}}>
+                  <td ></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td>.</td>
+                </tr>
+                <tr >
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td><Box  textAlign={'right'}>{item.total}</Box></td>
                 </tr>
                 <tr>
                   <td></td>
@@ -161,13 +181,13 @@ const Printcedula2 = () => {
                   <td></td>
                   <td></td>
                   <td></td>
-                  <td><Box  textAlign={'right'}>{item.total}</Box></td>
+                  <td><Box  textAlign={'right'}>{item.total_paid}</Box></td>
                 </tr>
                 <tr>
+                  <td></td>                 
+                  <td colspan="2"><Box textAlign={'right'}>MARIA FE. E. DALISAY</Box></td>
                   <td></td>
-                  <td></td>
-                  <td><Box textAlign={'right'}>MARIA FE. E. DALISAY</Box></td>
-                  <td colspan="3"><Box textAlign={'right'}>{item.num_word}</Box></td>
+                  <td colspan="2"><Box textAlign={'right'}>{item.num_word}</Box></td>
                 </tr>
           
               </tbody>
