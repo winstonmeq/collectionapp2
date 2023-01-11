@@ -45,6 +45,16 @@ const Printcedula2 = () => {
 
   const tableRef = useRef(null);
 
+
+
+
+  function formatNumber(num) {
+    return (num < 10 ? "00" : "0") + num;
+  }
+
+  
+
+
   return (
     <Flex direction={"column"} align={"center"} width={"100vw"}>
       <ReactToPrint
@@ -66,11 +76,11 @@ const Printcedula2 = () => {
                 </tr>
 
                 <tr>
-                  <td style={{ width: "30px" }}><Box textAlign={'right'} >{item.year}</Box></td>
-                  <td colspan="1" style={{ width: "90px" }}>
+                  <td style={{ width: "25px" }}><Box textAlign={'right'} >{item.year}</Box></td>
+                  <td colspan="1" style={{ width: "118px" }}>
                   <Box textAlign={'center'} >{item.place_issue}</Box>
                   </td>
-                  <td style={{ width: "10px" }}></td>
+                  <td style={{ width: "1px" }}></td>
                   <td style={{ width: "50px" }}><Box textAlign={'left'} >{item.date}</Box></td>
                   <td style={{ width: "50px" }}></td>
                   <td style={{ width: "50px" }}></td>
@@ -96,7 +106,7 @@ const Printcedula2 = () => {
                 </tr>
                 <tr>   
                   <td></td>             
-                  <td colspan="2" style={{ width: "180px", fontSize:"8px"}}>
+                  <td colspan="2" style={{ width: "180px", fontSize:"9px", fontWeight: "bolder"}}>
                   <Flex direction='row'><Box marginLeft={'30px'}>{item.single}</Box>
                                         <Box marginLeft={'70px'}>{item.widow} </Box></Flex>
                   <Flex direction='row'><Box marginLeft={'30px'}>{item.married}</Box>
@@ -117,7 +127,7 @@ const Printcedula2 = () => {
                   <td></td>
                   <td></td>
                   <td></td>
-                  <td><Box textAlign={'right'}>{item.amount1}</Box></td>
+                  <td><Box textAlign={'right'}>{(item.amount1).toFixed(2)}</Box></td>
                 </tr>
                 <tr style={{ fontSize:"15px"}}>
                   <td ></td>
@@ -132,24 +142,24 @@ const Printcedula2 = () => {
                   <td></td>
                   <td></td>
                   <td></td>
-                  <td><Box textAlign={'center'}>{item.amount2}</Box></td>
-                  <td><Box textAlign={'right'}>{item.amount2R}</Box></td>
+                  <td><Box textAlign={'center'}>{(item.amount2).toFixed(2)}</Box></td>
+                  <td><Box textAlign={'right'}>{(item.amount2R).toFixed(2)}</Box></td>
                 </tr>
                 <tr>
                   <td></td>
                   <td></td>
                   <td></td>
                   <td></td>
-                  <td><Box textAlign={'center'}>{item.amount3}</Box></td>
-                  <td><Box textAlign={'right'}>{item.amount3R}</Box></td>
+                  <td><Box textAlign={'center'}>{(item.amount3).toFixed(2)}</Box></td>
+                  <td><Box textAlign={'right'}>{(item.amount3R).toFixed(2)}</Box></td>
                 </tr>
                 <tr>
                   <td></td>
                   <td></td>
                   <td></td>
                   <td></td>
-                  <td><Box  textAlign={'center'}>{item.amount4}</Box></td>
-                  <td><Box  textAlign={'right'}>{item.amount4R}</Box></td>
+                  <td><Box  textAlign={'center'}>{(item.amount4).toFixed(2)}</Box></td>
+                  <td><Box  textAlign={'right'}>{(item.amount4R).toFixed(2)}</Box></td>
                 </tr>
                 <tr style={{ fontSize:"5px"}}>
                   <td ></td>
