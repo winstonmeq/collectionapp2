@@ -47,10 +47,10 @@ const Cedula = () => {
   const [weight, setweight] = useState("");
   const [male, setmale] = useState("");
   const [female, setfemale] = useState("");
-  const [single, setsingle] = useState("");
-  const [married, setmarried] = useState("");
-  const [widow, setwidow] = useState("");
-  const [divorced, setdivorced] = useState("");
+  const [single, setsingle] = useState(".");
+  const [married, setmarried] = useState(".");
+  const [widow, setwidow] = useState(".");
+  const [divorced, setdivorced] = useState(".");
   const [profession, setprofession] = useState("");
   const [amount1, setamount1] = useState(0.00);
   const [amount2, setamount2] = useState(0.00);
@@ -82,22 +82,22 @@ const Cedula = () => {
 
 const savedata = () => {
 
-  settotal((((Number(amount1) + Number(amount2 * 0.001) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001)))).toFixed(2) )
-
-  // setinterest(((Number(amount1) + Number(amount2 * 0.001 ) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001)) * 0.01).toFixed(2))
-  
-  settotal_paid((((Number(amount1) + Number(amount2 * 0.001) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001)) * 0.01) + 
-  Number(amount1) + Number(amount2 * 0.001) + Number(amount3 * 0.001) + Number(amount4 * 0.001)).toFixed(2) )
-
-
   setamount2R((amount2 * 0.001).toFixed(2))
   
   setamount3R((amount3 * 0.001).toFixed(2))
   
   setamount4R((amount4 * 0.001).toFixed(2))
 
-  setnum_word(converter.toWords(((Number(amount1) + Number(amount2 * 0.001) + Number(amount3 * 0.001) + Number(amount4 * 0.001)) * 0.01) + 
-                    Number(amount1) + Number(amount2 * 0.001) + Number(amount3 * 0.001) + Number(amount4 * 0.001) ))
+  settotal((Number(amount1) + Number(amount2 * 0.001) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001)).toFixed(2))
+
+  setinterest(calculatePenalty(getmonth));
+  
+  settotal_paid((Number(amount1) + Number(amount2 * 0.001) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001) + Number(calculatePenalty(getmonth))).toFixed(2))
+
+
+ 
+
+  setnum_word(converter.toWords((Number(amount1) + Number(amount2 * 0.001) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001)) + Number(calculatePenalty(getmonth))))
 
 }
 
@@ -113,25 +113,138 @@ const optionDivorced = ['Divorced', ' / '];
 
 
 function calculatePenalty(monthno) {
+   
+
+  if(monthno == 1){
+    
+    
+    var intmonth = 0;
   
- 
-
- 
-
-  if(monthno == 3){
-
-    const intmonth = 3;
-    // setinterest(((Number(amount1) + Number(amount2 * 0.001 ) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001)) * 0.06).toFixed(2))
-    console.log('mao ni month karon',monthno)
    
    return intmonth;
     
   }  
 
-  if(monthno == 1){
+  if(monthno == 2){
+    
+    
+    var intmonth = 0;
+  
+   
+   return intmonth;
+    
+  }  
 
-    const intmonth = 1;
-    // setinterest(((Number(amount1) + Number(amount2 * 0.001 ) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001)) * 0.06).toFixed(2))
+
+  if(monthno == 3){
+    
+    
+    var intmonth = (((Number(amount1) + Number(amount2 * 0.001 ) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001)) * 0.06).toFixed(2))
+  
+   
+   return intmonth;
+    
+  }  
+
+  if(monthno == 4){
+
+    const intmonth = (((Number(amount1) + Number(amount2 * 0.001 ) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001)) * 0.08).toFixed(2))
+
+   
+   return intmonth;
+    
+  }  
+
+  if(monthno == 3){
+
+    
+    
+    var intmonth = (((Number(amount1) + Number(amount2 * 0.001 ) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001)) * 0.06).toFixed(2))
+  
+   
+   return intmonth;
+    
+  }  
+
+  if(monthno == 4){
+
+    const intmonth = (((Number(amount1) + Number(amount2 * 0.001 ) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001)) * 0.08).toFixed(2))
+
+   
+   return intmonth;
+    
+  }  
+
+  if(monthno == 5){
+
+    
+    
+    var intmonth = (((Number(amount1) + Number(amount2 * 0.001 ) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001)) * 0.10).toFixed(2))
+  
+   
+   return intmonth;
+    
+  }  
+
+  if(monthno == 6){
+
+    const intmonth = (((Number(amount1) + Number(amount2 * 0.001 ) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001)) * 0.12).toFixed(2))
+
+   
+   return intmonth;
+    
+  }  
+
+  if(monthno == 7){
+
+    const intmonth = (((Number(amount1) + Number(amount2 * 0.001 ) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001)) * 0.14).toFixed(2))
+
+   
+   return intmonth;
+    
+  }  
+
+  if(monthno == 8){
+
+    const intmonth = (((Number(amount1) + Number(amount2 * 0.001 ) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001)) * 0.16).toFixed(2))
+
+   
+   return intmonth;
+    
+  }  
+
+  if(monthno == 9){
+
+    const intmonth = (((Number(amount1) + Number(amount2 * 0.001 ) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001)) * 0.18).toFixed(2))
+
+   
+   return intmonth;
+    
+  }  
+
+  if(monthno == 10){
+
+    const intmonth = (((Number(amount1) + Number(amount2 * 0.001 ) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001)) * 0.20).toFixed(2))
+
+   
+   return intmonth;
+    
+  } 
+  
+  
+  if(monthno == 11){
+
+    const intmonth = (((Number(amount1) + Number(amount2 * 0.001 ) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001)) * 0.22).toFixed(2))
+
+   
+   return intmonth;
+    
+  }  
+
+  
+  if(monthno == 12){
+
+    const intmonth = (((Number(amount1) + Number(amount2 * 0.001 ) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001)) * 0.24).toFixed(2))
 
    
    return intmonth;
@@ -264,20 +377,16 @@ function calculatePenalty(monthno) {
           </Box>
           <Box align={"right"}>  
           <Select value={male} onChange={e => setmale(e.target.value)} style={{width:"100px"}}>
-              {optionMale.map(option => (
-              <option key={option} value={ option }>
-               { option }
-              </option>
-           ))}
+            
+              <option  value=''>Male</option>
+              <option  value='/'> / </option>
+        
             </Select>
           </Box>
           <Box align={"right"}>
           <Select value={female} onChange={e => setfemale(e.target.value)} style={{width:"100px"}}>
-              {optionFemale.map(option => (
-              <option key={option} value={ option }>
-               { option }
-              </option>
-           ))}
+              <option  value=''>Female</option>
+              <option  value='/'> / </option>
             </Select>
           </Box>
           </Flex>
@@ -305,38 +414,30 @@ function calculatePenalty(monthno) {
          <Flex direction={'row'}>
           <Box align={"right"}>
           <Select value={single} onChange={e => setsingle(e.target.value)} style={{width:"100px"}}>
-              {optionSingle.map(option => (
-              <option key={option} value={ option }>
-               { option }
-              </option>
-           ))}
+             <option  value=''>Single</option>
+              <option  value='/'> / </option>
+          
             </Select>
           </Box>
           <Box align={"right"}>
           <Select value={married} onChange={e => setmarried(e.target.value)} style={{width:"150px"}}>
-              {optionMarried.map(option => (
-              <option key={option} value={ option }>
-               { option }
-              </option>
-           ))}
+          <option  value=''>Married</option>
+              <option  value='/'> / </option>
+          
             </Select>
           </Box>
           <Box align={"right"}>
           <Select value={widow} onChange={e => setwidow(e.target.value)} style={{width:"150px"}}>
-              {optionWidow.map(option => (
-              <option key={option} value={ option }>
-               { option }
-              </option>
-           ))}
+          <option  value=''>Widow</option>
+              <option  value='/'> / </option>
+          
             </Select>
           </Box>
           <Box align={"right"}>
           <Select value={divorced} onChange={e => setdivorced(e.target.value)} style={{width:"150px"}}>
-              {optionDivorced.map(option => (
-              <option key={option} value={ option }>
-               { option }
-              </option>
-           ))}
+          <option  value=''>Divorced</option>
+              <option  value='/'> / </option>
+          
             </Select>
           </Box>
           </Flex>
@@ -459,11 +560,8 @@ function calculatePenalty(monthno) {
             readOnly= {true}
           
               placeholder="Total"
-              value={(((Number(amount1) + Number(amount2 * 0.001) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001)))).toFixed(2) }
-              onChange={(e) => {
-                settotal(e.target.value);
-              }}
-             
+              value={(Number(amount1) + Number(amount2 * 0.001) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001)).toFixed(2) }
+              onChange={''}            
               
             />
           </Box>
@@ -487,11 +585,8 @@ function calculatePenalty(monthno) {
             readOnly= {true}
            
               placeholder="Total Paid"
-              value={(((Number(amount1) + Number(amount2 * 0.001) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001)) * 0.01) + 
-                    Number(amount1) + Number(amount2 * 0.001) + Number(amount3 * 0.001) + Number(amount4 * 0.001)).toFixed(2) }
-              onChange={(e) => {
-                settotal_paid(e.target.value);
-              }}
+              value={((Number(amount1) + Number(amount2 * 0.001) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001)) + Number(calculatePenalty(getmonth))).toFixed(2) }
+              onChange={''}
              
               
             />
@@ -503,11 +598,8 @@ function calculatePenalty(monthno) {
             <Input
               type="text"
               placeholder="In words"
-              value={converter.toWords(((Number(amount1) + Number(amount2 * 0.001) + Number(amount3 * 0.001) + Number(amount4 * 0.001)) * 0.01) + 
-                    Number(amount1) + Number(amount2 * 0.001) + Number(amount3 * 0.001) + Number(amount4 * 0.001) )}
-              onChange={(e) => {
-                setnum_word(e.target.value);
-              }}
+              value={converter.toWords((Number(amount1) + Number(amount2 * 0.001) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001)) + Number(calculatePenalty(getmonth)))}
+              onChange={''}
           />
           </Box>
           </Flex>

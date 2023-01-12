@@ -95,8 +95,8 @@ const Printcedula2 = () => {
                 <tr>                  
                   <td colspan="3" style={{ width: "240px" }}><Box marginLeft={'60px'}>{item.full_add}</Box></td>
                   <td></td>
-                  <td style={{ width: "60px" }}><Box  textAlign={'center'}>{item.male}</Box></td>
-                  <td style={{ width: "60px" }}><Box  textAlign={'center'}>{item.female}</Box></td>
+                  <td style={{ width: "60px" }}><Box marginTop={'2px'} textAlign={'center'}>{item.male}</Box></td>
+                  <td style={{ width: "60px" }}><Box marginTop={'2px'} textAlign={'center'}>{item.female}</Box></td>
                  
                 </tr>
                 <tr>                  
@@ -106,7 +106,7 @@ const Printcedula2 = () => {
                 </tr>
                 <tr>   
                   <td></td>             
-                  <td colspan="2" style={{ width: "180px", fontSize:"9px", fontWeight: "bolder"}}>
+                  <td colspan="2" style={{ width: "180px", fontSize:"6px", fontWeight: "bolder"}}>
                   <Flex direction='row'><Box marginLeft={'30px'}>{item.single}</Box>
                                         <Box marginLeft={'70px'}>{item.widow} </Box></Flex>
                   <Flex direction='row'><Box marginLeft={'30px'}>{item.married}</Box>
@@ -117,7 +117,7 @@ const Printcedula2 = () => {
                 </tr>
                 <tr>
                   <td></td>
-                  <td colspan='3'>{item.profession}</td>
+                  <td colspan='3'><Box textAlign={'center'}>{item.profession}</Box></td>                
                   <td></td>
                   <td></td>
                 </tr>
@@ -129,7 +129,7 @@ const Printcedula2 = () => {
                   <td></td>
                   <td><Box textAlign={'right'}>{(item.amount1).toFixed(2)}</Box></td>
                 </tr>
-                <tr style={{ fontSize:"15px"}}>
+                <tr style={{fontSize:"18px"}}>
                   <td ></td>
                   <td></td>
                   <td></td>
@@ -161,7 +161,15 @@ const Printcedula2 = () => {
                   <td><Box  textAlign={'center'}>{(item.amount4).toFixed(2)}</Box></td>
                   <td><Box  textAlign={'right'}>{(item.amount4R).toFixed(2)}</Box></td>
                 </tr>
-                <tr style={{ fontSize:"5px"}}>
+                <tr >
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td><Box  textAlign={'right'}>{(item.total).toFixed(2)}</Box></td>
+                </tr>
+                <tr style={{fontSize:"8px"}}>
                   <td ></td>
                   <td></td>
                   <td></td>
@@ -169,30 +177,24 @@ const Printcedula2 = () => {
                   <td></td>
                   <td>.</td>
                 </tr>
-                <tr >
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td><Box  textAlign={'right'}>{item.total}</Box></td>
-                </tr>
                 <tr>
                   <td></td>
                   <td></td>
                   <td></td>
                   <td></td>
                   <td></td>
-                  <td><Box  textAlign={'right'}>{item.interest}</Box></td>
+                  <td><Box  textAlign={'right'}>{(item.interest).toFixed(2)}</Box></td>
                 </tr>
+                
                 <tr>
                   <td></td>
                   <td></td>
                   <td></td>
                   <td></td>
                   <td></td>
-                  <td><Box  textAlign={'right'}>{item.total_paid}</Box></td>
+                  <td><Box  textAlign={'right'}>{(item.total_paid).toFixed(2)}</Box></td>
                 </tr>
+               
                 <tr>
                   <td></td>                 
                   <td colspan="2"><Box textAlign={'right'}>MARIA FE. E. DALISAY</Box></td>
