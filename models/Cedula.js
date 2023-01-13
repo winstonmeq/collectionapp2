@@ -22,10 +22,21 @@ const CedulaSchema = mongoose.Schema({
         type:String,
         trim:true
     },
-    full_name:{
+    lname:{
         type:String,
         trim:true
     },
+
+    fname:{
+        type:String,
+        trim:true
+    },
+
+    mname:{
+        type:String,
+        trim:true
+    },
+    
     full_add:{
         type:String,
         trim:true

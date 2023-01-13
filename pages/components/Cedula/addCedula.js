@@ -28,9 +28,7 @@ const Cedula = () => {
   const router = useRouter();
 
   const currentDate = new Date();
-  const dateToday = `${currentDate.getDate()}/${
-    currentDate.getMonth() + 1
-  }/${currentDate.getFullYear()}`;
+  const dateToday = `${currentDate.getMonth() + 1}/${currentDate.getDate()}/${currentDate.getFullYear()}`;
 
   const [modalopen, setmodalopen] = useState(false);
 
@@ -38,7 +36,9 @@ const Cedula = () => {
   const [year, setyear] = useState("23");
   const [date, setdate] = useState(dateToday);
   const [place_issue, setplace_issue] = useState("President Roxas, Cotabato");
-  const [full_name, setfull_name] = useState("");
+  const [lname, setlname] = useState("");
+  const [fname, setfname] = useState("");
+  const [mname, setmname] = useState("");
   const [full_add, setfull_add] = useState("");
   const [place_birth, setplace_birth] = useState("");
   const [date_birth, setdate_birth] = useState("");
@@ -47,10 +47,10 @@ const Cedula = () => {
   const [weight, setweight] = useState("");
   const [male, setmale] = useState("");
   const [female, setfemale] = useState("");
-  const [single, setsingle] = useState(".");
-  const [married, setmarried] = useState(".");
-  const [widow, setwidow] = useState(".");
-  const [divorced, setdivorced] = useState(".");
+  const [single, setsingle] = useState("`");
+  const [married, setmarried] = useState("`");
+  const [widow, setwidow] = useState("`");
+  const [divorced, setdivorced] = useState("`");
   const [profession, setprofession] = useState("");
   const [amount1, setamount1] = useState(0.00);
   const [amount2, setamount2] = useState(0.00);
@@ -63,12 +63,6 @@ const Cedula = () => {
   const [interest, setinterest] = useState(0.00);
   const [total_paid, settotal_paid] = useState(0.00);
   const [num_word, setnum_word] = useState("");
-
-  const[monthno, setmonthno] = useState(0);
-
-  const openmodal = () => {
-    setmodalopen(true);
-  };
 
 
 
@@ -267,7 +261,9 @@ function calculatePenalty(monthno) {
       date,      
       year,
       place_issue,
-      full_name,
+      lname,
+      fname,
+      mname,
       full_add,
       place_birth,
       date_birth,
@@ -353,17 +349,39 @@ function calculatePenalty(monthno) {
               />
             </Box>
           </Flex>
-
+          <Flex direction={'row'}>
           <Box align={"right"}>
             <Input
               type="text"
-              placeholder="Full Name"
+              placeholder="Last Name"
               required
               onChange={(e) => {
-                setfull_name(e.target.value);
+                setlname(e.target.value);
               }}
-            />
+            />            
           </Box>
+          <Box align={"right"}>
+            <Input
+              type="text"
+              placeholder="First Name"
+              required
+              onChange={(e) => {
+                setfname(e.target.value);
+              }}
+            />            
+          </Box>
+          <Box align={"right"}>
+            <Input
+              type="text"
+              placeholder="Middle Initial"
+              required
+              onChange={(e) => {
+                setmname(e.target.value);
+              }}
+            />            
+          </Box>
+          </Flex>
+       
           <Flex direction={'row'} >
           <Box w={'80%'} align={"right"}>
             <Input
@@ -379,14 +397,14 @@ function calculatePenalty(monthno) {
           <Select value={male} onChange={e => setmale(e.target.value)} style={{width:"100px"}}>
             
               <option  value=''>Male</option>
-              <option  value='/'> / </option>
+              <option  value='&#10003;'>&#10003;</option>
         
             </Select>
           </Box>
           <Box align={"right"}>
           <Select value={female} onChange={e => setfemale(e.target.value)} style={{width:"100px"}}>
               <option  value=''>Female</option>
-              <option  value='/'> / </option>
+              <option  value='&#10003;'>&#10003;</option>
             </Select>
           </Box>
           </Flex>
@@ -415,28 +433,28 @@ function calculatePenalty(monthno) {
           <Box align={"right"}>
           <Select value={single} onChange={e => setsingle(e.target.value)} style={{width:"100px"}}>
              <option  value=''>Single</option>
-              <option  value='/'> / </option>
+              <option  value='&#10003;'>&#10003;</option>
           
             </Select>
           </Box>
           <Box align={"right"}>
           <Select value={married} onChange={e => setmarried(e.target.value)} style={{width:"150px"}}>
           <option  value=''>Married</option>
-              <option  value='/'> / </option>
+              <option  value='&#10003;'>&#10003;</option>
           
             </Select>
           </Box>
           <Box align={"right"}>
           <Select value={widow} onChange={e => setwidow(e.target.value)} style={{width:"150px"}}>
           <option  value=''>Widow</option>
-              <option  value='/'> / </option>
+              <option  value='&#10003;'>&#10003;</option>
           
             </Select>
           </Box>
           <Box align={"right"}>
           <Select value={divorced} onChange={e => setdivorced(e.target.value)} style={{width:"150px"}}>
           <option  value=''>Divorced</option>
-              <option  value='/'> / </option>
+              <option  value='&#10003;'>&#10003;</option>
           
             </Select>
           </Box>
@@ -509,8 +527,8 @@ function calculatePenalty(monthno) {
             <Input
               type="number"
               readOnly= {true}
-              value={(amount2 * 0.001).toFixed(2)}
-              onChange={''}
+              defaultValue={(amount2 * 0.001).toFixed(2)}
+             
             />
           </Box>
          </Flex>
@@ -528,8 +546,8 @@ function calculatePenalty(monthno) {
             <Input
             type="number"
             readOnly= {true}
-              value={(amount3 * 0.001).toFixed(2)}
-              onChange={''}
+              defaultValue={(amount3 * 0.001).toFixed(2)}
+              
             />
           </Box>
          </Flex>
@@ -548,8 +566,7 @@ function calculatePenalty(monthno) {
             <Input
                type="number"
                readOnly= {true}
-              value={(amount4 * 0.001).toFixed(2)}
-              onChange={''}
+              defaultValue={(amount4 * 0.001).toFixed(2)}
             />
           </Box>
          </Flex>
@@ -560,8 +577,8 @@ function calculatePenalty(monthno) {
             readOnly= {true}
           
               placeholder="Total"
-              value={(Number(amount1) + Number(amount2 * 0.001) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001)).toFixed(2) }
-              onChange={''}            
+              defaultValue={(Number(amount1) + Number(amount2 * 0.001) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001)).toFixed(2) }
+                        
               
             />
           </Box>
@@ -573,8 +590,8 @@ function calculatePenalty(monthno) {
                 readOnly= {true}
                 
               placeholder="Interest"
-              value={calculatePenalty(getmonth)}
-              onChange={''}
+              defaultValue={calculatePenalty(getmonth)}
+             
             />
           </Box>
           </Flex>
@@ -585,8 +602,8 @@ function calculatePenalty(monthno) {
             readOnly= {true}
            
               placeholder="Total Paid"
-              value={((Number(amount1) + Number(amount2 * 0.001) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001)) + Number(calculatePenalty(getmonth))).toFixed(2) }
-              onChange={''}
+              defaultValue={((Number(amount1) + Number(amount2 * 0.001) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001)) + Number(calculatePenalty(getmonth))).toFixed(2) }
+              
              
               
             />
@@ -598,8 +615,8 @@ function calculatePenalty(monthno) {
             <Input
               type="text"
               placeholder="In words"
-              value={converter.toWords((Number(amount1) + Number(amount2 * 0.001) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001)) + Number(calculatePenalty(getmonth)))}
-              onChange={''}
+              defaultValue={converter.toWords((Number(amount1) + Number(amount2 * 0.001) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001)) + Number(calculatePenalty(getmonth)))}
+              
           />
           </Box>
           </Flex>

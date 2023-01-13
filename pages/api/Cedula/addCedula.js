@@ -9,7 +9,7 @@ export default async function handler(req, res) {
 
       try {
 
-      const { cedula_no, date, year,place_issue,full_name,full_add,place_birth,date_birth,nationality,status,height,weight,male,
+      const { cedula_no, date, year,place_issue,lname,fname,mname,full_add,place_birth,date_birth,nationality,status,height,weight,male,
              female, single, married, widow, divorced, profession, amount1, amount2,amount2R, amount3,amount3R, amount4,amount4R,
              interest, total,total_paid, num_word} = req.body;
 
@@ -24,7 +24,9 @@ export default async function handler(req, res) {
         year:year,
         date:date,
         place_issue:place_issue,
-        full_name:full_name,
+        lname:lname,
+        fname:fname,
+        mname:mname,
         full_add:full_add,
         place_birth: place_birth,
         date_birth: date_birth,
