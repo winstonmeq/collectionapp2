@@ -4,7 +4,7 @@ import {
   Box,
   Button,
   Text,
-  Spacer,
+  Select,
   Input,
   Stack,
   
@@ -28,9 +28,7 @@ const Cedula = () => {
   const router = useRouter();
 
   const currentDate = new Date();
-  const dateToday = `${currentDate.getDate()}/${
-    currentDate.getMonth() + 1
-  }/${currentDate.getFullYear()}`;
+  const dateToday = `${currentDate.getMonth() + 1}/${currentDate.getDate()}/${currentDate.getFullYear()}`;
 
   const [modalopen, setmodalopen] = useState(false);
 
@@ -38,7 +36,9 @@ const Cedula = () => {
   const [year, setyear] = useState("23");
   const [date, setdate] = useState(dateToday);
   const [place_issue, setplace_issue] = useState("President Roxas, Cotabato");
-  const [full_name, setfull_name] = useState("");
+  const [lname, setlname] = useState("");
+  const [fname, setfname] = useState("");
+  const [mname, setmname] = useState("");
   const [full_add, setfull_add] = useState("");
   const [place_birth, setplace_birth] = useState("");
   const [date_birth, setdate_birth] = useState("");
@@ -47,53 +47,207 @@ const Cedula = () => {
   const [weight, setweight] = useState("");
   const [male, setmale] = useState("");
   const [female, setfemale] = useState("");
-  const [single, setsingle] = useState("");
-  const [married, setmarried] = useState("");
-  const [widow, setwidow] = useState("");
-  const [divorced, setdivorced] = useState("");
+  const [single, setsingle] = useState("`");
+  const [married, setmarried] = useState("`");
+  const [widow, setwidow] = useState("`");
+  const [divorced, setdivorced] = useState("`");
   const [profession, setprofession] = useState("");
-  const [amount1, setamount1] = useState(0);
-  const [amount2, setamount2] = useState(0);
-  const [amount2R, setamount2R] = useState(0);
-  const [amount3, setamount3] = useState(0);
-  const [amount3R, setamount3R] = useState(0);
-  const [amount4, setamount4] = useState(0);
-  const [amount4R, setamount4R] = useState(0);
-  const [interest, setinterest] = useState(0);
-  const [total, settotal] = useState(0);
+  const [amount1, setamount1] = useState(0.00);
+  const [amount2, setamount2] = useState(0.00);
+  const [amount2R, setamount2R] = useState(0.00);
+  const [amount3, setamount3] = useState(0.00);
+  const [amount3R, setamount3R] = useState(0.00);
+  const [amount4, setamount4] = useState(0.00);
+  const [amount4R, setamount4R] = useState(0.00);
+  const [total, settotal] = useState(0.00);
+  const [interest, setinterest] = useState(0.00);
+  const [total_paid, settotal_paid] = useState(0.00);
   const [num_word, setnum_word] = useState("");
-  const [res_interest,setres_interest] = useState(0)
-
-  const openmodal = () => {
-    setmodalopen(true);
-  };
 
 
 
   var converter = require('number-to-words');
 
 
+   const getmonth = currentDate.getMonth() + 1
+
 
 
 
 const savedata = () => {
 
-  setinterest(((Number(amount1) + Number(amount2 * 0.001 ) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001)) * 0.01).toFixed(2))
-
-  settotal((((Number(amount1) + Number(amount2 * 0.001) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001)) * 0.01) + 
-  Number(amount1) + Number(amount2 * 0.001) + Number(amount3 * 0.001) + Number(amount4 * 0.001)).toFixed(2) )
-
-
-  setamount2R(amount2 * 0.001)
+  setamount2R((amount2 * 0.001).toFixed(2))
   
-  setamount3R(amount3 * 0.001)
+  setamount3R((amount3 * 0.001).toFixed(2))
   
-  setamount4R(amount4 * 0.001)
+  setamount4R((amount4 * 0.001).toFixed(2))
 
-  setnum_word(converter.toWords(((Number(amount1) + Number(amount2 * 0.001) + Number(amount3 * 0.001) + Number(amount4 * 0.001)) * 0.01) + 
-                    Number(amount1) + Number(amount2 * 0.001) + Number(amount3 * 0.001) + Number(amount4 * 0.001) ))
+  settotal((Number(amount1) + Number(amount2 * 0.001) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001)).toFixed(2))
+
+  setinterest(calculatePenalty(getmonth));
+  
+  settotal_paid((Number(amount1) + Number(amount2 * 0.001) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001) + Number(calculatePenalty(getmonth))).toFixed(2))
+
+
+ 
+
+  setnum_word(converter.toWords((Number(amount1) + Number(amount2 * 0.001) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001)) + Number(calculatePenalty(getmonth))))
 
 }
+
+
+const optionMale = ['Male', ' / '];
+
+const optionFemale = ['Female', ' / '];
+
+const optionSingle = ['Single', ' / '];
+const optionMarried = ['Married', ' / '];
+const optionWidow = ['Widow', ' / '];
+const optionDivorced = ['Divorced', ' / '];
+
+
+function calculatePenalty(monthno) {
+   
+
+  if(monthno == 1){
+    
+    
+    var intmonth = 0;
+  
+   
+   return intmonth;
+    
+  }  
+
+  if(monthno == 2){
+    
+    
+    var intmonth = 0;
+  
+   
+   return intmonth;
+    
+  }  
+
+
+  if(monthno == 3){
+    
+    
+    var intmonth = (((Number(amount1) + Number(amount2 * 0.001 ) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001)) * 0.06).toFixed(2))
+  
+   
+   return intmonth;
+    
+  }  
+
+  if(monthno == 4){
+
+    const intmonth = (((Number(amount1) + Number(amount2 * 0.001 ) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001)) * 0.08).toFixed(2))
+
+   
+   return intmonth;
+    
+  }  
+
+  if(monthno == 3){
+
+    
+    
+    var intmonth = (((Number(amount1) + Number(amount2 * 0.001 ) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001)) * 0.06).toFixed(2))
+  
+   
+   return intmonth;
+    
+  }  
+
+  if(monthno == 4){
+
+    const intmonth = (((Number(amount1) + Number(amount2 * 0.001 ) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001)) * 0.08).toFixed(2))
+
+   
+   return intmonth;
+    
+  }  
+
+  if(monthno == 5){
+
+    
+    
+    var intmonth = (((Number(amount1) + Number(amount2 * 0.001 ) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001)) * 0.10).toFixed(2))
+  
+   
+   return intmonth;
+    
+  }  
+
+  if(monthno == 6){
+
+    const intmonth = (((Number(amount1) + Number(amount2 * 0.001 ) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001)) * 0.12).toFixed(2))
+
+   
+   return intmonth;
+    
+  }  
+
+  if(monthno == 7){
+
+    const intmonth = (((Number(amount1) + Number(amount2 * 0.001 ) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001)) * 0.14).toFixed(2))
+
+   
+   return intmonth;
+    
+  }  
+
+  if(monthno == 8){
+
+    const intmonth = (((Number(amount1) + Number(amount2 * 0.001 ) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001)) * 0.16).toFixed(2))
+
+   
+   return intmonth;
+    
+  }  
+
+  if(monthno == 9){
+
+    const intmonth = (((Number(amount1) + Number(amount2 * 0.001 ) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001)) * 0.18).toFixed(2))
+
+   
+   return intmonth;
+    
+  }  
+
+  if(monthno == 10){
+
+    const intmonth = (((Number(amount1) + Number(amount2 * 0.001 ) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001)) * 0.20).toFixed(2))
+
+   
+   return intmonth;
+    
+  } 
+  
+  
+  if(monthno == 11){
+
+    const intmonth = (((Number(amount1) + Number(amount2 * 0.001 ) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001)) * 0.22).toFixed(2))
+
+   
+   return intmonth;
+    
+  }  
+
+  
+  if(monthno == 12){
+
+    const intmonth = (((Number(amount1) + Number(amount2 * 0.001 ) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001)) * 0.24).toFixed(2))
+
+   
+   return intmonth;
+    
+  }  
+
+ 
+}
+
 
 
 
@@ -104,10 +258,12 @@ const savedata = () => {
 
     const payload = {
       cedula_no,
-      date,
+      date,      
       year,
       place_issue,
-      full_name,
+      lname,
+      fname,
+      mname,
       full_add,
       place_birth,
       date_birth,
@@ -127,9 +283,10 @@ const savedata = () => {
       amount3,
       amount3R,
       amount4,  
-      amount4R,     
+      amount4R,   
+      total,   
       interest,
-      total,     
+      total_paid,   
       num_word,
     };
 
@@ -153,8 +310,8 @@ const savedata = () => {
          <Box align={"right"}>
             <Input
               type="text"  
-             
               placeholder="Cedula Number"
+              required
               onChange={(e) => {
                 setcedula_no(e.target.value);
               }}
@@ -166,7 +323,7 @@ const savedata = () => {
               <Input
                 type="text"
                 value="23"
-              
+                required
                 onChange={(e) => {
                   setyear(e.target.value);
                 }}
@@ -176,6 +333,7 @@ const savedata = () => {
               <Input
                 type="text"
                 value="President Roxas, Cotabato"
+                required
                 onChange={(e) => {
                   setplace_issue(e.target.value);
                 }}
@@ -191,52 +349,72 @@ const savedata = () => {
               />
             </Box>
           </Flex>
-
+          <Flex direction={'row'}>
           <Box align={"right"}>
             <Input
               type="text"
-              placeholder="Full Name"
+              placeholder="Last Name"
+              required
               onChange={(e) => {
-                setfull_name(e.target.value);
+                setlname(e.target.value);
               }}
-            />
+            />            
           </Box>
+          <Box align={"right"}>
+            <Input
+              type="text"
+              placeholder="First Name"
+              required
+              onChange={(e) => {
+                setfname(e.target.value);
+              }}
+            />            
+          </Box>
+          <Box align={"right"}>
+            <Input
+              type="text"
+              placeholder="Middle Initial"
+              required
+              onChange={(e) => {
+                setmname(e.target.value);
+              }}
+            />            
+          </Box>
+          </Flex>
+       
           <Flex direction={'row'} >
           <Box w={'80%'} align={"right"}>
             <Input
               type="text"
               placeholder="Full Address"
+              required  
               onChange={(e) => {
                 setfull_add(e.target.value);
               }}
             />
           </Box>
-          <Box align={"right"}>
-            <Input
-              type="text"
-              placeholder="Male"
-              onChange={(e) => {
-                setmale(e.target.value);
-              }}
-            />
+          <Box align={"right"}>  
+          <Select value={male} onChange={e => setmale(e.target.value)} style={{width:"100px"}}>
+            
+              <option  value=''>Male</option>
+              <option  value='&#10003;'>&#10003;</option>
+        
+            </Select>
           </Box>
           <Box align={"right"}>
-            <Input
-              type="text"
-              placeholder="Female"
-              onChange={(e) => {
-                setfemale(e.target.value);
-              }}
-            />
+          <Select value={female} onChange={e => setfemale(e.target.value)} style={{width:"100px"}}>
+              <option  value=''>Female</option>
+              <option  value='&#10003;'>&#10003;</option>
+            </Select>
           </Box>
           </Flex>
          <Flex direction={'row'} gridColumn={2}>
          <Box align={"right"}>
             <Input
               type="text"
-              value={'Filipino'}
+              value={'FILIPINO'}
               onChange={(e) => {
-                setnationlity('Filipino');
+                setnationlity('FILIPINO');
               }}
             />
           </Box>
@@ -244,6 +422,7 @@ const savedata = () => {
             <Input
               type="text"
               placeholder="Place of birth"
+              required
               onChange={(e) => {
                 setplace_birth(e.target.value);
               }}
@@ -252,40 +431,32 @@ const savedata = () => {
          </Flex>
          <Flex direction={'row'}>
           <Box align={"right"}>
-            <Input
-              type="text"
-              placeholder="Single"
-              onChange={(e) => {
-                setsingle(e.target.value);
-              }}
-            />
+          <Select value={single} onChange={e => setsingle(e.target.value)} style={{width:"100px"}}>
+             <option  value=''>Single</option>
+              <option  value='&#10003;'>&#10003;</option>
+          
+            </Select>
           </Box>
           <Box align={"right"}>
-            <Input
-              type="text"
-              placeholder="Married"
-              onChange={(e) => {
-                setmarried(e.target.value);
-              }}
-            />
+          <Select value={married} onChange={e => setmarried(e.target.value)} style={{width:"150px"}}>
+          <option  value=''>Married</option>
+              <option  value='&#10003;'>&#10003;</option>
+          
+            </Select>
           </Box>
           <Box align={"right"}>
-            <Input
-              type="text"
-              placeholder="Widow"
-              onChange={(e) => {
-                setwidow(e.target.value);
-              }}
-            />
+          <Select value={widow} onChange={e => setwidow(e.target.value)} style={{width:"150px"}}>
+          <option  value=''>Widow</option>
+              <option  value='&#10003;'>&#10003;</option>
+          
+            </Select>
           </Box>
           <Box align={"right"}>
-            <Input
-              type="text"
-              placeholder="Divorced"
-              onChange={(e) => {
-                setdivorced(e.target.value);
-              }}
-            />
+          <Select value={divorced} onChange={e => setdivorced(e.target.value)} style={{width:"150px"}}>
+          <option  value=''>Divorced</option>
+              <option  value='&#10003;'>&#10003;</option>
+          
+            </Select>
           </Box>
           </Flex>
           <Flex direction={'row'}>
@@ -293,6 +464,7 @@ const savedata = () => {
             <Input
               type="date"
               placeholder="Date of Birth"
+              required
               onChange={(e) => {
                 setdate_birth(e.target.value);
               }}
@@ -302,6 +474,7 @@ const savedata = () => {
             <Input
               type="text"
               placeholder="Height"
+              required
               onChange={(e) => {
                 setheight(e.target.value);
               }}
@@ -311,6 +484,7 @@ const savedata = () => {
             <Input
               type="text"
               placeholder="Weight"
+              required
               onChange={(e) => {
                 setweight(e.target.value);
               }}
@@ -322,6 +496,7 @@ const savedata = () => {
             <Input
               type="text"
               placeholder="Profession"
+              required
               onChange={(e) => {
                 setprofession(e.target.value);
               }}
@@ -331,7 +506,7 @@ const savedata = () => {
           <Box>
             <Input
               type="number"
-              placeholder="Amount1"
+              value={amount1}
               onChange={(e) => {
                 setamount1(e.target.value);
               }}
@@ -342,7 +517,7 @@ const savedata = () => {
          <Box align={"right"}>
             <Input
                 type="number"
-              placeholder="Amount2"
+                value={amount2}
               onChange={(e) => {
                 setamount2(e.target.value);
               }}
@@ -352,11 +527,8 @@ const savedata = () => {
             <Input
               type="number"
               readOnly= {true}
-              placeholder="Amount2"
-              value={(amount2 * 0.001).toFixed(2)}
-              onChange={(e) => {
-                setamount2R((amount2 * 0.001).toFixed(2));
-              }}
+              defaultValue={(amount2 * 0.001).toFixed(2)}
+             
             />
           </Box>
          </Flex>
@@ -364,7 +536,7 @@ const savedata = () => {
          <Box align={"right"}>
             <Input
             type="number"
-              placeholder="Amount3"
+            value={amount3}              
               onChange={(e) => {
                 setamount3(e.target.value);
               }}
@@ -374,11 +546,8 @@ const savedata = () => {
             <Input
             type="number"
             readOnly= {true}
-              placeholder="Amount3"
-              value={(amount3 * 0.001).toFixed(2)}
-              onChange={(e) => {
-                setamount3R((amount3 * 0.001).toFixed(2));
-              }}
+              defaultValue={(amount3 * 0.001).toFixed(2)}
+              
             />
           </Box>
          </Flex>
@@ -386,7 +555,7 @@ const savedata = () => {
          <Box align={"right"}>
             <Input
               type="number"
-              placeholder="Amount4"
+              value={amount4}
               onChange={(e) => {
                 setamount4(e.target.value);
               }}
@@ -397,24 +566,32 @@ const savedata = () => {
             <Input
                type="number"
                readOnly= {true}
-              placeholder="Amount4"
-              value={(amount4 * 0.001).toFixed(2)}
-              onChange={(e) => {
-                setamount4R(e.target.value);
-              }}
+              defaultValue={(amount4 * 0.001).toFixed(2)}
             />
           </Box>
          </Flex>
          <Flex justify={'right'}>
           <Box>
             <Input
+            type="number"
+            readOnly= {true}
+          
+              placeholder="Total"
+              defaultValue={(Number(amount1) + Number(amount2 * 0.001) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001)).toFixed(2) }
+                        
+              
+            />
+          </Box>
+          </Flex>
+         <Flex justify={'right'}>
+          <Box>
+            <Input
                 type="number"
                 readOnly= {true}
+                
               placeholder="Interest"
-              value={((Number(amount1) + Number(amount2 * 0.001 ) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001)) * 0.01).toFixed(2)}
-              onChange={(e) => {
-                setinterest(e.target.value);
-              }}
+              defaultValue={calculatePenalty(getmonth)}
+             
             />
           </Box>
           </Flex>
@@ -423,12 +600,10 @@ const savedata = () => {
             <Input
             type="number"
             readOnly= {true}
-              placeholder="Total"
-              value={(((Number(amount1) + Number(amount2 * 0.001) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001)) * 0.01) + 
-                    Number(amount1) + Number(amount2 * 0.001) + Number(amount3 * 0.001) + Number(amount4 * 0.001)).toFixed(2) }
-              onChange={(e) => {
-                settotal(e.target.value);
-              }}
+           
+              placeholder="Total Paid"
+              defaultValue={((Number(amount1) + Number(amount2 * 0.001) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001)) + Number(calculatePenalty(getmonth))).toFixed(2) }
+              
              
               
             />
@@ -440,11 +615,8 @@ const savedata = () => {
             <Input
               type="text"
               placeholder="In words"
-              value={converter.toWords(((Number(amount1) + Number(amount2 * 0.001) + Number(amount3 * 0.001) + Number(amount4 * 0.001)) * 0.01) + 
-                    Number(amount1) + Number(amount2 * 0.001) + Number(amount3 * 0.001) + Number(amount4 * 0.001) )}
-              onChange={(e) => {
-                setnum_word(e.target.value);
-              }}
+              defaultValue={converter.toWords((Number(amount1) + Number(amount2 * 0.001) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001)) + Number(calculatePenalty(getmonth)))}
+              
           />
           </Box>
           </Flex>

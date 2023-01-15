@@ -22,10 +22,21 @@ const CedulaSchema = mongoose.Schema({
         type:String,
         trim:true
     },
-    full_name:{
+    lname:{
         type:String,
         trim:true
     },
+
+    fname:{
+        type:String,
+        trim:true
+    },
+
+    mname:{
+        type:String,
+        trim:true
+    },
+    
     full_add:{
         type:String,
         trim:true
@@ -149,6 +160,11 @@ const CedulaSchema = mongoose.Schema({
 
 
     interest:{
+        type:Number,
+        trim:true
+    },
+
+    total_paid:{
         type:Number,
         trim:true
     },
