@@ -7,6 +7,7 @@ import {
   Select,
   Input,
   Stack,
+  Modal,
   
 } from "@chakra-ui/react";
 import Link from "next/link";
@@ -302,9 +303,10 @@ function calculatePenalty(monthno) {
   };
 
   return (
+
+    
     <Flex direction={"column"} align={"center"} width={"100vw"}>
- 
-      <Box>
+         <Box>
         <form onSubmit={addCedulaHandler}>
          <Flex justify={'right'}>
          <Box align={"right"}>

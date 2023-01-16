@@ -17,7 +17,7 @@ const Menunav = () => {
 </Button>
 </Link>
   
-  <Link href={'/components/Cedula/addCedula'} >
+  <Link href={'/components/Cedula/addCedulaView'} >
   <Button>
        <Text fontSize={'md'}>Cedula</Text>
 </Button>

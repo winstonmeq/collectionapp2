@@ -56,7 +56,9 @@ const Printcedula2 = () => {
 
 
   return (
+   
     <Flex direction={"column"} align={"center"} width={"100vw"}>
+
       <ReactToPrint
         trigger={() => <Button>Print this out!</Button>}
         content={() => tableRef.current}

@@ -7,7 +7,7 @@ import {
     Th,
     Td,
     TableCaption,
-    TableContainer,
+    TableContainer, useDisclosure, Button, Modal, ModalBody, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalFooter
   } from '@chakra-ui/react'
   import { listCedula } from "../../../axios/cedula_request";
   import { useState } from 'react';
@@ -15,12 +15,11 @@ import {
   import Link from 'next/link';
 
 
-
 const ListCedula = () => {
 
   const [data, setdata] = useState([]);
   const [userId, setuserId] = useState('635684a1d9f90d0fed02ca51');
-
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
 
   const getListCedula = async (userId) => {     
@@ -58,13 +57,33 @@ const ListCedula = () => {
     return (
         <>
     
-          <TableContainer>
+    <Button onClick={onOpen}>Add</Button>
+    <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Add Cedula</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+              
+           <addCedula />
+
+          </ModalBody>
+
+          <ModalFooter>
+            <Button colorScheme='blue' mr={3} onClick={onClose}>
+              Close
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+   <TableContainer>
   <Table variant='striped' colorScheme='teal'>
     <TableCaption>List of Cedula</TableCaption>
     <Thead>
       <Tr>
         <Th>Cedula #</Th>
-        <Th>Name</Th>
+        <Th>Last Name</Th>
+        <Th>First Name</Th>
         <Th>Address</Th>
         <Th>Amount</Th>
         <Th>Action</Th>
@@ -76,7 +95,8 @@ const ListCedula = () => {
 return (
       <Tr key={i}>
         <Td >{item.cedula_no}</Td>
-        <Td>{item.full_name}</Td>
+        <Td>{item.lname}</Td>
+        <Td>{item.fname}</Td>
         <Td>{item.full_add}</Td>
         <Td>{item.total}</Td>
         <Td>{
