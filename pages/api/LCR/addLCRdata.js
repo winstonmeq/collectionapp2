@@ -11,14 +11,11 @@ export default async function handler(req, res) {
 
       const { name, amount, type} = req.body;
 
- 
-
-
-      await dbConnect();   
+       await dbConnect();   
 
       const lcr = new LCRdata({
         name:name,
-        amout:amount,
+        amount:amount,
         type:type,
         userId: '635684a1d9f90d0fed02ca51'
       });

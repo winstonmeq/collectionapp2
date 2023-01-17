@@ -8,84 +8,79 @@ import {
     Spacer,
   } from "@chakra-ui/react";
 import { useState } from "react";
+import axios from 'axios';
 
 
 
 
+const AddLCR = ({lcrdata}) => {
 
-const AddLCR = () => {
+    const [newlcrdata, setnewlcrdata] = useState({});
+    const [data,setdata] = useState([lcrdata]);
+ 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+          const response = await axios.post('http://192.168.0.8:3000/api/LCR/addLCRdata', newlcrdata);
+          console.log(response);
 
-    const [type,settype] = useState('');
-    const [amount,setamount] = useState(0);
-    
-    let fee = [{name:'dfd',description:'sdfsdf', amount:'3443'}];
+        } catch (error) {
 
+          console.error(error);
 
-    const lcrfee = {
-        name:type,
-        amount: amount
-    }
+        }
 
-
-    
-    const addfee = () => {
-
-        fee.push(lcrfee);
-
-        console.log(fee)
-        
-        
-    }
+      };
+   
+      console.log(lcrdata);
+     
 
 return (
-    <Flex direction={'row'}>
+    <>
+ <h1>LCR data List</h1>
+      <ul>
+      { lcrdata.map((item) => (
+              <li key={item.name}>{item.name} {item.amount}</li>
+            ))
+         }
+      </ul>
 
-<Box>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="name">Name:</label>
+        <input type="text" id="name" onChange={(e) => setnewlcrdata({ ...newlcrdata, name: e.target.value })} />
+        <label htmlFor="description">Amount:</label>
+        <input type="text" id="Amount" onChange={(e) => setnewlcrdata({ ...newlcrdata, amount: e.target.value })} />
+        <label htmlFor="Type">Type:</label>
+        <input type="text" id="Type" onChange={(e) => setnewlcrdata({ ...newlcrdata, type: e.target.value })} />
+        <button type="submit">Add LCR Data</button>
+      </form>
 
-   
-<Input
-  type="text"
-  placeholder="Type"
-  required
-  onChange={(e) => {
-  settype(e.target.value);
-}}/>
-
-
-
-   
-<Input
-  type="text"
-  placeholder="Amount"
-  required
-  onChange={(e) => {
-  setamount(e.target.value);
-}}/>
-
-
-<Button onClick={addfee}>add fee </Button>
-</Box>
-
-<Box border={'1px'} width={"50%"} margin={'10px'}>
-
- {fee.map((item) => {
-
-    return (
-        <div>
-            {item.description}
-        </div>
-    )
-   
- })}
-
-
-
-</Box>
-
-</Flex>
+    </>
 )
 
 
+
 }
+
+
+
+export async function getServerSideProps() {
+    const res = await axios.post('http://192.168.0.8:3000/api/LCR/listLCRdata');
+    const lcrdata = res.data;
+  
+    return {
+      props: {
+        lcrdata
+
+       
+      }
+    }
+
+}
+
+
+
+
+
 
 export default AddLCR;

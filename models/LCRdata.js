@@ -26,12 +26,11 @@ const LCRdataSchema = mongoose.Schema({
         index: true,
 
     },
-  
-    userlevel:{
-        type:Number, 
-        index:true,            
-        trim:true
-    }
+   
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",        
+    },
 
 },{
 
