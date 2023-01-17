@@ -3,7 +3,7 @@ import {
     Thead,
     Tbody,
     Tfoot,
-    Tr,
+    Tr, Flex, Box,
     Th,
     Td,
     TableCaption,
@@ -13,8 +13,7 @@ import {
   import { useState } from 'react';
   import { useEffect } from 'react';
   import Link from 'next/link';
-
-
+import Cedula from './addCedulaView';
 const ListCedula = () => {
 
   const [data, setdata] = useState([]);
@@ -56,27 +55,38 @@ const ListCedula = () => {
 
     return (
         <>
-    
+    <Flex >
+        
     <Button onClick={onOpen}>Add</Button>
-    <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Add Cedula</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-              
-           <addCedula />
 
-          </ModalBody>
+  <Modal closeOnOverlayClick={false} isOpen={isOpen} onClose={onClose} size={'xl'}  >
+    <ModalOverlay />
+    <ModalContent >
+      <ModalHeader>Add Cedula</ModalHeader>
+    
+      <ModalBody >
+  
 
-          <ModalFooter>
-            <Button colorScheme='blue' mr={3} onClick={onClose}>
-              Close
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
-   <TableContainer>
+    <Cedula />        
+        
+    
+     
+
+     </ModalBody>
+
+      <ModalFooter>
+        <Button size={'sm'} colorScheme='blue' mr={3} onClick={onClose}>
+          Close
+        </Button>
+      </ModalFooter>
+    </ModalContent>
+  </Modal>
+
+
+    </Flex>
+  
+  
+  <TableContainer>
   <Table variant='striped' colorScheme='teal'>
     <TableCaption>List of Cedula</TableCaption>
     <Thead>
