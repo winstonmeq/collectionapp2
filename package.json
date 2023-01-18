@@ -19,7 +19,8 @@
     "number-to-words": "^1.2.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-to-print": "^2.14.9"
+    "react-to-print": "^2.14.9",
+    "ws": "^8.12.0"
   },
   "devDependencies": {
     "eslint": "8.26.0",

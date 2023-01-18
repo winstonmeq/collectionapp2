@@ -37,9 +37,11 @@ export default async function handler(req, res) {
 
         }else{
 
-            errorHandler("Something went wrong", res)
+          res.status(200).json('no data')
 
         }
+
+        
       } catch (error) {
 
         errorHandler(error, res);

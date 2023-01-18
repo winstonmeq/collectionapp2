@@ -27,8 +27,7 @@ export default async function handler(req, res) {
         // const userDoc = saveUser._doc;
         // delete userDoc.password;
 
-        responseHandler(save, res);
-        
+        res.status(200).json(save)
         
       } else {
 
