@@ -6,31 +6,28 @@ const LCRdataSchema = mongoose.Schema({
     
 
     name: {
-        type:String,
-        required:true,        
+        type:String,        
         index: true,
 
     },
   
 
     amount: {
-        type:Number,
-        required:true,        
+        type:Number,        
         index: true,
 
     },
 
     type: {
-        type:String,
-        required:true,        
+        type:String,       
         index: true,
 
     },
    
-    userId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",        
-    },
+    // userId: {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: "User",        
+    // },
 
 },{
 

@@ -21,7 +21,7 @@ import {
   
   
   
-  const AddLCR = ({ lcrdata }) => {
+  const AddLCR = () => {
   
     const [newlcrdata, setnewlcrdata] = useState({});
     const [data, setData] = useState([]);
@@ -30,20 +30,20 @@ import {
     const [amount1, setAmount1] = useState('')
     const [transacId,setTransacId] = useState();
    
-  useEffect(() => {
+  // useEffect(() => {
    
-    function trasacId() {
-      setTransacId(transacId = `T${Math.floor(Math.random() * 1000000)}`)
-    }
+  //   function trasacId() {
+  //     setTransacId(transacId = `T${Math.floor(Math.random() * 1000000)}`)
+  //   }
 
-    trasacId();
-  }, []);
+  //   trasacId();
+  // }, []);
 
 
 
  
     
-  const [datalist, setdatalist] = useState([{ name:'Certification fee', amount: 75.00, type:'birth'},{ name:'Late Registration', amount: 120.00, type:'birth'}])
+  const [datalist, setdatalist] = useState([{ name:'Certification fee', amount: 75.00, type:'birth'}])
  
 
   const lcr1 = { name:'Certification fee', amount: 75.00, type:'birth'}
@@ -62,18 +62,18 @@ const handleSave = async() => {
   try {
 
     console.log({datalist})
-       const response = await axios.post('http://192.168.0.8:3000/api/LCR/addLCRdata',{datalist});
-      
-    
+
+       const response = await axios.post('http://192.168.0.8:3000/api/LCR/addLCRdata2',{datalist});
+         
 
   } catch (error) {
-      console.error(error);
+      console.log(error)
   }
 }
 
 const handleSubmit = async (e) => {
 
-  const payload = {name:'werwer',amount:'tttt',type:'sjdfh'}
+  const payload = {name:'werwer',amount:200,type:'sjdfh'}
   console.log('payload',payload);
 
   e.preventDefault();
@@ -126,7 +126,7 @@ const handleSubmit = async (e) => {
       {datalist.map((item,i)=>{
   
   return (
-        <Tr key={item.id}>
+        <Tr key={i}>
            <Td >{item.id}</Td>
            <Td >{item.transactionId}</Td>
           <Td >{item.name}</Td>
@@ -150,7 +150,7 @@ const handleSubmit = async (e) => {
        
       </Tfoot>
     </Table>
-    <Button onClick={handleSubmit}>Save</Button>
+    <Button onClick={handleSave}>Save</Button>
   </TableContainer>
     </Box>
     </Flex>
