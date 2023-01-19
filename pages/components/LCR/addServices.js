@@ -62,6 +62,9 @@ const AddLCR = ({ lcrdata }) => {
 
   };
 
+
+  
+
   const savedd = () => {
 
     setAmount1(NameChange(name1))

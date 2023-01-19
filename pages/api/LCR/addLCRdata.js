@@ -11,6 +11,8 @@ export default async function handler(req, res) {
 
       const { name, amount, type} = req.body;
 
+      console.log('dsfsdf')
+
        await dbConnect();   
 
       const lcr = new LCRdata({

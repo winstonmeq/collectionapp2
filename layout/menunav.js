@@ -29,7 +29,7 @@ const Menunav = () => {
 </Button>
       </Link>
 
-<Link href={'/components/LCR/addServices'} >
+<Link href={'/components/LCR/addLCR'} >
   <Button>
        <Text fontSize={'md'}>LCR</Text>
   </Button>
