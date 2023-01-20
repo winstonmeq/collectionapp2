@@ -56,14 +56,16 @@ const Printcedula2 = () => {
 
 
   return (
+   
     <Flex direction={"column"} align={"center"} width={"100vw"}>
+
       <ReactToPrint
         trigger={() => <Button>Print this out!</Button>}
         content={() => tableRef.current}
       />
 
       <Box ref={tableRef} align={"left"}>
-        <table style={{ width: "500px", marginLeft: "35px", fontSize:'12px' }}>
+        <table style={{ width: "500px", marginLeft: "35px", fontSize:'12px', fontWeight:'bold' }}>
           {data.map((item, i) => {
             return (
               <tbody>
@@ -108,7 +110,7 @@ const Printcedula2 = () => {
                 </tr>
                 <tr>                  
                   <td colspan="2" style={{ width: "120px" }}><Box textAlign={'left'} marginLeft={'50px'}>{item.nationality}</Box></td>
-                  <td colspan="3" style={{ width: "180px" }}><Box textAlign={'right'}>{item.place_birth}</Box></td>
+                  <td colspan="3" style={{ width: "180px", fontSize:"10px" }}><Box textAlign={'right'}>{item.place_birth}</Box></td>
                   <td style={{ width: "60px" }}><Box textAlign={'right'}>{item.height}</Box></td>
                 </tr>
                 <tr>   
@@ -136,7 +138,7 @@ const Printcedula2 = () => {
                   <td></td>
                   <td><Box textAlign={'right'}>{(item.amount1).toFixed(2)}</Box></td>
                 </tr>
-                <tr style={{fontSize:"16px"}}>
+                <tr style={{fontSize:"14px"}}>
                   <td ></td>
                   <td></td>
                   <td></td>
@@ -213,7 +215,7 @@ const Printcedula2 = () => {
                   <td></td>                 
                   <td colspan="3"><Box textAlign={'center'}>MARIA FE. E. DALISAY</Box></td>
                  
-                  <td colspan="2"><Box textAlign={'right'}>{item.num_word}</Box></td>
+                  <td colspan="2" style={{fontSize:"10px"}}><Box textAlign={'right'}>{item.num_word}</Box></td>
                 </tr>
           
               </tbody>

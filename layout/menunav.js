@@ -17,21 +17,28 @@ const Menunav = () => {
 </Button>
 </Link>
   
-  <Link href={'/components/Cedula/addCedula'} >
+  {/* <Link href={'/components/Cedula/addCedulaView'} >
+  <Button>
+       <Text fontSize={'md'}>Cedula</Text>
+</Button>
+      </Link> */}
+
+      <Link href={'/components/Cedula/listCedula'} >
   <Button>
        <Text fontSize={'md'}>Cedula</Text>
 </Button>
       </Link>
 
-      <Link href={'/components/Cedula/listCedula'} >
+<Link href={'/components/LCR/addLCR'} >
   <Button>
-       <Text fontSize={'md'}>Cedula Lists</Text>
-</Button>
-      </Link>
+       <Text fontSize={'md'}>LCR</Text>
+  </Button>
+</Link>
 
-<Link href={'/components/Laboratory'} >
+
+<Link href={'/components/services/printOR'} >
   <Button>
-       <Text fontSize={'md'}>Laboratory Fee</Text>
+       <Text fontSize={'md'}>Print OR</Text>
   </Button>
 </Link>
 
