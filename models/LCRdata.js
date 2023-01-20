@@ -5,6 +5,13 @@ const LCRdataSchema = mongoose.Schema({
     
     
 
+    transacId: {
+        type:String,        
+        index: true,
+         
+    },
+  
+
     name: {
         type:String,        
         index: true,
@@ -24,10 +31,10 @@ const LCRdataSchema = mongoose.Schema({
 
     },
    
-    // userId: {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: "User",        
-    // },
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",        
+    },
 
 },{
 
