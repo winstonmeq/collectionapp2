@@ -13,7 +13,16 @@ import {
   import { useState } from 'react';
   import { useEffect } from 'react';
   import Link from 'next/link';
-import Cedula from './addCedulaView';
+   //import Cedula from './addCedulaView';
+   import Cedula from '../Cedula/addCedulaView'
+
+
+
+
+
+
+
+
 const ListCedula = () => {
 
   const [data, setdata] = useState([]);

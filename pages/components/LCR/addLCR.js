@@ -1,11 +1,8 @@
 import {
   Flex,
-  Avatar,
   Box,
   Button,
-  Text,
-  Input,
-  Spacer, Table, TableContainer, Select,
+  Table, TableContainer, 
   Thead,
   Tbody,
   Tfoot,
@@ -18,9 +15,7 @@ import {
 import { useState } from "react";
 import { useEffect } from "react";
 import axios from 'axios';
-import Link from "next/link";
-import Savepayment from "../../payments/savepayment";
-
+import Savepayment from "../payments/savepayment";
 
 
 const AddLCR = () => {
@@ -47,7 +42,6 @@ const AddLCR = () => {
 
   const [datalist, setdatalist] = useState([])
 
-  console.log('maon nih transacID',transacId)
 
   const lcr1 = { transId: transacId , name: 'Certification fee', amount: 75.00, type: 'birth', userId: '635684a1d9f90d0fed02ca51' }
   const lcr2 = { transId: transacId, name: 'Late Registration', amount: 120.00, type: 'birth', userId: '635684a1d9f90d0fed02ca51' }
@@ -158,14 +152,16 @@ const AddLCR = () => {
               </Tfoot>
             </Table>
             <Button onClick={handleSave}>Save</Button>
+            <Savepayment transacId={transacId} amount={totalAmount}/>
           </TableContainer>
           
-          <Button ><Savepayment transacId={transacId} amount={totalAmount} /></Button>
+      
 
         </Box>
       </Flex>
        </Flex>
       </Box>
+      
       </Flex>
       
 
