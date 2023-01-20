@@ -14,6 +14,8 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 
+
+
 const Savepayment = ({transacId, amount}) => {
  
     const [paylist, setpaylist] = useState([])
