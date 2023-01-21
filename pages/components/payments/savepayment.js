@@ -17,7 +17,7 @@ import { useEffect } from "react";
 import axios from 'axios';
 
 
-const Savepayment = ({transacId, amount}) => {
+const Savepayment = ({transacId, amount, savehandle}) => {
  
     const [paylist, setpaylist] = useState([])
     const [customerName, setcustomerName] = useState('');
@@ -25,6 +25,7 @@ const Savepayment = ({transacId, amount}) => {
     const [userId, setuserId] = useState('635684a1d9f90d0fed02ca51')
 
     const { isOpen, onOpen, onClose } = useDisclosure()
+    const [isOpen2, setIsOpen2] = useState();
 
 
     const handleSavePayment = async () => {
@@ -34,7 +35,7 @@ const Savepayment = ({transacId, amount}) => {
 
           console.log(payload)
     
-          const response = await axios.post('http://192.168.0.8:3000/api/Payment/addPayment', payload);
+          const response = await axios.post('http://192.168.102.18:3000/api/Payment/addPayment', payload);
     
        
     
@@ -42,12 +43,13 @@ const Savepayment = ({transacId, amount}) => {
           console.log(error)
         }
       }
-    
+
+   
 
   return (
     <Flex >
         
-    <Button onClick={onOpen}>Add</Button>
+    <Button onClick={onOpen}>Pay</Button>
 
   <Modal closeOnOverlayClick={false} isOpen={isOpen} onClose={onClose} size={'xl'}  >
     <ModalOverlay />
@@ -64,10 +66,10 @@ const Savepayment = ({transacId, amount}) => {
           <Input type='text' value={orText} onChange={(e) => {setorText(e.target.value)}}  />
           <label>Amount</label>
           <Input type='number' value={amount} onChange={e => {}}  />
-            <Button type="submit">Submit</Button>
+            <Button onClick={savehandle} type="submit">Print</Button>
           </form>
      </ModalBody>
-     <Button onClick={handleSavePayment} type="submit">Send to DB</Button>
+     {/* <Button onClick={savehandle} type="submit">Save Handle</Button> */}
       <ModalFooter>
         <Button size={'sm'} colorScheme='blue' mr={3} onClick={onClose}>
           Close

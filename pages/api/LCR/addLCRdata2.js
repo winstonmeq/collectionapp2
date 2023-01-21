@@ -6,6 +6,8 @@ import LCRdata from "../../../models/LCRdata";
 export default async function handler(req, res) {
 
   
+//mao nih nga API route if ang data mo naka array nah.. mag nice sya
+//kanang datalist array na so daghan na naka row nga data 
 
       try {
 

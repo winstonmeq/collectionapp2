@@ -36,7 +36,7 @@ const Menunav = () => {
 </Link>
 
 
-<Link href={'/components/services/printOR'} >
+<Link href={'/components/payments/paymentlist'} >
   <Button>
        <Text fontSize={'md'}>Print OR</Text>
   </Button>

@@ -25,12 +25,12 @@ const AddLCR = () => {
   const [price, setprice] = useState(0);
   const [name1, setName1] = useState('')
   const [amount1, setAmount1] = useState('')
-  const [transacId, setTransacId] = useState();
+  const [transId, setTransId] = useState();
 
   useEffect(() => {
 
     function trasacId() {
-      setTransacId(`T${Math.floor(Math.random() * 1000000)}`)
+      setTransId(`T${Math.floor(Math.random() * 1000000)}`)
     }
 
     trasacId();
@@ -43,13 +43,20 @@ const AddLCR = () => {
   const [datalist, setdatalist] = useState([])
 
 
-  const lcr1 = { transId: transacId , name: 'Certification fee', amount: 75.00, type: 'birth', userId: '635684a1d9f90d0fed02ca51' }
-  const lcr2 = { transId: transacId, name: 'Late Registration', amount: 120.00, type: 'birth', userId: '635684a1d9f90d0fed02ca51' }
-  const lcr3 = { transId: transacId, name: 'True Copy', amount: 80.00, type: "married", userId: '635684a1d9f90d0fed02ca51' }
+  const lcr1 = { transacId: transId , name: 'Certification fee', amount: 75.00, type: 'birth', userId: '635684a1d9f90d0fed02ca51' }
+  const lcr2 = { transacId: transId, name: 'Late Registration', amount: 120.00, type: 'birth', userId: '635684a1d9f90d0fed02ca51' }
+  const lcr3 = { transacId: transId, name: 'True Copy', amount: 80.00, type: "married", userId: '635684a1d9f90d0fed02ca51' }
 
   const handleAddProduct = (newData) => {
     setdatalist([...datalist, newData]);
   }
+
+
+  const passdata = () => {
+
+  }
+
+
 
   const handleRemoveProduct = (name) => {
     setdatalist(datalist.filter(item => item.name !== name));
@@ -60,7 +67,7 @@ const AddLCR = () => {
 
       console.log({ datalist })
 
-      const response = await axios.post('http://192.168.0.8:3000/api/LCR/addLCRdata2', { datalist });
+      const response = await axios.post('http://192.168.102.18:3000/api/LCR/addLCRdata2', { datalist });
    
      setdatalist([])
      
@@ -75,8 +82,7 @@ const AddLCR = () => {
 
   const totalAmount = datalist.reduce((acc, item) => acc + item.amount, 0);
 
-
-
+  
 
   return (
     <Flex direction={'row'} >
@@ -151,8 +157,8 @@ const AddLCR = () => {
 
               </Tfoot>
             </Table>
-            <Button onClick={handleSave}>Save</Button>
-            <Savepayment transacId={transacId} amount={totalAmount}/>
+            {/* <Button onClick={handleSave}>Save</Button> */}
+           <Savepayment transacId={transId} amount={totalAmount} savehandle={handleSave} />
           </TableContainer>
           
       

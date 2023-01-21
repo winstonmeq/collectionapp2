@@ -43,9 +43,9 @@ const Printcedula2 = () => {
     }
   }, [id]);
 
+
+
   const tableRef = useRef(null);
-
-
 
 
   function formatNumber(num) {

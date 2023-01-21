@@ -15,12 +15,12 @@ export default async function handler(req, res) {
 
        await dbConnect();  
        
-        const pay = new payment(transacId, customerName, amount, orText, userId);
+        const pay = new payment({transacId, customerName, amount, orText, userId});
         // Save the data to the database      
         await pay.save();
     
            
-    res.status(200).json({ message: 'Data saved successfully' });
+       res.status(200).json({ message: 'Data saved successfully' });
 
 
       } catch (error) {

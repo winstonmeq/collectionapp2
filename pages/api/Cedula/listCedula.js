@@ -15,6 +15,8 @@ export default async function handler(req, res) {
       try {
   
         const {userId} = req.body;
+
+        console.log({userId})
   
         await dbConnect(); 
         
