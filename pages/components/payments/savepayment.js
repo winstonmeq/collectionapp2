@@ -35,7 +35,7 @@ const Savepayment = ({transacId, amount, savehandle}) => {
 
           console.log(payload)
     
-          const response = await axios.post('http://192.168.102.18:3000/api/Payment/addPayment', payload);
+          const response = await axios.post(process.env.NEXTAUTH_URL + '/api/Payment/addPayment', payload);
     
        
     
