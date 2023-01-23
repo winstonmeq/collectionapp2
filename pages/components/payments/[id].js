@@ -71,8 +71,8 @@ return (
    <Box paddingLeft={'50px'}>MTO</Box>
    <Box height={'12px'}></Box>
    <Box paddingLeft={'50px'}>{item.customerName}</Box>
-   <Box height={'60px'}></Box>
-   <Box height={'170px'}>  
+   <Box height={'40px'}></Box>
+   <Box height={'190px'}>  
    {item.data2.map((item2)=>(
 
 <Flex direction={'row'} textAlign={'left'}>
@@ -87,7 +87,6 @@ return (
 </Box>      
 <Box>
 <Flex direction={'row'} textAlign={'left'}>
-    <Box height={'8px'}></Box>
     <Box width={'270px'}></Box>
     <Box>{item.amount.toFixed(2)}</Box>
     <Box height={'40px'}></Box>
