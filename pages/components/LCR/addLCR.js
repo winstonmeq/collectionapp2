@@ -66,7 +66,7 @@ const AddLCR = () => {
 
       console.log({ datalist })
 
-      const response = await axios.post('http://192.168.102.18:3000/api/LCR/addLCRdata2', { datalist });
+      const response = await axios.post(process.env.NEXTAUTH_URL + '/api/LCR/addLCRdata2', { datalist });
    
      setdatalist([])
      
@@ -149,8 +149,8 @@ const AddLCR = () => {
                 <Tr>
                   <Th></Th>
                   <Th></Th>
-                  <Th colSpan="1">Total</Th>
-                  <Th>{totalAmount}</Th>
+                  <Th style={{fontSize:"15px", fontWeight: "bold"}}colSpan="1">Total</Th>
+                  <Th style={{ fontSize:"20px", fontWeight: "bold"}}>{totalAmount.toFixed(2)}</Th>
                 </Tr>
 
 

@@ -22,7 +22,7 @@ const Paymentlist = () => {
 
     useEffect(() => {
         async function fetchData() {
-            const { data } = await axios.get('http://192.168.102.18:3000/api/Payment/apiPaymentList');
+            const { data } = await axios.get(process.env.NEXTAUTH_URL + '/api/Payment/apiPaymentList');
 
             console.log(data)
             setPaymentList(data);
