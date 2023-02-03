@@ -16,6 +16,8 @@ export default async function handler(req, res) {
 
        await dbConnect();  
        
+           
+       const sort = { createdAt: -1 };
        
     
         const getdata = await Payment.aggregate([
@@ -28,7 +30,7 @@ export default async function handler(req, res) {
                        
                                     
     
-        ]).exec();
+        ]).sort(sort);
 
 
           
