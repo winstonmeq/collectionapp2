@@ -29,11 +29,15 @@ const AddLCR = () => {
 
   useEffect(() => {
 
-    function trasacId() {
+    const trasacId = () => {
       setTransId(`T${Math.floor(Math.random() * 1000000)}`)
+      console.log(transId)
     }
 
-    trasacId();
+     trasacId();
+
+     
+  
   }, []);
 
 
@@ -53,11 +57,6 @@ const AddLCR = () => {
 
   const handleAddProduct = (newData) => {
     setdatalist([...datalist, newData]);
-  }
-
-
-  const passdata = () => {
-
   }
 
 

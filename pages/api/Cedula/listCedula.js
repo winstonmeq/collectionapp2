@@ -20,7 +20,7 @@ export default async function handler(req, res) {
   
         await dbConnect(); 
         
-        // console.log(userId);
+        const sort = {createdAt: -1}
          
         const getdata = await Cedula.aggregate([
             
@@ -33,7 +33,7 @@ export default async function handler(req, res) {
             
                                     
     
-        ]).exec();
+        ]).sort(sort);
 
 
         if(getdata){

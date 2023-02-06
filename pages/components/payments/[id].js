@@ -1,22 +1,16 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useRouter } from "next/router";
-import { useRef } from "react";
-import ReactToPrint from "react-to-print";
-import moment from 'moment/moment';
-import {
-    Flex,
-    Avatar,
-    Box,
-    Button,
-    Text,
-    Input,
-    Spacer,
-  } from "@chakra-ui/react";
+
+
 
 
 const Print = () => {
 
+
+    
+
+    const tableRef = useRef(null);
 
     const [paymentList, setPaymentList] = useState([]);
 
@@ -41,27 +35,9 @@ const Print = () => {
 
     const tableRef = useRef(null);
 
+    var converter = require('number-to-words');
 
-    function convertToWords(num) {
 
-        var converter = require('number-to-words');
-
-        const wholeNum = Math.floor(num);
-        const decimalNum = ((num - wholeNum) * 100).toFixed();
-        
-     
-
-       const wholeNumWords = converter.toWords(wholeNum);
-        
-       if(decimalNum == 0){
-    
-        return `${wholeNumWords}`;
-    
-       }
-        
-        return `${wholeNumWords} and ${decimalNum}/100`;
-    
-      }
 
 
 
@@ -69,37 +45,31 @@ const Print = () => {
 
 
     return (
-<Flex  direction={"column"} align={"center"} width={"100vw"}>
+        <div>
+            <h1>Payment List</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {paymentList.map((item,i) => {
+                        return (
+                            
+                            <tr key={i}>
+                            <td>{item.transacId}</td>                            
+                            <td>{item.customerName}</td>
+                            <td>{item.amount}</td>
+                            {/* <td>
+                            {item.data2.map((item2)=>(
 
-<ReactToPrint
-        trigger={() => <Button>Print this out!</Button>}
-        content={() => tableRef.current}
-      />
-
-<Box ref={tableRef} align={"left"} paddingLeft={'30px'}>
-
-{paymentList.map((item,i) => {
-
-return (
-<Box key={i}>
-<Flex direction={'column'}>
-    <Box height={'170px'}></Box>
-   <Box>{moment(item.createdAt).format('MM/DD/YYYY')}</Box>
-   <Box height={'20px'}></Box>
-   <Box paddingLeft={'50px'}>MTO</Box>
-   <Box height={'12px'}></Box>
-   <Box paddingLeft={'50px'}>{item.customerName}</Box>
-   <Box height={'40px'}></Box>
-   <Box height={'190px'}>  
-   {item.data2.map((item2)=>(
-
-<Flex direction={'row'} textAlign={'left'}>
-    <Box width={'230px'}>{item2.name}</Box>
-    <Box width={'40px'}></Box>
-    <Box>{item2.amount.toFixed(2)}</Box>
-</Flex>
-
-
+                                <tr>
+                                    <td>{item2.name}</td>
+                                    <td>{item2.amount}</td>
+                                </tr>
 
 ))}   
 </Box>      
@@ -111,8 +81,7 @@ return (
 </Flex>
 <Flex direction={'row'} textAlign={'left'}>
 <Box width={'40px'}></Box>
-{/* <Box>{converter.toWords(item.amount)}</Box> */}
-<Box>{convertToWords(item.amount)}</Box>
+<Box>{converter.toWords(item.amount)}</Box>
 </Flex>
 </Box>
 
@@ -125,11 +94,10 @@ return (
 
 
 
-)})}
-
-</Box>
-    </Flex>
-        
+                    })}
+                </tbody>
+            </table>
+        </div>
     );
 };
 

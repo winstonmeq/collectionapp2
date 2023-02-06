@@ -1,7 +1,6 @@
 import { dbConnect } from "../../../conn/dbconnect";
 import { errorHandler,responseHandler } from "../../../util/common";
 import Payment from "../../../models/Payment";
-import LCRdata from "../../../models/LCRdata";
 
 
 export default async function handler(req, res) {
@@ -15,17 +14,14 @@ export default async function handler(req, res) {
       console.log(' payment api transacId ang',id)
 
        await dbConnect();  
-       
+   
            
         const getdata = await Payment.aggregate([
             
             { 
                 $match : { userId: require('mongoose').Types.ObjectId('635684a1d9f90d0fed02ca51')} && {transacId: id}, 
-
-
             },
-            {
-                
+            {                
                 $lookup: {
                     from: 'lcrdatas',
                     localField: 'transacId',
@@ -33,13 +29,15 @@ export default async function handler(req, res) {
                     as: 'data2'
                 }
                   
+<<<<<<< HEAD
             },
            
+=======
+            }           
+>>>>>>> 8bbc07200949e9ded1a1cfd20fdcb083ff1f0074
                                     
     
         ]).exec();
-
-
           
        res.status(200).json(getdata);
 
