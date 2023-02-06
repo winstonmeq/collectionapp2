@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Link from 'next/link';
-import {
+  import {
     Table,
     Thead,
     Tbody,
@@ -12,13 +12,16 @@ import {
     TableCaption,
     TableContainer, useDisclosure, Button, Modal, ModalBody, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalFooter
   } from '@chakra-ui/react'
-
-
+import AddLCR from '../LCR/addLCR';
 
 const Paymentlist = () => {
 
 
     const [paymentList, setPaymentList] = useState([]);
+    const { isOpen, onOpen, onClose } = useDisclosure()
+
+
+
 
     useEffect(() => {
         async function fetchData() {
@@ -32,7 +35,14 @@ const Paymentlist = () => {
 
     return (
         <div>
-            <h1>Product List</h1>
+
+<Link href={'/components/LCR/addLCR'} >
+  <Button>Add</Button>
+      </Link>
+           
+      
+
+            <h1>Payment List</h1>
             <Table>
                 <Thead>
                     <Tr>

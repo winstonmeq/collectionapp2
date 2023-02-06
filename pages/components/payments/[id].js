@@ -41,9 +41,27 @@ const Print = () => {
 
     const tableRef = useRef(null);
 
-    var converter = require('number-to-words');
 
+    function convertToWords(num) {
 
+        var converter = require('number-to-words');
+
+        const wholeNum = Math.floor(num);
+        const decimalNum = ((num - wholeNum) * 100).toFixed();
+        
+     
+
+       const wholeNumWords = converter.toWords(wholeNum);
+        
+       if(decimalNum == 0){
+    
+        return `${wholeNumWords}`;
+    
+       }
+        
+        return `${wholeNumWords} and ${decimalNum}/100`;
+    
+      }
 
 
 
@@ -93,7 +111,8 @@ return (
 </Flex>
 <Flex direction={'row'} textAlign={'left'}>
 <Box width={'40px'}></Box>
-<Box>{converter.toWords(item.amount)}</Box>
+{/* <Box>{converter.toWords(item.amount)}</Box> */}
+<Box>{convertToWords(item.amount)}</Box>
 </Flex>
 </Box>
 

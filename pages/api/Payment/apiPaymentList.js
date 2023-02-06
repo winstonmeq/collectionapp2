@@ -25,6 +25,11 @@ export default async function handler(req, res) {
 
 
             },
+
+            { 
+              $sort : { createdAt: -1 } 
+            }
+            
                        
                                     
     

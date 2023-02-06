@@ -27,6 +27,10 @@ export default async function handler(req, res) {
             { 
               $match : { userId: require('mongoose').Types.ObjectId(userId)},
             },
+            { 
+              $sort : { createdAt: -1 } 
+            }
+            
                                     
     
         ]).exec();

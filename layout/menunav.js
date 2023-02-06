@@ -29,16 +29,9 @@ const Menunav = () => {
 </Button>
       </Link>
 
-<Link href={'/components/LCR/addLCR'} >
-  <Button>
-       <Text fontSize={'md'}>LCR</Text>
-  </Button>
-</Link>
-
-
 <Link href={'/components/payments/paymentlist'} >
   <Button>
-       <Text fontSize={'md'}>Print OR</Text>
+       <Text fontSize={'md'}>LCR</Text>
   </Button>
 </Link>
 
