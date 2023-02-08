@@ -9,13 +9,19 @@ export default async function handler(req, res) {
 
       try {
 
-        const { transacId, customerName, amount, orText, userId } = req.body;
+        const { transacId, service_type, customerName, amount, orText, userId } = req.body;
 
-      console.log(' payment api result',{transacId, customerName, amount, orText, userId})
+      console.log(' payment api result',{transacId, service_type, customerName, amount, orText, userId})
 
        await dbConnect();  
        
-        const pay = new payment({transacId, customerName, amount, orText, userId});
+        const pay = new payment({
+          transacId:transacId, 
+          service_type:service_type, 
+          customerName:customerName, 
+          amount:amount, 
+          orText:orText, 
+          userId:userId});
         // Save the data to the database      
         await pay.save();
     
@@ -30,6 +36,8 @@ export default async function handler(req, res) {
       }
 
       finally {
+
+        console.log('close the database connection')
         // Close the database connection
         //mongoose.connection.close();
     }

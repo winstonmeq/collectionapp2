@@ -21,6 +21,7 @@ import { useRouter } from "next/router";
 const Savepayment = ({transacId, service_type, amount, savehandle}) => {
  
     const [paylist, setpaylist] = useState([])
+    // const [service_type, setservice_type] = useState('');
     const [customerName, setcustomerName] = useState('');
     const [orText, setorText] = useState('');
     const [userId, setuserId] = useState('635684a1d9f90d0fed02ca51')
@@ -86,7 +87,7 @@ const Savepayment = ({transacId, service_type, amount, savehandle}) => {
             {/* <Button type="submit">Save/Print</Button> */}
           </form>
      </ModalBody>
-     <Button onClick={handleSavePayment} >Save Handle</Button>
+     <Button onClick={handleSavePayment} >Save</Button>
       <ModalFooter>
       
         <Button size={'sm'} colorScheme='blue' mr={3} onClick={onClose}>

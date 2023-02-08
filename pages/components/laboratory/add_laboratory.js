@@ -70,7 +70,7 @@ import {
     const handleSave = async () => {
       try {
     
-        const response = await axios.post(process.env.NEXTAUTH_URL + '/api/LCR/addLCRdata2', { datalist });
+        const response = await axios.post(process.env.NEXTAUTH_URL + '/api/laboratory/add_lab_payment', { datalist });
      
        //setdatalist([])
   

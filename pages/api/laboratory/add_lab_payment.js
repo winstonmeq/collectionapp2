@@ -19,9 +19,9 @@ export default async function handler(req, res) {
        
        for (const data of datalist) {
         // Create a new instance of the LCRdata model
-        const lcr = new Labdata(data);
+        const labsave = new Labdata(data);
         // Save the data to the database      
-        await lcr.save();
+        await labsave.save();
     }
            
     res.status(200).json({ message: 'Data saved successfully' });
