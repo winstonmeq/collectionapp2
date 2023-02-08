@@ -1,7 +1,7 @@
 import { dbConnect } from "../../../conn/dbconnect";
 import { errorHandler,responseHandler } from "../../../util/common";
-import Labdata from "../../../models/Labdata";
-
+//import Labdata from "../../../models/Labdata";
+import LCRdata from "../../../models/LCRdata";
 
 export default async function handler(req, res) {
 
@@ -19,7 +19,7 @@ export default async function handler(req, res) {
        
        for (const data of datalist) {
         // Create a new instance of the LCRdata model
-        const labsave = new Labdata(data);
+        const labsave = new LCRdata(data);
         // Save the data to the database      
         await labsave.save();
     }
@@ -35,7 +35,7 @@ export default async function handler(req, res) {
 
       finally {
         // Close the database connection
-     //   mongoose.connection.close();
+        mongoose.connection.close();
      
     }
   

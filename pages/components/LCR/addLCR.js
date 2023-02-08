@@ -165,7 +165,7 @@ const AddLCR = () => {
               </Tfoot>
             </Table>
             {/* <Button onClick={handleSave}>Save</Button> */}
-           <Savepayment transacId={transId} service_type={'MCR'} amount={totalAmount} savehandle={handleSave} />
+           <Savepayment transacId={transId} serviceType={'MCR'} amount={totalAmount} savehandle={handleSave} />
           </TableContainer>
           
       

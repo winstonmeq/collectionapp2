@@ -18,13 +18,13 @@ import axios from 'axios';
 import { useRouter } from "next/router";
 
 
-const Savepayment = ({transacId, service_type, amount, savehandle}) => {
+const Savepayment = ({transacId, serviceType, amount, savehandle}) => {
  
     const [paylist, setpaylist] = useState([])
     // const [service_type, setservice_type] = useState('');
     const [customerName, setcustomerName] = useState('');
     const [orText, setorText] = useState('');
-    const [userId, setuserId] = useState('635684a1d9f90d0fed02ca51')
+    const [userId, setuserId] = useState('63e393c65569758cb477789e')
 
     const { isOpen, onOpen, onClose } = useDisclosure()
 
@@ -34,9 +34,9 @@ const Savepayment = ({transacId, service_type, amount, savehandle}) => {
     const handleSavePayment = async () => {
         try {
     
-          const payload = {transacId, service_type, customerName, amount, orText, userId}
+          const payload = {transacId, serviceType, customerName, amount, orText, userId}
 
-          console.log(payload)         
+          console.log('browser', payload)         
     
           const response = await axios.post(process.env.NEXTAUTH_URL + '/api/Payment/addPayment', payload);
     
@@ -76,7 +76,7 @@ const Savepayment = ({transacId, service_type, amount, savehandle}) => {
           <label>Transaction Id</label>
           <Input type='text' readOnly value={transacId} onChange={e => {}}/>
           <label>Services Type</label>
-          <Input type='text' readOnly value={service_type} onChange={e => {}}/>
+          <Input type='text' readOnly value={serviceType} onChange={e => {}}/>
           <label >Customer Name</label>
           <Input type='text' value={customerName} autoFocus={'true'} required onChange={(e) => {setcustomerName(e.target.value)}}  />
           <label>OR Text</label>

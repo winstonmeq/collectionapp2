@@ -1,27 +1,25 @@
 import { dbConnect } from "../../../conn/dbconnect";
 import { errorHandler,responseHandler } from "../../../util/common";
-import payment from "../../../models/Payment";
+import Payment from "../../../models/Payment";
 
 
 export default async function handler(req, res) {
 
-  
+        try {
 
-      try {
+        const { transacId, serviceType, customerName, amount, orText, userId } = req.body;
 
-        const { transacId, service_type, customerName, amount, orText, userId } = req.body;
-
-      console.log(' payment api result',{transacId, service_type, customerName, amount, orText, userId})
+      console.log(' payment api result',{transacId, serviceType, customerName, amount, orText, userId})
 
        await dbConnect();  
        
-        const pay = new payment({
-          transacId:transacId, 
-          service_type:service_type, 
-          customerName:customerName, 
-          amount:amount, 
-          orText:orText, 
-          userId:userId});
+        const pay = new Payment({
+          transacId, 
+          serviceType, 
+          customerName, 
+          amount, 
+          orText, 
+          userId});
         // Save the data to the database      
         await pay.save();
     

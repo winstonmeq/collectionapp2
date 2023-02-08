@@ -9,7 +9,7 @@ export default async function handler(req, res) {
        
       try {
 
-      const { email,password} = req.body;
+      const { email,password,fname,lname,position,userlevel} = req.body;
 
       console.log('paylod1',email,password)
 
@@ -19,9 +19,10 @@ export default async function handler(req, res) {
 
 
       const user = new User({
-        email: email,
-        password: password,       
-        userlevel: 0
+        email,
+        password, 
+        fname,lname, position,      
+        userlevel: 0,
       });
 
       const saveUser = await user.save();

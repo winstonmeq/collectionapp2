@@ -168,7 +168,7 @@ import {
                 </Tfoot>
               </Table>
               {/* <Button onClick={handleSave}>Save</Button> */}
-             <Savepayment transacId={transId} service_type={'laboratory'} amount={totalAmount} savehandle={handleSave} />
+             <Savepayment transacId={transId} serviceType={'laboratory'} amount={totalAmount} savehandle={handleSave} />
             </TableContainer>
             
         
