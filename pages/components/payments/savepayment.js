@@ -18,7 +18,7 @@ import axios from 'axios';
 import { useRouter } from "next/router";
 
 
-const Savepayment = ({transacId, amount, savehandle}) => {
+const Savepayment = ({transacId, service_type, amount, savehandle}) => {
  
     const [paylist, setpaylist] = useState([])
     const [customerName, setcustomerName] = useState('');
@@ -33,7 +33,7 @@ const Savepayment = ({transacId, amount, savehandle}) => {
     const handleSavePayment = async () => {
         try {
     
-          const payload = {transacId, customerName, amount, orText, userId}
+          const payload = {transacId, service_type, customerName, amount, orText, userId}
 
           console.log(payload)         
     
@@ -74,6 +74,8 @@ const Savepayment = ({transacId, amount, savehandle}) => {
           <form onSubmit={handleSavePayment}>
           <label>Transaction Id</label>
           <Input type='text' readOnly value={transacId} onChange={e => {}}/>
+          <label>Services Type</label>
+          <Input type='text' readOnly value={service_type} onChange={e => {}}/>
           <label >Customer Name</label>
           <Input type='text' value={customerName} autoFocus={'true'} required onChange={(e) => {setcustomerName(e.target.value)}}  />
           <label>OR Text</label>

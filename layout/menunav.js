@@ -31,13 +31,13 @@ const Menunav = () => {
 
 <Link href={'/components/payments/paymentlist'} >
   <Button>
-       <Text fontSize={'md'}>LCR</Text>
+       <Text fontSize={'md'}>Local Civil Registrar</Text>
   </Button>
 </Link>
 
-<Link href={'/components/CivilRegistrar'} >
+<Link href={'/components/laboratory'} >
   <Button>
-       <Text fontSize={'md'}>MCR Fee</Text>
+       <Text fontSize={'md'}>Medical Laboratory</Text>
   </Button>
 </Link>
   

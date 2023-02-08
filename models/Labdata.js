@@ -10,7 +10,7 @@ const LabdataSchema = mongoose.Schema({
         index: true,
          
     },
-  
+   
 
     name: {
         type:String,        

@@ -10,7 +10,6 @@ const LCRdataSchema = mongoose.Schema({
         index: true,
          
     },
-  
 
     name: {
         type:String,        

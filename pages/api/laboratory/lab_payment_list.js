@@ -1,6 +1,7 @@
 import { dbConnect } from "../../../conn/dbconnect";
 import { errorHandler,responseHandler } from "../../../util/common";
 import Payment from "../../../models/Payment";
+import LCRdata from "../../../models/LCRdata";
 
 
 export default async function handler(req, res) {
@@ -9,30 +10,34 @@ export default async function handler(req, res) {
 
       try {
 
-        const {id} = req.query;
+        const {transacId, userId} = req.body;
 
-      console.log(' payment api transacId ang',id)
+      console.log(' payment api transacId',transacId)
 
        await dbConnect();  
-   
+       
            
+       const sort = { createdAt: -1 };
+       
+    
         const getdata = await Payment.aggregate([
             
             { 
-                $match : { userId: require('mongoose').Types.ObjectId('635684a1d9f90d0fed02ca51')} && {transacId: id}, 
-            },
-            {                
-                $lookup: {
-                    from: 'lcrdatas',
-                    localField: 'transacId',
-                    foreignField: 'transacId',
-                    as: 'data2'
-                }
+                $match : { userId: require('mongoose').Types.ObjectId('635684a1d9f90d0fed02ca51')}, 
+
 
             },
-                                               
+
+            { 
+              $sort : { createdAt: -1 } 
+            }
+            
+                       
+                                    
     
-        ]).exec();
+        ]).sort(sort);
+
+
           
        res.status(200).json(getdata);
 
