@@ -53,6 +53,7 @@ const Cedula = () => {
   const [amount1, setamount1] = useState(5.00);
   const [amount2, setamount2] = useState(0.00);
   const [amount2R, setamount2R] = useState(0.00);
+  const [brgyShare, setbrgyShare] = useState(0.00);
   const [amount3, setamount3] = useState(0.00);
   const [amount3R, setamount3R] = useState(0.00);
   const [amount4, setamount4] = useState(0.00);
@@ -64,17 +65,35 @@ const Cedula = () => {
 
 
 
-  var converter = require('number-to-words');
-
-
    const getmonth = currentDate.getMonth() + 1
 
+   function convertToWords(num) {
 
+    var converter = require('number-to-words');
+
+    const wholeNum = Math.floor(num);
+    const decimalNum = ((num - wholeNum) * 100).toFixed();
+    
+   
+   const wholeNumWords = converter.toWords(wholeNum);
+    
+   if(decimalNum == 0){
+
+    return `${wholeNumWords}`;
+
+   }
+    
+    return `${wholeNumWords} and ${decimalNum}/100`;
+
+  }
+  
 
 
 const savedata = () => {
 
   setamount2R((amount2 * 0.001).toFixed(2))
+
+  setbrgyShare(((amount2 * 0.001) / 2).toFixed(2))
   
   setamount3R((amount3 * 0.001).toFixed(2))
   
@@ -86,10 +105,10 @@ const savedata = () => {
   
   settotal_paid((Number(amount1) + Number(amount2 * 0.001) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001) + Number(calculatePenalty(getmonth))).toFixed(2))
 
-
  
+ 
+  setnum_word(convertToWords(((Number(amount1) + Number(amount2 * 0.001) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001)) + Number(calculatePenalty(getmonth))).toFixed(2)))
 
-  setnum_word(converter.toWords((Number(amount1) + Number(amount2 * 0.001) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001)) + Number(calculatePenalty(getmonth))))
 
 }
 
@@ -278,6 +297,7 @@ function calculatePenalty(monthno) {
       amount1,
       amount2,
       amount2R,
+      brgyShare,
       amount3,
       amount3R,
       amount4,  
@@ -385,14 +405,38 @@ function calculatePenalty(monthno) {
        
           <Flex direction={'row'} >
           <Box w={'80%'} align={"right"}>
-            <Input
-              type="text"
-              placeholder="Full Address"
-              required  
-              onChange={(e) => {
-                setfull_add(e.target.value);
-              }}
-            />
+          <Select value={full_add} onChange={e =>  setfull_add(e.target.value)} style={{width:"100%"}}>
+            
+              <option  value=''>Select Barangay</option>
+              <option  value='Alegria'>Alegria</option>
+              <option  value='Bato-bato'>Bato-bato</option>
+              <option  value='Del Carmen'>Del Carmen</option>
+              <option  value='F. Cajelo'>F. Cajelo</option>
+              <option  value='Idaoman'>Idaoman</option>
+              <option  value='Ilustre'>Ilustre</option>
+              <option  value='Kamarahan'>Kamarahan</option>
+              <option  value='Camasi'>Camasi</option>
+              <option  value='Kisupaan'>Kisupaan</option>
+              <option  value='La Esperanza'>La Esperanza</option>
+              <option  value='Labu-o'>Labu-o</option>
+              <option  value='Lama-lama'>Lama-lama</option>
+              <option  value='Lomonay'>Lomonay</option>
+              <option  value='New Cebu'>New Cebu</option>
+              <option  value='Poblacion'>Poblacion</option>
+              <option  value='Sagcungan'>Sagcungan</option>
+              <option  value='Salat'>Salat</option>
+              <option  value='Sarayan'>Sarayan</option>
+              <option  value='Tuael'>Tuael</option>
+              <option  value='Greenhill'>Greenhill</option>
+              <option  value='Cabangbangan'>Cabangbangan</option>
+              <option  value='Datu Inda'>Datu Inda</option>
+              <option  value='Datu Sundungan'>Datu Sundungan</option>
+              <option  value='Kimahuring'>Kimahuring</option>
+              <option  value='Mabuhay'>Mabuhay</option>
+           
+           
+      
+          </Select>
           </Box>
           <Box align={"right"}>  
           <Select value={male} onChange={e => setmale(e.target.value)} style={{width:"100px"}}>
@@ -629,7 +673,9 @@ function calculatePenalty(monthno) {
             <Input
               type="text"
               placeholder="In words"
-              value={converter.toWords((Number(amount1) + Number(amount2 * 0.001) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001)) + Number(calculatePenalty(getmonth)))}
+              //value={converter.toWords(((Number(amount1) + Number(amount2 * 0.001) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001)) + Number(calculatePenalty(getmonth))).toFixed(2))}
+              value={convertToWords(((Number(amount1) + Number(amount2 * 0.001) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001)) + Number(calculatePenalty(getmonth))).toFixed(2))}
+
               onChange={(e) => {
                 
               }}

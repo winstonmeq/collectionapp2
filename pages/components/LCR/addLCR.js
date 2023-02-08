@@ -16,7 +16,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import axios from 'axios';
 import Savepayment from "../payments/savepayment";
-
+import { useRouter } from "next/router";
 
 const AddLCR = () => {
 
@@ -42,14 +42,18 @@ const AddLCR = () => {
 
 
 
-
+  //const route = useRouter();
 
   const [datalist, setdatalist] = useState([])
 
 
-  const lcr1 = { transacId: transId , name: 'Certification fee', amount: 75.00, type: 'birth', userId: '635684a1d9f90d0fed02ca51' }
-  const lcr2 = { transacId: transId, name: 'Late Registration', amount: 120.00, type: 'birth', userId: '635684a1d9f90d0fed02ca51' }
-  const lcr3 = { transacId: transId, name: 'True Copy', amount: 80.00, type: "married", userId: '635684a1d9f90d0fed02ca51' }
+  const lcr1 = { transacId: transId , name: 'Certification Fee', amount: 75.00, type: 'birth', userId: '635684a1d9f90d0fed02ca51' }
+  const lcr2 = { transacId: transId, name: 'Late Registration Fee', amount: 120.00, type: 'birth', userId: '635684a1d9f90d0fed02ca51' }
+  const lcr3 = { transacId: transId, name: 'True Copy Fee', amount: 75.00, type: "married", userId: '635684a1d9f90d0fed02ca51' }
+  const lcr4 = { transacId: transId, name: 'Clerical Error Fee', amount: 1000.00, type: "birth", userId: '635684a1d9f90d0fed02ca51' }
+  const lcr5 = { transacId: transId, name: 'CNOMAR Fee', amount: 350.00, type: "married", userId: '635684a1d9f90d0fed02ca51' }
+  const lcr6 = { transacId: transId, name: 'CNOMAR /NaN Resident Fee', amount: 450.00, type: "married", userId: '635684a1d9f90d0fed02ca51' }
+
 
   const handleAddProduct = (newData) => {
     setdatalist([...datalist, newData]);
@@ -63,13 +67,14 @@ const AddLCR = () => {
 
   const handleSave = async () => {
     try {
-
-      console.log({ datalist })
-
+  
       const response = await axios.post(process.env.NEXTAUTH_URL + '/api/LCR/addLCRdata2', { datalist });
    
-     setdatalist([])
-     
+     //setdatalist([])
+
+     console.log('datalist',{ datalist })
+
+   
 
     } catch (error) {
       console.log(error)
@@ -86,7 +91,7 @@ const AddLCR = () => {
   return (
     <Flex direction={'row'} >
       
-      <Flex direction={'column'} width={'20%'}>
+      {/* <Flex direction={'column'} width={'20%'}>
       <Box>
       <Flex direction={'column'} padding={'10px'}>
           <Stack width={'40%'}>
@@ -97,7 +102,7 @@ const AddLCR = () => {
            
       </Flex>
       </Box>
-      </Flex>
+      </Flex> */}
       
       <Flex direction={'column'} width={'80%'} >
       <Box border={'1px'} >
@@ -106,9 +111,12 @@ const AddLCR = () => {
        <Flex direction={'row'} justify={'center'}  >
        <Box >        
        <Stack >
-          <Button onClick={() => handleAddProduct(lcr1)}>Certification</Button>
-          <Button onClick={() => handleAddProduct(lcr2)}>Late Registration</Button>
-          <Button onClick={() => handleAddProduct(lcr3)}>True Copy</Button>
+          <Button onClick={() => handleAddProduct(lcr1)}>Certification Fee (75)</Button>
+          <Button onClick={() => handleAddProduct(lcr2)}>Late Registration (120)</Button>
+          <Button onClick={() => handleAddProduct(lcr3)}>True Copy (75)</Button>
+          <Button onClick={() => handleAddProduct(lcr4)}>Clerical Error Fee (1000)</Button>
+          <Button onClick={() => handleAddProduct(lcr5)}>CNOMAR Fee(350)</Button>
+          <Button onClick={() => handleAddProduct(lcr6)}>CNOMAR/NaN Resident Fee(450)</Button>
         </Stack>
        </Box>
        </Flex>
@@ -136,7 +144,7 @@ const AddLCR = () => {
                       <Td >{item.id}</Td>
                       <Td >{item.transacId}</Td>
                       <Td >{item.name}</Td>
-                      <Td>{item.amount}</Td>
+                      <Td>{item.amount.toFixed(2)}</Td>
                       <Td> <Button onClick={() => handleRemoveProduct(item.name)}>Remove</Button>
                       </Td>
                     </Tr>
@@ -157,7 +165,7 @@ const AddLCR = () => {
               </Tfoot>
             </Table>
             {/* <Button onClick={handleSave}>Save</Button> */}
-           <Savepayment transacId={transId} amount={totalAmount} savehandle={handleSave} />
+           <Savepayment transacId={transId} service_type={'MCR'} amount={totalAmount} savehandle={handleSave} />
           </TableContainer>
           
       

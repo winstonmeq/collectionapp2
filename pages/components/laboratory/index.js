@@ -14,7 +14,7 @@ import Link from 'next/link';
   } from '@chakra-ui/react'
 import AddLCR from '../LCR/addLCR';
 
-const Paymentlist = () => {
+const IndexLab = () => {
 
 
     const [paymentList, setPaymentList] = useState([]);
@@ -36,9 +36,9 @@ const Paymentlist = () => {
     return (
         <div>
 
-<Link href={'/components/LCR/addLCR'} >
+<Link href={'/components/laboratory/add_laboratory'} >
   <Button>Add</Button>
-      </Link>
+</Link>
            
       
 
@@ -78,4 +78,4 @@ const Paymentlist = () => {
     );
 };
 
-export default Paymentlist;
+export default IndexLab;

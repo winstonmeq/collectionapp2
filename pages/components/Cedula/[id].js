@@ -47,11 +47,9 @@ const Printcedula2 = () => {
 
   const tableRef = useRef(null);
 
+  // const getmonth = currentDate.getMonth() + 1
 
-  function formatNumber(num) {
-    return (num < 10 ? "00" : "0") + num;
-  }
-
+ 
   
 
 
@@ -102,7 +100,7 @@ const Printcedula2 = () => {
                   <td style={{ width: "60px" }}></td>
                 </tr>
                 <tr>                  
-                  <td colspan="3" style={{ width: "240px" }}><Box marginLeft={'60px'}>{item.full_add}</Box></td>
+                  <td colspan="3" style={{ width: "240px" }}><Box marginLeft={'60px'}>{item.full_add}, Pres. Roxas, Cot.</Box></td>
                   <td></td>
                   <td style={{ width: "60px" }}><Box marginTop={'2px'} textAlign={'center'}>{item.male}</Box></td>
                   <td style={{ width: "60px" }}><Box marginTop={'2px'} textAlign={'center'}>{item.female}</Box></td>

@@ -1,7 +1,7 @@
 
 import mongoose from "mongoose";
 
-const LCRdataSchema = mongoose.Schema({
+const LabdataSchema = mongoose.Schema({
     
     
 
@@ -10,6 +10,7 @@ const LCRdataSchema = mongoose.Schema({
         index: true,
          
     },
+   
 
     name: {
         type:String,        
@@ -43,4 +44,4 @@ const LCRdataSchema = mongoose.Schema({
 
 
 
-export default mongoose.models.LCRdata || mongoose.model('LCRdata', LCRdataSchema);
+export default mongoose.models.Labdata || mongoose.model('Labdata', LabdataSchema);

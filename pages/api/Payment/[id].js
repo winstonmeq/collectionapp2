@@ -28,9 +28,9 @@ export default async function handler(req, res) {
                     foreignField: 'transacId',
                     as: 'data2'
                 }
-                  
-            }           
-                                    
+
+            },
+                                               
     
         ]).exec();
           

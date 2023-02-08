@@ -12,7 +12,13 @@ const PaymentSchema = mongoose.Schema({
         unique:true
 
     },
-    customerName:{
+
+    service_type: {
+        type:String,        
+         
+    },
+  
+    customer_name:{
         type:String,
         required:true,
        

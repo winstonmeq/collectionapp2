@@ -128,6 +128,11 @@ const CedulaSchema = mongoose.Schema({
         trim:true
     },
 
+    brgyShare:{
+        type:Number,     
+        trim:true
+    },
+
 
     amount3:{
         type:Number,
