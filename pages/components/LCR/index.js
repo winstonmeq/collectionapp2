@@ -14,7 +14,7 @@ import Link from 'next/link';
   } from '@chakra-ui/react'
 import AddLCR from '../LCR/addLCR';
 
-const Paymentlist = () => {
+const MCRlist = () => {
 
 
     const [paymentList, setPaymentList] = useState([]);
@@ -26,7 +26,7 @@ const Paymentlist = () => {
     useEffect(() => {
         async function fetchData() {
             
-            const { data } = await axios.get(process.env.NEXTAUTH_URL + '/api/Payment/apiPaymentList');
+            const { data } = await axios.get(process.env.NEXTAUTH_URL + '/api/LCR/mcr_payment_list');
 
             console.log(data)
             setPaymentList(data);
@@ -65,7 +65,7 @@ const Paymentlist = () => {
                             <Td>{item.customerName}</Td>
                             <Td>{item.amount}</Td>
                             <Td>{
-                                    <Link href={`${item.transacId}`}>Print</Link>
+                                    <Link href={`payments/${item.transacId}`}>Print</Link>
                                 }</Td>                    
                            </Tr>
                          
@@ -81,4 +81,4 @@ const Paymentlist = () => {
     );
 };
 
-export default Paymentlist;
+export default MCRlist;

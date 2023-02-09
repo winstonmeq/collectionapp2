@@ -25,7 +25,7 @@ const IndexLab = () => {
 
     useEffect(() => {
         async function fetchData() {
-            const { data } = await axios.get(process.env.NEXTAUTH_URL + '/api/Payment/apiPaymentList');
+            const { data } = await axios.get(process.env.NEXTAUTH_URL + '/api/laboratory/lab_payment_list');
 
             console.log(data)
             setPaymentList(data);
@@ -47,6 +47,7 @@ const IndexLab = () => {
                 <Thead>
                     <Tr>
                         <Th>ID</Th>
+                        <Th>Services</Th>
                         <Th>Name</Th>
                         <Th>Amount</Th>
                         <Th>Action</Th>
@@ -58,11 +59,12 @@ const IndexLab = () => {
                         return (
                             
                             <Tr key={i}>
-                            <Td>{item.transacId}</Td>                            
+                            <Td>{item.transacId}</Td>
+                            <Td>{item.serviceType}</Td>                            
                             <Td>{item.customerName}</Td>
                             <Td>{item.amount}</Td>
                             <Td>{
-                                    <Link href={`${item.transacId}`}>Print</Link>
+                                    <Link href={`payments/${item.transacId}`}>Print</Link>
                                 }</Td>                    
                            </Tr>
                          

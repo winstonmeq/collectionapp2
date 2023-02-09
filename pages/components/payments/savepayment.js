@@ -24,7 +24,7 @@ const Savepayment = ({transacId, serviceType, amount, savehandle}) => {
     // const [service_type, setservice_type] = useState('');
     const [customerName, setcustomerName] = useState('');
     const [orText, setorText] = useState('');
-    const [userId, setuserId] = useState('63e393c65569758cb477789e')
+    const [userId, setuserId] = useState('63e4484b3a663c0b8d277141')
 
     const { isOpen, onOpen, onClose } = useDisclosure()
 
@@ -57,7 +57,7 @@ const Savepayment = ({transacId, serviceType, amount, savehandle}) => {
       async function saveData() {
 
             
-        router.push('/components/payments/paymentlist');
+        router.push(`/components/payments/${transacId}`);
       }
    
 

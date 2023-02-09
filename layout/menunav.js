@@ -29,7 +29,7 @@ const Menunav = () => {
 </Button>
       </Link>
 
-<Link href={'/components/payments/paymentlist'} >
+<Link href={'/components/LCR'} >
   <Button>
        <Text fontSize={'md'}>Local Civil Registrar</Text>
   </Button>

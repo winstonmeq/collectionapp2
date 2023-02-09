@@ -1,7 +1,6 @@
 import { dbConnect } from "../../../conn/dbconnect";
 import { errorHandler,responseHandler } from "../../../util/common";
 import Payment from "../../../models/Payment";
-import LCRdata from "../../../models/LCRdata";
 
 
 export default async function handler(req, res) {
@@ -23,7 +22,7 @@ export default async function handler(req, res) {
         const getdata = await Payment.aggregate([
             
             { 
-                $match : { userId: require('mongoose').Types.ObjectId('63e4484b3a663c0b8d277141')}, 
+                $match : { $and: [ {userId: require('mongoose').Types.ObjectId('63e4484b3a663c0b8d277141')}, {serviceType:'MCR'} ] }, 
 
 
             },
@@ -44,7 +43,7 @@ export default async function handler(req, res) {
 
       } catch (error) {
         // Send an error response
-        res.status(500).json({ error: 'Unable to save data' });
+        res.status(500).json({ error: 'Unable to LIST data' });
 
       }
 

@@ -47,13 +47,13 @@ import {
     const [datalist, setdatalist] = useState([])
   
   
-    const lab1 = { transacId: transId , name: 'Complete Blood Count', amount: 100.00, type: 'birth', userId: '635684a1d9f90d0fed02ca51' }
-    const lab2 = { transacId: transId, name: 'Platelet Count', amount: 50.00, type: 'birth', userId: '635684a1d9f90d0fed02ca51' }
-    const lab3 = { transacId: transId, name: 'Hemoglobin', amount: 50.00, type: "married", userId: '635684a1d9f90d0fed02ca51' }
-    const lab4 = { transacId: transId, name: 'Blood Typing', amount: 50.00, type: "birth", userId: '635684a1d9f90d0fed02ca51' }
-    const lab5 = { transacId: transId, name: 'Urinalysis', amount: 30.00, type: "married", userId: '635684a1d9f90d0fed02ca51' }
-    const lab6 = { transacId: transId, name: 'Stool Examination', amount: 30.00, type: "married", userId: '635684a1d9f90d0fed02ca51' }
-    const lab7 = { transacId: transId, name: 'Sputum/AFB (Vendor Only)', amount: 30.00, type: "married", userId: '635684a1d9f90d0fed02ca51' }
+    const lab1 = { transacId: transId , name: 'Complete Blood Count', amount: 100.00, type: 'birth', userId: '63e4484b3a663c0b8d277141' }
+    const lab2 = { transacId: transId, name: 'Platelet Count', amount: 50.00, type: 'birth', userId: '63e4484b3a663c0b8d277141' }
+    const lab3 = { transacId: transId, name: 'Hemoglobin', amount: 50.00, type: "married", userId: '63e4484b3a663c0b8d277141' }
+    const lab4 = { transacId: transId, name: 'Blood Typing', amount: 50.00, type: "birth", userId: '63e4484b3a663c0b8d277141' }
+    const lab5 = { transacId: transId, name: 'Urinalysis', amount: 30.00, type: "married", userId: '63e4484b3a663c0b8d277141' }
+    const lab6 = { transacId: transId, name: 'Stool Examination', amount: 30.00, type: "married", userId: '63e4484b3a663c0b8d277141' }
+    const lab7 = { transacId: transId, name: 'Sputum/AFB (Vendor Only)', amount: 30.00, type: "married", userId: '63e4484b3a663c0b8d277141' }
 
   
   

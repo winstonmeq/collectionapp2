@@ -35,7 +35,7 @@ export default async function handler(req, res) {
 
       finally {
         // Close the database connection
-        mongoose.connection.close();
+        //mongoose.connection.close();
      
     }
   

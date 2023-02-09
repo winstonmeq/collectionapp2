@@ -47,12 +47,12 @@ const AddLCR = () => {
   const [datalist, setdatalist] = useState([])
 
 
-  const lcr1 = { transacId: transId , name: 'Certification Fee', amount: 75.00, type: 'birth', userId: '635684a1d9f90d0fed02ca51' }
-  const lcr2 = { transacId: transId, name: 'Late Registration Fee', amount: 120.00, type: 'birth', userId: '635684a1d9f90d0fed02ca51' }
-  const lcr3 = { transacId: transId, name: 'True Copy Fee', amount: 75.00, type: "married", userId: '635684a1d9f90d0fed02ca51' }
-  const lcr4 = { transacId: transId, name: 'Clerical Error Fee', amount: 1000.00, type: "birth", userId: '635684a1d9f90d0fed02ca51' }
-  const lcr5 = { transacId: transId, name: 'CNOMAR Fee', amount: 350.00, type: "married", userId: '635684a1d9f90d0fed02ca51' }
-  const lcr6 = { transacId: transId, name: 'CNOMAR /NaN Resident Fee', amount: 450.00, type: "married", userId: '635684a1d9f90d0fed02ca51' }
+  const lcr1 = { transacId: transId , name: 'Certification Fee', amount: 75.00, type: 'birth', userId: '63e4484b3a663c0b8d277141' }
+  const lcr2 = { transacId: transId, name: 'Late Registration Fee', amount: 120.00, type: 'birth', userId: '63e4484b3a663c0b8d277141' }
+  const lcr3 = { transacId: transId, name: 'True Copy Fee', amount: 75.00, type: "married", userId: '63e4484b3a663c0b8d277141' }
+  const lcr4 = { transacId: transId, name: 'Clerical Error Fee', amount: 1000.00, type: "birth", userId: '63e4484b3a663c0b8d277141' }
+  const lcr5 = { transacId: transId, name: 'CNOMAR Fee', amount: 350.00, type: "married", userId: '63e4484b3a663c0b8d277141' }
+  const lcr6 = { transacId: transId, name: 'CNOMAR /NaN Resident Fee', amount: 450.00, type: "married", userId: '63e4484b3a663c0b8d277141' }
 
 
   const handleAddProduct = (newData) => {
