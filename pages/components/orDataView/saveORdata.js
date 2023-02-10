@@ -25,34 +25,47 @@ import {
     const [orType, setorType] = useState('51');
     const [orFrom, setorFrom] = useState(0)
     const [orTo, setorTo] = useState(0)
+    const [orUse, setorUse] = useState(0)
     const [userId, setuserId] = useState('63e4484b3a663c0b8d277141')
  
   
-    const handleSaveORdata = async () => {
-        try {
+    // const handleSaveORdata = async () => {
+    //     try {
     
-          const payload = {orType, orFrom,orTo, userId}
+    //       const payload = {orType, orFrom,orTo,orNumber, userId}
 
-          console.log('browser', payload)         
+    //       console.log('browser', payload)         
     
-          const response = await axios.post(process.env.NEXTAUTH_URL + '/api/or/addOR', payload);
+    //       const response = await axios.post(process.env.NEXTAUTH_URL + '/api/or/addOR', payload);
     
            
-        } catch (error) {
+    //     } catch (error) {
 
-          console.log(error)
+    //       console.log(error)
 
+    //     }
+    //   }
+
+
+      const generateRange = async (num1, num2) => {
+       
+        for (let orNumber = num1; orNumber <= num2; orNumber++) {
+            try {
+    
+                const payload = {orType, orFrom,orTo,orNumber,orUse, userId}
+      
+                console.log('browser', payload)         
+          
+                const response = await axios.post(process.env.NEXTAUTH_URL + '/api/or/addOR', payload);
+          
+                 
+              } catch (error) {
+      
+                console.log(error)
+      
+              }
         }
-      }
 
-
-      const generateRange = (number1, number2) => {
-        range = [];
-        for (let i = number1; i <= number2; i++) {
-          range.push(i);
-        }
-        //return range;
-        console.log(range)
       }
   
   
@@ -73,7 +86,7 @@ import {
         </Box>
 
            
-        <Button onClick={handleSaveORdata}>Save</Button>
+        <Button onClick={(e) => {generateRange(orFrom,orTo)}}>Save</Button>
 
 
        

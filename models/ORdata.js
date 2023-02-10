@@ -26,6 +26,15 @@ const ORdataSchema = mongoose.Schema({
 
     },
 
+    orNumber: {
+        type:Number,        
+       
+    },
+
+    orUse: {
+        type:Number,
+    },
+
     
     userId: {
         type: mongoose.Schema.Types.ObjectId,

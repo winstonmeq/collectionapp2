@@ -23,11 +23,12 @@ const Savepayment = ({transacId, serviceType, amount, savehandle}) => {
     const [paylist, setpaylist] = useState([])
     // const [service_type, setservice_type] = useState('');
     const [customerName, setcustomerName] = useState('');
-    const [orText, setorText] = useState('');
+    const [orText, setorText] = useState(0);
     const [userId, setuserId] = useState('63e4484b3a663c0b8d277141')
     const [orType, setorType] = useState('51');
-    const [orFrom, setorFrom] = useState(0)
-    const [orTo, setorTo] = useState(0)
+    const [orUse, setorUse] = useState(1);
+    const [or_id, setor_id] = useState('');
+   
     const { isOpen, onOpen, onClose } = useDisclosure()
 
     const router = useRouter();
@@ -43,8 +44,11 @@ const Savepayment = ({transacId, serviceType, amount, savehandle}) => {
           const response = await axios.post(process.env.NEXTAUTH_URL + '/api/Payment/addPayment', payload);
     
          if(response != null){
-         saveData()
+        
          savehandle()
+         saveData()
+        updateORdata()
+
          }
      
          
@@ -57,10 +61,30 @@ const Savepayment = ({transacId, serviceType, amount, savehandle}) => {
 
 
       async function saveData() {
-
             
         router.push(`/components/payments/${transacId}`);
+
       }
+
+   
+      const updateORdata = async () => {
+
+
+        try {
+    
+          const payload = {or_id, orUse, userId}
+
+          const response = await axios.post(process.env.NEXTAUTH_URL + '/api/or/addOR', payload);
+    
+           
+        } catch (error) {
+
+          console.log(error)
+
+        }
+
+      }
+
 
 
 
@@ -68,45 +92,13 @@ const Savepayment = ({transacId, serviceType, amount, savehandle}) => {
 
         async function fetchData() {
             const { data } = await axios.get( process.env.NEXTAUTH_URL + `/api/or/getOR`)
-            console.log('mao ni OR',data[0].orFrom)
-            setorFrom(data[0].orFrom)
-            setorTo(data[0].orTo)
+            console.log('mao ni OR',data[0].orNumber)
+            setorText(data[0].orNumber)
+            setor_id(data[0]._id)
         }
 
         fetchData();
         }, []);
-
-
-
-
-
-/////////////////////sample code for the function para sa OR range 
-
-let range = [];
-
-const generateRange = (number1, number2) => {
-  range = [];
-  for (let i = number1; i <= number2; i++) {
-    range.push(i);
-  }
-  //return range;
-  console.log(range)
-}
-
-const  removeValue = () => {
-
-  if (range.length > 0) {
-    // range.shift();
-     console.log(range.shift())
-  }
- 
- 
-}
-
-
-
-
-
 
 
 
@@ -130,21 +122,19 @@ const  removeValue = () => {
           <Input type='text' readOnly value={transacId} onChange={e => {}}/>
           <label>Services Type</label>
           <Input type='text' readOnly value={serviceType} onChange={e => {}}/>
+          <label>OR Text</label>
+          <Input type='text' value={orText} readonly required onChange={(e) => {}}  />
           <label >Customer Name</label>
           <Input type='text' value={customerName} autoFocus={'true'} required onChange={(e) => {setcustomerName(e.target.value)}}  />
-          <label>OR Text</label>
-          <Input type='text' value={orText} required onChange={(e) => {setorText(e.target.value)}}  />
+         
           <label>Amount</label>
           <Input type='number' value={amount} required onChange={e => {}}  />
          
             {/* <Button type="submit">Save/Print</Button> */}
           </form>
      </ModalBody>
-     <Button onClick={handleSavePayment} >Save</Button>
+     <Button onClick={(e) => {handleSavePayment()}} >Save</Button>
 
-     <Button onClick={(e) =>{ generateRange(orFrom,orTo)}} >Generate OR Number</Button>
-
-     <Button onClick={(e) => removeValue()} >Remove value</Button>
 
       <ModalFooter>
       
