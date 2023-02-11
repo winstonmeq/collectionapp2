@@ -19,8 +19,29 @@ export default async function handler(req, res) {
         const getdata = await ORdata.aggregate([
             
             { 
-                $match : { userId: require('mongoose').Types.ObjectId('63e4484b3a663c0b8d277141')} && {orUse:0}, 
+                $match : { userId: require('mongoose').Types.ObjectId('63e4484b3a663c0b8d277141')} && {orUse:1}, 
             },
+            {
+                
+              $lookup: {
+                  from: 'payments',
+                  localField: 'orNumber',
+                  foreignField: 'orNumber',
+                  as: 'payments'
+              }
+                
+          },
+
+          {
+            $unwind: '$payments'
+          },
+          {
+            $group: {
+              _id: 'orNumber',
+              totalAmount: { $sum: '$payments.amount' }
+            }
+          }
+  
                                          
     
         ]).exec();

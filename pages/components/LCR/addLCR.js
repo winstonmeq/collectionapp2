@@ -55,6 +55,7 @@ const AddLCR = () => {
   const lcr6 = { transacId: transId, name: 'CNOMAR /NaN Resident Fee', amount: 450.00, type: "married", userId: '63e4484b3a663c0b8d277141' }
 
 
+
   const handleAddProduct = (newData) => {
     setdatalist([...datalist, newData]);
   }
@@ -164,8 +165,13 @@ const AddLCR = () => {
 
               </Tfoot>
             </Table>
-            {/* <Button onClick={handleSave}>Save</Button> */}
-           <Savepayment transacId={transId} serviceType={'MCR'} amount={totalAmount} savehandle={handleSave} />
+
+            { datalist.length ?               <Savepayment transacId={transId} serviceType={'MCR'} amount={totalAmount} savehandle={handleSave} />
+  : null
+            
+
+            }            
+
           </TableContainer>
           
       

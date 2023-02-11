@@ -43,10 +43,10 @@ export default async function handler(req, res) {
 
       }
 
-      finally {
-        // Close the database connection
-        //mongoose.connection.close();
-    }
+    //   finally {
+    //     // Close the database connection
+    //     //mongoose.connection.close();
+    // }
   
   }
 

@@ -25,8 +25,8 @@ const PaymentSchema = mongoose.Schema({
 
     },
 
-    orText: {
-        type:String,
+    orNumber: {
+        type:Number,
         required:true,        
        
 

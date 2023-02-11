@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
+  reactStrictMode: false,
   swcMinify: true,
 
     env: {
@@ -8,7 +8,7 @@ const nextConfig = {
 
    
      //NEXTAUTH_URL: 'https://deltaph.vercel.app',
-     NEXTAUTH_URL: 'http://192.168.0.8:3000',
+     NEXTAUTH_URL: 'http://192.168.102.19:3000',
      NEXTAUTH_SECRET: 'v7COYqKpEdnCbd5aISAw9BxjupOLKYCgBVZ2kwusMNs=',
 
  },

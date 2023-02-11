@@ -77,7 +77,7 @@ const Printcedula2 = () => {
 
                 <tr>
                   <td style={{ width: "25px" }}><Box textAlign={'right'} >{item.year}</Box></td>
-                  <td colspan="1" style={{ width: "118px" }}>
+                  <td colSpan="1" style={{ width: "118px" }}>
                   <Box textAlign={'center'} >{item.place_issue}</Box>
                   </td>
                   <td style={{ width: "1px" }}></td>
@@ -86,9 +86,11 @@ const Printcedula2 = () => {
                   <td style={{ width: "50px" }}></td>
                 </tr>
 
+
+
                 
                 <tr>                  
-                  <td colspan="4" style={{ width: "240px" }}>
+                  <td colSpan="4" style={{ width: "240px" }}>
                     <Flex direction={'row'}>
                     <Box marginLeft={'60px'}>{item.lname} ,</Box>
                   <Box marginLeft={'60px'}>{item.fname}</Box>
@@ -100,31 +102,31 @@ const Printcedula2 = () => {
                   <td style={{ width: "60px" }}></td>
                 </tr>
                 <tr>                  
-                  <td colspan="3" style={{ width: "240px" }}><Box marginLeft={'60px'}>{item.full_add}, Pres. Roxas, Cot.</Box></td>
+                  <td colSpan="3" style={{ width: "240px" }}><Box marginLeft={'60px'}>{item.full_add}, Pres. Roxas, Cot.</Box></td>
                   <td></td>
                   <td style={{ width: "60px" }}><Box marginTop={'2px'} textAlign={'center'}>{item.male}</Box></td>
                   <td style={{ width: "60px" }}><Box marginTop={'2px'} textAlign={'center'}>{item.female}</Box></td>
                  
                 </tr>
                 <tr>                  
-                  <td colspan="2" style={{ width: "120px" }}><Box textAlign={'left'} marginLeft={'50px'}>{item.nationality}</Box></td>
-                  <td colspan="3" style={{ width: "180px", fontSize:"10px" }}><Box textAlign={'right'}>{item.place_birth}</Box></td>
+                  <td colSpan="2" style={{ width: "120px" }}><Box textAlign={'left'} marginLeft={'50px'}>{item.nationality}</Box></td>
+                  <td colSpan="3" style={{ width: "180px", fontSize:"10px" }}><Box textAlign={'right'}>{item.place_birth}</Box></td>
                   <td style={{ width: "60px" }}><Box textAlign={'right'}>{item.height}</Box></td>
                 </tr>
                 <tr>   
                   <td></td>             
-                  <td colspan="2" style={{ width: "180px", fontSize:"8px", fontWeight: "bolder"}}>
+                  <td colSpan="2" style={{ width: "180px", fontSize:"8px", fontWeight: "bolder"}}>
                   <Flex direction='row'><Box marginLeft={'30px'}>{item.single}</Box>
                                         <Box marginLeft={'70px'}>{item.widow} </Box></Flex>
                   <Flex direction='row'><Box marginLeft={'30px'}>{item.married}</Box>
                                         <Box marginLeft={'70px'}>{item.divorced} </Box></Flex>
                   </td>
-                  <td colspan="2" style={{ width: "120px" }}><Box textAlign={'right'}>{item.date_birth}</Box></td>
+                  <td colSpan="2" style={{ width: "120px" }}><Box textAlign={'right'}>{item.date_birth}</Box></td>
                   <td style={{ width: "60px" }}><Box  textAlign={'right'}>{item.weight}</Box></td>
                 </tr>
                 <tr>
                   <td></td>
-                  <td colspan='3'><Box textAlign={'center'}>{item.profession}</Box></td>                
+                  <td colSpan='3'><Box textAlign={'center'}>{item.profession}</Box></td>                
                   <td></td>
                   <td></td>
                 </tr>
@@ -211,9 +213,9 @@ const Printcedula2 = () => {
                 </tr>
                 <tr>
                   <td></td>                 
-                  <td colspan="3"><Box textAlign={'center'}>MARIA FE. E. DALISAY</Box></td>
+                  <td colSpan="3"><Box textAlign={'center'}>MARIA FE. E. DALISAY</Box></td>
                  
-                  <td colspan="2" style={{fontSize:"10px"}}><Box textAlign={'right'}>{item.num_word}</Box></td>
+                  <td colSpan="2" style={{fontSize:"10px"}}><Box textAlign={'right'}>{item.num_word}</Box></td>
                 </tr>
           
               </tbody>

@@ -40,6 +40,12 @@ const Menunav = () => {
        <Text fontSize={'md'}>Medical Laboratory</Text>
   </Button>
 </Link>
+
+<Link href={'/components/orDataView/saveORdata'} >
+  <Button >
+       <Text fontSize={'md'}>OR Entry</Text>
+  </Button>
+</Link>
   
   
 

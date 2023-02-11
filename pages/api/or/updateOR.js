@@ -11,14 +11,27 @@ export default async function handler(req, res) {
 
     //     const {id} = req.query;
 
-    //   console.log(' payment api transacId ang',id)
+   // console.log('updateOR',or_id, orType, orFrom, orTo, orNumber,orUse,  userId)
 
-    const { or_id, userId } = req.body;
+       const { orType, orFrom, orTo, orNumber,orUse,or_id, userId } = req.body;
 
        await dbConnect();  
    
            
-        const getdata = await ORdata.updateOne({_id:or_id},{$set:{orUse:orUse, userId: userId}}).exec();
+        const getdata = await ORdata.updateOne({_id:or_id},
+        
+        {
+          $set:{
+                  orType:orType,
+                  orFrom:orFrom,
+                  orTo:orTo,
+                  orNumber:orNumber,
+                  orUse:orUse, 
+                  userId: userId}
+        
+        
+        
+        }).exec();
           
        res.status(200).json(getdata);
 

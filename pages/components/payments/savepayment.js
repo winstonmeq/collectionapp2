@@ -23,9 +23,12 @@ const Savepayment = ({transacId, serviceType, amount, savehandle}) => {
     const [paylist, setpaylist] = useState([])
     // const [service_type, setservice_type] = useState('');
     const [customerName, setcustomerName] = useState('');
-    const [orText, setorText] = useState(0);
+    const [orNumber, setorNumber] = useState(0);
     const [userId, setuserId] = useState('63e4484b3a663c0b8d277141')
     const [orType, setorType] = useState('51');
+  
+    const [orFrom, setorFrom] = useState(0)
+    const [orTo, setorTo] = useState(0)
     const [orUse, setorUse] = useState(1);
     const [or_id, setor_id] = useState('');
    
@@ -37,7 +40,7 @@ const Savepayment = ({transacId, serviceType, amount, savehandle}) => {
     const handleSavePayment = async () => {
         try {
     
-          const payload = {transacId, serviceType, customerName, amount, orText, userId}
+          const payload = {transacId, serviceType, customerName, amount, orNumber, userId}
 
           console.log('browser', payload)         
     
@@ -45,9 +48,9 @@ const Savepayment = ({transacId, serviceType, amount, savehandle}) => {
     
          if(response != null){
         
-         savehandle()
-         saveData()
-        updateORdata()
+         savehandle()        
+         updateORdata()
+
 
          }
      
@@ -57,24 +60,23 @@ const Savepayment = ({transacId, serviceType, amount, savehandle}) => {
           console.log(error)
 
         }
-      }
 
-
-      async function saveData() {
-            
         router.push(`/components/payments/${transacId}`);
 
       }
 
+    
+
    
       const updateORdata = async () => {
 
-
         try {
-    
+
+          console.log('update OR',or_id)
+          
           const payload = {or_id, orUse, userId}
 
-          const response = await axios.post(process.env.NEXTAUTH_URL + '/api/or/addOR', payload);
+          const response = await axios.put(process.env.NEXTAUTH_URL + '/api/or/updateOR', payload);
     
            
         } catch (error) {
@@ -86,15 +88,26 @@ const Savepayment = ({transacId, serviceType, amount, savehandle}) => {
       }
 
 
+  
+
 
 
       useEffect(() => {   
 
         async function fetchData() {
             const { data } = await axios.get( process.env.NEXTAUTH_URL + `/api/or/getOR`)
-            console.log('mao ni OR',data[0].orNumber)
-            setorText(data[0].orNumber)
-            setor_id(data[0]._id)
+          //  console.log('mao ni OR',data[0].orNumber)
+
+            if(data[0]!=null){
+              setorNumber(data[0].orNumber)
+              setor_id(data[0]._id)
+            } else {
+               
+              window.alert('No OR');
+              router.push('/components/orDataView/saveORdata');
+
+            }
+           
         }
 
         fetchData();
@@ -123,9 +136,9 @@ const Savepayment = ({transacId, serviceType, amount, savehandle}) => {
           <label>Services Type</label>
           <Input type='text' readOnly value={serviceType} onChange={e => {}}/>
           <label>OR Text</label>
-          <Input type='text' value={orText} readonly required onChange={(e) => {}}  />
+          <Input type='text' value={orNumber} readOnly required onChange={(e) => {}}  />
           <label >Customer Name</label>
-          <Input type='text' value={customerName} autoFocus={'true'} required onChange={(e) => {setcustomerName(e.target.value)}}  />
+          <Input type='text' value={customerName} autoFocus={true} required onChange={(e) => {setcustomerName(e.target.value)}}  />
          
           <label>Amount</label>
           <Input type='number' value={amount} required onChange={e => {}}  />

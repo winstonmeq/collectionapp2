@@ -167,8 +167,11 @@ import {
   
                 </Tfoot>
               </Table>
-              {/* <Button onClick={handleSave}>Save</Button> */}
-             <Savepayment transacId={transId} serviceType={'laboratory'} amount={totalAmount} savehandle={handleSave} />
+              { datalist.length ?               <Savepayment transacId={transId} serviceType={'laboratory'} amount={totalAmount} savehandle={handleSave} />
+  : null
+            
+
+            } 
             </TableContainer>
             
         

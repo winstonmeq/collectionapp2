@@ -30,22 +30,17 @@ const Print = () => {
    
     useEffect(() => {        
         async function fetchData(id) {
-            const { data } = await axios.get( process.env.NEXTAUTH_URL + `/api/Payment/${id}`)
-            console.log(data)
+            const { data } = await axios.get( process.env.NEXTAUTH_URL + `/api/Payment/${id}`)           
             setPaymentList(data);
         }
         fetchData(id);
-    }, [id]);
+    }, []);
 
 
 
     const tableRef = useRef(null);
 
     var converter = require('number-to-words');
-
-
-
-
 
 
 
@@ -64,19 +59,20 @@ const Print = () => {
 
 return (
 <Box key={i}>
-<Flex direction={'column'}>
+<Flex  direction={'column'}>
     <Box height={'170px'}></Box>
-   <Box>{moment(item.createdAt).format('MM/DD/YYYY')}</Box>
+   <Box >{moment(item.createdAt).format('MM/DD/YYYY')}</Box>
    <Box height={'20px'}></Box>
    <Box paddingLeft={'50px'}>MTO</Box>
    <Box height={'12px'}></Box>
    <Box paddingLeft={'50px'}>{item.customerName}</Box>
    <Box height={'40px'}></Box>
    <Box height={'190px'}>  
-   {item.data2.map((item2)=>(
 
-<Flex direction={'row'} textAlign={'left'}>
-    <Box width={'230px'}>{item2.name}</Box>
+   {item.data2.map((item2,j)=>(
+
+<Flex key={j}  direction={'row'} textAlign={'left'}>
+    <Box  width={'230px'}>{item2.name}</Box>
     <Box width={'40px'}></Box>
     <Box>{item2.amount.toFixed(2)}</Box>
 </Flex>

@@ -7,9 +7,9 @@ export default async function handler(req, res) {
 
         try {
 
-        const { transacId, serviceType, customerName, amount, orText, userId } = req.body;
+        const { transacId, serviceType, customerName, amount, orNumber, userId } = req.body;
 
-      console.log(' payment api result',{transacId, serviceType, customerName, amount, orText, userId})
+      console.log(' payment api result',{transacId, serviceType, customerName, amount, orNumber, userId})
 
        await dbConnect();  
        
@@ -18,7 +18,7 @@ export default async function handler(req, res) {
           serviceType, 
           customerName, 
           amount, 
-          orText, 
+          orNumber, 
           userId});
         // Save the data to the database      
         await pay.save();
@@ -30,6 +30,7 @@ export default async function handler(req, res) {
       } catch (error) {
         // Send an error response
         res.status(500).json({ error: 'Unable to save data' });
+        console.log(error)
 
       }
 
