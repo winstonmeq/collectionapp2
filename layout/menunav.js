@@ -46,6 +46,12 @@ const Menunav = () => {
        <Text fontSize={'md'}>OR Entry</Text>
   </Button>
 </Link>
+
+<Link href={'/components/reports/rpt_payments'} >
+  <Button >
+       <Text fontSize={'md'}>Reports</Text>
+  </Button>
+</Link>
   
   
 

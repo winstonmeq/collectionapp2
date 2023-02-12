@@ -130,6 +130,8 @@ import Fetch_no_orUse from "./fetch_no_orUse";
 
    <Box width={'80%'} border={'1px'}>
 
+
+<h1>Balance</h1>
    <Table>
    <Thead>
    <Tr>
@@ -143,7 +145,7 @@ import Fetch_no_orUse from "./fetch_no_orUse";
 
    <Tbody>
   
-   </Tbody>
+  
    { datalist.map((items,i) => {
 
 return (
@@ -163,7 +165,8 @@ return (
 })
 
 }
-   </Table>
+</Tbody>
+</Table>
 
 <Fetch_no_orUse />
  

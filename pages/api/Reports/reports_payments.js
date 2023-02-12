@@ -1,6 +1,6 @@
 import { dbConnect } from "../../../conn/dbconnect";
 import { errorHandler,responseHandler } from "../../../util/common";
-import ORdata from "../../../models/ORdata";
+import Payment from "../../../models/Payment";
 
 
 export default async function handler(req, res) {
@@ -16,19 +16,32 @@ export default async function handler(req, res) {
        await dbConnect();  
    
            
-        const getdata = await ORdata.aggregate([
+        const getdata = await Payment.aggregate([
             
             { 
-                $match : { userId: require('mongoose').Types.ObjectId('63e4484b3a663c0b8d277141')} && {orUse:0}, 
+                $match : { userId: require('mongoose').Types.ObjectId('63e4484b3a663c0b8d277141')}, 
             },
           
           {
-            $group: {
-              _id: '$orBooklet',
-              orType: { $first: '$orType' },
-              orBooklet: { $first: '$orBooklet' },
-              firstORNumber: { $first: '$orNumber' },
-              lastORNumber: { $last: '$orNumber' }
+            $project: {
+              _id: 0,
+              orNumber:'$orNumber',
+              customerName:'$customerName',
+              serviceType:'$serviceType',
+              MCR:{
+                $cond:{
+                    if:{$eq:['$serviceType','MCR']},
+                    then:'$amount',
+                    else:null,
+                }
+              },
+              Lab:{
+                $cond:{
+                    if:{$eq:['$serviceType','laboratory']},
+                    then:'$amount',
+                    else:null,
+                }
+              }
             }
           },
   

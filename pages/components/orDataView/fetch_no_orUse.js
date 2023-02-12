@@ -45,8 +45,9 @@ import {
    <Flex direction={'row'}>
 
    <Box width={'80%'} border={'1px'}>
-
-   <Table>
+   <h1>Ending Balance</h1>
+   <TableContainer>
+   <Table variant='striped'>
    <TableCaption>Ending Balance</TableCaption>
    <Thead>
    <Tr>
@@ -81,7 +82,7 @@ return (
 
 }
    </Table>
- 
+</TableContainer> 
    </Box>
 
   <Box width={'20%'}>
