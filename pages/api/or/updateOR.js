@@ -13,7 +13,7 @@ export default async function handler(req, res) {
 
    // console.log('updateOR',or_id, orType, orFrom, orTo, orNumber,orUse,  userId)
 
-       const { orType, orFrom, orTo, orNumber,orUse,or_id, userId } = req.body;
+       const { orType, orFrom,orBooklet, orTo, orNumber,orUse,or_id, userId } = req.body;
 
        await dbConnect();  
    
@@ -23,6 +23,7 @@ export default async function handler(req, res) {
         {
           $set:{
                   orType:orType,
+                  orBooklet:orBooklet,
                   orFrom:orFrom,
                   orTo:orTo,
                   orNumber:orNumber,

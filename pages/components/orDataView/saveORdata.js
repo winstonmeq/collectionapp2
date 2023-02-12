@@ -18,12 +18,15 @@ import {
   import axios from 'axios';
   import Savepayment from "../payments/savepayment";
   import { useRouter } from "next/router";
+import Fetch_no_orUse from "./fetch_no_orUse";
   
   const SaveORdata = () => {
   
 
     const [datalist,setdatalist] = useState([])
     const [orType, setorType] = useState('51');
+    const [orBooklet, setorBooklet] = useState('')
+
     const [orFirst, setorFirst] = useState(0)
     const [orLast, setorLast] = useState(0)
     const [amount, setAmount] = useState(0)
@@ -39,25 +42,21 @@ import {
     useEffect(() => {   
 
       async function fetchOR() {
-          const { data } = await axios.get( process.env.NEXTAUTH_URL + `/api/or/fetchOR`)  
-        
+          const { data } = await axios.get( process.env.NEXTAUTH_URL + `/api/or/fetchOR`)          
           setdatalist(data)
        
-          
       }
 
       fetchOR();
   
-      
-     
       }, []);
 
     
-function fetchORdata() {
+// function fetchORdata() {
 
   
 
-  let sum = 0;
+//   let sum = 0;
 // for (let i = 0; i < datalist.length; i++) {
 //   let payments = datalist[i].payments;
 //   for (let j = 0; j < payments.length; j++) {
@@ -65,13 +64,13 @@ function fetchORdata() {
 //   }
 // }
 
-console.log(datalist)
+// console.log(datalist)
  
-  setAmount(sum)
-  setorFirst(datalist[0].orNumber)
-  setorLast(datalist[datalist.length - 1].orNumber)
+//   setAmount(sum)
+//   setorFirst(datalist[0].orNumber)
+//   setorLast(datalist[datalist.length - 1].orNumber)
 
-}
+// }
 
 
 
@@ -80,7 +79,7 @@ console.log(datalist)
         for (let orNumber = num1; orNumber <= num2; orNumber++) {
             try {
     
-                const payload = {orType, orFrom,orTo,orNumber,orUse, userId}
+                const payload = {orType, orBooklet, orFrom,orTo,orNumber,orUse, userId}
       
                 console.log('browser', payload)         
           
@@ -106,11 +105,13 @@ console.log(datalist)
   
     return (
       <div>
-
        
        <Flex direction={'row'}>
        <Box>
             <Input type="text" value={orType} onChange={(e)=>{setorType(e.target.value)}} />
+        </Box>
+        <Box>
+            <Input type="text" value={orBooklet} onChange={(e)=>{setorBooklet(e.target.value)}} />
         </Box>
         <Box>
             <Input type="text" value={orFrom} onChange={(e)=>{setorFrom(e.target.value)}} />
@@ -127,11 +128,54 @@ console.log(datalist)
 
    <Flex direction={'row'}>
 
-   <Button onClick={fetchORdata}>Generate Report</Button>
+   <Box width={'80%'} border={'1px'}>
 
-    <Box>OR Start = {orFirst}</Box>
-    <Box>OR End = {orLast}</Box>
-    <Box>Total Amount = {amount}</Box>
+   <Table>
+   <Thead>
+   <Tr>
+   <Th>OR Type</Th>
+    <Th>Booklet</Th>
+    <Th>OR Start</Th>
+    <Th>OR End</Th>
+    <Th>Amount</Th>
+   </Tr>
+   </Thead>
+
+   <Tbody>
+  
+   </Tbody>
+   { datalist.map((items,i) => {
+
+return (
+  <Tr key={i}>
+  <Td>{items.orType}</Td>
+    <Td >{items.orBooklet}</Td>
+    <Td >{items.firstORNumber}</Td>
+    <Td >{items.lastORNumber}</Td>
+    <Td >{items.totalAmount}</Td>
+
+  </Tr>
+ 
+  
+)
+
+
+})
+
+}
+   </Table>
+
+<Fetch_no_orUse />
+ 
+   </Box>
+
+   
+
+  <Box width={'20%'}>
+
+  </Box>
+
+   
 
     </Flex>
       

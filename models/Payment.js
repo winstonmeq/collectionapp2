@@ -13,6 +13,11 @@ const PaymentSchema = mongoose.Schema({
 
     },
 
+    orBooklet: {
+        type:String,
+        required:true,        
+    },
+
     serviceType: {
         type:String,        
         index: true,
@@ -20,8 +25,7 @@ const PaymentSchema = mongoose.Schema({
   
     customerName:{
         type:String,
-        required:true,
-       
+        required:true,      
 
     },
 

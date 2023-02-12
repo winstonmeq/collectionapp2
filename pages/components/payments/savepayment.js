@@ -25,10 +25,9 @@ const Savepayment = ({transacId, serviceType, amount, savehandle}) => {
     const [customerName, setcustomerName] = useState('');
     const [orNumber, setorNumber] = useState(0);
     const [userId, setuserId] = useState('63e4484b3a663c0b8d277141')
-    const [orType, setorType] = useState('51');
+    const [orBooklet, setorBooklet] = useState('');
   
-    const [orFrom, setorFrom] = useState(0)
-    const [orTo, setorTo] = useState(0)
+ 
     const [orUse, setorUse] = useState(1);
     const [or_id, setor_id] = useState('');
    
@@ -40,7 +39,7 @@ const Savepayment = ({transacId, serviceType, amount, savehandle}) => {
     const handleSavePayment = async () => {
         try {
     
-          const payload = {transacId, serviceType, customerName, amount, orNumber, userId}
+          const payload = {transacId, serviceType, customerName, amount,orBooklet, orNumber, userId}
 
           console.log('browser', payload)         
     
@@ -101,6 +100,7 @@ const Savepayment = ({transacId, serviceType, amount, savehandle}) => {
             if(data[0]!=null){
               setorNumber(data[0].orNumber)
               setor_id(data[0]._id)
+              setorBooklet(data[0].orBooklet)
             } else {
                
               window.alert('No OR');

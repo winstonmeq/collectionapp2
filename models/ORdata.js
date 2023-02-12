@@ -11,7 +11,11 @@ const ORdataSchema = mongoose.Schema({
         index: true,
 
     },
-  
+
+    orBooklet: {
+        type:String,
+        required:true,        
+    },  
 
     orFrom: {
         type:Number,        
