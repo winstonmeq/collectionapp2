@@ -52,6 +52,14 @@ const Menunav = () => {
        <Text fontSize={'md'}>Reports</Text>
   </Button>
 </Link>
+
+
+<Link href={'/components/reports/collection_deposit'} >
+  <Button >
+       <Text fontSize={'md'}>Collection & Deposit</Text>
+  </Button>
+</Link>
+  
   
   
 
