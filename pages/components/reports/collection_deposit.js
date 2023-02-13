@@ -10,7 +10,7 @@ import ReactToPrint from "react-to-print";
     Tfoot,
     Tr, Flex, Box,
     Th,Text,
-    Td,Container,
+    Td,Container,Spacer,
     TableCaption,
     TableContainer, useDisclosure, Button, Modal, ModalBody, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalFooter
   } from '@chakra-ui/react'
@@ -45,7 +45,7 @@ const Collection_deposit = () => {
         }
 
         async function fetch_allOR() {
-            const { data } = await axios.get( process.env.NEXTAUTH_URL + '/api/or/fetch_allOR')          
+            const { data } = await axios.get(process.env.NEXTAUTH_URL + '/api/or/fetch_or_payment');
             setdatalist3(data)
            
         }
@@ -232,18 +232,54 @@ const Collection_deposit = () => {
           
  </tr>
 
+ { datalist3.map((items,i) => {
+   
+   return (
+   
+       
+   <>
+   <tr key={i} style={{ width: "60px", fontSize:'10px' }}>
+   <td style={{border: '1px solid black',width:'73px'}}>{items.orType}</td>
+   <td style={{border: '1px solid black',width:'39px'}}>{items.orUse.length}</td>
+   <td style={{border: '1px solid black',width:'54px'}}>{items.orNumber[0]}</td>
+   <td style={{border: '1px solid black',width:'56px'}}>{items.orNumber[items.orUse.length - 1]}</td>
+
+   <td style={{border: '1px solid black',width:'39px'}}></td>
+   <td style={{border: '1px solid black',width:'54px'}}></td>
+   <td style={{border: '1px solid black',width:'56px'}}></td>
+   
+   <td style={{border: '1px solid black',width:'39px'}}>{items.orYes.length}</td>
+   <td style={{border: '1px solid black',width:'54px'}}>{items.orNumberYes[0]}</td>
+   <td style={{border: '1px solid black',width:'56px'}}>{items.orNumberYes[items.orYes.length - 1]}</td>
+   
+   <td style={{border: '1px solid black',width:'39px'}}>{items.orNo.length}</td>
+   <td style={{border: '1px solid black',width:'54px'}}>{items.orNumberNo[0]}</td>
+   <td style={{border: '1px solid black',width:'56px'}}>{items.orNumberNo[items.orNo.length - 1]}</td>
+   
+   
+   
+   </tr>
+   
+   </>
+   )
+   
+   }) }
 
 
-    
-{ datalist3.map((items,i) => {
+ </tbody>
+</table>
+{/* 
+<Flex direction={'row'} textAlign={'center'} >
+    <Box bg={''}>
+    { datalist3.map((items,i) => {
 
 return (
 <>
-<tr >
-<td key={i} style={{border: '1px solid black',width:'30px'}}>{items.orType}</td>
-<td style={{border: '1px solid black'}}>{Number(items.lastORNumber) - Number(items.firstORNumber) + 1}</td>
-<td style={{border: '1px solid black'}}>{items.firstORNumber}</td>
-<td style={{border: '1px solid black'}}>{items.lastORNumber}</td>
+<tr style={{ width: "60px", fontSize:'10px' }}>
+<td key={i} style={{border: '1px solid black',width:'73px'}}>{items.orType}</td>
+<td style={{border: '1px solid black',width:'39px'}}>{Number(items.lastORNumber) - Number(items.firstORNumber) + 1}</td>
+<td style={{border: '1px solid black',width:'54px'}}>{items.firstORNumber}</td>
+<td style={{border: '1px solid black',width:'56px'}}>{items.lastORNumber}</td>
 </tr>
 
 </>
@@ -251,34 +287,42 @@ return (
 
 }) }
 
-
+</Box>
+<Box>    
 <tr>
-<td style={{border: '1px solid black',width:'1px'}}>.</td>
-<td style={{border: '1px solid black',width:'30px'}}>.</td>
-<td style={{border: '1px solid black',width:'30px'}}>.</td>
+<td style={{border: '1px solid black',width:'39px'}}></td>
+<td style={{border: '1px solid black',width:'54px'}}></td>
+<td style={{border: '1px solid black',width:'56px'}}></td>
 </tr>
-{ datalist.map((items,i) => {
+</Box>
+
+
+<Box bg={'red'}>
+    { datalist.map((items,i) => {
 
 return (
 <>
-<tr>
-<td key={i}  style={{border: '1px solid black'}}>{Number(items.lastORNumber) - Number(items.firstORNumber) + 1}</td>
-<td style={{border: '1px solid black'}}>{items.firstORNumber}</td>
-<td style={{border: '1px solid black'}}>{items.lastORNumber}</td>
+<tr style={{ width: "60px", fontSize:'10px' }}>
+<td key={i}  style={{border: '1px solid black',width:'39px'}}>{Number(items.lastORNumber) - Number(items.firstORNumber) + 1}</td>
+<td style={{border: '1px solid black',width:'54px'}}>{items.firstORNumber}</td>
+<td style={{border: '1px solid black',width:'56px'}}>{items.lastORNumber}</td>
 </tr>
 </>
 )
 
 }) }
+    </Box>
+    <Box bg={''}>
+      
 
-{ datalist2.map((items,i) => {
+{ datalist2.map((item,i) => {
 
 return (
     <>
- <tr>   
-<td key={i}  style={{border: '1px solid black'}}>{Number(items.lastORNumber) - Number(items.firstORNumber) + 1}</td>
-<td style={{border: '1px solid black'}}>{items.firstORNumber}</td>
-<td style={{border: '1px solid black'}}>{items.lastORNumber}</td>
+ <tr style={{ width: "60px", fontSize:'10px' }}>   
+<td key={i}  style={{border: '1px solid black',width:'39px'}}>{Number(item.lastORNumber) - Number(item.firstORNumber) + 1}</td>
+<td style={{border: '1px solid black',width:'54px'}}>{item.firstORNumber}</td>
+<td style={{border: '1px solid black',width:'56px'}}>{item.lastORNumber}</td>
 </tr>
 </>
 
@@ -287,12 +331,15 @@ return (
 
 })}
 
+    </Box>
+</Flex>
+
+     */}
 
 
 
 
- </tbody>
-</table>
+
 
 
 
