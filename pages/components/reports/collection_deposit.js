@@ -75,7 +75,11 @@ const Collection_deposit = () => {
  
 <Box ref={tableRef} padding={'20px'} >
 
-<Box textAlign={'center'}>Report of Collection and Deposits</Box>
+<Box textAlign={'center'} fontSize ={'2xl'}>Report of Collection and Deposits</Box>
+<Box textAlign={'center'}>PRESIDENT ROXAS, COTABATO</Box>
+<Box textAlign={'center'}>LGU</Box>
+
+<br></br>
 <table style={{ width: "680px", fontSize:'12px' }} >
     <tbody>
         <tr >
@@ -149,6 +153,7 @@ const Collection_deposit = () => {
 
 <table style={{ width: "300px", fontSize:'12px' }}>
           
+<tbody>
 <tr>
             <td style={{border: '1px solid black', width:'200px'}}>General Fund</td>
             <td style={{border: '1px solid black',width:'160px'}}>{total}</td>
@@ -165,6 +170,7 @@ const Collection_deposit = () => {
             <td style={{border: '1px solid black',width:'160px'}}>{total}</td>
           
  </tr>
+</tbody>
 </table>
 
 
@@ -172,7 +178,8 @@ const Collection_deposit = () => {
 <Text>B. Remittance/Deposits</Text>
 
 <table style={{ width: "680px", fontSize:'12px' }}>
-          
+<tbody>
+              
 <tr>
             <td style={{border: '1px solid black', width:'200px'}}>Accountable Officer/Bank</td>
             <td style={{border: '1px solid black',width:'160px'}}>Reference</td>
@@ -186,6 +193,7 @@ const Collection_deposit = () => {
             <td style={{border: '1px solid black',width:'160px'}}></td>
           
  </tr>
+</tbody>
 
 </table>
 
@@ -266,83 +274,136 @@ const Collection_deposit = () => {
    }) }
 
 
+
+
  </tbody>
 </table>
-{/* 
-<Flex direction={'row'} textAlign={'center'} >
-    <Box bg={''}>
-    { datalist3.map((items,i) => {
-
-return (
-<>
-<tr style={{ width: "60px", fontSize:'10px' }}>
-<td key={i} style={{border: '1px solid black',width:'73px'}}>{items.orType}</td>
-<td style={{border: '1px solid black',width:'39px'}}>{Number(items.lastORNumber) - Number(items.firstORNumber) + 1}</td>
-<td style={{border: '1px solid black',width:'54px'}}>{items.firstORNumber}</td>
-<td style={{border: '1px solid black',width:'56px'}}>{items.lastORNumber}</td>
-</tr>
-
-</>
-)
-
-}) }
-
-</Box>
-<Box>    
-<tr>
-<td style={{border: '1px solid black',width:'39px'}}></td>
-<td style={{border: '1px solid black',width:'54px'}}></td>
-<td style={{border: '1px solid black',width:'56px'}}></td>
-</tr>
-</Box>
 
 
-<Box bg={'red'}>
-    { datalist.map((items,i) => {
+<table style={{ width: "670px", fontSize:'10px' }}>
+    <tbody>
+    <tr>
+    <td colspan='3' style={{border: '1px solid black',width:'39px'}}>Beginning Balance ______,2023</td>
+    <td  style={{border: '1px solid black',width:'39px'}}>0</td>
+    <td colspan='3' style={{border: '1px solid black',width:'39px'}}>List of Checks</td>
 
-return (
-<>
-<tr style={{ width: "60px", fontSize:'10px' }}>
-<td key={i}  style={{border: '1px solid black',width:'39px'}}>{Number(items.lastORNumber) - Number(items.firstORNumber) + 1}</td>
-<td style={{border: '1px solid black',width:'54px'}}>{items.firstORNumber}</td>
-<td style={{border: '1px solid black',width:'56px'}}>{items.lastORNumber}</td>
-</tr>
-</>
-)
+    </tr>
+    <tr>
+        <td style={{border: '1px solid black',width:'39px'}}>Add</td>
+        <td colspan='2' style={{border: '1px solid black',width:'39px'}}>Collection</td>
+        <td style={{border: '1px solid black',width:'39px'}}></td>
+        <td style={{border: '1px solid black',width:'39px'}}>Check No.</td>
+        <td style={{border: '1px solid black',width:'39px'}}>Payee</td>
+        <td style={{border: '1px solid black',width:'39px'}}>Amount</td>
 
-}) }
-    </Box>
-    <Box bg={''}>
-      
+    </tr>
+    <tr>
+        <td style={{border: '1px solid black',width:'39px'}}></td>
+        <td style={{border: '1px solid black',width:'39px'}}>Cash</td>
+        <td style={{border: '1px solid black',width:'39px'}}></td>
+        <td style={{border: '1px solid black',width:'39px'}}>{total}</td>
+        <td style={{border: '1px solid black',width:'39px'}}></td>
+        <td style={{border: '1px solid black',width:'39px'}}></td>
+        <td style={{border: '1px solid black',width:'39px'}}></td>
 
-{ datalist2.map((item,i) => {
+    </tr>
+    <tr>
+        <td style={{border: '1px solid black',width:'39px'}}></td>
+        <td style={{border: '1px solid black',width:'39px'}}>Checks:</td>
+        <td style={{border: '1px solid black',width:'39px'}}></td>
+        <td style={{border: '1px solid black',width:'39px'}}></td>
+        <td style={{border: '1px solid black',width:'39px'}}></td>
+        <td style={{border: '1px solid black',width:'39px'}}></td>
+        <td style={{border: '1px solid black',width:'39px'}}></td>
 
-return (
-    <>
- <tr style={{ width: "60px", fontSize:'10px' }}>   
-<td key={i}  style={{border: '1px solid black',width:'39px'}}>{Number(item.lastORNumber) - Number(item.firstORNumber) + 1}</td>
-<td style={{border: '1px solid black',width:'54px'}}>{item.firstORNumber}</td>
-<td style={{border: '1px solid black',width:'56px'}}>{item.lastORNumber}</td>
-</tr>
-</>
+    </tr>
+    <tr>
+        <td style={{border: '1px solid black',width:'39px'}}></td>
+        <td style={{border: '1px solid black',width:'39px'}}></td>
+        <td style={{border: '1px solid black',width:'39px'}}>Total</td>
+        <td style={{border: '1px solid black',width:'39px'}}>{total}</td>
+        <td style={{border: '1px solid black',width:'39px'}}></td>
+        <td style={{border: '1px solid black',width:'39px'}}></td>
+        <td style={{border: '1px solid black',width:'39px'}}></td>
 
-)
+    </tr>
 
+    <tr>
+    <td colspan='3' style={{border: '1px solid black',width:'39px'}}>Less: Remittance to Cashier/Treasurer/Depository Bank</td>
+    <td  style={{border: '1px solid black',width:'39px'}}></td>
+    <td colspan='3' style={{border: '1px solid black',width:'39px'}}></td>
 
-})}
+    </tr>
 
-    </Box>
-</Flex>
+    
+    <tr>
+    <td colspan='3' style={{border: '1px solid black',width:'39px'}}>Balance</td>
+    <td  style={{border: '1px solid black',width:'39px'}}></td>
+    <td colspan='3' style={{border: '1px solid black',width:'39px'}}></td>
 
-     */}
+    </tr>
 
 
 
+    <tr style={{ width: "670px", fontSize:'10px', textAlign: 'center' }}>
+    <td colspan='4' style={{border: '1px solid black',width:'39px'}}>C E R T I F I C A T I O N</td>
+    <td colspan='3' style={{border: '1px solid black',width:'39px'}}>VERIFICATION AND ACKNOWLEDGEMENT</td>
+
+    </tr>
+    
+    <tr>
+    <td colspan='4' style={{border: '1px solid black',width:'39px'}}>I HEREBY CERTIFY the foregoing report of collections and</td>
+    <td colspan='3' style={{border: '1px solid black',width:'39px'}}>I HEREBY CERTIFY the foregoing report of collections</td>
+
+    </tr>
+
+    <tr>
+    <td colspan='4' style={{border: '1px solid black',width:'39px'}}>deposits, & accountability for accountable forms is true and correct</td>
+    <td colspan='3' style={{border: '1px solid black',width:'39px'}}>has been verified and acknowledge receipt of...</td>
+
+    </tr>
+    <tr>
+    <td colspan='4' style={{border: '1px solid black',width:'39px', height:'50px'}}></td>
+    <td colspan='3' style={{border: '1px solid black',width:'39px', fontSize:'14px'}}>{total.toFixed(2)}</td>
+
+    </tr>
+
+    <tr style={{ textAlign: 'center' }}>
+    <td colspan='2' style={{border: '1px solid black',width:'39px'}}>HAROLD KIM B. UDANI</td>
+    <td colspan='2'style={{border: '1px solid black',width:'39px'}}>FEB. 14, 2023</td>
+    <td colspan='2' style={{border: '1px solid black',width:'39px'}}>MARIA FE E. DALISAY</td>
+    <td style={{border: '1px solid black',width:'39px'}}>FEB. 14, 2023</td>
+
+    </tr>
+    <tr style={{ textAlign: 'center' }}>
+    <td colspan='2' style={{border: '1px solid black',width:'39px'}}>Name & Signature</td>
+    <td colspan='2'style={{border: '1px solid black',width:'39px'}}>Date</td>
+    <td colspan='2'style={{border: '1px solid black',width:'39px'}}>Name & Signature</td>
+    <td style={{border: '1px solid black',width:'39px'}}>FEB. 14, 2023</td>
+
+    </tr >
+
+    <tr style={{ width: "670px", fontSize:'10px', textAlign: 'center' }}>
+    <td colspan='2' style={{border: '1px solid black',width:'39px'}}>Accountable Officer</td>
+    <td colspan='2' style={{border: '1px solid black',width:'39px'}}></td>
+    <td colspan='2' style={{border: '1px solid black',width:'39px'}}>Cashier/Treasurer</td>
+    <td style={{border: '1px solid black',width:'39px'}}></td>
+
+    </tr>
 
 
 
 
 
+
+
+
+
+
+
+    </tbody>
+   
+   </table>
 
 
 
