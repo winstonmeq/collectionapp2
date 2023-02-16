@@ -25,9 +25,9 @@ export default async function handler(req, res) {
           {
             $project: {
               _id: 0,
-              orNumber:'$orNumber',
-              customerName:'$customerName',
-              serviceType:'$serviceType',
+              orNumber:1,
+              customerName:1,
+              serviceType:1,
               MCR:{
                 $cond:{
                     if:{$eq:['$serviceType','MCR']},

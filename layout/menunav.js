@@ -65,6 +65,22 @@ const Menunav = () => {
        <Text fontSize={'md'}>Collection Test </Text>
   </Button>
 </Link>
+
+<Link href={'/components/Account/add_account'} >
+  <Button >
+       <Text fontSize={'md'}>Account</Text>
+  </Button>
+</Link>
+
+
+<Link href={'/components/SubAccount/add_sub_account'} >
+  <Button >
+       <Text fontSize={'md'}>Sub-Account</Text>
+  </Button>
+</Link>
+  
+  
+  
   
   
   
