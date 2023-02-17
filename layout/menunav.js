@@ -60,9 +60,9 @@ const Menunav = () => {
   </Button>
 </Link>
   
-  <Link href={'/components/reports/collectionTest'} >
+  <Link href={'/components/Utility'} >
   <Button >
-       <Text fontSize={'md'}>Collection Test </Text>
+       <Text fontSize={'md'}>Utility</Text>
   </Button>
 </Link>
 

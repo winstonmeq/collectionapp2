@@ -1,19 +1,19 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from "next/router";
 import axios from 'axios';
-import { Box, Flex, Text, Input, Button, Stack,Select,
+import { Box, Flex, Text, Input, Button, Stack,Select, useDisclosure, Modal, ModalBody, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalFooter 
     
   } from '@chakra-ui/react';
 
-const Add_sub_account = () => {
+const Add_sub_account = ({account_name,account_id}) => {
 
     const [sub_account_name, setSub_account_name] = useState('');
     const [sub_account_code, setSub_account_code] = useState('');
     const [sub_account_description, setSub_account_description] = useState('');
     const [sub_account_fee, setSub_account_fee] = useState(0);
+    const { isOpen, onOpen, onClose } = useDisclosure()
 
-
-    const [account_id, setAccount_id] = useState('')
+    // const [account_id, setAccount_id] = useState('')
 
     const [userId, setuserId] = useState('63e4484b3a663c0b8d277141')
     const [datalist, setdatalist] = useState([]);    
@@ -70,15 +70,24 @@ const Add_sub_account = () => {
 
 
     return (
-        <Flex direction={'row'} justify={'center'}>
+        <Box direction={'row'} justify={'center'} width={'400px'}>
             
-          <Box width={'30%'}>
+            
+            <Button onClick={onOpen}>{account_name}</Button>
+
+<Modal closeOnOverlayClick={false} isOpen={isOpen} onClose={onClose} size={'xl'}  >
+  <ModalOverlay />
+  <ModalContent >
+    <ModalHeader>Sub Account</ModalHeader>
+  
+    <ModalBody >
+    <Box width={'30%'}>
             <Stack spacing='24px'>
             <form>
 
             <Box>
             <label>Select Account Name</label>
-
+{/* 
           <Select value={account_id} onChange={e => setAccount_id(e.target.value)} >
 
                 {datalist.map((items,i) => {
@@ -92,7 +101,14 @@ const Add_sub_account = () => {
                 } )}          
             
           
-            </Select>
+            </Select> */}
+
+                <Input
+                    type='text'
+                    value={account_name}
+                    onChange={''}
+                />
+
           </Box>
 
 
@@ -153,9 +169,22 @@ const Add_sub_account = () => {
             </Stack>
          
           </Box>
+   
+   
+
+   </ModalBody>
+
+    <ModalFooter>
+      <Button size={'sm'} colorScheme='blue' mr={3} onClick={onClose}>
+        Close
+      </Button>
+    </ModalFooter>
+  </ModalContent>
+</Modal>
+         
 
 
-        </Flex>
+        </Box>
     )
 }
 
