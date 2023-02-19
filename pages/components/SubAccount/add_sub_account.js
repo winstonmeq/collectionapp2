@@ -4,8 +4,21 @@ import axios from 'axios';
 import { Box, Flex, Text, Input, Button, Stack,Select, useDisclosure, Modal, ModalBody, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalFooter 
     
   } from '@chakra-ui/react';
+  import DataTable from 'react-data-table-component';
 
-const Add_sub_account = ({account_name,account_id}) => {
+
+
+
+
+
+
+
+
+
+const Add_sub_account = () => {
+
+  const [account_name, setAccount_name] = useState('');
+
 
     const [sub_account_name, setSub_account_name] = useState('');
     const [sub_account_code, setSub_account_code] = useState('');
@@ -13,10 +26,13 @@ const Add_sub_account = ({account_name,account_id}) => {
     const [sub_account_fee, setSub_account_fee] = useState(0);
     const { isOpen, onOpen, onClose } = useDisclosure()
 
-    // const [account_id, setAccount_id] = useState('')
+    const [account_id, setAccount_id] = useState('')
 
     const [userId, setuserId] = useState('63e4484b3a663c0b8d277141')
     const [datalist, setdatalist] = useState([]);    
+    const [datalist2, setdatalist2] = useState([]);    
+
+
 
     const router = useRouter();
 
@@ -50,30 +66,82 @@ const Add_sub_account = ({account_name,account_id}) => {
         async function fetchData() {
             const { data } = await axios.get( process.env.NEXTAUTH_URL + `/api/Account/get_account`)
             setdatalist(data);
-
-            if(data!=null){          
-
-            } else {             
-
-              window.alert('Please add Account');
-              router.push('/components/orDataView/saveORdata');
-
-            }
            
         }
 
+        async function fetchData2() {
+          const { data } = await axios.get( process.env.NEXTAUTH_URL + `/api/Account/get_account_sub`)
+          setdatalist2(data);
+           
+      }
+
+      
         fetchData();
+        fetchData2();
         }, []);
+
+
+     
+  
+  
+          const columns = [
+      
+              {
+                  name:'Account Name',
+                  cell: (row) => (
+                      
+                    <Button  onClick={(e)=>{onOpen(), setAccount_id(row._id), setAccount_name(row.account_name)}}>{row.data2 ? row.account_name : ''}</Button>
+
+     
+                  ),
+                  sortable: true,
+              },
+              {
+                  name:'Sub Account Name',
+               selector: (row) => (
+                <>
+                        {row.data2.map((item)=>{
+
+                          return (
+                            
+                               <table key={item._id}>
+                               <tbody>
+                               <tr >
+                                <td  style={{width:'120px',  }}>{item.sub_account_name}</td>                                
+                                <td style={{width:'50px', }}>{item.sub_account_fee}</td>
+                               </tr>
+
+                               </tbody>
+                           
+
+                               </table>                                               
+                          
+                        
+                            
+
+                          )
+                         
+                        })}
+                </>
+               ),
+                  sortable: true, 
+                
+                  
+      
+              },
+              
+  
+          ]
+
 
 
 
 
 
     return (
-        <Box direction={'row'} justify={'center'} width={'400px'}>
+        <Flex direction={'column'} justify={'center'} >
             
-            
-            <Button onClick={onOpen}>{account_name}</Button>
+{console.log(datalist2)}
 
 <Modal closeOnOverlayClick={false} isOpen={isOpen} onClose={onClose} size={'xl'}  >
   <ModalOverlay />
@@ -81,32 +149,34 @@ const Add_sub_account = ({account_name,account_id}) => {
     <ModalHeader>Sub Account</ModalHeader>
   
     <ModalBody >
-    <Box width={'30%'}>
+
+    <Box>
             <Stack spacing='24px'>
             <form>
 
             <Box>
             <label>Select Account Name</label>
-{/* 
-          <Select value={account_id} onChange={e => setAccount_id(e.target.value)} >
 
-                {datalist.map((items,i) => {
+          {/* <Select value={account_id} onChange={e => setAccount_id(e.target.value)} >
 
-                    return (
+            <option value=''>Select</option>
 
+
+                {datalist.map((items,i) => (
+                   
+                       
                         <option key={items._id} value={items._id}>{items.account_name}</option>
 
-                    )
-
-                } )}          
+                       
+                ) )}          
             
           
             </Select> */}
 
-                <Input
+            <Input
                     type='text'
                     value={account_name}
-                    onChange={''}
+                    onChange={(e) => {''}}
                 />
 
           </Box>
@@ -172,6 +242,8 @@ const Add_sub_account = ({account_name,account_id}) => {
    
    
 
+
+    
    </ModalBody>
 
     <ModalFooter>
@@ -181,10 +253,14 @@ const Add_sub_account = ({account_name,account_id}) => {
     </ModalFooter>
   </ModalContent>
 </Modal>
-         
+            
+            <DataTable
+            columns={columns}
+            data={datalist2}
+           /> 
+  
 
-
-        </Box>
+        </Flex>
     )
 }
 

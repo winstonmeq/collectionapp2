@@ -1,6 +1,6 @@
 import { dbConnect } from "../../../conn/dbconnect";
 import { errorHandler,responseHandler } from "../../../util/common";
-import SubAccount from "../../../models/Sub_account";
+import Account from "../../../models/Account";
 
 
 export default async function handler(req, res) {
@@ -16,34 +16,22 @@ export default async function handler(req, res) {
        await dbConnect();  
        
       
-       const getdata = await SubAccount.aggregate([
+       const getdata = await Account.aggregate([
             
         { 
             $match : { userId: require('mongoose').Types.ObjectId('63e4484b3a663c0b8d277141')}, 
 
         },
+            
+        {                
+            $lookup: {
+                from: 'sub_accounts',
+                localField: '_id',
+                foreignField: 'account_id',
+                as: 'data2'
+            }
 
-        // {                
-        //     $lookup: {
-        //         from: 'accounts',
-        //         localField: 'account_id',
-        //         foreignField: '_id',
-        //         as: 'data2'
-        //     }
-
-        // },
-
-        // {
-        //     $group: {
-        //       _id: '$data2.account_name',
-        //       sub_account_name: {$push:'$sub_account_name'},
-           
-        //     }
-        //   },
-
-
-              
-                          
+        },
                                 
 
     ]).exec();

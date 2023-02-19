@@ -14,13 +14,12 @@ const Sub_accountSchema = mongoose.Schema({
 
     sub_account_code: {
         type:String,
-        required:true,        
+                
     },  
 
     sub_account_description: {
 
         type:String,
-        required:true,       
 
     },
 

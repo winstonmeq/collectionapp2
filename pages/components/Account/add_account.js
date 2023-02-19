@@ -1,10 +1,19 @@
 import { createUser } from '../../../axios/user_request'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from "next/router";
 import axios from 'axios';
-import { Box, Flex, Text, Input, Button, Stack,
-    
-  } from '@chakra-ui/react';
+import { Box, Flex, Text, Input, Button, Stack,Select, useDisclosure, Modal, ModalBody, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalFooter   
+} from '@chakra-ui/react';
+import DataTable from 'react-data-table-component';
+
+
+
+
+
+
+
+
+
 
 const Add_account = () => {
 
@@ -12,6 +21,9 @@ const Add_account = () => {
     const [account_code, setAccount_code] = useState('');
     const [account_description, setAccount_description] = useState('');
     const [userId, setuserId] = useState('63e4484b3a663c0b8d277141')
+    const { isOpen, onOpen, onClose } = useDisclosure()
+    const [datalist, setdatalist] = useState([]);    
+
 
 
     const router = useRouter();
@@ -44,12 +56,66 @@ const Add_account = () => {
     };
 
 
+    
+    
+    useEffect(() => {   
 
+      async function fetchData() {
+          const { data } = await axios.get( process.env.NEXTAUTH_URL + `/api/Account/get_account`)
+          setdatalist(data);
+
+          if(data!=null){          
+
+          } else {             
+
+            window.alert('Please add Account');
+           
+
+          }
+         
+      }
+
+      fetchData();
+      }, []);
+
+      const columns = [
+    
+        {
+            name:'Account Name',
+            selector:(row) => row.account_name,
+            sortable: true,
+        },
+        {
+            name:'Account Code',
+            selector:(row) => row.account_code,
+            sortable: true,
+
+
+        },
+        {
+            name:'Account Description',
+            selector:(row) => row.account_description,
+            sortable: true,
+
+        },
+      
+    ]
 
     return (
-        <Flex direction={'row'} justify={'center'}>
-            
-          <Box width={'30%'}>
+        <Flex direction={'column'} justify={'center'}>
+
+
+
+<Button width={'100px'} onClick={onOpen}>Add</Button>
+
+<Modal closeOnOverlayClick={false} isOpen={isOpen} onClose={onClose} size={'xl'}  >
+  <ModalOverlay />
+  <ModalContent >
+    <ModalHeader>Account </ModalHeader>
+  
+    <ModalBody >
+
+    <Box>
             <Stack spacing='24px'>
             <form>
                 <Box>
@@ -97,6 +163,22 @@ const Add_account = () => {
             </Stack>
          
           </Box>
+
+   </ModalBody>
+
+    <ModalFooter>
+      <Button size={'sm'} colorScheme='blue' mr={3} onClick={onClose}>
+        Close
+      </Button>
+    </ModalFooter>
+  </ModalContent>
+</Modal>
+            
+        
+            <DataTable
+            columns={columns}
+            data={datalist}
+           /> 
 
 
         </Flex>

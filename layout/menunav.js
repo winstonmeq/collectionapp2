@@ -35,9 +35,9 @@ const Menunav = () => {
   </Button>
 </Link>
 
-<Link href={'/components/laboratory'} >
+<Link href={'/components/Bayad'} >
   <Button>
-       <Text fontSize={'md'}>Medical Laboratory</Text>
+       <Text fontSize={'md'}>Bayad</Text>
   </Button>
 </Link>
 

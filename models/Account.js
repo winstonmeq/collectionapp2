@@ -14,13 +14,11 @@ const AccountSchema = mongoose.Schema({
 
     account_code: {
         type:String,
-        required:true,        
     },  
 
     account_description: {
 
         type:String,
-        required:true,       
 
     },
    

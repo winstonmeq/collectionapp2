@@ -4,10 +4,10 @@ import axios from 'axios';
 import { Box, Flex, Text, Input, Button, Stack,Select, useDisclosure, Modal, ModalBody, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalFooter   
   } from '@chakra-ui/react';
 
-import DataTable from 'react-data-table-component';
 import Add_sub_account from '../SubAccount/add_sub_account';
 
-
+import DataTable from 'react-data-table-component';
+import Add_account from '../Account/add_account';
 
 
 
@@ -29,104 +29,19 @@ const Utility = () => {
 
   
 
-    
-    useEffect(() => {   
-
-        async function fetchData() {
-            const { data } = await axios.get( process.env.NEXTAUTH_URL + `/api/Sub_account/get_sub_account`)
-            setdatalist(data);
-
-            if(data!=null){          
-
-            } else {             
-
-              window.alert('Please add Account');
-              router.push('/components/orDataView/saveORdata');
-
-            }
-           
-        }
-
-        fetchData();
-
-
-        }, []);
-
-
-    const columns = [
-    
-        {
-            name:'Account Name',
-            //selector:(row) => row.data2[0].account_name,
-            cell: (row) => (
-                
-                <Add_sub_account account_name={row.data2[0].account_name} account_id={row.data2[0]._id} />
-
-            ),
-            sortable: true,
-        },
-        {
-            name:'Sub Account Name',
-            selector:(row) => row.sub_account_name,
-            sortable: true,
-
-
-        },
-        {
-            name:'Sub Account Code',
-            selector:(row) => row.sub_account_code,
-            sortable: true,
-
-        },
-        {
-            name:'Fee & Charges',
-            selector:(row) => row.sub_account_fee,
-            sortable: true,
-
-        },
-        
-
-        // {
-        //     name:'Sub Account',
-        //     cell: (row) => (
-        //         <>
-        //          { row.sub_account_name.map((item) => {
-
-        //             return (
-        //                 <Box height={'120px'} bg={'red'} width={'50px'}>
-        //                       {item}
-        //                 </Box>
-                      
-        //             )
-               
-
-
-        //          })}
-                
-        //         </>
-              
-        //       ),
-        //     sortable: true,
-        // },
-
-   
-    
-    ]
-
-
+  
     return (
-        <Flex direction={'row'} justify={'center'}>
+        <Flex direction={'row'} justify={'center'} w={'100%'}>
 
             {console.log(datalist)}
-    
- 
-      <DataTable
-            columns={columns}
-            data={datalist}
-           />
-
+    <Box width={'50%'} border={'1px'} padding='10px' >
+        <Add_account />
+    </Box>
+    <Box width={'50%'} padding='10px' >
+        <Add_sub_account />
+    </Box>
   
-
+      
         </Flex>
     )
 }

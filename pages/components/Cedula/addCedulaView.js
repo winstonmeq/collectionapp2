@@ -325,6 +325,9 @@ function calculatePenalty(monthno) {
 
     
     <Flex direction={"column"} align={"center"} >
+
+
+
          <Box>
         <form onSubmit={addCedulaHandler}>
          <Flex justify={'right'}>
