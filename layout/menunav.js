@@ -66,20 +66,13 @@ const Menunav = () => {
   </Button>
 </Link>
 
-<Link href={'/components/Account/add_account'} >
+
+<Link href={'/components/reports/reportall'} >
   <Button >
-       <Text fontSize={'md'}>Account</Text>
+       <Text fontSize={'md'}>Reports All</Text>
   </Button>
 </Link>
 
-
-<Link href={'/components/SubAccount/add_sub_account'} >
-  <Button >
-       <Text fontSize={'md'}>Sub-Account</Text>
-  </Button>
-</Link>
-  
-  
   
   
   

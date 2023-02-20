@@ -28,8 +28,8 @@ import {
     const [newlcrdata, setnewlcrdata] = useState({});
     const [data, setData] = useState([]);
     const [price, setprice] = useState(0);
-    const [name1, setName1] = useState('')
-    const [amount1, setAmount1] = useState('')
+    const [accountName, setAccountName] = useState('')
+    const [searchName, setSearchName] = useState('')
     const [transId, setTransId] = useState();
     const [datalist2, setdatalist2] = useState([]);    
 
@@ -65,36 +65,39 @@ import {
   
     const [datalist, setdatalist] = useState([])
   
-  
-    const lab1 = { transacId: transId , name: 'Complete Blood Count', amount: 100.00, type: 'birth', userId: '63e4484b3a663c0b8d277141' }
-    const lab2 = { transacId: transId, name: 'Platelet Count', amount: 50.00, type: 'birth', userId: '63e4484b3a663c0b8d277141' }
-    const lab3 = { transacId: transId, name: 'Hemoglobin', amount: 50.00, type: "married", userId: '63e4484b3a663c0b8d277141' }
-    const lab4 = { transacId: transId, name: 'Blood Typing', amount: 50.00, type: "birth", userId: '63e4484b3a663c0b8d277141' }
-    const lab5 = { transacId: transId, name: 'Urinalysis', amount: 30.00, type: "married", userId: '63e4484b3a663c0b8d277141' }
-    const lab6 = { transacId: transId, name: 'Stool Examination', amount: 30.00, type: "married", userId: '63e4484b3a663c0b8d277141' }
-    const lab7 = { transacId: transId, name: 'Sputum/AFB (Vendor Only)', amount: 30.00, type: "married", userId: '63e4484b3a663c0b8d277141' }
-
-  
+    
   
     const handleAddProduct = (newData) => {
       setdatalist([...datalist, newData]);
     }
   
   
+
+
+
+    function handleSearchButtonClick() {
+      // filter the dataList array based on the search query
+      const filteredList = datalist2.filter((item) =>
+        item.sub_account_name.toLowerCase().includes(searchName.toLowerCase())
+      );
+      console.log(`Searching for: ${searchName}. Results: ${filteredList}`);
+    }
+
+
   
     const handleRemoveProduct = (name) => {
       setdatalist(datalist.filter(item => item.name !== name));
     }
+
+
   
     const handleSave = async () => {
       try {
     
-        const response = await axios.post(process.env.NEXTAUTH_URL + '/api/laboratory/add_lab_payment', { datalist });
-     
-       //setdatalist([])
+        const response = await axios.post(process.env.NEXTAUTH_URL + '/api/laboratory/add_lab_payment', { datalist });     
+         //setdatalist([])
   
        console.log('datalist',{ datalist })
-  
      
   
       } catch (error) {
@@ -138,13 +141,15 @@ import {
                 <table>
                     <tbody>    
                     <tr>
-                        <td colspan='3'>Select Services</td>
+                        <td colSpan='3'>Select Services</td>
                     </tr>
                     <tr>
-                        <td colspan='3'><Input type='text' /></td>
-                        <td><Button>Search</Button></td>
+                        <td colSpan='3'><Input type='text' value={searchName} onChange={e=>setSearchName(e.target.value)} /></td>
+                        <td><Button onClick={handleSearchButtonClick}>Search</Button></td>
                     </tr>
-                    {datalist2.map((item)=> {
+                    {datalist2 .filter((item) =>
+                             item.sub_account_name.toLowerCase().includes(searchName.toLowerCase())
+                             ).map((item)=> {
              
                     return (                
                            <tr key={item._id}>
@@ -155,10 +160,13 @@ import {
                                     transacId: transId , 
                                     name: item.sub_account_name, 
                                     amount: item.sub_account_fee, 
-                                    type: 'birth', 
-                                    userId: '63e4484b3a663c0b8d277141' 
+                                    type: item.data2[0].account_name,
+                                    userId: '63e4484b3a663c0b8d277141',                                   
 
-                            })}>Add</Button></td>
+                            },
+                            setAccountName(item.data2[0].account_name) 
+                            
+                            )}>Add</Button></td>
                         </tr>
                         )
                     })}
@@ -226,8 +234,9 @@ import {
   
                 </Tfoot>
               </Table>
-              { datalist.length ?               <Savepayment transacId={transId} serviceType={'laboratory'} amount={totalAmount} savehandle={handleSave} />
-  : null
+              { datalist.length ?               
+              <Savepayment transacId={transId} serviceType={accountName} amount={totalAmount} savehandle={handleSave} />
+                  : null
             
 
             } 
