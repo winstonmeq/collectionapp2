@@ -30,14 +30,14 @@ export default async function handler(req, res) {
               serviceType:1,
               MCR:{
                 $cond:{
-                    if:{$eq:['$serviceType','MCR']},
+                    if:{$eq:['$serviceType','Civil']},
                     then:'$amount',
                     else:null,
                 }
               },
               Lab:{
                 $cond:{
-                    if:{$eq:['$serviceType','laboratory']},
+                    if:{$eq:['$serviceType','Tricycle']},
                     then:'$amount',
                     else:null,
                 }

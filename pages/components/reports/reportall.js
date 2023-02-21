@@ -23,56 +23,79 @@ const Report_all = () => {
 
 
     const [datalist, setdatalist] = useState([]);
+    const [datalist2, setdatalist2] = useState([]);
+
     const { isOpen, onOpen, onClose } = useDisclosure()
 
 
 
-
+  
     useEffect(() => {
         async function fetchData() {
             
             const { data } = await axios.get(process.env.NEXTAUTH_URL + '/api/Reports/report_all');
 
-            console.log(data)
             setdatalist(data);
         }
+
+        
+      async function fetchData2() {
+        const { data } = await axios.get( process.env.NEXTAUTH_URL + `/api/Account/get_account`)
+        setdatalist2(data);
+       
+    }
+
+       
         fetchData();
+        fetchData2();
     }, []);
 
 
 
-    const civilData = datalist.filter((item) => item.serviceType === 'Civil');
-    const tricycleData = datalist.filter((item) => item.serviceType === 'Tricycle');
+    // const civilData = datalist.filter((item) => item.serviceType === 'Civil');
+    // const tricycleData = datalist.filter((item) => item.serviceType === 'Tricycle');
 
 
-     console.log(civilData)
+    //  console.log(civilData)
+
 
 
     return (
-        <div>
-      <div style={{ display: 'flex' }}>
-        <div style={{ flex: 1 }}>
-          <h2>Civil</h2>
-          <ul>
-            {civilData.map((item) => (
-              <li key={item._id}>
-                {item.amount}
-              </li>
+        <Flex >
+          {console.log('account',datalist)}
+    <table>
+      <thead>
+        <tr>
+        <th>OR #</th>
+          <th>Customer</th>
+          { datalist2.map((it,i) => (
+              <th key={i}>{it.account_name}</th>
+            ))
+             
+            }
+         
+        </tr>
+      </thead>
+      <tbody>
+
+        {datalist.map((item,index) => (
+          <tr key={index}>
+            <td>{item._id.transacId}</td>
+            <td>{item.customerName}</td>
+            {item.amount.map((item) => (
+
+              <td key={item}>{item}</td>
+
+
             ))}
-          </ul>
-        </div>
-        <div style={{ flex: 1 }}>
-          <h2>Tricycle</h2>
-          <ul>
-            {tricycleData.map((item) => (
-              <li key={item._id}>
-                {item.amount}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-    </div>
+           
+          
+         
+          </tr>
+        ))}
+      </tbody>
+    </table>
+    </Flex>
     );
 };
 

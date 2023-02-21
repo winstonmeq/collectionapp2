@@ -1,6 +1,6 @@
 import { dbConnect } from "../../../conn/dbconnect";
 import { errorHandler,responseHandler } from "../../../util/common";
-import Payment from "../../../models/Payment";
+import LCRdata from "../../../models/LCRdata";
 
 
 export default async function handler(req, res) {
@@ -16,19 +16,43 @@ export default async function handler(req, res) {
        await dbConnect();  
    
            
-        const getdata = await Payment.aggregate([
+        const getdata = await LCRdata.aggregate([
             
             { 
                 $match : { userId: require('mongoose').Types.ObjectId('63e4484b3a663c0b8d277141')}, 
             },
-                 
-            // {
-            //     $group: {
-            //       _id: 0,
-            //       serviceType: { $push: '$serviceType' },
-            //       amount: { $push: '$amount' },
-            //     }
-            //   },
+
+          //   {                
+          //     $lookup: {
+          //         from: 'payments',
+          //         localField: 'transacId',
+          //         foreignField: 'transacId',
+          //         as: 'data2'
+          //     }
+  
+          // },
+            { 
+              $group: {
+              _id: {transacId:"$transacId" },
+               type:{$push: "$type"},
+               amount:{$push: "$amount"},
+               } 
+            },
+
+
+
+
+
+
+        //   {
+        //      $project: {
+        //       _id: 0,
+        //      type: 1,
+        //      serviceType:"$_id.type",
+        //       orNumber: "$_id.orNumber",
+        //       amount: 1
+        //   }
+        // }
 
                                          
     
