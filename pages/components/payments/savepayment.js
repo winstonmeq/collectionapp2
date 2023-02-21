@@ -103,8 +103,8 @@ const Savepayment = ({transacId, serviceType, amount, savehandle}) => {
               setorBooklet(data[0].orBooklet)
             } else {
                
-              window.alert('No OR');
-              router.push('/components/orDataView/saveORdata');
+              // window.alert('No OR');
+              // router.push('/components/orDataView/saveORdata');
 
             }
            

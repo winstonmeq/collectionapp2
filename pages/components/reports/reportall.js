@@ -63,40 +63,72 @@ const Report_all = () => {
     return (
         <Flex >
           {console.log('account',datalist)}
-    <table>
-      <thead>
-        <tr>
-        <th>OR #</th>
-          <th>Customer</th>
-          { datalist2.map((it,i) => (
-              <th key={i}>{it.account_name}</th>
-            ))
-             
-            }
-         
-        </tr>
-      </thead>
-      <tbody>
-
-        {datalist.map((item,index) => (
-          <tr key={index}>
-            <td>{item._id.transacId}</td>
-            <td>{item.customerName}</td>
-            {item.amount.map((item) => (
-
-              <td key={item}>{item}</td>
-
-
-            ))}
-           
           
-         
-          </tr>
-        ))}
-      </tbody>
-    </table>
+
+<table>
+<thead>
+ <tr>
+<th>OR #</th>
+<th>Customer</th>
+<th>MCR</th>
+<th>Registration Fee</th> 
+</tr>
+</thead>
+<tbody>
+
+{datalist.map((item,index) => (
+<tr key={index}>
+<td>{item.orNumber[0]}</td>
+<td>{item.customer[0]}</td>
+<td>{item.MCR}</td>
+<td>{item.Registration}</td>
+     
+    
+   
+</tr>
+ ))}
+</tbody>
+</table>
+  
     </Flex>
     );
 };
 
+{/*           
+
+          <table>
+<thead>
+ <tr>
+<th>OR #</th>
+<th>Customer</th>
+{ datalist2.map((it,i) => (
+   <th key={i}>{it.account_name}</th>
+))
+       
+}
+   
+</tr>
+</thead>
+<tbody>
+
+{datalist.map((item,index) => (
+<tr key={index}>
+<td>{item._id.transacId}</td>
+<td>{item.customerName}</td>
+{item.amount.map((item) => (
+
+ <td key={item}>{item}</td>
+
+
+ ))}
+     
+    
+   
+</tr>
+ ))}
+</tbody>
+</table> */}
+
 export default Report_all;
+
+

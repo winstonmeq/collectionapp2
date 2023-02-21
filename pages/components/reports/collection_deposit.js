@@ -84,7 +84,7 @@ const Collection_deposit = () => {
     <tbody>
         <tr >
             <td style={{border: '1px solid black'}}>Fund</td>
-            <td style={{border: '1px solid black'}}>DIRECT TO CASH</td>
+            <td style={{border: '1px solid black'}}>General Fund</td>
             <td style={{ width: "40px" }}></td>
             <td style={{border: '1px solid black'}}>Date:</td>
             <td style={{border: '1px solid black'}}>January 23, 2023</td>
@@ -248,13 +248,17 @@ const Collection_deposit = () => {
    <>
    <tr key={i} style={{ width: "60px", fontSize:'10px' }}>
    <td style={{border: '1px solid black',width:'73px'}}>{items.orType}</td>
+
+
+   <td style={{border: '1px solid black',width:'39px'}}>{items.orBahaw.length}</td>
+   <td style={{border: '1px solid black',width:'54px'}}>{items.orNumberBahaw[0]}</td>
+   <td style={{border: '1px solid black',width:'56px'}}>{items.orNumberBahaw[items.orBahaw.length - 1]}</td>
+
    <td style={{border: '1px solid black',width:'39px'}}>{items.orUse.length}</td>
    <td style={{border: '1px solid black',width:'54px'}}>{items.orNumber[0]}</td>
    <td style={{border: '1px solid black',width:'56px'}}>{items.orNumber[items.orUse.length - 1]}</td>
 
-   <td style={{border: '1px solid black',width:'39px'}}></td>
-   <td style={{border: '1px solid black',width:'54px'}}></td>
-   <td style={{border: '1px solid black',width:'56px'}}></td>
+   
    
    <td style={{border: '1px solid black',width:'39px'}}>{items.orYes.length}</td>
    <td style={{border: '1px solid black',width:'54px'}}>{items.orNumberYes[0]}</td>

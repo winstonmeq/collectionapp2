@@ -62,6 +62,25 @@ export default async function handler(req, res) {
                         }
                       },
 
+                          
+                      orBahaw:{
+                        $filter: {
+                          input: '$orUse',
+                          as: 'use',
+                          cond: { $eq: ['$$use', 3] }
+                        }
+                      },
+
+                      orNumberBahaw: {
+                        $filter: {
+                          input: "$orNumber",
+                          as: "number",
+                          cond: {
+                            $eq: [ { $arrayElemAt: [ "$orUse", { $indexOfArray: [ "$orNumber", "$$number" ] } ] }, 3 ]
+                          }
+                        }
+                      },
+
                       orNo:{
                         $filter: {
                           input: '$orUse',
@@ -79,6 +98,8 @@ export default async function handler(req, res) {
                           }
                         }
                       },
+
+                  
                     
 
 

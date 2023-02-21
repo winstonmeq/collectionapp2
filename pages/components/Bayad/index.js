@@ -173,20 +173,7 @@ import {
                     </tbody>
                 </table>
                 
-                   
-
-
-
-
-        
-
-            {/* <Button onClick={() => handleAddProduct(lab1)}>Blood Count (100)</Button>
-            <Button onClick={() => handleAddProduct(lab2)}>Platelet Count (50)</Button>
-            <Button onClick={() => handleAddProduct(lab3)}>Hemoglobin/Hematocrit (50)</Button>
-            <Button onClick={() => handleAddProduct(lab4)}>Blood Typing (50)</Button>
-            <Button onClick={() => handleAddProduct(lab5)}>Urinalysis (30)</Button>
-            <Button onClick={() => handleAddProduct(lab6)}>Stool Examination(30)</Button>
-            <Button onClick={() => handleAddProduct(lab7)}>Sputum/AFB (Vendor Only) (30)</Button> */}
+           
           </Stack>
          </Box>
          </Flex>

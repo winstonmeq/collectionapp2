@@ -16,14 +16,15 @@ export default async function handler(req, res) {
        await dbConnect();  
    
            
-        const getdata = await ORdata.aggregate([
-            
-            { 
-                $match : { userId: require('mongoose').Types.ObjectId('63e4484b3a663c0b8d277141')} && {orUse:0}, 
-            },
-                                         
-    
-        ]).exec();
+       const getdata = await ORdata.aggregate([
+        {
+          $match: {
+            userId: require('mongoose').Types.ObjectId('63e4484b3a663c0b8d277141'),
+            orUse: 0,
+          }
+        }
+      ]).exec();
+      
           
        res.status(200).json(getdata);
 
