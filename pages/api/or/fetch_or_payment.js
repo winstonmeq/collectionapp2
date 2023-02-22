@@ -30,6 +30,7 @@ export default async function handler(req, res) {
                   orType: { $first: '$orType' },
                   orBooklet: { $first: '$orBooklet' },
                   orUse: { $push: '$orUse' },
+                  orBB: {$push:'$orBB'},
                   orNumber: { $push: '$orNumber' },
                 
                 }
@@ -43,6 +44,7 @@ export default async function handler(req, res) {
                     orType:'$orType',
                     orBooklet:'$orBooklet',
                     orNumber:'$orNumber',
+                    orBB:'orBB',
                     orUse:'$orUse',
                     orYes:{
                       $filter: {
@@ -65,9 +67,9 @@ export default async function handler(req, res) {
                           
                       orBahaw:{
                         $filter: {
-                          input: '$orUse',
+                          input: '$orBB',
                           as: 'use',
-                          cond: { $eq: ['$$use', 3] }
+                          cond: { $eq: ['$$use', 1] }
                         }
                       },
 
@@ -76,7 +78,7 @@ export default async function handler(req, res) {
                           input: "$orNumber",
                           as: "number",
                           cond: {
-                            $eq: [ { $arrayElemAt: [ "$orUse", { $indexOfArray: [ "$orNumber", "$$number" ] } ] }, 3 ]
+                            $eq: [ { $arrayElemAt: [ "$orBB", { $indexOfArray: [ "$orNumber", "$$number" ] } ] }, 1 ]
                           }
                         }
                       },

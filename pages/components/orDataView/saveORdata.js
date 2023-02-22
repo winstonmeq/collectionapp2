@@ -34,6 +34,7 @@ import Fetch_no_orUse from "./fetch_no_orUse";
     const [orFrom, setorFrom] = useState(0)
     const [orTo, setorTo] = useState(0)
     const [orUse, setorUse] = useState(0)
+    const [orBB, setorBB] = useState(0)
     const [userId, setuserId] = useState('63e4484b3a663c0b8d277141')
  
   
@@ -79,7 +80,7 @@ import Fetch_no_orUse from "./fetch_no_orUse";
         for (let orNumber = num1; orNumber <= num2; orNumber++) {
             try {
     
-                const payload = {orType, orBooklet, orFrom,orTo,orNumber,orUse, userId}
+                const payload = {orType, orBooklet, orFrom,orTo,orNumber,orUse,orBB, userId}
       
                 console.log('browser', payload)         
           

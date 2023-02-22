@@ -45,7 +45,7 @@ export default async function handler(req, res) {
               orNumber:{$push:"$data2.orNumber"},
               customer:{$push:"$data2.customerName"},
                name:{$push: "$name"},
-              type:{$push:"$type"},
+               type:{$push:"$type"},
                amount:{$push: "$amount"},
             
                } 

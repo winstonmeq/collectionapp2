@@ -39,6 +39,10 @@ const ORdataSchema = mongoose.Schema({
         type:Number,
     },
 
+    orBB: {
+        type:Number,
+    },
+
     
     userId: {
         type: mongoose.Schema.Types.ObjectId,
