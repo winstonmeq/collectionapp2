@@ -47,6 +47,7 @@ export default async function handler(req, res) {
                name:{$push: "$name"},
                type:{$push:"$type"},
                amount:{$push: "$amount"},
+               date:{$first: "$data2.createdAt"}
             
                } 
             },
@@ -60,13 +61,69 @@ export default async function handler(req, res) {
                   transacId:"$_id.transacId",                     
                   orNumber:1,
                   customer:1,
-                  MCR: {
+                  date:1,
+                  BusinessTax: {
                     $reduce: {
                       input: {
                         $filter: {
                           input: "$amount",
                           as: "item",
-                          cond: { $eq: [{ $arrayElemAt: ["$type", { $indexOfArray: ["$amount", "$$item"] }] }, "MCR"] }
+                          cond: { $eq: [{ $arrayElemAt: ["$type", { $indexOfArray: ["$amount", "$$item"] }] }, "Business Tax"] }
+                        }
+                      },
+                      initialValue: 0,
+                      in: { $add: ["$$value", "$$this"] }
+                    }
+                  },
+                  FinesPenalty: {
+                    $reduce: {
+                      input: {
+                        $filter: {
+                          input: "$amount",
+                          as: "item",
+                          cond: { $eq: [{ $arrayElemAt: ["$type", { $indexOfArray: ["$amount", "$$item"] }] }, "Fines/Penalty"] }
+                        }
+                      },
+                      initialValue: 0,
+                      in: { $add: ["$$value", "$$this"] }
+                    }
+                  },
+                  Mayors: {
+                    $reduce: {
+                      input: {
+                        $filter: {
+                          input: "$amount",
+                          as: "item",
+                          cond: { $eq: [{ $arrayElemAt: ["$type", { $indexOfArray: ["$amount", "$$item"] }] }, "Mayors"] }
+                        }
+                      },
+                      initialValue: 0,
+                      in: { $add: ["$$value", "$$this"] }
+                    }
+                  },
+
+
+                  Garbage: {
+                    $reduce: {
+                      input: {
+                        $filter: {
+                          input: "$amount",
+                          as: "item",
+                          cond: { $eq: [{ $arrayElemAt: ["$type", { $indexOfArray: ["$amount", "$$item"] }] }, "Garbage"] }
+                        }
+                      },
+                      initialValue: 0,
+                      in: { $add: ["$$value", "$$this"] }
+                    }
+                  },
+
+                  Occupation: {
+                    $reduce: {
+                      input: {
+                        $filter: {
+                          input: "$amount",
+                          as: "item",
+                          cond: { $eq: [{ $arrayElemAt: ["$type", { $indexOfArray: ["$amount", "$$item"] }] }, "Occupation"] }
                         }
                       },
                       initialValue: 0,

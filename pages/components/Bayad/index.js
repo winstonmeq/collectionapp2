@@ -27,7 +27,7 @@ import {
   
     const [newlcrdata, setnewlcrdata] = useState({});
     const [data, setData] = useState([]);
-    const [price, setprice] = useState(0);
+    const [amount2, setamount2] = useState(0);
     const [accountName, setAccountName] = useState('')
     const [searchName, setSearchName] = useState('')
     const [transId, setTransId] = useState();
@@ -162,7 +162,7 @@ import {
                                     amount: item.sub_account_fee, 
                                     type: item.data2[0].account_name,
                                     userId: '63e4484b3a663c0b8d277141',                                   
-
+                                    
                             },
                             setAccountName(item.data2[0].account_name) 
                             
@@ -191,6 +191,7 @@ import {
                     <Th>Name</Th>
                     <Th>Amount</Th>
                     <Th>Action</Th>
+                    <Th>Price</Th>
                   </Tr>
                 </Thead>
                 <Tbody>
@@ -201,9 +202,9 @@ import {
                         <Td >{item.id}</Td>
                         <Td >{item.transacId}</Td>
                         <Td >{item.name}</Td>
-                        <Td>{item.amount.toFixed(2)}</Td>
-                        <Td> <Button onClick={() => handleRemoveProduct(item.name)}>Remove</Button>
-                        </Td>
+                        <Td>{item.amount === 0 ? <Input type='text' value={amount2} onChange={(e) => {setamount2(e.target.value)}} />
+ : item.amount}</Td>
+                        <Td> <Button onClick={() => handleRemoveProduct(item.name)}>Remove</Button></Td>
                       </Tr>
                     )
   
@@ -215,14 +216,14 @@ import {
                     <Th></Th>
                     <Th></Th>
                     <Th style={{fontSize:"15px", fontWeight: "bold"}}colSpan="1">Total</Th>
-                    <Th style={{ fontSize:"20px", fontWeight: "bold"}}>{totalAmount.toFixed(2)}</Th>
+                    <Th style={{ fontSize:"20px", fontWeight: "bold"}}>{(Number(totalAmount) + Number(amount2)).toFixed(2)}</Th>
                   </Tr>
   
   
                 </Tfoot>
               </Table>
               { datalist.length ?               
-              <Savepayment transacId={transId} serviceType={accountName} amount={totalAmount} savehandle={handleSave} />
+              <Savepayment transacId={transId} serviceType={accountName} amount={Number(totalAmount) + Number(amount2)} savehandle={handleSave} />
                   : null
             
 
