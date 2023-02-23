@@ -154,7 +154,8 @@ import {
                     return (                
                            <tr key={item._id}>
                             <td style={{width:'150px'}}>{item.sub_account_name}</td>
-                            <td style={{width:'80px'}}>{item.sub_account_fee}</td>
+                            <td style={{width:'80px'}}>{item.sub_account_fee === 0 ? <Input type='text' value={amount2} onChange={(e) => {setamount2(e.target.value)}} />
+ : item.amount}</td>
                             <td style={{width:'50px'}}><Button onClick={() => handleAddProduct({
 
                                     transacId: transId , 
