@@ -19,12 +19,12 @@ export default async function handler(req, res) {
         const getdata = await ORdata.aggregate([
             
             { 
-                $match : { userId: require('mongoose').Types.ObjectId('63e4484b3a663c0b8d277141')} && {orUse:0}, 
+                $match : { userId: require('mongoose').Types.ObjectId('63e4484b3a663c0b8d277141'), orUse:0}, 
             },
           
           {
             $group: {
-              _id: '$orBooklet',
+              _id: '$orType',
               orType: { $first: '$orType' },
               orBooklet: { $first: '$orBooklet' },
               firstORNumber: { $first: '$orNumber' },

@@ -37,7 +37,7 @@ export default async function handler(req, res) {
           },
           {
             $group: {
-              _id: '$payments.orBooklet',
+              _id: '$orType',
               totalAmount: { $sum: '$payments.amount' },
               orType: { $first: '$orType' },
               orBooklet: { $first: '$orBooklet' },

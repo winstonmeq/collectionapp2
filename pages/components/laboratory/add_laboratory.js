@@ -47,7 +47,7 @@ import {
     const [datalist, setdatalist] = useState([])
   
   
-    const lab1 = { transacId: transId , name: 'Complete Blood Count', amount: 100.00, type: 'birth', userId: '63e4484b3a663c0b8d277141' }
+    const lab1 = { transacId: transId , name: 'Complete Blood Count', amount: <input type='text' />, type: 'birth', userId: '63e4484b3a663c0b8d277141' }
     const lab2 = { transacId: transId, name: 'Platelet Count', amount: 50.00, type: 'birth', userId: '63e4484b3a663c0b8d277141' }
     const lab3 = { transacId: transId, name: 'Hemoglobin', amount: 50.00, type: "married", userId: '63e4484b3a663c0b8d277141' }
     const lab4 = { transacId: transId, name: 'Blood Typing', amount: 50.00, type: "birth", userId: '63e4484b3a663c0b8d277141' }

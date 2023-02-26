@@ -48,14 +48,14 @@ const Add_sub_account = () => {
 
             if (response != null) {
 
-                console.log('add', response)
+                console.log('Sub Account added successfully', response)
             }
 
         } catch (error) {
             console.log(error)
         }
 
-       // router.push(`/`);
+        router.push('/components/Utility');
 
     };
 

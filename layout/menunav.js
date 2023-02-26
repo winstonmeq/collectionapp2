@@ -29,17 +29,13 @@ const Menunav = () => {
 </Button>
       </Link>
 
-<Link href={'/components/LCR'} >
-  <Button>
-       <Text fontSize={'md'}>Local Civil Registrar</Text>
-  </Button>
-</Link>
-
-<Link href={'/components/Bayad'} >
+<Link href={'/components/Business'} >
   <Button>
        <Text fontSize={'md'}>Bayad</Text>
   </Button>
 </Link>
+
+
 
 <Link href={'/components/orDataView/saveORdata'} >
   <Button >
@@ -47,11 +43,6 @@ const Menunav = () => {
   </Button>
 </Link>
 
-<Link href={'/components/reports/rpt_payments'} >
-  <Button >
-       <Text fontSize={'md'}>Reports</Text>
-  </Button>
-</Link>
 
 
 <Link href={'/components/reports/collection_deposit'} >

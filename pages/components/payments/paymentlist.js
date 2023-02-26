@@ -48,7 +48,6 @@ const Paymentlist = () => {
                 <Thead>
                     <Tr>
                         <Th>ID</Th>
-                        <Th>Type Service</Th>
                         <Th>Name</Th>
                         <Th>Amount</Th>
                         <Th>Action</Th>
@@ -61,7 +60,6 @@ const Paymentlist = () => {
                             
                             <Tr key={i}>
                             <Td>{item.transacId}</Td>  
-                            <Td>{item.serviceType}</Td>                                
                             <Td>{item.customerName}</Td>
                             <Td>{item.amount}</Td>
                             <Td>{

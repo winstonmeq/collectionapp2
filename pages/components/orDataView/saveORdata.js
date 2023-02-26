@@ -5,7 +5,7 @@ import {
     Button,
     Table, TableContainer, 
     Thead,
-    Tbody,
+    Tbody,Select,Spacer,
     Tfoot,
     Tr,
     Th,
@@ -55,7 +55,7 @@ import Fetch_no_orUse from "./fetch_no_orUse";
     
 // function fetchORdata() {
 
-  
+  // ayaw ni delete intawon
 
 //   let sum = 0;
 // for (let i = 0; i < datalist.length; i++) {
@@ -107,32 +107,43 @@ import Fetch_no_orUse from "./fetch_no_orUse";
     return (
       <div>
        
-       <Flex direction={'row'}>
+       <Flex direction={'row'} justify={'center'}>
        <Box>
-            <Input type="text" value={orType} onChange={(e)=>{setorType(e.target.value)}} />
+          <label>OR Type</label>
+          <Select value={orType} onChange={(e) => {setorType(e.target.value)}} style={{width:"100px"}}>
+            
+              <option  value='51'>51</option>
+              <option  value='52'>52</option>
+              <option  value='53'>53</option>
+              <option  value='56'>56</option>
+        
+            </Select>
+      
         </Box>
         <Box>
+        <label>Stab Number</label>
             <Input type="text" value={orBooklet} onChange={(e)=>{setorBooklet(e.target.value)}} />
         </Box>
         <Box>
+        <label>OR# Start</label>
             <Input type="text" value={orFrom} onChange={(e)=>{setorFrom(e.target.value)}} />
         </Box>
       
         <Box>
+        <label>OR# End</label>
             <Input type="text" value={orTo} onChange={(e)=>{setorTo(e.target.value)}} />
         </Box>
-
                   
         <Button onClick={(e) => {generateRange(orFrom,orTo)}}>Save</Button>      
   
       </Flex>
-
+ <Box height={'50px'}></Box>
    <Flex direction={'row'}>
 
    <Box width={'80%'} border={'1px'}>
 
 
-<h1>Balance</h1>
+<h1>Issued OR</h1>
    <Table>
    <Thead>
    <Tr>

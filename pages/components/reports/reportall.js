@@ -85,9 +85,11 @@ const Report_all = () => {
 <th style={{width:'100px'}}>Bus. Tax</th>
 <th style={{width:'100px'}}>Fines/Penalty</th> 
 <th style={{width:'100px'}}>Mayors</th>
-<th>Garbage</th> 
-<th>Occupation</th>
-<th>Franchise</th> 
+<th style={{width:'100px'}}>Garbage</th> 
+<th style={{width:'100px'}}>Medical</th>
+
+<th style={{width:'100px'}}>Occupation</th>
+<th style={{width:'100px'}}>Franchise</th> 
 </tr>
 </thead>
 <tbody>
@@ -98,10 +100,12 @@ const Report_all = () => {
   <td style={{width:'150px'}}>{ddate(item.date)}</td>
   <td style={{width:'80px'}}>{item.orNumber[0]}</td>
   <td style={{width:'150px'}}>{item.customer[0]}</td>
-  <td style={{width:'100px'}}>{item.BusinessTax}</td>
+  <td style={{width:'100px'}}>{item.Business}</td>
   <td style={{width:'100px'}}>{item.FinesPenalty}</td>
   <td style={{width:'100px'}}>{item.Mayors}</td>
   <td style={{width:'60px'}}>{item.Garbage}</td>
+  <td style={{width:'60px'}}>{item.Medical}</td>
+
   <td style={{width:'60px'}}>{item.Occupation}</td>
   <td style={{width:'60px'}}>{item.Franchise}</td>
      

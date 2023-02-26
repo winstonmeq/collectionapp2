@@ -18,11 +18,7 @@ const PaymentSchema = mongoose.Schema({
         required:true,        
     },
 
-    serviceType: {
-        type:String,        
-        index: true,
-    },
-  
+    
     customerName:{
         type:String,
         required:true,      

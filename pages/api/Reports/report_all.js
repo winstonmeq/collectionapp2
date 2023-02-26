@@ -19,16 +19,16 @@ export default async function handler(req, res) {
         const getdata = await LCRdata.aggregate([
             
             { 
-                $match : { userId: require('mongoose').Types.ObjectId('63e4484b3a663c0b8d277141')}, 
+                $match : { 
+                  
+                  createdAt: {
+                    $gte: new Date("2023-02-23"),
+                    $lte: new Date("2023-02-25")
+                  },
+                                    
+                  userId: require('mongoose').Types.ObjectId('63e4484b3a663c0b8d277141')}, 
             },
 
-            // {
-            //   $match: {
-                
-            //       createdAt: { $gte: new Date("2023-02-21"), $lte: new Date("2023-02-21") },
-               
-            //   }
-            // },
 
             {                
               $lookup: {
@@ -62,13 +62,13 @@ export default async function handler(req, res) {
                   orNumber:1,
                   customer:1,
                   date:1,
-                  BusinessTax: {
+                  Business: {
                     $reduce: {
                       input: {
                         $filter: {
                           input: "$amount",
                           as: "item",
-                          cond: { $eq: [{ $arrayElemAt: ["$type", { $indexOfArray: ["$amount", "$$item"] }] }, "Business Tax"] }
+                          cond: { $eq: [{ $arrayElemAt: ["$type", { $indexOfArray: ["$amount", "$$item"] }] }, "Business"] }
                         }
                       },
                       initialValue: 0,
@@ -110,6 +110,20 @@ export default async function handler(req, res) {
                           input: "$amount",
                           as: "item",
                           cond: { $eq: [{ $arrayElemAt: ["$type", { $indexOfArray: ["$amount", "$$item"] }] }, "Garbage"] }
+                        }
+                      },
+                      initialValue: 0,
+                      in: { $add: ["$$value", "$$this"] }
+                    }
+                  },
+
+                  Medical: {
+                    $reduce: {
+                      input: {
+                        $filter: {
+                          input: "$amount",
+                          as: "item",
+                          cond: { $eq: [{ $arrayElemAt: ["$type", { $indexOfArray: ["$amount", "$$item"] }] }, "Medical"] }
                         }
                       },
                       initialValue: 0,

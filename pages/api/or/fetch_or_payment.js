@@ -20,13 +20,22 @@ export default async function handler(req, res) {
         const getdata = await ORdata.aggregate([
             
             { 
-                $match : { userId: require('mongoose').Types.ObjectId('63e4484b3a663c0b8d277141')}, 
+                $match : { 
+               
+                    createdAt: {
+                      $gte: new Date("2023-02-23"),
+                      $lte: new Date("2023-02-26")
+                    },
+
+                    userId: require('mongoose').Types.ObjectId('63e4484b3a663c0b8d277141')
+                
+              }
             },
 
             
             {
                 $group: {
-                  _id: '$orBooklet',
+                  _id: '$orType',
                   orType: { $first: '$orType' },
                   orBooklet: { $first: '$orBooklet' },
                   orUse: { $push: '$orUse' },
@@ -46,6 +55,7 @@ export default async function handler(req, res) {
                     orNumber:'$orNumber',
                     orBB:'orBB',
                     orUse:'$orUse',
+                    
                     orYes:{
                       $filter: {
                         input: '$orUse',
@@ -69,8 +79,9 @@ export default async function handler(req, res) {
                         $filter: {
                           input: '$orBB',
                           as: 'use',
-                          cond: { $eq: ['$$use', 1] }
-                        }
+                          cond: { $eq: ['$$use', 1]}
+                        },
+                        
                       },
 
                       orNumberBahaw: {

@@ -166,7 +166,7 @@ const AddLCR = () => {
               </Tfoot>
             </Table>
 
-            { datalist.length ?               <Savepayment transacId={transId} serviceType={'MCR'} amount={totalAmount} savehandle={handleSave} />
+            { datalist.length ?               <Savepayment transacId={transId} amount={totalAmount} savehandle={handleSave} />
   : null
             
 

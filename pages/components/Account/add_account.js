@@ -41,8 +41,9 @@ const Add_account = () => {
 
             if (response != null) {
 
-                console.log('add', response)
+                console.log('added successfully', response)
 
+                router.reload()
             }
 
         } catch (error) {

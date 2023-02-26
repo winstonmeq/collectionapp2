@@ -18,7 +18,7 @@ import axios from 'axios';
 import { useRouter } from "next/router";
 
 
-const Savepayment = ({transacId, serviceType, amount, savehandle}) => {
+const Savepayment = ({transacId, amount, savehandle}) => {
  
     const [paylist, setpaylist] = useState([])
     // const [service_type, setservice_type] = useState('');
@@ -39,7 +39,7 @@ const Savepayment = ({transacId, serviceType, amount, savehandle}) => {
     const handleSavePayment = async () => {
         try {
     
-          const payload = {transacId, serviceType, customerName, amount,orBooklet, orNumber, userId}
+          const payload = {transacId, customerName, amount,orBooklet, orNumber, userId}
 
           console.log('browser', payload)         
     
@@ -103,8 +103,8 @@ const Savepayment = ({transacId, serviceType, amount, savehandle}) => {
               setorBooklet(data[0].orBooklet)
             } else {
                
-              // window.alert('No OR');
-              // router.push('/components/orDataView/saveORdata');
+              window.alert('No OR');
+              router.push('/components/orDataView/saveORdata');
 
             }
            
@@ -133,8 +133,6 @@ const Savepayment = ({transacId, serviceType, amount, savehandle}) => {
           <form onSubmit={handleSavePayment}>
           <label>Transaction Id</label>
           <Input type='text' readOnly value={transacId} onChange={e => {}}/>
-          <label>Services Type</label>
-          <Input type='text' readOnly value={serviceType} onChange={e => {}}/>
           <label>OR Text</label>
           <Input type='text' value={orNumber} readOnly required onChange={(e) => {}}  />
           <label >Customer Name</label>
