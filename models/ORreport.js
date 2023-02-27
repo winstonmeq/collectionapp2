@@ -6,42 +6,77 @@ const ORreportSchema = mongoose.Schema({
     
 
   
-    orType: {
+    formType: {
         type:String,        
         index: true,
 
     },
 
-    orBooklet: {
-        type:String,
+    orDate: {
+        type:Date,
         required:true,        
     },  
 
-    orFrom: {
-        type:Number,        
-        index: true,
-
-    },
-
     
-    orTo: {
+    qty1: {
+        type:Number,
+        required:true,        
+    },  
+
+    bgFrom: {
         type:Number,        
         index: true,
-
     },
 
-    orNumber: {
+    bgTo: {
         type:Number,        
-       
+        index: true,
     },
 
-    orUse: {
+    qty2: {
         type:Number,
+        required:true,        
+    },  
+
+    rcFrom: {
+        type:Number,        
+        index: true,
     },
 
-    orBB: {
-        type:Number,
+    rcTo: {
+        type:Number,        
+        index: true,
     },
+
+    qty3: {
+        type:Number,
+        required:true,        
+    },  
+
+    isFrom: {
+        type:Number,        
+        index: true,
+    },
+
+    isTo: {
+        type:Number,        
+        index: true,
+    },
+
+    qty4: {
+        type:Number,
+        required:true,        
+    },  
+
+    ebFrom: {
+        type:Number,        
+        index: true,
+    },
+
+    ebTo: {
+        type:Number,        
+        index: true,
+    },     
 
     
     userId: {

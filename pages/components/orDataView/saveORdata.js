@@ -27,9 +27,11 @@ import Fetch_no_orUse from "./fetch_no_orUse";
     const [orType, setorType] = useState('51');
     const [orBooklet, setorBooklet] = useState('')
 
-    const [orFirst, setorFirst] = useState(0)
-    const [orLast, setorLast] = useState(0)
-    const [amount, setAmount] = useState(0)
+
+    const [qty2, setqty2] = useState(0)
+    const [rcFrom, setrcFrom] = useState(0)
+    const [rcTo, setrcTo] = useState(0)
+    
 
     const [orFrom, setorFrom] = useState(0)
     const [orTo, setorTo] = useState(0)
@@ -85,23 +87,47 @@ import Fetch_no_orUse from "./fetch_no_orUse";
                 console.log('browser', payload)         
           
                 const response = await axios.post(process.env.NEXTAUTH_URL + '/api/or/addOR', payload);
-          
-          
+                   
 
               } catch (error) {
       
                 console.log(error)
       
-              }
-
-             
+              }            
 
         }
 
 
         router.push('/')
       }
+
+
   
+      const saveORreport = async () => {
+
+        setqty2(rcTo - rcFrom)
+
+            try {
+    
+                const payload = {orDate, qty2, rcFrom, rcTo, userId }
+      
+                console.log('browser', payload)         
+          
+                const response = await axios.post(process.env.NEXTAUTH_URL + '/api/orReport/add_or_report', payload);
+                   
+
+              } catch (error) {
+      
+                console.log(error)
+      
+              }  
+
+
+
+      }
+
+
+
   
   
     return (
