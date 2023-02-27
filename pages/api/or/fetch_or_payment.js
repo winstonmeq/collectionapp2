@@ -37,7 +37,7 @@ export default async function handler(req, res) {
                 $group: {
                   _id: '$orType',
                   orType: { $first: '$orType' },
-                  orBooklet: { $first: '$orBooklet' },
+                  orGenId: { $first: '$orGenId' },
                   orUse: { $push: '$orUse' },
                   orBB: {$push:'$orBB'},
                   orNumber: { $push: '$orNumber' },
@@ -51,7 +51,7 @@ export default async function handler(req, res) {
                 $project:{
                     _id:0,
                     orType:'$orType',
-                    orBooklet:'$orBooklet',
+                    orGenId:'$orGenId',
                     orNumber:'$orNumber',
                     orBB:'orBB',
                     orUse:'$orUse',

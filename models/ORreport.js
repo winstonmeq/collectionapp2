@@ -4,11 +4,14 @@ import mongoose from "mongoose";
 const ORreportSchema = mongoose.Schema({
     
     
+    
+    orGenId: {
+        type:String,        
 
+    },
   
     formType: {
         type:String,        
-        index: true,
 
     },
 
@@ -20,62 +23,51 @@ const ORreportSchema = mongoose.Schema({
     
     qty1: {
         type:Number,
-        required:true,        
+
     },  
 
     bgFrom: {
         type:Number,        
-        index: true,
     },
 
     bgTo: {
         type:Number,        
-        index: true,
     },
 
     qty2: {
         type:Number,
-        required:true,        
     },  
 
     rcFrom: {
         type:Number,        
-        index: true,
     },
 
     rcTo: {
         type:Number,        
-        index: true,
     },
 
     qty3: {
         type:Number,
-        required:true,        
     },  
 
     isFrom: {
         type:Number,        
-        index: true,
     },
 
     isTo: {
         type:Number,        
-        index: true,
     },
 
     qty4: {
         type:Number,
-        required:true,        
     },  
 
     ebFrom: {
         type:Number,        
-        index: true,
     },
 
     ebTo: {
         type:Number,        
-        index: true,
     },     
 
     

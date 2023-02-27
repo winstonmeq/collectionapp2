@@ -13,7 +13,7 @@ const PaymentSchema = mongoose.Schema({
 
     },
 
-    orBooklet: {
+    orGenId: {
         type:String,
         required:true,        
     },

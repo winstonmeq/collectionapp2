@@ -24,11 +24,11 @@ export default async function handler(req, res) {
           
           {
             $group: {
-              _id: '$orType',
-              orType: { $first: '$orType' },
+              _id: '$orGenId',
+              orType:{$first:'$orType'},
               orGenId: { $first: '$orGenId' },
-              firstORNumber: { $first: '$orNumber' },
-              lastORNumber: { $last: '$orNumber' }
+              orNumber: { $first: '$orNumber' },
+              orTo: { $last: '$orTo' }
             }
           },
   

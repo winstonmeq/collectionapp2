@@ -7,12 +7,12 @@ export default async function handler(req, res) {
 
         try {
 
-        const { formType, orDate,  qty1, bgFrom, bgTo, qty2, rcFrom, rcTo, qty3, isFrom, isTo, qty4, ebFrom, ebTo, userId } = req.body;
+        const { orGenId, formType, orDate,  qty1, bgFrom, bgTo, qty2, rcFrom, rcTo, qty3, isFrom, isTo, qty4, ebFrom, ebTo, userId } = req.body;
 
 
        await dbConnect();  
        
-        const orSave = new ORreport({ formType, orDate,  qty1, bgFrom, bgTo, qty2, rcFrom, rcTo, qty3, isFrom, isTo, qty4, ebFrom, ebTo, userId });
+        const orSave = new ORreport({ orGenId,formType, orDate,  qty1, bgFrom, bgTo, qty2, rcFrom, rcTo, qty3, isFrom, isTo, qty4, ebFrom, ebTo, userId });
         
         // Save the data to the database      
         await orSave.save();

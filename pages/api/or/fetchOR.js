@@ -40,7 +40,7 @@ export default async function handler(req, res) {
               _id: '$orType',
               totalAmount: { $sum: '$payments.amount' },
               orType: { $first: '$orType' },
-              orBooklet: { $first: '$orBooklet' },
+              orGenId: { $first: '$orGenId' },
               firstORNumber: { $first: '$orNumber' },
               lastORNumber: { $last: '$orNumber' }
             }

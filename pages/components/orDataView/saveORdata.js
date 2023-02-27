@@ -19,26 +19,23 @@ import {
   import Savepayment from "../payments/savepayment";
   import { useRouter } from "next/router";
 import Fetch_no_orUse from "./fetch_no_orUse";
-  
+  import moment from "moment/moment";
+
+
+
   const SaveORdata = () => {
   
 
     const [datalist,setdatalist] = useState([])
     const [orType, setorType] = useState('51');
-    const [orBooklet, setorBooklet] = useState('')
 
-
-    const [qty2, setqty2] = useState(0)
-    const [rcFrom, setrcFrom] = useState(0)
-    const [rcTo, setrcTo] = useState(0)
-    
 
     const [orFrom, setorFrom] = useState(0)
     const [orTo, setorTo] = useState(0)
     const [orUse, setorUse] = useState(0)
     const [orBB, setorBB] = useState(0)
     const [userId, setuserId] = useState('63e4484b3a663c0b8d277141')
- 
+    const [orGenId, setorGenId] = useState('')
   
     const router = useRouter()
 
@@ -49,8 +46,15 @@ import Fetch_no_orUse from "./fetch_no_orUse";
           setdatalist(data)
        
       }
+      const ORgenerateId = () => {
+        setorGenId(`or${Math.floor(Math.random() * 10000)}`)
+      }
+  
+      
 
       fetchOR();
+      ORgenerateId();
+  
   
       }, []);
 
@@ -82,7 +86,7 @@ import Fetch_no_orUse from "./fetch_no_orUse";
         for (let orNumber = num1; orNumber <= num2; orNumber++) {
             try {
     
-                const payload = {orType, orBooklet, orFrom,orTo,orNumber,orUse,orBB, userId}
+                const payload = {orType, orGenId, orFrom,orTo,orNumber,orUse,orBB, userId}
       
                 console.log('browser', payload)         
           
@@ -97,21 +101,28 @@ import Fetch_no_orUse from "./fetch_no_orUse";
 
         }
 
+    
 
         router.push('/')
       }
 
 
+      const currentDate = new Date();
+       const dateToday = `${currentDate.getMonth() + 1}/${currentDate.getDate()}/${currentDate.getFullYear()}`;
   
-      const saveORreport = async () => {
+   
 
-        setqty2(rcTo - rcFrom)
+      const saveORreport = async (orGenIdd, orType, tdate,rcFrom,rcTo) => {
+
+
 
             try {
     
-                const payload = {orDate, qty2, rcFrom, rcTo, userId }
+                const payload = {orGenId:orGenIdd, formType:orType, orDate:tdate, qty1:null, bgFrom:null, bgTo:null, 
+                                 qty2:(rcTo-rcFrom + 1), rcFrom:rcFrom, rcTo:rcTo, 
+                                 qty3:null, isFrom:null, isTo:null, qty4:null, ebFrom:null, ebTo:null, userId}
       
-                console.log('browser', payload)         
+                console.log('orReport', payload)         
           
                 const response = await axios.post(process.env.NEXTAUTH_URL + '/api/orReport/add_or_report', payload);
                    
@@ -138,17 +149,18 @@ import Fetch_no_orUse from "./fetch_no_orUse";
           <label>OR Type</label>
           <Select value={orType} onChange={(e) => {setorType(e.target.value)}} style={{width:"100px"}}>
             
-              <option  value='51'>51</option>
+              <option  value=''>Select</option>
               <option  value='52'>52</option>
               <option  value='53'>53</option>
               <option  value='56'>56</option>
-        
+              <option  value='51'>51</option>
+            
             </Select>
       
         </Box>
         <Box>
         <label>Stab Number</label>
-            <Input type="text" value={orBooklet} onChange={(e)=>{setorBooklet(e.target.value)}} />
+            <Input type="text" value={orGenId} onChange={(e)=>{}} />
         </Box>
         <Box>
         <label>OR# Start</label>
@@ -159,8 +171,8 @@ import Fetch_no_orUse from "./fetch_no_orUse";
         <label>OR# End</label>
             <Input type="text" value={orTo} onChange={(e)=>{setorTo(e.target.value)}} />
         </Box>
-                  
-        <Button onClick={(e) => {generateRange(orFrom,orTo)}}>Save</Button>      
+
+        <Button onClick={(e) => {generateRange(orFrom,orTo), saveORreport(orGenId, orType,dateToday,orFrom,orTo)}}>Save</Button>      
   
       </Flex>
  <Box height={'50px'}></Box>
@@ -189,7 +201,7 @@ import Fetch_no_orUse from "./fetch_no_orUse";
 return (
   <Tr key={i}>
   <Td>{items.orType}</Td>
-    <Td >{items.orBooklet}</Td>
+    <Td >{items.orGenId}</Td>
     <Td >{items.firstORNumber}</Td>
     <Td >{items.lastORNumber}</Td>
     <Td >{items.totalAmount}</Td>

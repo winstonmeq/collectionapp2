@@ -22,6 +22,7 @@ const Collection_deposit = () => {
     const [datalist, setdatalist] = useState([]);    
     const [datalist2, setdatalist2] = useState([]);
     const [datalist3, setdatalist3] = useState([]);
+    const [datalist4, setdatalist4] = useState([]);
     const { isOpen, onOpen, onClose } = useDisclosure()
 
 
@@ -49,7 +50,14 @@ const Collection_deposit = () => {
             setdatalist3(data)
            
         }
+
+        async function getORreport() {
+            const { data } = await axios.get(process.env.NEXTAUTH_URL + '/api/orReport/get_or_report');
+            setdatalist4(data)
+           
+        }
   
+        getORreport();
         fetch_allOR();
         fetchIssuesOR();
         fetchNoIssuesOR();
@@ -240,7 +248,42 @@ const Collection_deposit = () => {
           
  </tr>
 
- { datalist3.map((items,i) => {
+ {datalist4.map((items,i) => {
+   
+   return (
+    <>
+
+    <tr key={i} style={{ width: "60px", fontSize:'10px' }}>
+   <td style={{border: '1px solid black',width:'73px'}}>{items.formType}</td>
+
+
+   <td style={{border: '1px solid black',width:'39px'}}>{items.qty1}</td>
+   <td style={{border: '1px solid black',width:'54px'}}>{items.bgFrom}</td>
+   <td style={{border: '1px solid black',width:'56px'}}>{items.bgTo}</td>
+
+   <td style={{border: '1px solid black',width:'39px'}}>{items.qty2}</td>
+   <td style={{border: '1px solid black',width:'54px'}}>{items.rcFrom}</td>
+   <td style={{border: '1px solid black',width:'56px'}}>{items.rcTo}</td>
+
+   
+   
+   <td style={{border: '1px solid black',width:'39px'}}>{items.qty3}</td>
+   <td style={{border: '1px solid black',width:'54px'}}>{items.isFrom}</td>
+   <td style={{border: '1px solid black',width:'56px'}}>{items.isTo}</td>
+   
+   <td style={{border: '1px solid black',width:'39px'}}>{items.qty4}</td>
+   <td style={{border: '1px solid black',width:'54px'}}>{items.ebFrom}</td>
+   <td style={{border: '1px solid black',width:'56px'}}>{items.ebTo}</td>
+   
+   
+   
+   </tr>
+    
+
+    </>
+   )})}
+
+ {/* { datalist3.map((items,i) => {
    
    return (
    
@@ -275,7 +318,7 @@ const Collection_deposit = () => {
    </>
    )
    
-   }) }
+   }) } */}
 
 
 

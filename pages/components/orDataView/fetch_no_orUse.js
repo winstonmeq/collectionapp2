@@ -67,7 +67,7 @@ import {
 return (
   <Tr key={i}>
   <Td>{items.orType}</Td>
-    <Td >{items.orBooklet}</Td>
+    <Td >{items.orGenId}</Td>
     <Td >{items.firstORNumber}</Td>
     <Td >{items.lastORNumber}</Td>
     <Td >{items.totalAmount}</Td>

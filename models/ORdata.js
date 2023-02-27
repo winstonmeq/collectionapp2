@@ -4,7 +4,11 @@ import mongoose from "mongoose";
 const ORdataSchema = mongoose.Schema({
     
     
+    orGenId: {
+        type:String,        
+        index: true,
 
+    },
   
     orType: {
         type:String,        
@@ -12,11 +16,7 @@ const ORdataSchema = mongoose.Schema({
 
     },
 
-    orBooklet: {
-        type:String,
-        required:true,        
-    },  
-
+   
     orFrom: {
         type:Number,        
         index: true,

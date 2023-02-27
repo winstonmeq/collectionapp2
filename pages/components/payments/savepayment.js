@@ -23,9 +23,13 @@ const Savepayment = ({transacId, amount, savehandle}) => {
     const [paylist, setpaylist] = useState([])
     // const [service_type, setservice_type] = useState('');
     const [customerName, setcustomerName] = useState('');
+    const [orFrom, setorFrom] = useState(0);
+    const [orTo, setorTo] = useState(0);
+
     const [orNumber, setorNumber] = useState(0);
+    const [orNumber2, setorNumber2] = useState(0);
     const [userId, setuserId] = useState('63e4484b3a663c0b8d277141')
-    const [orBooklet, setorBooklet] = useState('');
+    const [orGenId, setorGenId] = useState('');
   
  
     const [orUse, setorUse] = useState(1);
@@ -39,7 +43,7 @@ const Savepayment = ({transacId, amount, savehandle}) => {
     const handleSavePayment = async () => {
         try {
     
-          const payload = {transacId, customerName, amount,orBooklet, orNumber, userId}
+          const payload = {transacId, customerName, amount,orGenId, orNumber, userId}
 
           console.log('browser', payload)         
     
@@ -84,6 +88,35 @@ const Savepayment = ({transacId, amount, savehandle}) => {
 
         }
 
+        updateORreport(orGenId, orFrom,orNumber,orNumber2, orTo)
+
+      }
+
+
+      
+      const updateORreport = async (orGenIdd, orFfrom,orNum,orNum2,orTto) => {
+
+        try {
+
+          
+          
+          const payload = {orGenId:orGenIdd, qty3:(orNum-orFfrom + 1), isFrom:orFfrom,isTo:orNum,
+                          qty4:(orTto-orNum), ebFrom:orNum2,ebTo:orTto, userId}
+
+
+          console.log('update ORreport',payload)
+
+
+          const response = await axios.put(process.env.NEXTAUTH_URL + '/api/orReport/update', payload);
+    
+           
+        } catch (error) {
+
+          console.log(error)
+
+        }
+
+
       }
 
 
@@ -95,12 +128,16 @@ const Savepayment = ({transacId, amount, savehandle}) => {
 
         async function fetchData() {
             const { data } = await axios.get( process.env.NEXTAUTH_URL + `/api/or/getOR`)
-          //  console.log('mao ni OR',data[0].orNumber)
+            console.log('mao ni OR',data[1].orNumber)
 
             if(data[0]!=null){
+              setorFrom(data[0].orFrom)
+              setorTo(data[0].orTo)
+              setorGenId(data[0].GenId)
               setorNumber(data[0].orNumber)
+              setorNumber2(data[1].orNumber)
               setor_id(data[0]._id)
-              setorBooklet(data[0].orBooklet)
+              setorGenId(data[0].orGenId)
             } else {
                
               window.alert('No OR');

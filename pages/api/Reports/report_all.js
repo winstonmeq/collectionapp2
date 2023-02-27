@@ -23,7 +23,7 @@ export default async function handler(req, res) {
                   
                   createdAt: {
                     $gte: new Date("2023-02-23"),
-                    $lte: new Date("2023-02-25")
+                    $lte: new Date("2023-02-28")
                   },
                                     
                   userId: require('mongoose').Types.ObjectId('63e4484b3a663c0b8d277141')}, 
