@@ -70,60 +70,6 @@ const Savepayment = ({transacId, amount, savehandle}) => {
 
     
 
-   
-      const updateORdata = async () => {
-
-        try {
-
-          console.log('update OR',or_id)
-          
-          const payload = {or_id, orUse, userId}
-
-          const response = await axios.put(process.env.NEXTAUTH_URL + '/api/or/updateOR', payload);
-    
-           
-        } catch (error) {
-
-          console.log(error)
-
-        }
-
-        updateORreport(orGenId, orFrom,orNumber,orNumber2, orTo)
-
-      }
-
-
-      
-      const updateORreport = async (orGenIdd, orFfrom,orNum,orNum2,orTto) => {
-
-        try {
-
-          
-          
-          const payload = {orGenId:orGenIdd, qty3:(orNum-orFfrom + 1), isFrom:orFfrom,isTo:orNum,
-                          qty4:(orTto-orNum), ebFrom:orNum2,ebTo:orTto, userId}
-
-
-          console.log('update ORreport',payload)
-
-
-          const response = await axios.put(process.env.NEXTAUTH_URL + '/api/orReport/update', payload);
-    
-           
-        } catch (error) {
-
-          console.log(error)
-
-        }
-
-
-      }
-
-
-  
-
-
-
       useEffect(() => {   
 
         async function fetchData() {
@@ -150,6 +96,75 @@ const Savepayment = ({transacId, amount, savehandle}) => {
 
 
 
+
+   
+      const updateORdata = async () => {
+
+        try {
+
+          console.log('update OR',or_id)
+          
+          const payload = {or_id, orUse, userId}
+
+          const response = await axios.put(process.env.NEXTAUTH_URL + '/api/or/updateOR', payload);
+    
+           
+        } catch (error) {
+
+          console.log(error)
+
+        }
+
+        updateORreport(orGenId, orFrom,orNumber,orNumber2, orTo)
+
+      }
+
+
+      
+      const updateORreport = async (orGenIdd, orFfrom,orNum,orNum2,orTto) => {
+
+         const qtty = 0;
+
+        try {
+
+
+          if((orTto-orNum) === 0){
+
+            orNum2 = null
+            orTto = null
+            qtty = null
+  
+          } else {
+
+            qtty = orTto-orNum
+
+
+          }
+
+                    
+          const payload = {orGenId:orGenIdd, qty3:(orNum-orFfrom + 1), isFrom:orFfrom,isTo:orNum,
+                          qty4:qtty, ebFrom:orNum2,ebTo:orTto, userId}
+
+
+          console.log('update ORreport',payload)
+
+          const response = await axios.put(process.env.NEXTAUTH_URL + '/api/orReport/update', payload);
+    
+           
+        } catch (error) {
+
+          console.log(error)
+
+        }
+
+
+      }
+
+
+  
+
+
+  
 
 
    
