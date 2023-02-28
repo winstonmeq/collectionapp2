@@ -22,9 +22,10 @@ import {
    
       
      
-      
-    const [orType, setorType] = useState('');
+      const [datalist, setdatalist] = useState([])
+      const [orType, setorType] = useState('');
       const [orGenId, setorGenId] = useState('');
+      const [orGenId2, setorGenId2] = useState('');
       const [orNumber, setorNumber] = useState(0);
       const [orTo, setorTo] = useState(0);
       const [userId, setuserId] = useState('63e4484b3a663c0b8d277141')
@@ -33,13 +34,27 @@ import {
       const { isOpen, onOpen, onClose } = useDisclosure()
   
       const router = useRouter();  
+
+
+
+    
+  
+      const currentDate = new Date();
+      const dateToday = `${currentDate.getMonth() + 1}/${currentDate.getDate()}/${currentDate.getFullYear()}`;
+
+
+      const ORgenerateId = () => {
+        setorGenId2(`fr${Math.floor(Math.random() * 10000)}`)
+      }
+
+
+
         
         useEffect(() => {   
   
           async function fetchData() {
               const { data } = await axios.get( process.env.NEXTAUTH_URL + `/api/or/fetchORnoUse`)
-  
-              console.log(data)
+            
               if(data[0]!=null){
                 setorType(data[0].orType)
                 setorGenId(data[0].orGenId)
@@ -53,12 +68,14 @@ import {
              
           }
   
+
+          ORgenerateId();
           fetchData();
+         
           }, []);
   
 
-          const currentDate = new Date();
-          const dateToday = `${currentDate.getMonth() + 1}/${currentDate.getDate()}/${currentDate.getFullYear()}`;
+        
      
           
       const saveORreport = async (orGenIdd, orType, tdate,rcNum,rcTo) => {
@@ -80,9 +97,46 @@ import {
   
           }  
 
+          updateORdata()
+      }
 
 
-  }
+
+      const updateORdata = async () => {
+
+        try {
+
+          
+          const payload = {orGenId,orGenId2,orFrom:orNumber, userId}
+
+          const response = await axios.put(process.env.NEXTAUTH_URL + '/api/or/updateORForward', payload);
+    
+           
+        } catch (error) {
+
+          console.log(error)
+
+        }
+       
+
+      }
+
+
+      // const handleSaveForwardedOR = async () => {
+      //   try {
+      
+      //     const response = await axios.post(process.env.NEXTAUTH_URL + '/api/forward/add_forward', {datalist});     
+    
+       
+    
+      //   } catch (error) {
+      //     console.log(error)
+      //   }
+  
+  
+  
+        
+      // }
 
   
   
@@ -92,7 +146,7 @@ import {
   
     return (
       <Flex >
-        <Button onClick={(e)=>{saveORreport(orGenId,orType,dateToday,orNumber,orTo)}}>Foward Balances</Button>
+        <Button onClick={(e)=>{saveORreport(orGenId2,orType,dateToday,orNumber,orTo)}}>Foward Balances</Button>
      
   
       </Flex>

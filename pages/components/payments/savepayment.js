@@ -128,14 +128,12 @@ const Savepayment = ({transacId, amount, savehandle}) => {
 
         async function fetchData() {
             const { data } = await axios.get( process.env.NEXTAUTH_URL + `/api/or/getOR`)
-            console.log('mao ni OR',data[1].orNumber)
 
             if(data[0]!=null){
               setorFrom(data[0].orFrom)
               setorTo(data[0].orTo)
-              setorGenId(data[0].GenId)
               setorNumber(data[0].orNumber)
-              setorNumber2(data[1].orNumber)
+              setorNumber2(data[0].orNumber < data[0].orTo ? data[0].orNumber + 1 : data[0].orNumber  )  
               setor_id(data[0]._id)
               setorGenId(data[0].orGenId)
             } else {

@@ -64,6 +64,12 @@ const Menunav = () => {
   </Button>
 </Link>
 
+<Link href={'/components/Forward'} >
+  <Button >
+       <Text fontSize={'md'}>Forward Balance</Text>
+  </Button>
+</Link>
+
   
   
   

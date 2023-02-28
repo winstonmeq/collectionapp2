@@ -1,6 +1,6 @@
 import { dbConnect } from "../../../conn/dbconnect";
 import { errorHandler,responseHandler } from "../../../util/common";
-import ORreport from "../../../models/ORreport";
+import ORdata from "../../../models/ORdata";
 
 
 export default async function handler(req, res) {
@@ -13,34 +13,23 @@ export default async function handler(req, res) {
 
    // console.log('updateOR',or_id, orType, orFrom, orTo, orNumber,orUse,  userId)
 
-   const { orGenId, formType, orDate,  qty1, bgFrom, bgTo, qty2, rcFrom, rcTo, qty3, isFrom, isTo, qty4, ebFrom, ebTo, userId } = req.body;
-
+       const {orType, orFrom,orGenId,orGenId2, orTo, orNumber,orUse,orBB, userId } = req.body;
 
        await dbConnect();  
    
            
-        const getdata = await ORreport.updateOne({orGenId:orGenId},
+        const getdata = await ORdata.updateMany({orGenId:orGenId, orUse: 0},
         
         {
-
           $set:{
-            formType:formType,
-            orGenId:orGenId, 
-            orDate:orDate,  
-            qty1:qty1, 
-            bgFrom:bgFrom, 
-            bgTo:bgTo, 
-            qty2:qty2, 
-            rcFrom:rcFrom, 
-            rcTo:rcTo, 
-            qty3:qty3, 
-            isFrom:isFrom, 
-            isTo:isTo, 
-            qty4:qty4, 
-            ebFrom:ebFrom, 
-            ebTo:ebTo, 
-            userId:userId        
-            }
+                  orType:orType,
+                  orGenId:orGenId2,
+                  orFrom:orFrom,
+                  orTo:orTo,
+                  orNumber:orNumber,
+                  orUse:orUse,
+                  orBB:orBB, 
+                  userId: userId}
         
         
         

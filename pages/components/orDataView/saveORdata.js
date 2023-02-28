@@ -46,6 +46,7 @@ import Fetch_no_orUse from "./fetch_no_orUse";
           setdatalist(data)
        
       }
+      
       const ORgenerateId = () => {
         setorGenId(`or${Math.floor(Math.random() * 10000)}`)
       }
