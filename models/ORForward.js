@@ -16,6 +16,12 @@ const ORForwardSchema = mongoose.Schema({
 
     },
 
+    orFund: {
+        type:String,   
+      
+    },
+
+
    
     orFrom: {
         type:Number,        

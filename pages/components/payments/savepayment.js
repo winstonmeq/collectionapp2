@@ -18,7 +18,7 @@ import axios from 'axios';
 import { useRouter } from "next/router";
 
 
-const Savepayment = ({transacId, amount, savehandle}) => {
+const Savepayment = ({transacId, orFund, amount, savehandle}) => {
  
     const [paylist, setpaylist] = useState([])
     // const [service_type, setservice_type] = useState('');
@@ -40,40 +40,14 @@ const Savepayment = ({transacId, amount, savehandle}) => {
     const router = useRouter();
 
 
-    const handleSavePayment = async () => {
-        try {
-    
-          const payload = {transacId, customerName, amount,orGenId, orNumber, userId}
-
-          console.log('browser', payload)         
-    
-          const response = await axios.post(process.env.NEXTAUTH_URL + '/api/Payment/addPayment', payload);
-    
-         if(response != null){
-        
-         savehandle()        
-         updateORdata()
-
-
-         }
-     
-         
-        } catch (error) {
-
-          console.log(error)
-
-        }
-
-        router.push(`/components/payments/${transacId}`);
-
-      }
-
-    
 
       useEffect(() => {   
 
         async function fetchData() {
-            const { data } = await axios.get( process.env.NEXTAUTH_URL + `/api/or/getOR`)
+
+          const payload = {orFund, userId}
+
+            const { data } = await axios.post( process.env.NEXTAUTH_URL + `/api/or/fetch_fund`, payload)
 
             if(data[0]!=null){
               setorFrom(data[0].orFrom)
@@ -95,28 +69,77 @@ const Savepayment = ({transacId, amount, savehandle}) => {
         }, []);
 
 
+        // useEffect(() => {   
+
+        //   async function fetchData() {
+        //       const { data } = await axios.get( process.env.NEXTAUTH_URL + `/api/or/getOR`)
+  
+        //       if(data[0]!=null){
+        //         setorFrom(data[0].orFrom)
+        //         setorTo(data[0].orTo)
+        //         setorNumber(data[0].orNumber)
+        //         setorNumber2(data[0].orNumber < data[0].orTo ? data[0].orNumber + 1 : data[0].orNumber  )  
+        //         setor_id(data[0]._id)
+        //         setorGenId(data[0].orGenId)
+        //       } else {
+                 
+        //         window.alert('No OR');
+        //         router.push('/components/orDataView/saveORdata');
+  
+        //       }
+             
+        //   }
+  
+        //   fetchData();
+        //   }, []);
+  
+
+
+        const handleSavePayment = async () => {
+          try {
+      
+            const payload = {transacId,orFund, customerName, amount,orGenId, orNumber, userId}
+  
+            console.log('browser', payload)         
+      
+            const response = await axios.post(process.env.NEXTAUTH_URL + '/api/Payment/addPayment', payload);
+      
+           if(response != null){
+          
+           savehandle()        
+           updateORdata()
+  
+  
+           }
+       
+           
+          } catch (error) {
+  
+            console.log(error)
+  
+          }
+  
+          router.push(`/components/payments/${transacId}`);
+  
+        }
+  
+      
 
 
    
       const updateORdata = async () => {
 
         try {
-
           console.log('update OR',or_id)
           
           const payload = {or_id, orUse, userId}
-
-          const response = await axios.put(process.env.NEXTAUTH_URL + '/api/or/updateOR', payload);
-    
+          const response = await axios.put(process.env.NEXTAUTH_URL + '/api/or/updateOR', payload);    
            
         } catch (error) {
-
           console.log(error)
-
         }
 
         updateORreport(orGenId, orFrom,orNumber,orNumber2, orTo)
-
       }
 
 

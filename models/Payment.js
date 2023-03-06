@@ -18,6 +18,12 @@ const PaymentSchema = mongoose.Schema({
         required:true,        
     },
 
+    orFund: {
+        type:String,       
+       
+    },
+
+
     
     customerName:{
         type:String,

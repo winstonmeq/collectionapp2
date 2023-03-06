@@ -6,7 +6,7 @@ import {
   Thead,
   Tbody,
   Tfoot,
-  Input,
+  Input,Select,
   Tr,
   Th,
   Td,
@@ -34,6 +34,7 @@ const Business_tax = () => {
   const [transId, setTransId] = useState();
   const [datalist, setdatalist] = useState([])
   const [datalist2, setdatalist2] = useState([]);    
+  const [orFund, setorFund] = useState('');
 
 
   useEffect(() => {
@@ -98,6 +99,11 @@ const Business_tax = () => {
   };
   
 
+
+
+
+
+
   const handleSave = async () => {
     try {
   
@@ -133,7 +139,20 @@ const Business_tax = () => {
       <Flex direction={'row'} width={'100%'} justify={'left'}>
        <Flex direction={'column'} width={'50%'}  padding={'10px'} >
        <Flex direction={'row'} justify={'center'}  >
-       <Box >        
+       <Box >       
+      
+       <Box>
+          <label>OR Fund</label>
+          <Select value={orFund} required onChange={(e) => {setorFund(e.target.value)}} >
+            
+              <option  value=''>Select</option>
+              <option  value='GF'>GF</option>
+              <option  value='DC'>DC</option>
+              <option  value='TF'>TF</option>            
+            
+            </Select>
+      
+        </Box> 
    
        <Box direction={'row'}>
        <Input width={'350px'} type='text' value={searchName} placeholder={'Search...'} onChange={e=>setSearchName(e.target.value)} />
@@ -166,6 +185,7 @@ const Business_tax = () => {
                           <Td style={{width:'50px'}}><Button onClick={() => handleAddProduct({
 
                                   transacId: transId , 
+                                  orFund: orFund,
                                   type: item.data2[0].account_name,
                                   name: item.sub_account_name, 
                                   amount: item.sub_account_fee === 0 ? Number(amounts[item._id]) : item.sub_account_fee ,
@@ -190,6 +210,7 @@ const Business_tax = () => {
       </Flex>
 
       <Flex direction={'column'}  >
+   
         <Box padding={'10px'} >
           <TableContainer >
             <Table variant='striped' colorScheme='blue'>
@@ -234,7 +255,7 @@ const Business_tax = () => {
           </TableContainer>
           
           { datalist.length ?               
-            <Savepayment transacId={transId} serviceType={accountName} amount={totalAmount} savehandle={handleSave} />
+            <Savepayment transacId={transId} orFund={orFund} serviceType={accountName} amount={totalAmount} savehandle={handleSave} />
                 : null
           
 

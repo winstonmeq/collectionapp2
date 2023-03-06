@@ -4,7 +4,7 @@ import Link from 'next/link';
   import {
     Table,
     Thead,
-    Tbody,
+    Tbody,Input,
     Tfoot,
     Tr, Flex, Box,
     Th,
@@ -14,6 +14,8 @@ import Link from 'next/link';
   } from '@chakra-ui/react'
 import AddLCR from '../LCR/addLCR';
 import moment from 'moment/moment';
+import { useRef } from "react";
+import ReactToPrint from "react-to-print";
 
 
 
@@ -25,39 +27,37 @@ const Report_all = () => {
 
     const [datalist, setdatalist] = useState([]);
     const [datalist2, setdatalist2] = useState([]);
+    const [date1, setDate1] = useState('');
+    const [date2, setDate2] = useState('');
+
+
 
     const { isOpen, onOpen, onClose } = useDisclosure()
 
-
-    const m1 = moment(new Date('2019/06/01'));
   
-    useEffect(() => {
-        async function fetchData() {
+    
+    const tableRef = useRef(null);
+
+  
+    // useEffect(() => {
+    //     async function fetchData() {
             
-            const { data } = await axios.get(process.env.NEXTAUTH_URL + '/api/Reports/report_all');
+    //         const { data } = await axios.get(process.env.NEXTAUTH_URL + '/api/Reports/report_all');
 
-            setdatalist(data);
-        }
-
-        
-      async function fetchData2() {
-        const { data } = await axios.get( process.env.NEXTAUTH_URL + `/api/Account/get_account`)
-        setdatalist2(data);
+    //         setdatalist(data);
+    //     }    
        
-    }
-
+    //     fetchData();
        
-        fetchData();
-        fetchData2();
-    }, []);
+    // }, []);
 
 
 
-    // const civilData = datalist.filter((item) => item.serviceType === 'Civil');
-    // const tricycleData = datalist.filter((item) => item.serviceType === 'Tricycle');
-
-
-    //  console.log(civilData)
+    const handleSearchButtonClick = async () => {
+      const response = await axios.get(`/api/Reports/report_all?date1=${date1}&date2=${date2}`);
+      const data = response.data;
+      setdatalist(data);
+    };
 
     
 
@@ -72,50 +72,80 @@ const Report_all = () => {
 
 
     return (
-        <Flex >
+
+     <Flex direction={'column'} >
           {console.log('account',datalist)}
-          
 
-<table>
-<thead>
- <tr>
- <th style={{width:'150px'}}>Date</th>
-<th style={{width:'80px'}}>OR #</th>
-<th style={{width:'150px'}}>Tax Payer</th>
-<th style={{width:'100px'}}>Bus. Tax</th>
-<th style={{width:'100px'}}>Fines/Penalty</th> 
-<th style={{width:'100px'}}>Mayors</th>
-<th style={{width:'100px'}}>Garbage</th> 
-<th style={{width:'100px'}}>Medical</th>
-
-<th style={{width:'100px'}}>Occupation</th>
-<th style={{width:'100px'}}>Franchise</th> 
-</tr>
-</thead>
-<tbody>
-
-  {datalist.map((item,index) => (
-    
-   <tr key={index} style={{textAlign:'center'}}>
-  <td style={{width:'150px'}}>{ddate(item.date)}</td>
-  <td style={{width:'80px'}}>{item.orNumber[0]}</td>
-  <td style={{width:'150px'}}>{item.customer[0]}</td>
-  <td style={{width:'100px'}}>{item.Business}</td>
-  <td style={{width:'100px'}}>{item.FinesPenalty}</td>
-  <td style={{width:'100px'}}>{item.Mayors}</td>
-  <td style={{width:'60px'}}>{item.Garbage}</td>
-  <td style={{width:'60px'}}>{item.Medical}</td>
-
-  <td style={{width:'60px'}}>{item.Occupation}</td>
-  <td style={{width:'60px'}}>{item.Franchise}</td>
+          <Flex direction={'row'}>
+           
+           <Box width={'40%'}>
+             <label>Date Start: </label>
+           <Input type="date" value={date1} onChange={(e) => setDate1(e.target.value)} width={'200px'} />
+           <label> Date End: </label>
+           <Input type="date" value={date2} onChange={(e) => setDate2(e.target.value)} width={'200px'} />
+           <Button onClick={handleSearchButtonClick} width={'100px'} >Search</Button>
+           </Box>
      
-  </tr>
-       
- ))}
-      
+           <ReactToPrint
+             trigger={() => <Button>Print this out!</Button>}
+             content={() => tableRef.current}
+             pageStyle="@page { size: landscape; }"
+           />
+     </Flex>
+   
 
-</tbody>
-</table>
+   <Box  ref={tableRef} padding={'20px'}>
+
+           
+  <Flex direction={'row'}>
+             
+     <table>
+     <thead>
+      <tr>
+      <th style={{width:'150px'}}>Date</th>
+     <th style={{width:'80px'}}>OR #</th>
+     <th style={{width:'150px'}}>Tax Payer</th>
+     <th style={{width:'100px'}}>Bus. Tax</th>
+     <th style={{width:'100px'}}>Fines/Penalty</th> 
+     <th style={{width:'100px'}}>Mayors</th>
+     <th style={{width:'100px'}}>Garbage</th> 
+     <th style={{width:'100px'}}>Medical</th>
+     
+     <th style={{width:'100px'}}>Occupation</th>
+     <th style={{width:'100px'}}>Franchise</th> 
+     </tr>
+     </thead>
+     <tbody>
+     
+       {datalist.map((item,index) => (
+         
+        <tr key={index} style={{textAlign:'center'}}>
+       <td style={{width:'150px'}}>{ddate(item.date)}</td>
+       <td style={{width:'80px'}}>{item.orNumber[0]}</td>
+       <td style={{width:'150px'}}>{item.customer[0]}</td>
+       <td style={{width:'100px'}}>{item.Business}</td>
+       <td style={{width:'100px'}}>{item.FinesPenalty}</td>
+       <td style={{width:'100px'}}>{item.Mayors}</td>
+       <td style={{width:'60px'}}>{item.Garbage}</td>
+       <td style={{width:'60px'}}>{item.Medical}</td>
+     
+       <td style={{width:'60px'}}>{item.Occupation}</td>
+       <td style={{width:'60px'}}>{item.Franchise}</td>
+          
+       </tr>
+            
+      ))}
+           
+     
+     </tbody>
+     </table>
+            </Flex>
+
+
+   </Box>
+
+     
+
   
     </Flex>
     );

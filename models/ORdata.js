@@ -16,6 +16,11 @@ const ORdataSchema = mongoose.Schema({
 
     },
 
+    orFund: {
+        type:String,       
+       
+    },
+
    
     orFrom: {
         type:Number,        

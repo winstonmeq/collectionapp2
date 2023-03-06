@@ -15,6 +15,12 @@ const ORreportSchema = mongoose.Schema({
 
     },
 
+    orFund: {
+        type:String,       
+       
+    },
+
+
     orDate: {
         type:Date,
         required:true,        

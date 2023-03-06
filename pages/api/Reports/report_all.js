@@ -9,9 +9,7 @@ export default async function handler(req, res) {
 
       try {
 
-    //     const {id} = req.query;
-
-    //   console.log(' payment api transacId ang',id)
+        const { date1, date2 } = req.query;
 
        await dbConnect();  
    
@@ -22,13 +20,13 @@ export default async function handler(req, res) {
                 $match : { 
                   
                   createdAt: {
-                    $gte: new Date("2023-02-23"),
-                    $lte: new Date("2023-02-29")
+                    $gte: new Date(date1),
+                    $lte: new Date(date2)
                   },
                                     
                   userId: require('mongoose').Types.ObjectId('63e4484b3a663c0b8d277141')}, 
             },
-
+           
 
             {                
               $lookup: {

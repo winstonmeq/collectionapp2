@@ -11,12 +11,17 @@ const LCRdataSchema = mongoose.Schema({
          
     },
 
+    orFund: {
+        type:String,       
+       
+    },
+
     name: {
         type:String,        
         index: true,
-
     },
-  
+
+
 
     amount: {
         type:Number,        

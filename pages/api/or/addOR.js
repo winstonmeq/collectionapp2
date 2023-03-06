@@ -7,13 +7,13 @@ export default async function handler(req, res) {
 
         try {
 
-        const { orType,orGenId, orFrom, orTo, orNumber,orUse,orBB, userId } = req.body;
+        const { orType,orGenId, orFund, orFrom, orTo, orNumber,orUse,orBB, userId } = req.body;
 
-      console.log(' OR data api result',{orType,orGenId, orFrom, orTo, orNumber,orUse,orBB, userId})
+      // console.log(' OR data api result',{orType, orGenId, orFrom, orTo, orNumber,orUse,orBB, userId})
 
        await dbConnect();  
        
-        const orSave = new ORdata({orType,orGenId, orFrom, orTo, orNumber,orUse,orBB, userId});
+        const orSave = new ORdata({orType,orGenId, orFund, orFrom, orTo, orNumber,orUse,orBB, userId});
         // Save the data to the database      
         await orSave.save();
     

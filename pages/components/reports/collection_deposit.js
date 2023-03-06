@@ -61,7 +61,6 @@ const Collection_deposit = () => {
         fetch_allOR();
         fetchIssuesOR();
         fetchNoIssuesOR();
-
       
 
     }, []);

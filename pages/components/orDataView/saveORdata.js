@@ -27,7 +27,7 @@ import Fetch_no_orUse from "./fetch_no_orUse";
   
 
     const [datalist,setdatalist] = useState([])
-    const [orType, setorType] = useState('51');
+    const [orType, setorType] = useState('');
 
 
     const [orFrom, setorFrom] = useState(0)
@@ -36,6 +36,7 @@ import Fetch_no_orUse from "./fetch_no_orUse";
     const [orBB, setorBB] = useState(0)
     const [userId, setuserId] = useState('63e4484b3a663c0b8d277141')
     const [orGenId, setorGenId] = useState('')
+    const [orFund, setorFund] = useState('')
   
     const router = useRouter()
 
@@ -87,12 +88,11 @@ import Fetch_no_orUse from "./fetch_no_orUse";
         for (let orNumber = num1; orNumber <= num2; orNumber++) {
             try {
     
-                const payload = {orType, orGenId, orFrom,orTo,orNumber,orUse,orBB, userId}
+                const payload = {orType, orFund, orGenId, orFrom,orTo,orNumber,orUse,orBB, userId}
       
                 console.log('browser', payload)         
           
-                const response = await axios.post(process.env.NEXTAUTH_URL + '/api/or/addOR', payload);
-                   
+                const response = await axios.post(process.env.NEXTAUTH_URL + '/api/or/addOR', payload);                   
 
               } catch (error) {
       
@@ -100,9 +100,7 @@ import Fetch_no_orUse from "./fetch_no_orUse";
       
               }            
 
-        }
-
-    
+        }    
 
         router.push('/')
       }
@@ -113,13 +111,12 @@ import Fetch_no_orUse from "./fetch_no_orUse";
   
    
 
-      const saveORreport = async (orGenIdd, orType, tdate,rcFrom,rcTo) => {
-
+      const saveORreport = async (orGenIdd,orFund, orType, tdate,rcFrom,rcTo) => {
 
 
             try {
     
-                const payload = {orGenId:orGenIdd, formType:orType, orDate:tdate, qty1:null, bgFrom:null, bgTo:null, 
+                const payload = {orGenId:orGenIdd, orFund:orFund, formType:orType, orDate:tdate, qty1:null, bgFrom:null, bgTo:null, 
                                  qty2:(rcTo-rcFrom + 1), rcFrom:rcFrom, rcTo:rcTo, 
                                  qty3:null, isFrom:null, isTo:null, qty4:null, ebFrom:null, ebTo:null, userId}
       
@@ -134,8 +131,6 @@ import Fetch_no_orUse from "./fetch_no_orUse";
       
               }  
 
-
-
       }
 
 
@@ -148,17 +143,32 @@ import Fetch_no_orUse from "./fetch_no_orUse";
        <Flex direction={'row'} justify={'center'}>
        <Box>
           <label>OR Type</label>
-          <Select value={orType} onChange={(e) => {setorType(e.target.value)}} style={{width:"100px"}}>
+          <Select value={orType} required onChange={(e) => {setorType(e.target.value)}} >
             
               <option  value=''>Select</option>
+              <option  value='51'>51</option>
               <option  value='52'>52</option>
               <option  value='53'>53</option>
               <option  value='56'>56</option>
-              <option  value='51'>51</option>
+            
             
             </Select>
       
         </Box>
+
+        <Box>
+          <label>OR Fund</label>
+          <Select value={orFund} required onChange={(e) => {setorFund(e.target.value)}} >
+            
+              <option  value=''>Select</option>
+              <option  value='GF'>General Fund</option>
+              <option  value='DC'>Direct Cash</option>
+              <option  value='TF'>Trust Fund</option>
+            
+            </Select>
+      
+        </Box>
+
         <Box>
         <label>Stab Number</label>
             <Input type="text" value={orGenId} onChange={(e)=>{}} />
@@ -173,8 +183,11 @@ import Fetch_no_orUse from "./fetch_no_orUse";
             <Input type="text" value={orTo} onChange={(e)=>{setorTo(e.target.value)}} />
         </Box>
 
-        <Button onClick={(e) => {generateRange(orFrom,orTo), saveORreport(orGenId, orType,dateToday,orFrom,orTo)}}>Save</Button>      
+          
   
+      </Flex>
+      <Flex direction={'column'}>
+      <Button width={'60px'} onClick={(e) => {generateRange(orFrom,orTo), saveORreport(orGenId, orFund, orType,dateToday,orFrom,orTo)}}>Save</Button>  
       </Flex>
  <Box height={'50px'}></Box>
    <Flex direction={'row'}>
@@ -186,6 +199,7 @@ import Fetch_no_orUse from "./fetch_no_orUse";
    <Table>
    <Thead>
    <Tr>
+   <Th>OR Fund</Th>
    <Th>OR Type</Th>
     <Th>Booklet</Th>
     <Th>OR Start</Th>
@@ -202,6 +216,7 @@ import Fetch_no_orUse from "./fetch_no_orUse";
 return (
   <Tr key={i}>
   <Td>{items.orType}</Td>
+  <Td >{items.orFund}</Td>
     <Td >{items.orGenId}</Td>
     <Td >{items.firstORNumber}</Td>
     <Td >{items.lastORNumber}</Td>
