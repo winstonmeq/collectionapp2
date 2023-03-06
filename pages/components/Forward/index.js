@@ -24,6 +24,7 @@ import {
      
       const [datalist, setdatalist] = useState([])
       const [orType, setorType] = useState('');
+      const [orFund, setorFund] = useState('');
       const [orGenId, setorGenId] = useState('');
       const [orGenId2, setorGenId2] = useState('');
       const [orNumber, setorNumber] = useState(0);
@@ -78,11 +79,11 @@ import {
         
      
           
-      const saveORreport = async (orGenIdd, orType, tdate,rcNum,rcTo) => {
+      const saveORreport = async (orGenIdd,  orType, orFund, tdate,rcNum,rcTo) => {
 
         try {
 
-            const payload = {orGenId:orGenIdd, formType:orType, orDate:tdate, qty1:(rcTo-rcNum + 1), bgFrom:rcNum, bgTo:rcTo, 
+            const payload = {orGenId:orGenIdd, formType:orType,orFund:orFund, orDate:tdate, qty1:(rcTo-rcNum + 1), bgFrom:rcNum, bgTo:rcTo, 
                              qty2:null, rcFrom:null, rcTo:null, 
                              qty3:null, isFrom:null, isTo:null, qty4:null, ebFrom:null, ebTo:null, userId}
   
@@ -146,7 +147,7 @@ import {
   
     return (
       <Flex >
-        <Button onClick={(e)=>{saveORreport(orGenId2,orType,dateToday,orNumber,orTo)}}>Foward Balances</Button>
+        <Button onClick={(e)=>{saveORreport(orGenId2,orType,orFund,dateToday,orNumber,orTo)}}>Foward Balances</Button>
      
   
       </Flex>
