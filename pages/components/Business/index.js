@@ -35,6 +35,7 @@ const Business_tax = () => {
   const [datalist, setdatalist] = useState([])
   const [datalist2, setdatalist2] = useState([]);    
   const [orFund, setorFund] = useState('');
+  const [orType, setorType] = useState('');
 
 
   useEffect(() => {
@@ -140,8 +141,22 @@ const Business_tax = () => {
        <Flex direction={'column'} width={'50%'}  padding={'10px'} >
        <Flex direction={'row'} justify={'center'}  >
        <Box >       
+    <Flex direction={'row'}>
+    <Box width={'120px'}>
+          <label>OR Type</label>
+          <Select value={orType} required onChange={(e) => {setorType(e.target.value)}} >
+            
+              <option  value=''>Select</option>
+              <option  value='51'>51</option>
+              <option  value='52'>52</option>
+              <option  value='53'>53</option> 
+              <option  value='56'>56</option>            
+            
+            </Select>
       
-       <Box>
+        </Box> 
+      
+       <Box width={'120px'}>
           <label>OR Fund</label>
           <Select value={orFund} required onChange={(e) => {setorFund(e.target.value)}} >
             
@@ -153,6 +168,8 @@ const Business_tax = () => {
             </Select>
       
         </Box> 
+    </Flex>
+      
    
        <Box direction={'row'}>
        <Input width={'350px'} type='text' value={searchName} placeholder={'Search...'} onChange={e=>setSearchName(e.target.value)} />
@@ -255,7 +272,7 @@ const Business_tax = () => {
           </TableContainer>
           
           { datalist.length ?               
-            <Savepayment transacId={transId} orFund={orFund} serviceType={accountName} amount={totalAmount} savehandle={handleSave} />
+            <Savepayment transacId={transId} orFund={orFund} orType={orType} serviceType={accountName} amount={totalAmount} savehandle={handleSave} />
                 : null
           
 

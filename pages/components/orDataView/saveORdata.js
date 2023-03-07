@@ -169,7 +169,7 @@ import Fetch_no_orUse from "./fetch_no_orUse";
       
         </Box>
 
-        <Box>
+        <Box width={'120px'}>
         <label>Stab Number</label>
             <Input type="text" value={orGenId} onChange={(e)=>{}} />
         </Box>
@@ -182,15 +182,16 @@ import Fetch_no_orUse from "./fetch_no_orUse";
         <label>OR# End</label>
             <Input type="text" value={orTo} onChange={(e)=>{setorTo(e.target.value)}} />
         </Box>
-
           
+
+        <Box marginTop={'20px'}>
+        <Button width={'60px'} onClick={(e) => {generateRange(orFrom,orTo), saveORreport(orGenId, orFund, orType,dateToday,orFrom,orTo)}}>Save</Button>  
+      </Box>
   
       </Flex>
-      <Flex direction={'column'}>
-      <Button width={'60px'} onClick={(e) => {generateRange(orFrom,orTo), saveORreport(orGenId, orFund, orType,dateToday,orFrom,orTo)}}>Save</Button>  
-      </Flex>
+     
  <Box height={'50px'}></Box>
-   <Flex direction={'row'}>
+   <Flex direction={'row'} justify={'center'}>
 
    <Box width={'80%'} border={'1px'}>
 
@@ -215,8 +216,8 @@ import Fetch_no_orUse from "./fetch_no_orUse";
 
 return (
   <Tr key={i}>
-  <Td>{items.orType}</Td>
-  <Td >{items.orFund}</Td>
+  <Td>{items.orFund}</Td>
+  <Td >{items.orType}</Td>
     <Td >{items.orGenId}</Td>
     <Td >{items.firstORNumber}</Td>
     <Td >{items.lastORNumber}</Td>
@@ -234,17 +235,10 @@ return (
 </Tbody>
 </Table>
 
-<Fetch_no_orUse />
  
    </Box>
 
-   
-
-  <Box width={'20%'}>
-
-  </Box>
-
-   
+      
 
     </Flex>
       

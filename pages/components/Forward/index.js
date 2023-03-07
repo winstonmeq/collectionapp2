@@ -44,9 +44,16 @@ import {
       const dateToday = `${currentDate.getMonth() + 1}/${currentDate.getDate()}/${currentDate.getFullYear()}`;
 
 
-      const ORgenerateId = () => {
+      const ORgenerateId = async () => {
         setorGenId2(`fr${Math.floor(Math.random() * 10000)}`)
       }
+
+      const AutoGen = () => {
+        let autoId = `fr${Math.floor(Math.random() * 10000)}`
+
+        return autoId
+      }
+
 
 
 
@@ -71,7 +78,7 @@ import {
              
           }  
 
-          ORgenerateId();
+       
           fetchData();
          
           }, []);
@@ -80,23 +87,24 @@ import {
         
      
           
-      const saveORreport = async (orGenId2,tdate) => {
+      const saveORreport = async (tdate) => {
 
        
         for(let i=0; i <= datalist.length; i++ ) {
-        
 
+          let genId = AutoGen()
+        
           try {
 
-        
-            const payload = {orGenId:orGenId2, formType:datalist[i].orType, orDate:tdate, qty1:(datalist[i].orTo-datalist[i].orNumber + 1), bgFrom:datalist[i].orNumber, bgTo:datalist[i].orTo, 
+                const payload = {orGenId:genId, formType:datalist[i].orType, orDate:tdate, qty1:(datalist[i].orTo-datalist[i].orNumber + 1), bgFrom:datalist[i].orNumber, bgTo:datalist[i].orTo, 
                              qty2:null, rcFrom:null, rcTo:null, 
                              qty3:null, isFrom:null, isTo:null, qty4:null, ebFrom:null, ebTo:null, userId}
   
             console.log('orReport', payload)         
       
-            const response = await axios.post(process.env.NEXTAUTH_URL + '/api/orReport/add_or_report', payload);
-               
+           const response = await axios.post(process.env.NEXTAUTH_URL + '/api/orReport/add_or_report', payload);
+            
+           updateORdata(genId)
 
           } catch (error) {
   
@@ -105,7 +113,7 @@ import {
           }  
 
           
-         updateORdata()
+       
 
         }
       
@@ -114,13 +122,13 @@ import {
 
 
 
-      const updateORdata = async () => {
+      const updateORdata = async (orGId) => {
 
         for(let i=0; i <= datalist.length; i++ ) {
 
             try {
               
-              const payload = {orGenId:datalist[i].orGenId,orGenId2,orFrom:datalist[i].orNumber, userId}
+              const payload = {orGenId:datalist[i].orGenId,orGenId2:orGId,orFrom:datalist[i].orNumber, userId}
 
               const response = await axios.put(process.env.NEXTAUTH_URL + '/api/or/updateORForward', payload);
         
@@ -138,28 +146,12 @@ import {
 
 
 
-      
-      // const handleSaveForwardedOR = async () => {
-      //   try {
-      
-      //     const response = await axios.post(process.env.NEXTAUTH_URL + '/api/forward/add_forward', {datalist});     
-    
-       
-    
-      //   } catch (error) {
-      //     console.log(error)
-      //   }
-     
-        
-      // }
-
-  
      
   
     return (
       <Flex >
-        {console.log(datalist)}
-        <Button onClick={(e)=>{saveORreport(orGenId2, dateToday)}}>Foward Balances</Button>
+        {console.log('datalist')}
+        <Button onClick={(e)=>{saveORreport(dateToday)}}>Foward Balances</Button>
      
   
       </Flex>

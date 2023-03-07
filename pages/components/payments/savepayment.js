@@ -18,7 +18,7 @@ import axios from 'axios';
 import { useRouter } from "next/router";
 
 
-const Savepayment = ({transacId, orFund, amount, savehandle}) => {
+const Savepayment = ({transacId, orFund,orType, amount, savehandle}) => {
  
     const [paylist, setpaylist] = useState([])
     // const [service_type, setservice_type] = useState('');
@@ -45,7 +45,7 @@ const Savepayment = ({transacId, orFund, amount, savehandle}) => {
 
         async function fetchData() {
 
-          const payload = {orFund, userId}
+          const payload = {orFund,orType, userId}
 
             const { data } = await axios.post( process.env.NEXTAUTH_URL + `/api/or/fetch_fund`, payload)
 
