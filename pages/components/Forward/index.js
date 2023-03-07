@@ -80,11 +80,16 @@ import {
         
      
           
-      const saveORreport = async (orGenIdd, orType, tdate,rcNum,rcTo) => {
+      const saveORreport = async (orGenId2,tdate) => {
+
+       
+        for(let i=0; i <= datalist.length; i++ ) {
+        
 
           try {
 
-            const payload = {orGenId:orGenIdd, formType:orType, orDate:tdate, qty1:(rcTo-rcNum + 1), bgFrom:rcNum, bgTo:rcTo, 
+        
+            const payload = {orGenId:orGenId2, formType:datalist[i].orType, orDate:tdate, qty1:(datalist[i].orTo-datalist[i].orNumber + 1), bgFrom:datalist[i].orNumber, bgTo:datalist[i].orTo, 
                              qty2:null, rcFrom:null, rcTo:null, 
                              qty3:null, isFrom:null, isTo:null, qty4:null, ebFrom:null, ebTo:null, userId}
   
@@ -99,10 +104,12 @@ import {
   
           }  
 
+          
+         updateORdata()
+
         }
       
 
-         updateORdata()
       }
 
 
@@ -113,7 +120,7 @@ import {
 
             try {
               
-              const payload = {orGenId,orGenId2,orFrom:datalist[i].orNumber, userId}
+              const payload = {orGenId:datalist[i].orGenId,orGenId2,orFrom:datalist[i].orNumber, userId}
 
               const response = await axios.put(process.env.NEXTAUTH_URL + '/api/or/updateORForward', payload);
         
@@ -151,7 +158,8 @@ import {
   
     return (
       <Flex >
-        <Button onClick={(e)=>{saveORreport(orGenId2,orType,dateToday,orNumber,orTo)}}>Foward Balances</Button>
+        {console.log(datalist)}
+        <Button onClick={(e)=>{saveORreport(orGenId2, dateToday)}}>Foward Balances</Button>
      
   
       </Flex>
