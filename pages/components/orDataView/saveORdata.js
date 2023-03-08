@@ -150,6 +150,7 @@ import Fetch_no_orUse from "./fetch_no_orUse";
               <option  value='52'>52</option>
               <option  value='53'>53</option>
               <option  value='56'>56</option>
+              <option  value='Cedula'>Cedula</option>
             
             
             </Select>

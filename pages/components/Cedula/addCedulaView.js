@@ -11,12 +11,12 @@ import {
   
 } from "@chakra-ui/react";
 
+import { useEffect } from "react";
+
 import { addCedula } from "../../../axios/cedula_request";
 import { useState } from "react";
 import { useRouter } from "next/router";
-
-
-
+import axios from 'axios';
 
 
 
@@ -62,7 +62,17 @@ const Cedula = () => {
   const [interest, setinterest] = useState(0.00);
   const [total_paid, settotal_paid] = useState(0.00);
   const [num_word, setnum_word] = useState("");
-
+  const [datalist, setdatalist] = useState([]);
+  const [orFund, setorFund] = useState('');
+  const [orType, setorType] = useState('');
+  const [transId, setTransId] = useState();
+  const [orGenId, setorGenId] = useState('');
+  const [orUse, setorUse] = useState(1);
+  const [or_id, setor_id] = useState('');
+  const [orFrom, setorFrom] = useState(0);
+  const [orTo, setorTo] = useState(0);
+  const [orNumber, setorNumber] = useState(0);
+  const [orNumber2, setorNumber2] = useState(0);
 
 
    const getmonth = currentDate.getMonth() + 1
@@ -86,6 +96,46 @@ const Cedula = () => {
     return `${wholeNumWords} and ${decimalNum}/100`;
 
   }
+
+    
+  useEffect(() => {   
+  
+    async function fetchData() {
+      
+        const { data } = await axios.get( process.env.NEXTAUTH_URL + `/api/Cedula/fetch_cedula`)
+
+        setdatalist(data);   
+        
+         if(data[0]!=null){
+          setor_id(data[0].or_id)
+          setorGenId(data[0].orGenId)
+          setorType(data[0].orType)
+          setorFund(data[0].orFund)
+          setorNumber(data[0].orNumber)
+          setcedula_no(data[0].orNumber)
+          setorFrom(data[0].orFfrom)
+          setorTo(data[0].orTo)
+          setorNumber2(data[0].orNumber < data[0].orTo ? data[0].orNumber + 1 : data[0].orNumber  )  
+
+                            
+           }  
+       
+
+    }   
+
+    const trasacId = () => {
+      setTransId(`T${Math.floor(Math.random() * 1000000)}`)
+      console.log(transId)
+    }
+
+     trasacId();
+    fetchData(); 
+   
+    }, []);
+
+
+    
+
   
 
 
@@ -103,14 +153,104 @@ const savedata = () => {
 
   setinterest(calculatePenalty(getmonth));
   
-  settotal_paid((Number(amount1) + Number(amount2 * 0.001) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001) + Number(calculatePenalty(getmonth))).toFixed(2))
-
- 
+  settotal_paid((Number(amount1) + Number(amount2 * 0.001) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001) + Number(calculatePenalty(getmonth))).toFixed(2)) 
  
   setnum_word(convertToWords(((Number(amount1) + Number(amount2 * 0.001) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001)) + Number(calculatePenalty(getmonth))).toFixed(2)))
 
 
+  handleSavePayment()
+
 }
+
+
+
+const handleSavePayment = async () => {
+  try {
+
+    const payload = {transacId:transId,orFund, customerName:lname +','+ fname, amount:total_paid,orGenId, orNumber, userId}
+
+    console.log('browser', payload)         
+
+    const response = await axios.post(process.env.NEXTAUTH_URL + '/api/Payment/addPayment', payload);
+
+   if(response != null){
+  
+   savehandle()        
+   updateORdata()
+
+
+   }
+
+   
+  } catch (error) {
+
+    console.log(error)
+
+  }
+
+
+}
+
+
+
+
+
+const updateORdata = async () => {
+
+try {
+  console.log('update OR',or_id)
+  
+  const payload = {or_id, orUse, userId}
+  const response = await axios.put(process.env.NEXTAUTH_URL + '/api/or/updateOR', payload);    
+   
+} catch (error) {
+  console.log(error)
+}
+
+updateORreport(orGenId, orFrom,orNumber,orNumber2, orTo)
+}
+
+
+
+const updateORreport = async (orGenIdd, orFfrom,orNum,orNum2,orTto) => {
+
+ const qtty = 0;
+
+try {
+
+
+  if((orTto-orNum) === 0){
+
+    orNum2 = null
+    orTto = null
+    qtty = null
+
+  } else {
+
+    qtty = orTto-orNum
+
+
+  }
+
+            
+  const payload = {orGenId:orGenIdd, qty3:(orNum-orFfrom + 1), isFrom:orFfrom,isTo:orNum,
+                  qty4:qtty, ebFrom:orNum2,ebTo:orTto, userId}
+
+
+  console.log('update ORreport',payload)
+
+  const response = await axios.put(process.env.NEXTAUTH_URL + '/api/orReport/update', payload);
+
+   
+} catch (error) {
+
+  console.log(error)
+
+}
+
+
+}
+
 
 
 const optionMale = ['Male', ' / '];
@@ -166,25 +306,7 @@ function calculatePenalty(monthno) {
     
   }  
 
-  if(monthno == 3){
-
-    
-    
-    var intmonth = (((Number(amount1) + Number(amount2 * 0.001 ) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001)) * 0.06).toFixed(2))
-  
-   
-   return intmonth;
-    
-  }  
-
-  if(monthno == 4){
-
-    const intmonth = (((Number(amount1) + Number(amount2 * 0.001 ) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001)) * 0.08).toFixed(2))
-
-   
-   return intmonth;
-    
-  }  
+ 
 
   if(monthno == 5){
 
@@ -326,6 +448,7 @@ function calculatePenalty(monthno) {
     
     <Flex direction={"column"} align={"center"} >
 
+ {console.log('data',datalist)}
 
 
          <Box>
@@ -334,10 +457,9 @@ function calculatePenalty(monthno) {
          <Box align={"right"}>
             <Input
               type="text"  
-              placeholder="Cedula Number"
+              value={cedula_no}
               required
-              onChange={(e) => {
-                setcedula_no(e.target.value);
+              onChange={(e) => {               
               }}
             />
           </Box>
@@ -688,6 +810,7 @@ function calculatePenalty(monthno) {
           <Flex  justify={'right'}>
           <Box>
           <Button onClick={savedata}  type="submit">Save</Button>
+        
           </Box>
           </Flex>
          
