@@ -76,9 +76,9 @@ const Report_all = () => {
      <Flex direction={'column'} >
           {console.log('account',datalist)}
 
-          <Flex direction={'row'}>
+     <Flex direction={'row'} justify={'center'}>
            
-           <Box width={'40%'}>
+           <Box width={'60%'}>
              <label>Date Start: </label>
            <Input type="date" value={date1} onChange={(e) => setDate1(e.target.value)} width={'200px'} />
            <label> Date End: </label>
@@ -86,11 +86,17 @@ const Report_all = () => {
            <Button onClick={handleSearchButtonClick} width={'100px'} >Search</Button>
            </Box>
      
-           <ReactToPrint
+     </Flex>
+     <Flex>
+     <Box>
+       
+     <ReactToPrint
              trigger={() => <Button>Print this out!</Button>}
              content={() => tableRef.current}
              pageStyle="@page { size: landscape; }"
            />
+      </Box>
+     
      </Flex>
    
 

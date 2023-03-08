@@ -73,6 +73,7 @@ const Cedula = () => {
   const [orTo, setorTo] = useState(0);
   const [orNumber, setorNumber] = useState(0);
   const [orNumber2, setorNumber2] = useState(0);
+  const [userId, setuserId] = useState('63e4484b3a663c0b8d277141')
 
 
    const getmonth = currentDate.getMonth() + 1
@@ -107,13 +108,13 @@ const Cedula = () => {
         setdatalist(data);   
         
          if(data[0]!=null){
-          setor_id(data[0].or_id)
+          setor_id(data[0]._id)
           setorGenId(data[0].orGenId)
           setorType(data[0].orType)
           setorFund(data[0].orFund)
           setorNumber(data[0].orNumber)
           setcedula_no(data[0].orNumber)
-          setorFrom(data[0].orFfrom)
+          setorFrom(data[0].orFrom)
           setorTo(data[0].orTo)
           setorNumber2(data[0].orNumber < data[0].orTo ? data[0].orNumber + 1 : data[0].orNumber  )  
 
@@ -165,6 +166,7 @@ const savedata = () => {
 
 
 const handleSavePayment = async () => {
+
   try {
 
     const payload = {transacId:transId,orFund, customerName:lname +','+ fname, amount:total_paid,orGenId, orNumber, userId}
@@ -175,7 +177,8 @@ const handleSavePayment = async () => {
 
    if(response != null){
   
-   savehandle()        
+    
+  {console.log('nag dagan ang save payment')}
    updateORdata()
 
 
@@ -198,6 +201,7 @@ const handleSavePayment = async () => {
 const updateORdata = async () => {
 
 try {
+
   console.log('update OR',or_id)
   
   const payload = {or_id, orUse, userId}
@@ -458,7 +462,6 @@ function calculatePenalty(monthno) {
             <Input
               type="text"  
               value={cedula_no}
-              required
               onChange={(e) => {               
               }}
             />
@@ -468,7 +471,7 @@ function calculatePenalty(monthno) {
             <Box width={'80px'} align={"right"}>
               <Input
                 type="text"
-                value="23"
+                value={currentDate.getFullYear()}              
                 required
                 onChange={(e) => {
                   setyear(e.target.value);
@@ -488,7 +491,7 @@ function calculatePenalty(monthno) {
             <Box align={"right"}>
               <Input
                 type="text"
-                value={dateToday}
+                value={currentDate.getFullYear}
                 onChange={(e) => {
                   setdate(e.target.value);
                 }}

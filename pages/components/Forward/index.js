@@ -90,12 +90,13 @@ import {
       const saveORreport = async (tdate) => {
 
        
-        for(let i=0; i <= datalist.length; i++ ) {
-
-          let genId = AutoGen()
+        for(let i=0; i <= datalist.length; i++ ) {     
+          
         
-          try {
+          try {          
 
+            let genId = AutoGen()
+        
                 const payload = {orGenId:genId, formType:datalist[i].orType, orDate:tdate, qty1:(datalist[i].orTo-datalist[i].orNumber + 1), bgFrom:datalist[i].orNumber, bgTo:datalist[i].orTo, 
                              qty2:null, rcFrom:null, rcTo:null, 
                              qty3:null, isFrom:null, isTo:null, qty4:null, ebFrom:null, ebTo:null, userId}
@@ -104,8 +105,9 @@ import {
       
            const response = await axios.post(process.env.NEXTAUTH_URL + '/api/orReport/add_or_report', payload);
             
-           updateORdata(genId)
 
+           updateORdata(datalist[i].orGenId, genId)
+        
           } catch (error) {
   
             console.log(error)
@@ -113,7 +115,8 @@ import {
           }  
 
           
-       
+        
+
 
         }
       
@@ -122,13 +125,13 @@ import {
 
 
 
-      const updateORdata = async (orGId) => {
+      const updateORdata = async (oldGenId, NewGenId) => {
 
         for(let i=0; i <= datalist.length; i++ ) {
 
             try {
               
-              const payload = {orGenId:datalist[i].orGenId,orGenId2:orGId,orFrom:datalist[i].orNumber, userId}
+              const payload = {orGenId:oldGenId, orGenId2:NewGenId, orFrom:datalist[i].orNumber, userId}
 
               const response = await axios.put(process.env.NEXTAUTH_URL + '/api/or/updateORForward', payload);
         
