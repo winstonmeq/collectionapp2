@@ -11,10 +11,12 @@ import {
   } from '@chakra-ui/react'
   import { useState } from 'react';
   import { useEffect } from 'react';
+  import { useRouter } from 'next/router';
   import Link from 'next/link';
   import axios from 'axios';
   import { useRef } from "react";
   import ReactToPrint from "react-to-print";
+import CedulaPrint from './print';
 
 
 const Cedula_report = () => {
@@ -25,11 +27,11 @@ const Cedula_report = () => {
   const [date1, setDate1] = useState('');
   const [date2, setDate2] = useState('');
   const [tableVisible, setTableVisible] = useState(false);
-
+  const [showtable2, setshowtable2] = useState(false)
 
 
   const tableRef = useRef(null);
-
+  const router = useRouter()
 
  
 
@@ -39,13 +41,14 @@ const Cedula_report = () => {
         return final;
        }
 
-        
-     
-
-  const toggleTable = () => {
-    setTableVisible(!tableVisible);
-  };
-
+     //mao ni code para mag push sang data sa next page na object type sya
+      //  const handleClick = () => {
+      //   router.push({
+      //     pathname: "/components/Cedula/print",
+      //     query: { data: JSON.stringify(datalist) },
+      //   });
+      // };
+      
 
 
   const handleSearchButtonClick = async () => {
@@ -60,14 +63,19 @@ const Cedula_report = () => {
 
 
 
-
-
   return (
         <Flex direction={'column'} >
      
 
         {console.log(datalist)}
 
+        <Link href={`/components/Cedula/print?date1=${date1}&date2=${date2}`} >
+  <Button >Preview   </Button>
+</Link>
+
+  
+
+   {/* <Button onClick={()=>handleClick()}>Push data</Button> */}
      
      <Flex direction={'row'} justify={'center'}>
            
@@ -82,17 +90,7 @@ const Cedula_report = () => {
      </Flex>
      
 
-     <Flex>
-     <Box>
-       
-     <ReactToPrint
-             trigger={() => <Button  >Print this out!</Button>}
-             content={() => tableRef.current}
-             pageStyle="@page { size: portrait; }"
-           />
-      </Box>
-     
-     </Flex>
+    
 
 
    
@@ -144,106 +142,6 @@ return (
 </TableContainer>
 </Box>
 
-
-
-<Box ref={tableRef} padding={'20px'}>
-
-<table>
-    
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>Republic of the Philippines</td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-   
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>Region XII</td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-   
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>Municipality of President Roxas</td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>Community Tax Certificate</td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>for the Period from October {date1} to {date2}</td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-    
-</table>
-<table>
-    <th>
-      <tr>
-        <td>Date</td>
-        <td>Cedula #</td>
-        <td>Client Name</td>
-        <td>Basic</td>
-        <td>Amount</td>
-        <td>Interest</td>
-        <td>Total Amount</td>
-        <td>Action</td>
-      </tr>
-    </th>
-    <tbody>
-    {datalist.map((item,i)=>{
-
-return (
-      <tr key={i}>
-        <td >{ddate(item.createdAt)}</td>
-        <td >{item.cedula_no}</td>
-        <td>{item.lname +', '+ item.fname}</td>
-        <td>{item.amount1}</td>
-        <td>{item.total}</td>
-        <td>{item.interest}</td>
-        <td>{item.total_paid}</td>
-        <td>{
-            <Link href={`${item._id}`}>Print</Link>
-        }</td>
-      </tr>
-      )
-
-
-      })}
-    </tbody>
-    {/* <Tfoot>
-      <Tr>
-        <Th>To convert</Th>
-        <Th>into</Th>
-        <Th isNumeric>multiply by</Th>
-      </Tr>
-    </Tfoot> */}
-  </table>
-
-
-</Box>
 
 
        
