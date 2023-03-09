@@ -63,8 +63,8 @@ import {
           async function fetchData() {
               const { data } = await axios.get( process.env.NEXTAUTH_URL + `/api/or/fetchORnoUse`)
             
-
               setdatalist(data);
+
               // if(data[0]!=null){
               //   setorType(data[0].orType)
               //   setorGenId(data[0].orGenId)
@@ -92,21 +92,25 @@ import {
        
         for(let i=0; i <= datalist.length; i++ ) {     
           
-        
+
+      
+
           try {          
+       
 
             let genId = AutoGen()
+
+            updateORdata(datalist[i].orGenId, genId, datalist[i].orNumber)
         
-                const payload = {orGenId:genId, formType:datalist[i].orType, orDate:tdate, qty1:(datalist[i].orTo-datalist[i].orNumber + 1), bgFrom:datalist[i].orNumber, bgTo:datalist[i].orTo, 
+            const payload = {orGenId:genId, formType:datalist[i].orType, orDate:tdate, qty1:(datalist[i].orTo-datalist[i].orNumber + 1), bgFrom:datalist[i].orNumber, bgTo:datalist[i].orTo, 
                              qty2:null, rcFrom:null, rcTo:null, 
                              qty3:null, isFrom:null, isTo:null, qty4:null, ebFrom:null, ebTo:null, userId}
   
-            console.log('orReport', payload)         
+            console.log('orReport', datalist[i].orGenId)         
       
-           const response = await axios.post(process.env.NEXTAUTH_URL + '/api/orReport/add_or_report', payload);
-            
+           const response = await axios.post(process.env.NEXTAUTH_URL + '/api/orReport/add_or_report', payload);            
 
-           updateORdata(datalist[i].orGenId, genId)
+        
         
           } catch (error) {
   
@@ -125,13 +129,11 @@ import {
 
 
 
-      const updateORdata = async (oldGenId, NewGenId) => {
-
-        for(let i=0; i <= datalist.length; i++ ) {
-
+      const updateORdata = async (oldGenId, NewGenId, orNumber) => {
+     
             try {
               
-              const payload = {orGenId:oldGenId, orGenId2:NewGenId, orFrom:datalist[i].orNumber, userId}
+              const payload = {orGenId:oldGenId, orGenId2:NewGenId, orFrom:orNumber, userId}
 
               const response = await axios.put(process.env.NEXTAUTH_URL + '/api/or/updateORForward', payload);
         
@@ -143,7 +145,7 @@ import {
 
             }
 
-        }       
+          
 
       }
 
@@ -153,7 +155,7 @@ import {
   
     return (
       <Flex >
-        {console.log('datalist')}
+        {console.log('datalist', datalist)}
         <Button onClick={(e)=>{saveORreport(dateToday)}}>Foward Balances</Button>
      
   

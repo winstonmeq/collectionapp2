@@ -25,9 +25,9 @@ export default async function handler(req, res) {
           {
             $group: {
               _id: '$orGenId',
-              orType:{$first:'$orType'},
-              orFund:{$first:'$orFund'},
               orGenId: { $first: '$orGenId' },
+              orType:{$first:'$orType'},
+              orFund:{$first:'$orFund'},            
               orNumber: { $first: '$orNumber' },
               orTo: { $last: '$orTo' }
             }

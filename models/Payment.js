@@ -22,8 +22,6 @@ const PaymentSchema = mongoose.Schema({
         type:String,       
        
     },
-
-
     
     customerName:{
         type:String,

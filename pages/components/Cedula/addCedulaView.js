@@ -432,6 +432,7 @@ function calculatePenalty(monthno) {
       interest,
       total_paid,   
       num_word,
+      userId
     };
 
     const result = await addCedula(payload);
@@ -491,7 +492,7 @@ function calculatePenalty(monthno) {
             <Box align={"right"}>
               <Input
                 type="text"
-                value={currentDate.getFullYear}
+                value={dateToday}
                 onChange={(e) => {
                   setdate(e.target.value);
                 }}

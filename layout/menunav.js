@@ -64,6 +64,13 @@ const Menunav = () => {
   </Button>
 </Link>
 
+<Link href={'/components/Cedula/cedula_report'} >
+  <Button >
+       <Text fontSize={'md'}>Cedula Report</Text>
+  </Button>
+</Link>
+
+
 <Link href={'/components/Forward'} >
   <Button >
        <Text fontSize={'md'}>Forward Balance</Text>

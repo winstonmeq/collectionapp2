@@ -62,12 +62,9 @@ const Report_all = () => {
     
 
    const ddate = (petsa) => {
-
     const finaldate = new Date(petsa);
-
     const final = finaldate.toLocaleDateString();
     return final;
-
    }
 
 
