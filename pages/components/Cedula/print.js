@@ -58,16 +58,16 @@ const CedulaPrint = () => {
       }, []);
 
 
-
+      const totalAmount = datalist.reduce((acc, item) => acc + item.total_paid, 0);
 
 
   return (
-        <Flex direction={'column'} >
+    <Flex  direction={"column"} align={"center"}>
+
      
 
         {console.log(datalist)}
 
-<Flex>
 
 <ReactToPrint
             trigger={() => <Button >Print this out!</Button>}
@@ -77,81 +77,29 @@ const CedulaPrint = () => {
         
  <Box ref={tableRef} padding={'20px'}>
 
+
+ <Box textAlign={'center'}>Republic of the Philippines</Box>
+<Box textAlign={'center'}>Region XII</Box>
+<Box textAlign={'center'}>Municipality of President Roxas</Box>
+<Box textAlign={'center'}>for the Period from October <b><u>{date1}</u></b> to <b><u>{date2}</u></b> </Box>
+<br></br>
 <table>
-  <th>
-
-  </th>
-  <tbody>
-  <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td>Republic of the Philippines</td>
-          <td></td>
-          <td></td>
-          <td></td>
-      </tr>
- 
-      <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td>Region XII</td>
-          <td></td>
-          <td></td>
-          <td></td>
-      </tr>
- 
-      <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td>Municipality of President Roxas</td>
-          <td></td>
-          <td></td>
-          <td></td>
-      </tr>
-      <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td>Community Tax Certificate</td>
-          <td></td>
-          <td></td>
-          <td></td>
-      </tr>
-      <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td>for the Period from October ____ to _____ </td>
-          <td></td>
-          <td></td>
-          <td></td>
-      </tr>
-
-  </tbody>
-     
   
-</table>
-<table>
-  <th>
-    <tr>
-      <td>Date</td>
-      <td>Cedula #</td>
-      <td>Client Name</td>
-      <td>Basic</td>
-      <td>Amount</td>
-      <td>Interest</td>
-      <td>Total Amount</td>
-      <td>Action</td>
+    <tr style={{textAlign:'center'}}>
+      <td style={{width:'100px', borderBottom:'1px solid'}}>Date</td>
+      <td style={{width:'100px', borderBottom:'1px solid'}}>Cedula #</td>
+      <td style={{width:'100px', borderBottom:'1px solid'}}>Client Name</td>
+      <td style={{width:'100px', borderBottom:'1px solid'}}>Basic</td>
+      <td style={{width:'100px', borderBottom:'1px solid'}}>Amount</td>
+      <td style={{width:'100px', borderBottom:'1px solid'}}>Interest</td>
+      <td style={{width:'100px', borderBottom:'1px solid'}}>Total Amount</td>
     </tr>
-  </th>
+  
   <tbody>
   {datalist.map((item,i)=>{
 
 return (
-    <tr key={i}>
+    <tr key={i} style={{textAlign:'center'}}>
       <td >{ddate(item.createdAt)}</td>
       <td >{item.cedula_no}</td>
       <td>{item.lname +', '+ item.fname}</td>
@@ -159,25 +107,54 @@ return (
       <td>{item.total}</td>
       <td>{item.interest}</td>
       <td>{item.total_paid}</td>
-      <td>{
-          <Link href={`${item._id}`}>Print</Link>
-      }</td>
+     
     </tr>
     )
 
 
     })}
+
+    
+  <tr style={{textAlign:'center'}}>
+      <td style={{width:'100px', borderTop:'1px solid'}}></td>
+      <td style={{width:'100px', borderTop:'1px solid'}}></td>
+      <td style={{width:'100px', borderTop:'1px solid'}}><b>Total</b></td>
+      <td style={{width:'100px', borderTop:'1px solid'}}></td>
+      <td style={{width:'100px', borderTop:'1px solid'}}></td>
+      <td style={{width:'100px', borderTop:'1px solid'}}></td>
+      <td style={{width:'100px', borderTop:'1px solid'}}><b>{totalAmount.toFixed(2)}</b></td>
+    </tr>
+    <br></br>
+    <tr style={{textAlign:'center'}}>
+      <td style={{width:'100px'}}></td>
+      <td style={{width:'100px'}}></td>
+      <td style={{width:'100px'}}></td>
+      <td style={{width:'100px'}}>Prepared by:</td>
+      <td style={{width:'100px'}}></td>
+      <td style={{width:'100px'}}></td>
+      <td style={{width:'100px'}}></td>
+    </tr>
+    <br></br>
+    <tr style={{textAlign:'center'}}>
+      <td style={{width:'100px'}}></td>
+      <td style={{width:'100px'}}></td>
+      <td style={{width:'100px'}}></td>
+      <td style={{width:'100px'}}></td>
+      <td colspan={'2'} style={{width:'100px'}}>HAROLD KIM B. UDANI</td>
+      <td style={{width:'100px'}}></td>
+    </tr>
+
   </tbody>
  
 </table>
 
 </Box>
 
-</Flex>
+
 
 
        
-       </Flex>
+</Flex>
     )
 }
 

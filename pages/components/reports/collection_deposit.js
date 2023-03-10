@@ -127,7 +127,8 @@ const Collection_deposit = () => {
 
 
 <table style={{ width: "680px", fontSize:'12px' }}>
-   
+    
+    <tbody>
            
         <tr>
             <td style={{border: '1px solid black', width:'200px'}}>Type Form</td>
@@ -136,7 +137,7 @@ const Collection_deposit = () => {
             <td style={{border: '1px solid black',width:'160px'}}>Amount</td>
         </tr>
        
-    <tbody>
+  
 
     { datalist.map((items,i) => {
 
