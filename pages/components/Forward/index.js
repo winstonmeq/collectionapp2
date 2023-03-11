@@ -90,8 +90,7 @@ import {
       const saveORreport = async (tdate) => {
 
        
-        for(let i=0; i <= datalist.length; i++ ) {     
-          
+        for(let i=0; i <= datalist.length; i++ ) {            
 
       
 
@@ -153,7 +152,7 @@ import {
     return (
       <Flex >
         {console.log('datalist', datalist)}
-        <Button onClick={(e)=>{saveORreport(dateToday)}}>Foward Balances</Button>
+        <Button onClick={(e)=>{saveORreport(dateToday)}}>Generate Report</Button>
      
   
       </Flex>

@@ -52,7 +52,7 @@ const Collection_deposit = () => {
         }
 
         async function getORreport() {
-            const { data } = await axios.get(process.env.NEXTAUTH_URL + '/api/orReport/get_or_report');
+            const { data } = await axios.get(process.env.NEXTAUTH_URL + '/api/Freport/fetch_report2');
             setdatalist4(data)
            
         }
@@ -428,7 +428,7 @@ const Collection_deposit = () => {
     <td colspan='2'style={{border: '1px solid black',width:'39px'}}>Name & Signature</td>
     <td style={{border: '1px solid black',width:'39px'}}>FEB. 14, 2023</td>
 
-    </tr >
+    </tr>
 
     <tr style={{ width: "670px", fontSize:'10px', textAlign: 'center' }}>
     <td colspan='2' style={{border: '1px solid black',width:'39px'}}>Accountable Officer</td>

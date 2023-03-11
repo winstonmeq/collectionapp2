@@ -16,6 +16,7 @@ import AddLCR from '../LCR/addLCR';
 import moment from 'moment/moment';
 import { useRef } from "react";
 import ReactToPrint from "react-to-print";
+import GenerateReport from './generateReport';
 
 
 
@@ -72,6 +73,8 @@ const Report_all = () => {
 
      <Flex direction={'column'} >
           {console.log('account',datalist)}
+
+          <GenerateReport />
 
      <Flex direction={'row'} justify={'center'}>
            
