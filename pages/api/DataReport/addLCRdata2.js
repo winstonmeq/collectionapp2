@@ -1,6 +1,6 @@
 import { dbConnect } from "../../../conn/dbconnect";
 import { errorHandler,responseHandler } from "../../../util/common";
-import LCRdata from "../../../models/LCRdata";
+import DataReport from "../../../models/DataReport";
 
 
 export default async function handler(req, res) {
@@ -11,17 +11,17 @@ export default async function handler(req, res) {
 
       try {
 
-      const { datalist } = req.body;
-
-      console.log('api result',{datalist})
+      const { datalist3 } = req.body;
+  
+      console.log(datalist3)
 
        await dbConnect();  
        
-       for (const data of datalist) {
+       for (const data of datalist3) {
         // Create a new instance of the LCRdata model
-        const lcr = new LCRdata(data);
+        const db = new DataReport(data);
         // Save the data to the database      
-        await lcr.save();
+        await db.save();
     }
            
     res.status(200).json({ message: 'Data saved successfully' });

@@ -90,9 +90,8 @@ import {
       const saveORreport = async (tdate) => {
 
        
-        for(let i=0; i <= datalist.length; i++ ) {            
-
-      
+        for(let i=0; i <= datalist.length; i++ ) {          
+     
 
           try {          
        
@@ -129,7 +128,7 @@ import {
      
             try {
               
-              const payload = {orGenId:oldGenId, orGenId2:NewGenId, orFrom:orNumber, userId}
+              const payload = {orGenId:oldGenId, orBB:1, orGenId2:NewGenId, orFrom:orNumber, userId}
 
               const response = await axios.put(process.env.NEXTAUTH_URL + '/api/or/updateORForward', payload);
         
@@ -152,7 +151,7 @@ import {
     return (
       <Flex >
         {console.log('datalist', datalist)}
-        <Button onClick={(e)=>{saveORreport(dateToday)}}>Generate Report</Button>
+        <Button onClick={(e)=>{saveORreport(dateToday)}}>Balance Forward</Button>
      
   
       </Flex>

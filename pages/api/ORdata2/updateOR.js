@@ -9,10 +9,7 @@ export default async function handler(req, res) {
 
       try {
 
-    //     const {id} = req.query;
-
-   // console.log('updateOR',or_id, orType, orFrom, orTo, orNumber,orUse,  userId)
-
+   
        const { or_id, orType, orFund, orFrom, orGenId, orTo, orNumber,orUse,orBB, userId } = req.body;
 
        await dbConnect();  

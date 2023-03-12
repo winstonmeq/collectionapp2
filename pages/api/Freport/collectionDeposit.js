@@ -1,6 +1,6 @@
 import { dbConnect } from "../../../conn/dbconnect";
 import { errorHandler,responseHandler } from "../../../util/common";
-import ORreport from "../../../models/ORreport";
+import FReport from "../../../models/FReport";
 
 
 export default async function handler(req, res) {
@@ -9,17 +9,17 @@ export default async function handler(req, res) {
 
       try {
 
-    //     const {id} = req.query;
+        const {report} = req.query;
 
     //   console.log(' payment api transacId ang',id)
 
        await dbConnect();  
    
            
-       const data = await ORreport.aggregate([
+       const data = await FReport.aggregate([
         {
           $match: {
-            userId: require('mongoose').Types.ObjectId('63e4484b3a663c0b8d277141')
+            userId: require('mongoose').Types.ObjectId('63e4484b3a663c0b8d277141'), reportNum:report
            
           }
         },
@@ -53,15 +53,6 @@ export default async function handler(req, res) {
             $sort: { updatedAt: 1 }
           },
   
-
-
-
-
-
-
-
-
-
 
 
       ]).exec();

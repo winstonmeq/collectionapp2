@@ -1,6 +1,6 @@
 import { dbConnect } from "../../../conn/dbconnect";
 import { errorHandler,responseHandler } from "../../../util/common";
-import ORdata from "../../../models/ORdata";
+import FReport from "../../../models/FReport";
 
 
 export default async function handler(req, res) {
@@ -16,10 +16,10 @@ export default async function handler(req, res) {
        await dbConnect();  
    
            
-        const getdata = await ORdata.aggregate([
+        const getdata = await FReport.aggregate([
             
             { 
-                $match : { userId: require('mongoose').Types.ObjectId('63e4484b3a663c0b8d277141')} && {orUse:1}, 
+                $match : { userId: require('mongoose').Types.ObjectId('63e4484b3a663c0b8d277141')}, 
             },
             {
                 
@@ -38,12 +38,13 @@ export default async function handler(req, res) {
           {
             $group: {
               _id: '$orType',
+              orType: { $first: '$orType' },
+              firstORNumber: { $first: '$orNumber' },
+              lastORNumber: { $last: '$orNumber' },
               totalAmount: { $sum: '$payments.amount' },
               orFund:{$first:'$orFund'},
-              orType: { $first: '$orType' },
-              orGenId: { $first: '$orGenId' },
-              firstORNumber: { $first: '$orNumber' },
-              lastORNumber: { $last: '$orNumber' }
+            
+              
             }
           },
   

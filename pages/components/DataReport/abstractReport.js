@@ -16,92 +16,76 @@ import AddLCR from '../LCR/addLCR';
 import moment from 'moment/moment';
 import { useRef } from "react";
 import ReactToPrint from "react-to-print";
-import GenerateReport from './generateReport';
 
 
 
 
-
-
-const Report_all = () => {
+const AbstractReport= () => {
 
 
     const [datalist, setdatalist] = useState([]);
     const [datalist2, setdatalist2] = useState([]);
     const [date1, setDate1] = useState('');
     const [date2, setDate2] = useState('');
-    const [Fundcode, setFundcode] = useState('');
+    const [reportName, setreportName] = useState('');
 
 
-
-    const { isOpen, onOpen, onClose } = useDisclosure()
 
   
     
     const tableRef = useRef(null);
 
-  
-    // useEffect(() => {
-    //     async function fetchData() {
-            
-    //         const { data } = await axios.get(process.env.NEXTAUTH_URL + '/api/Reports/report_all');
+    useEffect(() => {
 
-    //         setdatalist(data);
-    //     }    
-       
-    //     fetchData();
-       
-    // }, []);
+      async function fetchData() {
+          
+          const { data } = await axios.get(process.env.NEXTAUTH_URL + '/api/DataReport/fetchData');          
+          setdatalist2(data);
+      }
+
+      fetchData();
+    
+
+  }, []);
 
 
-
-    const handleSearchButtonClick = async (selectedfcode) => {
-      const {data} = await axios.get(`/api/LCR/report_all?Fundcode=${selectedfcode}`);
+    
+    const handleSearchButtonClick = async (selectedReport) => {
+      const {data} = await axios.get(`/api/DataReport/abstractReport?reportName=${selectedReport}`);
       setdatalist(data);
     };
 
     
 
-   const ddate = (petsa) => {
-    const finaldate = new Date(petsa);
-    const final = finaldate.toLocaleDateString();
-    return final;
-   }
-
-
 
    const handleSelectChange = (e) => {
-    const selectedfcode = e.target.value
-    handleSearchButtonClick(selectedfcode);
+    const selectedReport = e.target.value
+    handleSearchButtonClick(selectedReport);
   };
 
     return (
 
      <Flex direction={'column'} >
-          {console.log('datalist',Fundcode)}
+          {console.log('datalist')}
 
 
      <Flex direction={'row'} justify={'center'}>
            
-           <Box width={'30%'}>
-            <Select value={Fundcode} onChange={handleSelectChange} >
-            
+     <Box width={'30%'} align={'left'}>
+            <Select value={reportName} onChange={handleSelectChange} >
             <option  value=''>Select</option>
-            <option  value='GF'>General Fund</option>
-            <option  value='DC'>Direct Cash</option>
-            <option  value='TF'>Trust Fund</option>
+            {datalist2.map((item,index) => (
+                <>
+                 <option  value={item.reportName}>{item.reportName}</option>
+               </>
+
+            ))}
+         
           
           </Select>
-           </Box>
-           {/* <Box>
-           <Button onClick={handleSearchButtonClick} width={'100px'} >Search</Button>
-           </Box> */}
-           <Box width={'100px'}></Box>
-           <Box>
-           <GenerateReport />
+</Box>
 
-           </Box>
-     
+       
      </Flex>
      <Flex>
      <Box>
@@ -143,7 +127,7 @@ const Report_all = () => {
         const total = item.Medical + item.Occupation + item.Mayors;
 
   return(
-       <tr key={index} style={{textAlign:'center'}}>
+       <tr key={item._id} style={{textAlign:'center'}}>
        <td style={{width:'80px'}}>{item._id}</td>
        <td style={{width:'80px'}}>{item.orType[0]}</td>
        <td style={{width:'80px'}}>{item.orNumber[0]}</td>
@@ -220,6 +204,6 @@ const Report_all = () => {
 </tbody>
 </table> */}
 
-export default Report_all;
+export default AbstractReport;
 
 

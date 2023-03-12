@@ -24,7 +24,7 @@ export default async function handler(req, res) {
                     $lte: new Date(date2)
                   },
                                     
-                  userId: require('mongoose').Types.ObjectId('63e4484b3a663c0b8d277141')}, 
+                  userId: require('mongoose').Types.ObjectId('63e4484b3a663c0b8d277141'), orFund:'GF'}, 
             },
            
 

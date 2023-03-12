@@ -25,7 +25,8 @@ const Savepayment = ({transacId, orFund,orType, amount, savehandle}) => {
     const [customerName, setcustomerName] = useState('');
     const [orFrom, setorFrom] = useState(0);
     const [orTo, setorTo] = useState(0);
-
+    const [orTo2, setorTo2] = useState(0);
+    const [orBB, setorBB] = useState(0);
     const [orNumber, setorNumber] = useState(0);
     const [orNumber2, setorNumber2] = useState(0);
     const [userId, setuserId] = useState('63e4484b3a663c0b8d277141')
@@ -40,6 +41,10 @@ const Savepayment = ({transacId, orFund,orType, amount, savehandle}) => {
     const router = useRouter();
 
 
+    const currentDate = new Date();
+    const dateToday = `${currentDate.getMonth() + 1}/${currentDate.getDate()}/${currentDate.getFullYear()}`;
+
+
 
       useEffect(() => {   
 
@@ -52,6 +57,8 @@ const Savepayment = ({transacId, orFund,orType, amount, savehandle}) => {
             if(data[0]!=null){
               setorFrom(data[0].orFrom)
               setorTo(data[0].orTo)
+              setorTo2(data[0].orTo)
+              setorBB(data[0].orBB)
               setorNumber(data[0].orNumber)
               setorNumber2(data[0].orNumber < data[0].orTo ? data[0].orNumber + 1 : data[0].orNumber  )  
               setor_id(data[0]._id)
@@ -69,36 +76,30 @@ const Savepayment = ({transacId, orFund,orType, amount, savehandle}) => {
         }, []);
 
 
-        // useEffect(() => {   
+      const updateORdata = async () => {
 
-        //   async function fetchData() {
-        //       const { data } = await axios.get( process.env.NEXTAUTH_URL + `/api/or/getOR`)
-  
-        //       if(data[0]!=null){
-        //         setorFrom(data[0].orFrom)
-        //         setorTo(data[0].orTo)
-        //         setorNumber(data[0].orNumber)
-        //         setorNumber2(data[0].orNumber < data[0].orTo ? data[0].orNumber + 1 : data[0].orNumber  )  
-        //         setor_id(data[0]._id)
-        //         setorGenId(data[0].orGenId)
-        //       } else {
+              try {
+                
+                const payload = {or_id, orUse, userId}
+
+                const response = await axios.put(process.env.NEXTAUTH_URL + '/api/ORdata2/updateOR', payload);    
                  
-        //         window.alert('No OR');
-        //         router.push('/components/orDataView/saveORdata');
-  
-        //       }
-             
-        //   }
-  
-        //   fetchData();
-        //   }, []);
-  
+              } catch (error) {
+                console.log(error)
+              }
+      
+        }
+      
 
 
+
+
+
+      
         const handleSavePayment = async () => {
           try {
       
-            const payload = {transacId,orFund, customerName, amount,orGenId, orNumber, userId}
+            const payload = {transacId,orFund,orType, customerName, amount,orGenId, orNumber, userId}
   
             console.log('browser', payload)         
       
@@ -106,9 +107,16 @@ const Savepayment = ({transacId, orFund,orType, amount, savehandle}) => {
       
            if(response != null){
           
-           savehandle()        
-           updateORdata()
-  
+           savehandle()
+           
+           if(orBB === 0){
+            saveORreport(orGenId, orFund, orType, orNumber,orNumber2, dateToday, orFrom, orTo, orTo2 )
+
+           } else {
+
+            saveBeginORreport(orGenId, orFund, orType, orNumber,orNumber2, dateToday, orFrom, orTo, orTo2 )
+
+           }
   
            }
        
@@ -118,84 +126,113 @@ const Savepayment = ({transacId, orFund,orType, amount, savehandle}) => {
             console.log(error)
   
           }
-  
-          router.push(`/components/payments/${transacId}`);
+
+        updateORdata()
+     
+        router.push(`/components/payments/${transacId}`);
   
         }
   
-      
 
+    
+
+
+
+
+      
+        const saveORreport = async (orGenIdd,orFundV, orTypeV,orNumV,orNum2, tdate,rcFrom,rcTo,rcTo2) => {
+
+          const qtty = 0;
+
+          try {
+
+            if((rcTo-orNumV) === 0){
+
+              rcTo2 = null
+              orNum2 = null
+              qtty = null
+    
+            } else {
+  
+              qtty = rcTo-orNumV
+  
+  
+            }
+
+  
+              const payload = {orGenId:orGenIdd, orFund:orFundV, formType:orTypeV, orDate:tdate, 
+                               qty1:null, bgFrom:null, bgTo:null, 
+                               qty2:(rcTo-rcFrom + 1), rcFrom:rcFrom, rcTo:rcTo, 
+
+                               qty3:(orNumV - rcFrom + 1), isFrom:rcFrom, isTo:orNumV,
+
+                               qty4:qtty, ebFrom:orNum2, ebTo:rcTo2, userId}
+    
+              console.log('orReport', payload)         
+        
+              const response = await axios.post(process.env.NEXTAUTH_URL + '/api/orReport/add_or_report', payload);
+                 
+
+            } catch (error) {
+    
+              console.log(error)
+    
+            }  
+
+    }
+
+    const saveBeginORreport = async (orGenIdd,orFundV, orTypeV,orNumV,orNum2, tdate,rcFrom,rcTo,rcTo2) => {
+
+      const qtty = 0;
+
+      try {
+
+        if((rcTo-orNumV) === 0){
+
+          rcTo2 = null
+          orNum2 = null
+          qtty = null
+
+        } else {
+
+          qtty = rcTo-orNumV
+
+
+        }
+
+
+          const payload = {orGenId:orGenIdd, orFund:orFundV, formType:orTypeV, orDate:tdate, 
+                           qty1:(rcTo-rcFrom + 1), bgFrom:rcFrom, bgTo:rcTo, 
+                           qty2:null, rcFrom:null, rcTo:null, 
+
+                           qty3:(orNumV - rcFrom + 1), isFrom:rcFrom, isTo:orNumV,
+
+                           qty4:qtty, ebFrom:orNum2, ebTo:rcTo2, userId}
+
+          console.log('orReport', payload)         
+    
+          const response = await axios.post(process.env.NEXTAUTH_URL + '/api/orReport/add_or_report', payload);
+             
+
+        } catch (error) {
+
+          console.log(error)
+
+        }  
+
+}
 
    
-      const updateORdata = async () => {
-
-        try {
-          console.log('update OR',or_id)
-          
-          const payload = {or_id, orUse, userId}
-          const response = await axios.put(process.env.NEXTAUTH_URL + '/api/or/updateOR', payload);    
-           
-        } catch (error) {
-          console.log(error)
-        }
-
-        updateORreport(orGenId, orFrom,orNumber,orNumber2, orTo)
-      }
-
 
       
-      const updateORreport = async (orGenIdd, orFfrom,orNum,orNum2,orTto) => {
-
-         const qtty = 0;
-
-        try {
-
-
-          if((orTto-orNum) === 0){
-
-            orNum2 = null
-            orTto = null
-            qtty = null
-  
-          } else {
-
-            qtty = orTto-orNum
-
-
-          }
-
-                    
-          const payload = {orGenId:orGenIdd, qty3:(orNum-orFfrom + 1), isFrom:orFfrom,isTo:orNum,
-                          qty4:qtty, ebFrom:orNum2,ebTo:orTto, userId}
-
-
-          console.log('update ORreport',payload)
-
-          const response = await axios.put(process.env.NEXTAUTH_URL + '/api/orReport/update', payload);
-    
-           
-        } catch (error) {
-
-          console.log(error)
-
-        }
-
-
-      }
-
-
-  
-
-
-  
-
-
    
 
   return (
     <Flex >
         
     <Button onClick={onOpen}>Pay</Button>
+
+    {console.log(or_id)}
 
   <Modal closeOnOverlayClick={false} isOpen={isOpen} onClose={onClose} size={'xl'}  >
     <ModalOverlay />

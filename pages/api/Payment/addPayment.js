@@ -7,9 +7,8 @@ export default async function handler(req, res) {
 
         try {
 
-        const { transacId, orFund, customerName, amount,orGenId, orNumber, userId } = req.body;
+        const { transacId, orFund, orType, customerName, amount,orGenId, orNumber, userId } = req.body;
 
-      console.log('save payment api result',{transacId, orFund, customerName, amount, orGenId, orNumber, userId})
 
        await dbConnect();  
        
@@ -17,6 +16,7 @@ export default async function handler(req, res) {
           
           transacId, 
           orFund,
+          orType,
           customerName, 
           amount, 
           orGenId,

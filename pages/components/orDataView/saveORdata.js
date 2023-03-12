@@ -40,21 +40,23 @@ import Fetch_no_orUse from "./fetch_no_orUse";
   
     const router = useRouter()
 
+    const ORgenerateId = () => {
+      setorGenId(`or${Math.floor(Math.random() * 10000)}`)
+    }
+
+
     useEffect(() => {   
 
-      async function fetchOR() {
-          const { data } = await axios.get( process.env.NEXTAUTH_URL + `/api/or/fetchOR`)          
-          setdatalist(data)
+      // async function fetchOR() {
+      //     const { data } = await axios.get( process.env.NEXTAUTH_URL + `/api/or/fetchOR`)          
+      //     setdatalist(data)
        
-      }
+      // }
       
-      const ORgenerateId = () => {
-        setorGenId(`or${Math.floor(Math.random() * 10000)}`)
-      }
-  
+    
       
 
-      fetchOR();
+      //fetchOR();
       ORgenerateId();
   
   
@@ -111,14 +113,13 @@ import Fetch_no_orUse from "./fetch_no_orUse";
   
    
 
-      const saveORreport = async (orGenIdd,orFund, orType, tdate,rcFrom,rcTo) => {
-
+      const saveORreport = async (orGenIdd,orFundV, orTypeV, tdate,rcFrom,rcTo) => {
 
             try {
     
-                const payload = {orGenId:orGenIdd, orFund:orFund, formType:orType, orDate:tdate, qty1:null, bgFrom:null, bgTo:null, 
+                const payload = {orGenId:orGenIdd, orFund:orFundV, formType:orTypeV, orDate:tdate, qty1:null, bgFrom:null, bgTo:null, 
                                  qty2:(rcTo-rcFrom + 1), rcFrom:rcFrom, rcTo:rcTo, 
-                                 qty3:null, isFrom:null, isTo:null, qty4:null, ebFrom:null, ebTo:null, userId}
+                                 qty3:null, isFrom:null, isTo:null, qty4:(rcTo-rcFrom + 1), ebFrom:rcFrom, ebTo:rcTo, userId}
       
                 console.log('orReport', payload)         
           

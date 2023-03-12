@@ -18,6 +18,11 @@ const PaymentSchema = mongoose.Schema({
         required:true,        
     },
 
+    orType: {
+        type:String,       
+       
+    },
+
     orFund: {
         type:String,       
        
