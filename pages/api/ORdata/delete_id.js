@@ -1,32 +1,25 @@
 import { dbConnect } from "../../../conn/dbconnect";
 import { errorHandler,responseHandler } from "../../../util/common";
 import ORdata from "../../../models/ORdata";
-import mongoose from "mongoose";
+
 
 export default async function handler(req, res) {
-
   
 
       try {
 
-    //     const {id} = req.query;
+         const {or_id} = req.query;
 
     //   console.log(' payment api transacId ang',id)
 
        await dbConnect();  
    
            
-       const getdata = await ORdata.aggregate([
-        {
-          $match: {
-            userId: require('mongoose').Types.ObjectId('63e4484b3a663c0b8d277141'), orType:'Cedula', orUse: 0,
-          }
-          
-        }
-      ]).exec();
-      
-          
-       res.status(200).json(getdata);
+       const getdata = await ORdata.deleteOne({_id: require('mongoose').Types.ObjectId(or_id) 
+    })
+                 
+                
+      res.status(200).json(getdata);
 
 
       } catch (error) {

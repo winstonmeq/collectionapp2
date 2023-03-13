@@ -18,11 +18,11 @@ import axios from 'axios';
 import { useRouter } from "next/router";
 
 
-const Savepayment = ({transacId, orFund,orType, amount, savehandle}) => {
+const Savepayment = ({transacId, orFund,orType, cusName, amount, savehandle}) => {
  
     const [paylist, setpaylist] = useState([])
     // const [service_type, setservice_type] = useState('');
-    const [customerName, setcustomerName] = useState('');
+    const [customerName, setcustomerName] = useState(cusName);
     const [orFrom, setorFrom] = useState(0);
     const [orTo, setorTo] = useState(0);
     const [orTo2, setorTo2] = useState(0);
@@ -47,6 +47,9 @@ const Savepayment = ({transacId, orFund,orType, amount, savehandle}) => {
 
 
       useEffect(() => {   
+
+
+        //function to get unuse OR with Fund and Type as reference
 
         async function fetchData() {
 
@@ -74,6 +77,9 @@ const Savepayment = ({transacId, orFund,orType, amount, savehandle}) => {
 
         fetchData();
         }, []);
+
+
+
 
 
       const updateORdata = async () => {
@@ -107,7 +113,11 @@ const Savepayment = ({transacId, orFund,orType, amount, savehandle}) => {
       
            if(response != null){
           
+            //this is a feedback function to save data to LCRdata
            savehandle()
+           
+           //this function is to update OR data from orUse 0 to orUse 1
+           updateORdata()
            
            if(orBB === 0){
             saveORreport(orGenId, orFund, orType, orNumber,orNumber2, dateToday, orFrom, orTo, orTo2 )
@@ -127,7 +137,7 @@ const Savepayment = ({transacId, orFund,orType, amount, savehandle}) => {
   
           }
 
-        updateORdata()
+      
      
         router.push(`/components/payments/${transacId}`);
   
@@ -135,10 +145,6 @@ const Savepayment = ({transacId, orFund,orType, amount, savehandle}) => {
   
 
     
-
-
-
-
       
         const saveORreport = async (orGenIdd,orFundV, orTypeV,orNumV,orNum2, tdate,rcFrom,rcTo,rcTo2) => {
 
@@ -181,6 +187,8 @@ const Savepayment = ({transacId, orFund,orType, amount, savehandle}) => {
 
     }
 
+
+       //this function is to save the data in begining balance if the or is orBB is 1 is means that the OR is forwarded
     const saveBeginORreport = async (orGenIdd,orFundV, orTypeV,orNumV,orNum2, tdate,rcFrom,rcTo,rcTo2) => {
 
       const qtty = 0;

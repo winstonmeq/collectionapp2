@@ -17,7 +17,7 @@ import { addCedula } from "../../../axios/cedula_request";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import axios from 'axios';
-
+import Savepayment from "../payments/savepayment";
 
 
 
@@ -159,101 +159,12 @@ const savedata = () => {
   setnum_word(convertToWords(((Number(amount1) + Number(amount2 * 0.001) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001)) + Number(calculatePenalty(getmonth))).toFixed(2)))
 
 
-  handleSavePayment()
-
-}
-
-
-
-const handleSavePayment = async () => {
-
-  try {
-
-    const payload = {transacId:transId,orFund, customerName:lname +','+ fname, amount:total_paid,orGenId, orNumber, userId}
-
-    console.log('browser', payload)         
-
-    const response = await axios.post(process.env.NEXTAUTH_URL + '/api/Payment/addPayment', payload);
-
-   if(response != null){
-  
-    
-  {console.log('nag dagan ang save payment')}
-   updateORdata()
-
-
-   }
-
-   
-  } catch (error) {
-
-    console.log(error)
-
-  }
-
-
 }
 
 
 
 
 
-const updateORdata = async () => {
-
-try {
-
-  console.log('update OR',or_id)
-  
-  const payload = {or_id, orUse, userId}
-  const response = await axios.put(process.env.NEXTAUTH_URL + '/api/or/updateOR', payload);    
-   
-} catch (error) {
-  console.log(error)
-}
-
-updateORreport(orGenId, orFrom,orNumber,orNumber2, orTo)
-}
-
-
-
-const updateORreport = async (orGenIdd, orFfrom,orNum,orNum2,orTto) => {
-
- const qtty = 0;
-
-try {
-
-
-  if((orTto-orNum) === 0){
-
-    orNum2 = null
-    orTto = null
-    qtty = null
-
-  } else {
-
-    qtty = orTto-orNum
-
-
-  }
-
-            
-  const payload = {orGenId:orGenIdd, qty3:(orNum-orFfrom + 1), isFrom:orFfrom,isTo:orNum,
-                  qty4:qtty, ebFrom:orNum2,ebTo:orTto, userId}
-
-
-  console.log('update ORreport',payload)
-
-  const response = await axios.put(process.env.NEXTAUTH_URL + '/api/orReport/update', payload);
-
-   
-} catch (error) {
-
-  console.log(error)
-
-}
-
-
-}
 
 
 
@@ -813,8 +724,14 @@ function calculatePenalty(monthno) {
           </Flex>
           <Flex  justify={'right'}>
           <Box>
-          <Button onClick={savedata}  type="submit">Save</Button>
-        
+          {/* <Button onClick={savedata}  type="submit">Save</Button> */}
+           
+          { datalist.length ?               
+            <Savepayment transacId={transId} orFund={orFund} orType={orType} cusName={lname} amount={total_paid} savehandle={savedata} />
+                : null
+          
+
+          } 
           </Box>
           </Flex>
          

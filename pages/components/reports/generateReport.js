@@ -91,6 +91,7 @@ import {
 
             await axios.get( process.env.NEXTAUTH_URL + `/api/orReport/delete_table`)
 
+
           }
 
 
@@ -111,33 +112,62 @@ import {
             } catch (error) {
               console.log(error)
             }
+
+            await axios.get( process.env.NEXTAUTH_URL + `/api/LCR/delete_table`)
+
           }
 
 
+
+
+          // const SaveORdata2 = async () => {
+          //   try {
+          
+          //       const ORdatalist = datalist4.map((data) => {
+          //           return {
+          //             ...data,
+          //             reportName: reportTag,
+
+          //           };
+          //         });
+                  
+          //         const response = await axios.post(process.env.NEXTAUTH_URL + '/api/ORdata2/addOR', { datalist4: ORdatalist });                  
+          //         console.log('Success Save ORdata2')
+
+          //   } catch (error) {
+          //     console.log(error)
+          //   }
+
+
+          //      //delete data per _id
+          //   await axios.get( process.env.NEXTAUTH_URL + `/api/ORdata/delete_table`)
+
+          // }
 
 
           const SaveORdata2 = async () => {
             try {
+              const ORdatalist = datalist4.map((data) => {
+                return {
+                  ...data,
+                  reportName: reportTag,
+                };
+              });
           
-                const ORdatalist = datalist4.map((data) => {
-                    return {
-                      ...data,
-                      reportName: reportTag,
-
-                    };
-                  });
-                  
-                  const response = await axios.post(process.env.NEXTAUTH_URL + '/api/ORdata2/addOR', { datalist4: ORdatalist });                  
-                  console.log('Success Save ORdata2')
-
+              const response = await axios.post(process.env.NEXTAUTH_URL + '/api/ORdata2/addOR', {
+                datalist4: ORdatalist,
+              });
+              console.log('Success Save ORdata2');
+          
+              // delete data per _id
+              for (const data of ORdatalist) {
+                await axios.get(process.env.NEXTAUTH_URL + `/api/ORdata/delete_id?or_id=${data._id}`);
+              }
             } catch (error) {
-              console.log(error)
+              console.log(error);
             }
-
-          }
-
-
-       
+          };
+          
         
   
 
