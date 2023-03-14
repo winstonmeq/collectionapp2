@@ -17,7 +17,7 @@ import { addCedula } from "../../../axios/cedula_request";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import axios from 'axios';
-import Savepayment from "../payments/savepayment";
+import Savepayment2 from "../payments/savepayment2";
 
 
 
@@ -74,6 +74,7 @@ const Cedula = () => {
   const [orNumber, setorNumber] = useState(0);
   const [orNumber2, setorNumber2] = useState(0);
   const [userId, setuserId] = useState('63e4484b3a663c0b8d277141')
+  const [customerName, setcustomerName] = useState('');
 
 
    const getmonth = currentDate.getMonth() + 1
@@ -84,7 +85,7 @@ const Cedula = () => {
 
     const wholeNum = Math.floor(num);
     const decimalNum = ((num - wholeNum) * 100).toFixed();
-    
+
    
    const wholeNumWords = converter.toWords(wholeNum);
     
@@ -93,7 +94,7 @@ const Cedula = () => {
     return `${wholeNumWords}`;
 
    }
-    
+
     return `${wholeNumWords} and ${decimalNum}/100`;
 
   }
@@ -121,6 +122,7 @@ const Cedula = () => {
                             
            }  
        
+          
 
     }   
 
@@ -158,9 +160,31 @@ const savedata = () => {
  
   setnum_word(convertToWords(((Number(amount1) + Number(amount2 * 0.001) + Number(amount3 * 0.001 ) + Number(amount4 * 0.001)) + Number(calculatePenalty(getmonth))).toFixed(2)))
 
+  handleSavePayment()
 
 }
 
+
+const handleSavePayment = async () => {
+  
+           
+  
+  try {
+
+    const payload = {transacId:'12123',orFund,orType, customerName:lname, amount:total_paid,orGenId, orNumber, userId}
+
+    const response = await axios.post(process.env.NEXTAUTH_URL + '/api/Payment/addPayment', payload);
+
+   
+  } catch (error) {
+
+    console.log(error)
+
+  }
+
+//router.push(`/components/payments/${transacId}`);
+
+}
 
 
 
@@ -180,6 +204,7 @@ const optionDivorced = ['Divorced', ' / '];
 
 function calculatePenalty(monthno) {
    
+  
 
   if(monthno == 1){
     
@@ -301,9 +326,6 @@ function calculatePenalty(monthno) {
 
  
 }
-
-
-
 
 
   const addCedulaHandler = async (e) => {
@@ -724,20 +746,18 @@ function calculatePenalty(monthno) {
           </Flex>
           <Flex  justify={'right'}>
           <Box>
-          {/* <Button onClick={savedata}  type="submit">Save</Button> */}
+          <Button onClick={savedata}  type="submit">Save</Button>
            
-          { datalist.length ?               
-            <Savepayment transacId={transId} orFund={orFund} orType={orType} cusName={lname} amount={total_paid} savehandle={savedata} />
-                : null
-          
+       
 
-          } 
           </Box>
           </Flex>
          
         </form>
       </Box>
+      {console.log(lname)}
     </Flex>
+  
   );
 };
 

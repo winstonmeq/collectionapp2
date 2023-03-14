@@ -18,11 +18,11 @@ import axios from 'axios';
 import { useRouter } from "next/router";
 
 
-const Savepayment = ({transacId, orFund,orType, cusName, amount, savehandle}) => {
+const Savepayment = ({transacId, orFund,orType, amount, savehandle}) => {
  
     const [paylist, setpaylist] = useState([])
     // const [service_type, setservice_type] = useState('');
-    const [customerName, setcustomerName] = useState(cusName);
+    const [customerName, setcustomerName] = useState('');
     const [orFrom, setorFrom] = useState(0);
     const [orTo, setorTo] = useState(0);
     const [orTo2, setorTo2] = useState(0);
@@ -255,11 +255,9 @@ const Savepayment = ({transacId, orFund,orType, cusName, amount, savehandle}) =>
           <Input type='text' value={orNumber} readOnly required onChange={(e) => {}}  />
           <label >Customer Name</label>
           <Input type='text' value={customerName} autoFocus={true} required onChange={(e) => {setcustomerName(e.target.value)}}  />
-         
           <label>Amount</label>
           <Input type='number' value={amount} required onChange={e => {}}  />
          
-            {/* <Button type="submit">Save/Print</Button> */}
           </form>
      </ModalBody>
      <Button onClick={(e) => {handleSavePayment()}} >Save</Button>
