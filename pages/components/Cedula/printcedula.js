@@ -50,14 +50,17 @@ const Printcedula2 = () => {
       <ReactToPrint
         trigger={() => <Button>Print this out!</Button>}
         content={() => tableRef.current}
+        documentTitle='Cedula'
+        onAfterPrint={'Print Success'}
+        pageStyle="@page { size: portrait; }"
       />
 
-      <Box ref={tableRef} align={"left"}>
-        <table style={{ width: "500px", marginLeft: "35px" }}>
+      <Box ref={tableRef} align={"left"} fontFamily={'Google Sans'}>
+        <table style={{ width: "500px", marginLeft: "35px",}}>
         {data.map((item,i) => {
 
         return (
-
+            <>
             <tbody>
             <tr key={i}>
               <td>
@@ -395,7 +398,7 @@ const Printcedula2 = () => {
             </tr>
           </tbody>
 
-
+              </>
 
         )
 

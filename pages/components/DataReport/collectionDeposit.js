@@ -98,7 +98,7 @@ const CollectionDeposit = () => {
     return (
         
 
-<Flex  direction={"column"} align={"center"}>
+<Flex  direction={"column"} align={"center"} >
 {console.log('datalist',datalist)}   
 
 
@@ -130,14 +130,14 @@ const CollectionDeposit = () => {
 
   
  
-<Box ref={tableRef} padding={'20px'} >
+<Box ref={tableRef} fontFamily={'Arial'} fontSize={'11px'}>
 
-<Box textAlign={'center'} fontSize ={'2xl'}>Report of Collection and Deposits</Box>
+<Box textAlign={'center'} >Report of Collection and Deposits</Box>
 <Box textAlign={'center'}>PRESIDENT ROXAS, COTABATO</Box>
 <Box textAlign={'center'}>LGU</Box>
 
 <br></br>
-<table style={{ width: "680px", fontSize:'12px' }} >
+<table style={{ width: "680px", }} >
     <tbody>
         <tr >
             <td style={{border: '1px solid black'}}>Fund</td>
@@ -160,7 +160,7 @@ const CollectionDeposit = () => {
 <Text>A. Collection</Text>
 
 
-<table style={{ width: "680px", fontSize:'12px' }} >
+<table style={{ width: "680px" }} >
     <tbody>
         <tr >
             <td style={{border: '1px solid black'}} >1. For Collectors</td> 
@@ -176,7 +176,7 @@ const CollectionDeposit = () => {
 <br></br>
 
 
-<table style={{ width: "680px", fontSize:'12px' }}>
+<table style={{ width: "680px" }}>
     
     <tbody>
            
@@ -208,7 +208,7 @@ const CollectionDeposit = () => {
 
 <br></br>
 
-<table style={{ width: "300px", fontSize:'12px' }}>
+<table style={{ width: "300px"}}>
           
 <tbody>
 <tr>

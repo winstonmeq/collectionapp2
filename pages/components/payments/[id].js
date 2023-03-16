@@ -46,34 +46,34 @@ const Print = () => {
 
 
     return (
-<Flex  direction={"column"} align={"center"} width={"100vw"}>
+<Flex  direction={"column"} align={"center"}  fontFamily={'Courier'}>
 
 <ReactToPrint
         trigger={() => <Button>Print this out!</Button>}
         content={() => tableRef.current}
       />
 
-<Box ref={tableRef} align={"left"} paddingLeft={'30px'}>
+<Box ref={tableRef} align={"left"} paddingLeft={'30px'} >
 
 {paymentList.map((item,i) => {
 
 return (
 <Box key={i}>
 <Flex  direction={'column'}>
-    <Box height={'170px'}></Box>
-   <Box >{moment(item.createdAt).format('MM/DD/YYYY')}</Box>
+    <Box height={'180px'}></Box>
+   <Box paddingLeft={'35px'} >{moment(item.createdAt).format('MM/DD/YYYY')}</Box>
    <Box height={'20px'}></Box>
-   <Box paddingLeft={'50px'}>MTO</Box>
+   <Box paddingLeft={'70px'}>MTO</Box>
    <Box height={'12px'}></Box>
-   <Box paddingLeft={'50px'}>{item.customerName}</Box>
-   <Box height={'40px'}></Box>
-   <Box height={'190px'}>  
+   <Box paddingLeft={'70px'}>{item.customerName}</Box>
+   <Box height={'45px'}></Box>
+   <Box height={'192px'}>  
 
    {item.data2.map((item2,j)=>(
 
 <Flex key={j}  direction={'row'} textAlign={'left'}>
-    <Box  width={'230px'}>{item2.name}</Box>
-    <Box width={'40px'}></Box>
+    <Box  width={'260px'}>{item2.name}</Box>
+    <Box width={'25px'}></Box>
     <Box>{item2.amount.toFixed(2)}</Box>
 </Flex>
 

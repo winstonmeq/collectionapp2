@@ -177,16 +177,16 @@ const Business_tax = () => {
        <Button onClick={handleSearchButtonClick}>Search</Button>
        </Box>
            <TableContainer maxHeight={'600px'} overflowY={'scroll'}>
-           <Table variant='striped' colorScheme='gray'>
+           <Table size='sm' variant='striped' colorScheme='gray.500' >
                <TableCaption>Business</TableCaption>
-               <Thead bg={'gray.400'} fontWeight={'bold'}>           
+               <Thead bg={'gray.200'} fontWeight={'bold'}>           
                   <Tr>
                         <Td >Sub Account</Td>
                         <Td >Amount</Td>
                         <Td >Action</Td>
                     </Tr>
                 </Thead>
-              <Tbody>
+              <Tbody >
              
                   {datalist2 .filter((item) =>
                            item.sub_account_name.toLowerCase().includes(searchName.toLowerCase())

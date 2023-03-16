@@ -49,13 +49,14 @@ const Add_sub_account = () => {
             if (response != null) {
 
                 console.log('Sub Account added successfully', response)
+                router.push('/');
             }
 
         } catch (error) {
             console.log(error)
         }
 
-        router.push('/components/Utility');
+       
 
     };
 
@@ -90,7 +91,7 @@ const Add_sub_account = () => {
                   name:'Account Name',
                   cell: (row) => (
                       
-                    <Button  onClick={(e)=>{onOpen(), setAccount_id(row._id), setAccount_name(row.account_name)}}>{row.data2 ? row.account_name : ''}</Button>
+                    <Button size={'sm'}  onClick={(e)=>{onOpen(), setAccount_id(row._id), setAccount_name(row.account_name)}}>{row.data2 ? row.account_name : ''}</Button>
 
      
                   ),
@@ -192,7 +193,7 @@ const Add_sub_account = () => {
                 />
 
                 </Box>
-               
+{/*                
               <Box>
 
               <label>Sub-Account Code</label>
@@ -213,7 +214,7 @@ const Add_sub_account = () => {
                     onChange={(e) => setSub_account_description(e.target.value)}
                 />
               
-              </Box>
+              </Box> */}
 
 
               <Box>
@@ -232,7 +233,7 @@ const Add_sub_account = () => {
 
             <Box>
 
-                <Button onClick={(e) => {add_sub_account_db()}} type="submit">Save</Button>
+                <Button size='sm' onClick={add_sub_account_db} type="submit">Save</Button>
 
                 </Box>
 

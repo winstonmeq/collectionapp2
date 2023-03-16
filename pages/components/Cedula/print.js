@@ -72,10 +72,12 @@ const CedulaPrint = () => {
 <ReactToPrint
             trigger={() => <Button >Print this out!</Button>}
             content={() => tableRef.current}
+            documentTitle='Cedula'
+            onAfterPrint={'Print Success'}
             pageStyle="@page { size: portrait; }"
           />
         
- <Box ref={tableRef} padding={'20px'}>
+ <Box ref={tableRef} padding={'20px'} width={'100%'} fontFamily={'Google Sans'}>
 
 
  <Box textAlign={'center'}>Republic of the Philippines</Box>

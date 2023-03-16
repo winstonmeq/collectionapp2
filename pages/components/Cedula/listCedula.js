@@ -19,14 +19,10 @@ import {
 
 
 
-
-
-
-
 const ListCedula = () => {
 
   const [data, setdata] = useState([]);
-  const [userId, setuserId] = useState('635684a1d9f90d0fed02ca51');
+  const [userId, setuserId] = useState('63e4484b3a663c0b8d277141');
   const { isOpen, onOpen, onClose } = useDisclosure()
 
 

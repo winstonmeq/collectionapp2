@@ -43,10 +43,24 @@ export default async function handler(req, res) {
               orType:{$push:"$data2.orType"},
 
 
-              Occupation: {$sum: {$cond:[{$eq:["$type", "Occupation"]}, "$amount",'']}},
+              Business_Tax: {$sum: {$cond:[{$eq:["$type", "Business"]}, "$amount",'']}},
+              Fines_Penalty: {$sum: {$cond:[{$eq:["$type", "Fines_Penalty"]}, "$amount",'']}},
+              Garbage: {$sum: {$cond:[{$eq:["$type", "Garbage"]}, "$amount",'']}},
+              Permit: {$sum: {$cond:[{$eq:["$type", "Permit"]}, "$amount",'']}},
+              Civil: {$sum: {$cond:[{$eq:["$type", "Civil"]}, "$amount",'']}},
+              Police: {$sum: {$cond:[{$eq:["$type", "Police"]}, "$amount",'']}},
+              Locational: {$sum: {$cond:[{$eq:["$type", "Locational"]}, "$amount",'']}},
+              Rental: {$sum: {$cond:[{$eq:["$type", "Rental"]}, "$amount",'']}},
+              Certification: {$sum: {$cond:[{$eq:["$type", "Certification"]}, "$amount",'']}},
+              Inspection: {$sum: {$cond:[{$eq:["$type", "Inspection"]}, "$amount",'']}},
               Medical: {$sum: {$cond:[{$eq:["$type", "Medical"]}, "$amount",'']}},
-              Mayors: {$sum: {$cond:[{$eq:["$type", "Mayors"]}, "$amount",'']}}
-            
+              Occupation: {$sum: {$cond:[{$eq:["$type", "Occupation"]}, "$amount",'']}},
+              Mayors: {$sum: {$cond:[{$eq:["$type", "Mayors"]}, "$amount",'']}},
+              Wt_Measure: {$sum: {$cond:[{$eq:["$type", "Wt.Measure"]}, "$amount",'']}},
+              Doc_Stamp: {$sum: {$cond:[{$eq:["$type", "Doc_Stamp"]}, "$amount",'']}},
+              Brgy_Clearance: {$sum: {$cond:[{$eq:["$type", "Brgy_Clearance"]}, "$amount",'']}},
+              Sand_Gravel: {$sum: {$cond:[{$eq:["$type", "Sand_Gravel"]}, "$amount",'']}},
+              Others: {$sum: {$cond:[{$eq:["$type", "Others"]}, "$amount",'']}},
                } 
             },
       

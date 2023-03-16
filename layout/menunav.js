@@ -12,8 +12,8 @@ const Menunav = () => {
       <Stack direction={'row'} >
 
 <Link href={'/'}>
-  <Button >
-       <Text fontSize={'md'}>Home</Text>
+  <Button size={'sm'} >
+       <Text fontSize={'sm'}>Home</Text>
 </Button>
 </Link>
   
@@ -24,69 +24,69 @@ const Menunav = () => {
       </Link> */}
 
       <Link href={'/components/Cedula/listCedula'} >
-  <Button>
-       <Text fontSize={'md'}>Cedula</Text>
+  <Button size={'sm'}  >
+       <Text fontSize={'sm'}>Cedula</Text>
 </Button>
       </Link>
 
 <Link href={'/components/Business'} >
-  <Button>
-       <Text fontSize={'md'}>Bayad</Text>
+  <Button size={'sm'} >
+       <Text fontSize={'sm'}>Bayad</Text>
   </Button>
 </Link>
 
 
 
 <Link href={'/components/orDataView/saveORdata'} >
-  <Button >
-       <Text fontSize={'md'}>OR Entry</Text>
+  <Button size={'sm'}  >
+       <Text fontSize={'sm'}>OR Entry</Text>
   </Button>
 </Link>
 
 
 
 <Link href={'/components/reports/collection_deposit'} >
-  <Button >
-       <Text fontSize={'md'}>OR Collection</Text>
+  <Button size={'sm'}  >
+       <Text fontSize={'sm'}>OR Collection</Text>
   </Button>
 </Link>
   
  
 
 <Link href={'/components/reports/reportall'} >
-  <Button >
-       <Text fontSize={'md'}>Abstract</Text>
+  <Button size={'sm'}  >
+       <Text fontSize={'sm'}>Abstract</Text>
   </Button>
 </Link>
 
 <Link href={'/components/Utility'} >
-  <Button >
-       <Text fontSize={'md'}>Utility</Text>
+  <Button size={'sm'}  >
+       <Text fontSize={'sm'}>Utility</Text>
   </Button>
 </Link>
 
 <Link href={'/components/DataReport/abstractReport'} >
-  <Button >
-       <Text fontSize={'md'}>Abstract Report</Text>
+  <Button size={'sm'} >
+       <Text fontSize={'sm'}>Abstract Report</Text>
   </Button>
 </Link>
 
 <Link href={'/components/DataReport/collectionDeposit'} >
-  <Button >
-       <Text fontSize={'md'}>Collection Report</Text>
+  <Button size={'sm'} >
+       <Text fontSize={'sm'}>Collection Report</Text>
   </Button>
 </Link>
 
 <Link href={'/components/Cedula/cedula_report'} >
-  <Button >
-       <Text fontSize={'md'}>Cedula Report</Text>
+  <Button size={'sm'}  >
+       <Text fontSize={'sm'}>Cedula Report</Text>
   </Button>
 </Link>
 
 
 <Link href={'/components/Forward'} >
-  <Button >
-       <Text fontSize={'md'}>Forward Balance</Text>
+  <Button size={'sm'}  >
+       <Text fontSize={'sm'}>Forward Balance</Text>
   </Button>
 </Link>
 

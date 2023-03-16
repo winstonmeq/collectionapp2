@@ -88,7 +88,7 @@ import {
                   
                   const payload = {or_id, orUse, userId}
   
-                  const response = await axios.put(process.env.NEXTAUTH_URL + '/api/ORdata2/updateOR', payload);    
+                  const response = await axios.put(process.env.NEXTAUTH_URL + '/api/ORdata/updateOR', payload);    
                    
                 } catch (error) {
                   console.log(error)

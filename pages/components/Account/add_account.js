@@ -86,19 +86,19 @@ const Add_account = () => {
             selector:(row) => row.account_name,
             sortable: true,
         },
-        {
-            name:'Account Code',
-            selector:(row) => row.account_code,
-            sortable: true,
+        // {
+        //     name:'Account Code',
+        //     selector:(row) => row.account_code,
+        //     sortable: true,
 
 
-        },
-        {
-            name:'Account Description',
-            selector:(row) => row.account_description,
-            sortable: true,
+        // },
+        // {
+        //     name:'Account Description',
+        //     selector:(row) => row.account_description,
+        //     sortable: true,
 
-        },
+        // },
       
     ]
 
@@ -128,7 +128,7 @@ const Add_account = () => {
                 />
 
                 </Box>
-               
+{/*                
               <Box>
 
               <label>Account Code</label>
@@ -149,7 +149,7 @@ const Add_account = () => {
                     onChange={(e) => setAccount_description(e.target.value)}
                 />
               
-              </Box>
+              </Box> */}
 
           
               

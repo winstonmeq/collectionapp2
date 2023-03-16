@@ -34,10 +34,10 @@ const Utility = () => {
         <Flex direction={'row'} justify={'center'} w={'100%'}>
 
             {console.log(datalist)}
-    <Box width={'50%'} border={'1px'} padding='10px' >
+    <Box width={'30%'} border={'1px'} padding='10px' >
         <Add_account />
     </Box>
-    <Box width={'50%'} padding='10px' >
+    <Box width={'70%'} padding='10px' >
         <Add_sub_account />
     </Box>
   
