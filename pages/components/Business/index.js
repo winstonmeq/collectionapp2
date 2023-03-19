@@ -10,7 +10,7 @@ import {
   Tr,
   Th,
   Td,
-  TableCaption,
+  TableCaption,FormLabel,
   Stack,
   Spacer,
 } from "@chakra-ui/react";
@@ -141,34 +141,29 @@ const Business_tax = () => {
        <Flex direction={'column'} width={'50%'}  padding={'10px'} >
        <Flex direction={'row'} justify={'center'}  >
        <Box >       
-    <Flex direction={'row'}>
-    <Box width={'120px'}>
-          <label>OR Type</label>
-          <Select value={orType} required onChange={(e) => {setorType(e.target.value)}} >
-            
-              <option  value=''>Select</option>
-              <option  value='51'>51</option>
-              <option  value='52'>52</option>
-              <option  value='53'>53</option> 
-              <option  value='56'>56</option>            
-            
-            </Select>
-      
-        </Box> 
-      
-       <Box width={'120px'}>
-          <label>OR Fund</label>
-          <Select value={orFund} required onChange={(e) => {setorFund(e.target.value)}} >
-            
-              <option  value=''>Select</option>
-              <option  value='GF'>GF</option>
-              <option  value='DC'>DC</option>
-              <option  value='TF'>TF</option>            
-            
-            </Select>
-      
-        </Box> 
-    </Flex>
+       <Flex direction='row'>
+  <Box width='120px' mr='20px'>
+    <FormLabel>OR Type</FormLabel>
+    <Select value={orType} required onChange={e => setorType(e.target.value)}>
+      <option value=''>Select</option>
+      <option value='51'>51</option>
+      <option value='52'>52</option>
+      <option value='53'>53</option> 
+      <option value='56'>56</option>            
+    </Select>
+  </Box> 
+
+  <Box width='120px'>
+    <FormLabel>OR Fund</FormLabel>
+    <Select value={orFund} required onChange={e => setorFund(e.target.value)}>
+      <option value=''>Select</option>
+      <option value='GF'>GF</option>
+      <option value='DC'>DC</option>
+      <option value='TF'>TF</option>            
+    </Select>
+  </Box> 
+</Flex>
+
       
    
        <Box direction={'row'}>
@@ -229,34 +224,31 @@ const Business_tax = () => {
       <Flex direction={'column'}  >
    
         <Box padding={'10px'} >
-          <TableContainer >
-            <Table variant='striped' colorScheme='blue'>
-              <TableCaption>Payment Summary</TableCaption>
-              <Thead>
-                <Tr>
-                  <Th>TransacId</Th>
-                  <Th>Account</Th>
-                  <Th>Sub Account</Th>
-                  <Th>Amount</Th>
-                  <Th>Action</Th>
-                </Tr>
-              </Thead>
-              <Tbody>
-                {datalist.map((item, i) => {
-
-                  return (
-                    <Tr key={i}>
-                      <Td >{item.transacId}</Td>
-                      <Td >{item.type}</Td>
-                      <Td >{item.name}</Td>
-                      <Td>{item.amount}</Td>
-                      <Td> <Button onClick={() => handleRemoveProduct(item.name)}>Remove</Button></Td>
-                    </Tr>
-                  )
-
-
-                })}
-              </Tbody>
+        <TableContainer style={{padding: "10px"}}>
+  <Table variant='striped' colorScheme='purple'>
+    <TableCaption>Payment Summary</TableCaption>
+    <Thead>
+      <Tr>
+        <Th style={{fontSize: "16px", fontWeight: "bold"}}>TransacId</Th>
+        <Th style={{fontSize: "16px", fontWeight: "bold"}}>Account</Th>
+        <Th style={{fontSize: "16px", fontWeight: "bold"}}>Sub Account</Th>
+        <Th style={{fontSize: "16px", fontWeight: "bold"}}>Amount</Th>
+        <Th style={{fontSize: "16px", fontWeight: "bold"}}>Action</Th>
+      </Tr>
+    </Thead>
+    <Tbody>
+      {datalist.map((item, i) => {
+        return (
+          <Tr key={i} style={{marginBottom: "10px", cursor: "pointer"}} _hover={{backgroundColor: "#E2E8F0"}}>
+            <Td style={{fontSize: "14px"}}>{item.transacId}</Td>
+            <Td style={{fontSize: "14px"}}>{item.type}</Td>
+            <Td style={{fontSize: "14px"}}>{item.name}</Td>
+            <Td style={{fontSize: "14px"}}>{item.amount}</Td>
+            <Td> <Button onClick={() => handleRemoveProduct(item.name)}>Remove</Button></Td>
+          </Tr>
+        )
+      })}
+    </Tbody>
               <Tfoot>
                 <Tr>
                   <Th></Th>

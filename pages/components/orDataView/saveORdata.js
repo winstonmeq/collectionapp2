@@ -20,6 +20,7 @@ import {
   import { useRouter } from "next/router";
 import Fetch_no_orUse from "./fetch_no_orUse";
   import moment from "moment/moment";
+import Collection_deposit from "../reports/collection_deposit";
 
 
 
@@ -104,7 +105,7 @@ import Fetch_no_orUse from "./fetch_no_orUse";
 
         }    
 
-        router.push('/')
+        router.reload()
       }
 
 
@@ -193,57 +194,8 @@ import Fetch_no_orUse from "./fetch_no_orUse";
       </Flex>
      
  <Box height={'50px'}></Box>
-   <Flex direction={'row'} justify={'center'}>
-
-   <Box width={'80%'} border={'1px'}>
-
-
-<h1>Issued OR</h1>
-   <Table>
-   <Thead>
-   <Tr>
-   <Th>OR Fund</Th>
-   <Th>OR Type</Th>
-    <Th>Booklet</Th>
-    <Th>OR Start</Th>
-    <Th>OR End</Th>
-    <Th>Amount</Th>
-   </Tr>
-   </Thead>
-
-   <Tbody>
   
-  
-   { datalist.map((items,i) => {
-
-return (
-  <Tr key={i}>
-  <Td>{items.orFund}</Td>
-  <Td >{items.orType}</Td>
-    <Td >{items.orGenId}</Td>
-    <Td >{items.firstORNumber}</Td>
-    <Td >{items.lastORNumber}</Td>
-    <Td >{items.totalAmount}</Td>
-
-  </Tr>
- 
-  
-)
-
-
-})
-
-}
-</Tbody>
-</Table>
-
- 
-   </Box>
-
-      
-
-    </Flex>
-      
+      <Collection_deposit />
 
 </div>
 

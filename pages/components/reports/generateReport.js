@@ -15,7 +15,7 @@ import {
   import { useState } from "react";
   import { useEffect } from "react";
   import axios from 'axios';
-  import { useRouter } from "next/router";
+  import Router, { useRouter } from "next/router";
   
   
   const GenerateReport = () => {
@@ -91,7 +91,7 @@ import {
 
             await axios.get( process.env.NEXTAUTH_URL + `/api/orReport/delete_table`)
 
-
+            Router.push('/components/Forward')
           }
 
 

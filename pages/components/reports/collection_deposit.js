@@ -77,10 +77,9 @@ const Collection_deposit = () => {
 {console.log(datalist4)}   
  
 
-<Text>C. Accountability for Accountables Forms</Text>
 
 
-<table style={{ width: "670px", fontSize:'10px' }}>
+<table style={{ width: "1020px", fontSize:'12px' }}>
 <tbody> 
 
 <tr>

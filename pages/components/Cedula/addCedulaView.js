@@ -528,6 +528,7 @@ const Cedula = () => {
               <Input
                 type="text"
                 value={cedula_no}
+                readOnly
                 onChange={(e) => {
                 }}
               />
@@ -568,6 +569,7 @@ const Cedula = () => {
             <Box align={"right"}>
               <Input
                 type="text"
+                autoFocus
                 placeholder="Last Name"
                 required
                 onChange={(e) => {

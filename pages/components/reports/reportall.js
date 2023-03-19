@@ -75,6 +75,105 @@ const Report_all = () => {
     handleSearchButtonClick(selectedfcode);
   };
 
+
+  const ComponentToPrint = () => {
+
+
+    return(
+      <Flex direction={'row'} fontFamily={'Arial'} paddingLeft={'20px'} fontSize={'12px'}>
+             
+      <table>
+      <thead>
+       <tr>
+       <th style={{width:'80px'}}>Date</th>
+      <th style={{width:'80px'}}>OR #</th>
+      <th style={{width:'100px'}}>OR Type</th>
+      <th style={{width:'100px'}}>Name</th>
+      <th style={{width:'100px'}}>Bus. Tax</th>
+      <th style={{width:'100px'}}>Fines Penalty</th>
+      <th style={{width:'100px'}}>Garbage</th>
+      <th style={{width:'100px'}}>Permit</th>
+      <th style={{width:'100px'}}>Civil</th>
+      <th style={{width:'100px'}}>Locational</th>
+      <th style={{width:'100px'}}>Rental</th>
+      <th style={{width:'100px'}}>Certification</th>
+      <th style={{width:'100px'}}>Inspection</th>
+      <th style={{width:'100px'}}>Medical</th>
+      <th style={{width:'100px'}}>Occupation</th>
+      <th style={{width:'100px'}}>Mayors</th>
+      <th style={{width:'100px'}}>Wt. Measure</th>
+      <th style={{width:'100px'}}>Doc Stamp</th>
+      <th style={{width:'100px'}}>Brgy. Clearance</th>
+      <th style={{width:'100px'}}>Sand & Gravel</th>
+      <th style={{width:'100px'}}>Others</th>
+      <th style={{width:'100px'}}>Total</th>
+ 
+     
+      </tr>
+      </thead>
+      <tbody>
+      
+        {datalist.map((item,index) => {
+ 
+         const total = item.Medical + item.Occupation + item.Mayors;
+ 
+   return(
+        <tr key={index} style={{textAlign:'center'}}>
+        <td style={{width:'80px'}}>2023</td>
+        <td style={{width:'80px'}}>{item.orNumber[0]}</td>
+        <td style={{width:'80px'}}>{item.orType[0]}</td>
+        <td style={{width:'100px'}}>{item.customer[0]}</td>
+        <td style={{width:'100px'}}>{item.Business_Tax}</td>
+        <td style={{width:'100px'}}>{item.Fines_Penalty}</td>
+        <td style={{width:'100px'}}>{item.Garbage}</td>
+        <td style={{width:'100px'}}>{item.Permit}</td>
+        <td style={{width:'100px'}}>{item.Civil}</td>
+        <td style={{width:'100px'}}>{item.Police}</td>
+        <td style={{width:'100px'}}>{item.Locational}</td>
+        <td style={{width:'100px'}}>{item.Rental}</td>
+        <td style={{width:'100px'}}>{item.Certification}</td>
+        <td style={{width:'100px'}}>{item.Inspection}</td>
+        <td style={{width:'100px'}}>{item.Medical}</td>
+        <td style={{width:'100px'}}>{item.Occupation}</td>
+        <td style={{width:'100px'}}>{item.Mayors}</td>
+        <td style={{width:'100px'}}>{item.Wt_Measure}</td>
+        <td style={{width:'100px'}}>{item.Doc_Stamp}</td>
+        <td style={{width:'100px'}}>{item.Brgy_Clearance}</td>
+        <td style={{width:'100px'}}>{item.Sand_Gravel}</td>
+        <td style={{width:'100px'}}>{item.Others}</td>
+ 
+        <td style={{width:'100px'}}>{total}</td>
+ 
+                 
+        </tr>
+   )
+       
+             
+        })}
+            
+      
+      </tbody>
+      <tfoot>
+     <tr>
+       <td colSpan="4" style={{ textAlign: 'right' }}>Total:</td>
+       <td>{datalist.reduce((sum, item) => sum + item.Medical, 0)}</td>
+       <td>{datalist.reduce((sum, item) => sum + item.Occupation, 0)}</td>
+       <td>{datalist.reduce((sum, item) => sum + item.Mayors, 0)}</td>
+       <td>{datalist.reduce((sum, item) => sum + item.Medical + item.Occupation + item.Mayors, 0)}</td>
+     </tr>
+   </tfoot>
+      </table>
+             </Flex>
+ 
+    )
+
+
+  }
+
+
+
+
+
     return (
 
      <Flex direction={'column'} >
@@ -109,105 +208,18 @@ const Report_all = () => {
      <ReactToPrint
              trigger={() => <Button>Print this out!</Button>}
              content={() => tableRef.current}
-             pageStyle="@page { size: landscape; }"
+            pageStyle={{ size: "8.5x13", orientation: "landscape" }}
+
+             //pageStyle="@page { size: landscape; }"
+             
            />
+      <ComponentToPrint ref={(el) => (this.componentRef = el)} />
+
       </Box>
      
      </Flex>
    
-
-   <Box  ref={tableRef}>
-
-           
-  <Flex direction={'row'} fontFamily={'Courier'} fontSize={'12px'}>
-             
-     <table>
-     <thead>
-      <tr>
-      <th style={{width:'80px'}}>Date</th>
-     <th style={{width:'80px'}}>OR #</th>
-     <th style={{width:'100px'}}>OR Type</th>
-     <th style={{width:'100px'}}>Name</th>
-     <th style={{width:'100px'}}>Bus. Tax</th>
-     <th style={{width:'100px'}}>Fines Penalty</th>
-     <th style={{width:'100px'}}>Garbage</th>
-     <th style={{width:'100px'}}>Permit</th>
-     <th style={{width:'100px'}}>Civil</th>
-     <th style={{width:'100px'}}>Locational</th>
-     <th style={{width:'100px'}}>Rental</th>
-     <th style={{width:'100px'}}>Certification</th>
-     <th style={{width:'100px'}}>Inspection</th>
-     <th style={{width:'100px'}}>Medical</th>
-     <th style={{width:'100px'}}>Occupation</th>
-     <th style={{width:'100px'}}>Mayors</th>
-     <th style={{width:'100px'}}>Wt. Measure</th>
-     <th style={{width:'100px'}}>Doc Stamp</th>
-     <th style={{width:'100px'}}>Brgy. Clearance</th>
-     <th style={{width:'100px'}}>Sand & Gravel</th>
-     <th style={{width:'100px'}}>Others</th>
-     <th style={{width:'100px'}}>Total</th>
-
     
-     </tr>
-     </thead>
-     <tbody>
-     
-       {datalist.map((item,index) => {
-
-        const total = item.Medical + item.Occupation + item.Mayors;
-
-  return(
-       <tr key={index} style={{textAlign:'center'}}>
-       <td style={{width:'80px'}}>2023</td>
-       <td style={{width:'80px'}}>{item.orNumber[0]}</td>
-       <td style={{width:'80px'}}>{item.orType[0]}</td>
-       <td style={{width:'100px'}}>{item.customer[0]}</td>
-       <td style={{width:'100px'}}>{item.Business_Tax}</td>
-       <td style={{width:'100px'}}>{item.Fines_Penalty}</td>
-       <td style={{width:'100px'}}>{item.Garbage}</td>
-       <td style={{width:'100px'}}>{item.Permit}</td>
-       <td style={{width:'100px'}}>{item.Civil}</td>
-       <td style={{width:'100px'}}>{item.Police}</td>
-       <td style={{width:'100px'}}>{item.Locational}</td>
-       <td style={{width:'100px'}}>{item.Rental}</td>
-       <td style={{width:'100px'}}>{item.Certification}</td>
-       <td style={{width:'100px'}}>{item.Inspection}</td>
-       <td style={{width:'100px'}}>{item.Medical}</td>
-       <td style={{width:'100px'}}>{item.Occupation}</td>
-       <td style={{width:'100px'}}>{item.Mayors}</td>
-       <td style={{width:'100px'}}>{item.Wt_Measure}</td>
-       <td style={{width:'100px'}}>{item.Doc_Stamp}</td>
-       <td style={{width:'100px'}}>{item.Brgy_Clearance}</td>
-       <td style={{width:'100px'}}>{item.Sand_Gravel}</td>
-       <td style={{width:'100px'}}>{item.Others}</td>
-
-       <td style={{width:'100px'}}>{total}</td>
-
-                
-       </tr>
-  )
-      
-            
-       })}
-           
-     
-     </tbody>
-     <tfoot>
-    <tr>
-      <td colSpan="4" style={{ textAlign: 'right' }}>Total:</td>
-      <td>{datalist.reduce((sum, item) => sum + item.Medical, 0)}</td>
-      <td>{datalist.reduce((sum, item) => sum + item.Occupation, 0)}</td>
-      <td>{datalist.reduce((sum, item) => sum + item.Mayors, 0)}</td>
-      <td>{datalist.reduce((sum, item) => sum + item.Medical + item.Occupation + item.Mayors, 0)}</td>
-    </tr>
-  </tfoot>
-     </table>
-            </Flex>
-
-
-   </Box>
-
-     
 
   
     </Flex>

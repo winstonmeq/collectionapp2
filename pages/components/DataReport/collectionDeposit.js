@@ -94,43 +94,10 @@ const CollectionDeposit = () => {
   //const total = datalist.reduce((acc, item) => acc + item.totalAmount, 0);
 
 
+ const ComponentToPrint = () => {
 
     return (
-        
-
-<Flex  direction={"column"} align={"center"} >
-{console.log('datalist',datalist)}   
-
-
-<Box width={'30%'} align={'left'}>
-            <Select value={'reportCode'} onChange={handleSelectChange} >
-            <option  value=''>Select</option>
-            {datalist2.map((item,index) => (
-                    <>
-        
-            <option key={index}  value={item.reportNum}>{item.reportNum}</option>
-            
-
-                    </>
-          
-
-
-            ))}
-         
-          
-          </Select>
-</Box>
-
-<Box>
-<ReactToPrint
-        trigger={() => <Button>Print this out!</Button>}
-        content={() => tableRef.current}
-      />
-</Box>
-
-  
- 
-<Box ref={tableRef} fontFamily={'Arial'} fontSize={'11px'}>
+        <Box ref={tableRef} fontFamily={'Arial'} fontSize={'11px'}>
 
 <Box textAlign={'center'} >Report of Collection and Deposits</Box>
 <Box textAlign={'center'}>PRESIDENT ROXAS, COTABATO</Box>
@@ -450,30 +417,65 @@ const CollectionDeposit = () => {
 
 
 
-
-
-
-
-
-
-
-
     </tbody>
    
    </table>
 
 
+</Box>
+    )
 
 
 
+ }
 
 
+    return (
+        
+
+<Flex  direction={"column"} align={"center"} >
+{console.log('datalist',datalist)}   
 
 
+<Box width={'30%'} align={'left'}>
+            <Select value={'reportCode'} onChange={handleSelectChange} >
+            <option  value=''>Select</option>
+            {datalist2.map((item,index) => (
+                    <>
+        
+            <option key={index}  value={item.reportNum}>{item.reportNum}</option>
+            
+
+                    </>
+          
 
 
+            ))}
+         
+          
+          </Select>
+</Box>
+
+<Box>
+<ReactToPrint
+        trigger={() => <Button>Print this out!</Button>}
+        content={() => tableRef.current}
+        pageStyle={{ size: "A4", orientation: "portrait" }}
+
+      />
+
+      {/* mao nih code sa pag hide sa imuha eh print dile na nimu makita ky ang display is none... */}
+       {/* <div style={{ display: 'none' }}>
+        <ComponentToPrint ref={tableRef} />
+      </div> */}
+
+        <ComponentToPrint ref={tableRef} />
 
 </Box>
+
+  
+ 
+
 </Flex>
       
 
