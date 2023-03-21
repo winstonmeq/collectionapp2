@@ -3,7 +3,6 @@ import { Box, Flex, Text, IconButton, Button, Stack,
   useColorModeValue, useBreakpointValue, useDisclosure,
 
 } from '@chakra-ui/react';
-import { ChevronDownIcon, ChevronRightIcon } from '@chakra-ui/icons';
 
 import Link from "next/link";
 
