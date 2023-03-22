@@ -12,6 +12,12 @@ import {
   Input,
   Spacer,
 } from "@chakra-ui/react";
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
+
+
+
+
 
 const Print = () => {
   const [paymentList, setPaymentList] = useState([]);
@@ -32,6 +38,26 @@ const Print = () => {
   const tableRef = useRef(null);
   var converter = require('number-to-words');
 
+
+
+  const handlePrint = () => {
+
+    html2canvas(tableRef.current).then((canvas) => {
+
+      const imgData = canvas.toDataURL('image/png');
+      const pdf = new jsPDF();
+     pdf.addImage(imgData, 'PNG', 10, 10, 0, 0); // A4 size
+  
+     pdf.save('my-pdf-file.pdf');
+
+    });
+  };
+
+
+
+
+
+
   return (
     <Flex  direction={"column"} align={"center"}  fontFamily={'Arial'}>
       <ReactToPrint
@@ -40,8 +66,12 @@ const Print = () => {
         pageStyle={{ size: "A4", orientation: "Portrait" }}
       />
 
+
+<button onClick={handlePrint}>Print PDF</button>
+
+
       <Box ref={tableRef} align={"left"} >
-        <table style={{fontSize:'12px'}} width={'1024'}>
+        <table style={{fontSize:'11px'}} width='350px' >
          
           <tbody>
           {paymentList.map((item, i) => {
@@ -133,7 +163,28 @@ const Print = () => {
           })}
           </tbody>
         </table>
+        <style jsx>{`
+        @media print {
+            /* Add your print styles here */
+            body {
+              font-size: 1.4vw; /* responsive font size */
+            }
+            h1 {
+              font-size: 2vw; /* responsive font size */
+              text-align: center;
+            }
+            table {
+              width: 90vw; /* responsive table width */
+            }
+            td {
+              font-size: 1.2vw; /* responsive font size */
+            }
+            /* ... */
+          }
+
         
+
+      `}</style>
       </Box>
     </Flex>
   );
