@@ -82,6 +82,7 @@ const Report_all = () => {
       <th style={{width:'100px'}}>Garbage</th>
       <th style={{width:'100px'}}>Permit</th>
       <th style={{width:'100px'}}>Civil</th>
+      <th style={{width:'100px'}}>Police</th>
       <th style={{width:'100px'}}>Locational</th>
       <th style={{width:'100px'}}>Rental</th>
       <th style={{width:'100px'}}>Certification</th>

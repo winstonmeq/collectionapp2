@@ -12,6 +12,12 @@ import {
   Input,
   Spacer,
 } from "@chakra-ui/react";
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
+
+
+
+
 
 const Print = () => {
   const [paymentList, setPaymentList] = useState([]);
@@ -32,6 +38,26 @@ const Print = () => {
   const tableRef = useRef(null);
   var converter = require('number-to-words');
 
+
+
+  const handlePrint = () => {
+
+    html2canvas(tableRef.current).then((canvas) => {
+
+      const imgData = canvas.toDataURL('image/png');
+      const pdf = new jsPDF();
+     pdf.addImage(imgData, 'PNG', 10, 10, 0, 0); // A4 size
+  
+     pdf.save('my-pdf-file.pdf');
+
+    });
+  };
+
+
+
+
+
+
   return (
     <Flex  direction={"column"} align={"center"}  fontFamily={'Arial'}>
       <ReactToPrint
@@ -40,42 +66,125 @@ const Print = () => {
         pageStyle={{ size: "A4", orientation: "Portrait" }}
       />
 
-      <Box ref={tableRef} align={"left"} paddingLeft={'30px'} >
-        {paymentList.map((item, i) => {
+
+<button onClick={handlePrint}>Print PDF</button>
+
+
+      <Box ref={tableRef} align={"left"} >
+        <table style={{fontSize:'11px'}} width='350px' >
+         
+          <tbody>
+          {paymentList.map((item, i) => {
           return (
-            <Box key={i}>
-              <Flex  direction={'column'}>
-                <Box height={'180px'}></Box>
-                <Box paddingLeft={'35px'}>{moment(item.createdAt).format('MM/DD/YYYY')}</Box>
-                <Box height={'20px'}></Box>
-                <Box paddingLeft={'70px'}>MTO</Box>
-                <Box height={'12px'}></Box>
-                <Box paddingLeft={'70px'}>{item.customerName}</Box>
-                <Box height={'45px'}></Box>
-                <Box height={'192px'}>  
-                  {item.data2.map((item2,j) => (
-                    <Flex key={j} direction={'row'} textAlign={'left'}>
-                      <Box  width={'260px'}>{item2.name}</Box>
-                      <Box width={'25px'}></Box>
-                      <Box>{item2.amount.toFixed(2)}</Box>
-                    </Flex>
-                  ))}
-                </Box>      
-                <Box>
-                  <Flex direction={'row'} textAlign={'left'}>
-                    <Box width={'270px'}></Box>
-                    <Box>{item.amount.toFixed(2)}</Box>
-                    <Box height={'40px'}></Box>
-                  </Flex>
-                  <Flex direction={'row'} textAlign={'left'}>
-                    <Box width={'40px'}></Box>
-                    <Box>{converter.toWords(item.amount)}</Box>
-                  </Flex>
-                </Box>
-              </Flex>
-            </Box>
-          );
-        })}
+            <> 
+            <tr>
+            <td height={'150px'} width={'180px'}></td>
+            <td width={'70px'}></td>
+            <td width={'100px'}></td>
+            </tr> 
+
+            <tr >             
+              <td style={{paddingLeft:'30px'}}>{moment(item.createdAt).format('MM/DD/YYYY')}</td>
+              <td></td>
+              <td></td>            
+            </tr>
+
+            <tr>
+            <td height={'15px'}></td>
+            <td></td>
+            <td></td>
+            </tr>  
+
+            <tr>
+              <td style={{paddingLeft:'30px'}} >MTO</td>
+              <td></td>
+              <td></td>
+            </tr>
+
+            <tr>
+            <td height={'15px'}></td>
+            <td></td>
+            <td></td>
+            </tr>  
+
+            <tr>
+              <td style={{paddingLeft:'30px'}}>{item.customerName}</td>
+              <td></td>
+              <td></td>
+            </tr>
+
+            <tr>
+            <td height={'35px'}></td>
+            <td></td>
+            <td></td>
+            </tr>  
+               
+
+            <tr>
+            <td height={'200px'} colspan='3'>
+            {item.data2.map((item2,j) => (
+                     <tr key={j}>
+                   <td width={'180px'} >{item2.name}</td>
+                   <td width={'70px'}></td>
+                   <td width={'100px'}>{item2.amount.toFixed(2)}</td>
+                    </tr>
+            ))}
+
+            </td>
+           
+            </tr> 
+
+            <tr>
+            <td></td>
+            <td></td>
+            <td>{item.amount.toFixed(2)}</td>
+            </tr>  
+
+            <tr>
+            <td height={'25px'}></td>
+            <td></td>
+            <td></td>
+            </tr>  
+
+
+            <tr>
+              <td >{converter.toWords(item.amount)}</td>
+              <td></td>
+              <td></td>
+            </tr>
+
+
+
+            </>   
+                       
+
+          
+           );
+          })}
+          </tbody>
+        </table>
+        <style jsx>{`
+        @media print {
+            /* Add your print styles here */
+            body {
+              font-size: 1.4vw; /* responsive font size */
+            }
+            h1 {
+              font-size: 2vw; /* responsive font size */
+              text-align: center;
+            }
+            table {
+              width: 90vw; /* responsive table width */
+            }
+            td {
+              font-size: 1.2vw; /* responsive font size */
+            }
+            /* ... */
+          }
+
+        
+
+      `}</style>
       </Box>
     </Flex>
   );
