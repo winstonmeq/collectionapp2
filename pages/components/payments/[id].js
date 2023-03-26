@@ -28,12 +28,15 @@ const Print = () => {
   console.log(id);
 
   useEffect(() => {        
-    async function fetchData(id) {
+    async function fetchData() {
       const { data } = await axios.get(process.env.NEXTAUTH_URL + `/api/Payment/${id}`);           
       setPaymentList(data);
     }
-    fetchData(id);
-  }, []);
+    if(id){
+      fetchData();
+    }
+    
+  }, [id]);
 
   const tableRef = useRef(null);
   var converter = require('number-to-words');
@@ -71,7 +74,7 @@ const Print = () => {
 
 
       <Box ref={tableRef} align={"left"} >
-        <table style={{fontSize:'11px'}} width='350px' >
+        <table style={{fontSize:'12px'}} width='350px' >
          
           <tbody>
           {paymentList.map((item, i) => {
@@ -133,11 +136,15 @@ const Print = () => {
             </td>
            
             </tr> 
-
-            <tr>
-            <td></td>
-            <td></td>
-            <td>{item.amount.toFixed(2)}</td>
+          
+            <tr>            
+                <td colspan='3'>
+                    <tr>
+                      <td width={'180px'} ></td>
+                      <td width={'70px'}></td>
+                      <td width={'100px'}> {item.amount.toFixed(2)}</td>
+                      </tr>
+                </td>
             </tr>  
 
             <tr>
