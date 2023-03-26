@@ -16,7 +16,8 @@ import {
   import { useEffect } from "react";
   import axios from 'axios';
   import { useRouter } from "next/router";
-  
+  import { useSession } from 'next-auth/react';
+
   
   const ForwardBal = () => {
    
@@ -29,7 +30,9 @@ import {
       const [orGenId2, setorGenId2] = useState('');
       const [orNumber, setorNumber] = useState(0);
       const [orTo, setorTo] = useState(0);
-      const [userId, setuserId] = useState('63e4484b3a663c0b8d277141')
+      const [userId, setuserId] = useState(null)
+
+      const { data: session} = useSession();
 
     
       const { isOpen, onOpen, onClose } = useDisclosure()
@@ -37,10 +40,17 @@ import {
       const router = useRouter();  
 
 
+      useEffect(() => {
+        if (session) {
+            setuserId(session.user.id);
+        }
+    }, [session]);
+
 
     
   
       const currentDate = new Date();
+
       const dateToday = `${currentDate.getMonth() + 1}/${currentDate.getDate()}/${currentDate.getFullYear()}`;
 
 
@@ -61,7 +71,7 @@ import {
         useEffect(() => {   
   
           async function fetchData() {
-              const { data } = await axios.get( process.env.NEXTAUTH_URL + `/api/or/fetchORnoUse`)
+              const { data } = await axios.get( process.env.NEXTAUTH_URL + `/api/or/fetchORnoUse?userId=${userId}`)
             
               setdatalist(data);
 
@@ -78,10 +88,13 @@ import {
              
           }  
 
-       
+        if(userId) {
           fetchData();
+
+        }
+          
          
-          }, []);
+          }, [userId]);
   
 
         
@@ -150,7 +163,7 @@ import {
   
     return (
       <Flex >
-        {console.log('datalist', datalist)}
+        {console.log(datalist)}
         <Button onClick={(e)=>{saveORreport(dateToday)}}>Balance Forward</Button>
      
   

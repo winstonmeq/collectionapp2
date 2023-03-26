@@ -62,17 +62,9 @@ const Add_account = () => {
     useEffect(() => {   
 
       async function fetchData() {
-          const { data } = await axios.get( process.env.NEXTAUTH_URL + `/api/Account/get_account`)
+          const { data } = await axios.get( process.env.NEXTAUTH_URL + `/api/Account/getAccount`)
           setdatalist(data);
 
-          if(data!=null){          
-
-          } else {             
-
-            window.alert('Please add Account');
-           
-
-          }
          
       }
 

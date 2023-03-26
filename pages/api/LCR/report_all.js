@@ -10,7 +10,7 @@ export default async function handler(req, res) {
       try {
 
        // const { date1, date2, } = req.query;
-       const { Fundcode } = req.query;
+       const { userId, Fundcode } = req.query;
 
 
        await dbConnect();  
@@ -22,7 +22,7 @@ export default async function handler(req, res) {
                 $match : { 
                   
                                              
-                  userId: require('mongoose').Types.ObjectId('63e4484b3a663c0b8d277141'), orFund:Fundcode}, 
+                  userId: require('mongoose').Types.ObjectId(userId), orFund:Fundcode}, 
             },
            
 

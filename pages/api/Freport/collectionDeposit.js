@@ -9,7 +9,7 @@ export default async function handler(req, res) {
 
       try {
 
-        const {report} = req.query;
+        const {userId, report} = req.query;
 
     //   console.log(' payment api transacId ang',id)
 
@@ -19,7 +19,7 @@ export default async function handler(req, res) {
        const data = await FReport.aggregate([
         {
           $match: {
-            userId: require('mongoose').Types.ObjectId('63e4484b3a663c0b8d277141'), reportNum:report
+            userId: require('mongoose').Types.ObjectId(userId), reportNum:report
            
           }
         },
@@ -28,6 +28,7 @@ export default async function handler(req, res) {
         {
             $group: {
               _id: '$orGenId',
+              reportNum: { $last: '$reportNum' },
               orGenId: { $last: '$orGenId' },
               formType: { $last: '$formType' },
               orFund: { $last: '$orFund' },

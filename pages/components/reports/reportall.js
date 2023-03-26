@@ -17,7 +17,7 @@ import moment from 'moment/moment';
 import { useRef } from "react";
 import ReactToPrint from "react-to-print";
 import GenerateReport from './generateReport';
-
+import { useSession } from 'next-auth/react';
 
 
 
@@ -37,26 +37,14 @@ const Report_all = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
 
   
+    const { data: session} = useSession();
     
     const tableRef = useRef(null);
 
   
-    // useEffect(() => {
-    //     async function fetchData() {
-            
-    //         const { data } = await axios.get(process.env.NEXTAUTH_URL + '/api/Reports/report_all');
-
-    //         setdatalist(data);
-    //     }    
-       
-    //     fetchData();
-       
-    // }, []);
-
-
 
     const handleSearchButtonClick = async (selectedfcode) => {
-      const {data} = await axios.get(`/api/LCR/report_all?Fundcode=${selectedfcode}`);
+      const {data} = await axios.get(`/api/LCR/report_all?userId=${session.user.id}&Fundcode=${selectedfcode}`);
       setdatalist(data);
     };
 
@@ -197,6 +185,7 @@ const Report_all = () => {
            </Box> */}
            <Box width={'100px'}></Box>
            <Box>
+          
            <GenerateReport />
 
            </Box>
@@ -205,15 +194,8 @@ const Report_all = () => {
      <Flex>
      <Box>
        
-     <ReactToPrint
-             trigger={() => <Button>Print this out!</Button>}
-             content={() => tableRef.current}
-            pageStyle={{ size: "8.5x13", orientation: "landscape" }}
-
-             //pageStyle="@page { size: landscape; }"
-             
-           />
-      <ComponentToPrint ref={(el) => (this.componentRef = el)} />
+  
+      <ComponentToPrint/>
 
       </Box>
      

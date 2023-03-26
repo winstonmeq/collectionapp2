@@ -9,7 +9,7 @@ export default async function handler(req, res) {
 
       try {
 
-         const {orFund,orType} = req.body;
+         const {orFund,orType,userId} = req.body;
 
 
        await dbConnect();  
@@ -18,7 +18,7 @@ export default async function handler(req, res) {
         const getdata = await ORdata.aggregate([
             
             { 
-                $match : { userId: require('mongoose').Types.ObjectId('63e4484b3a663c0b8d277141'), orUse:0, orFund:orFund, orType:orType}, 
+                $match : { userId: require('mongoose').Types.ObjectId(userId), orUse:0, orFund:orFund, orType:orType}, 
             },
           
       

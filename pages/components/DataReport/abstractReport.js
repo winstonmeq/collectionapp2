@@ -16,6 +16,7 @@ import AddLCR from '../LCR/addLCR';
 import moment from 'moment/moment';
 import { useRef } from "react";
 import ReactToPrint from "react-to-print";
+import { useSession } from 'next-auth/react';
 
 
 
@@ -29,7 +30,7 @@ const AbstractReport= () => {
     const [date2, setDate2] = useState('');
     const [reportName, setreportName] = useState('');
 
-
+    const { data: session} = useSession();
 
   
     
@@ -39,7 +40,7 @@ const AbstractReport= () => {
 
       async function fetchData() {
           
-          const { data } = await axios.get(process.env.NEXTAUTH_URL + '/api/DataReport/fetchData');          
+          const { data } = await axios.get(process.env.NEXTAUTH_URL + `/api/DataReport/fetchData?userId=${session.user.id}`);          
           setdatalist2(data);
       }
 
@@ -51,7 +52,7 @@ const AbstractReport= () => {
 
     
     const handleSearchButtonClick = async (selectedReport) => {
-      const {data} = await axios.get(`/api/DataReport/abstractReport?reportName=${selectedReport}`);
+      const {data} = await axios.get(`/api/DataReport/abstractReport?userId=${session.user.id}&reportName=${selectedReport}`);
       setdatalist(data);
     };
 

@@ -19,7 +19,7 @@ import { useEffect } from "react";
 import axios from 'axios';
 import Savepayment from "../payments/savepayment";
 import { useRouter } from "next/router";
-
+import { useSession } from "next-auth/react";
 
 
 
@@ -37,6 +37,25 @@ const Business_tax = () => {
   const [orFund, setorFund] = useState('');
   const [orType, setorType] = useState('');
 
+
+  const { data: session, status } = useSession();
+  
+  if (status === 'loading') {
+    return <div>Loading...</div>;
+  }
+
+
+  if (!session) {
+    return   <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "30vh" }}>
+    <div style={{ textAlign: "center" }}>
+      <h1>Please Login</h1>
+      <p>You need to be authenticated to access this page.</p>
+    </div>
+  </div>
+  }
+
+
+  
 
   useEffect(() => {
 
@@ -127,8 +146,10 @@ const Business_tax = () => {
   
 
   return (
+    
     <Flex direction={'row'} justify={'center'} >
       
+     
 
       {console.log(datalist2)}
 
@@ -201,7 +222,7 @@ const Business_tax = () => {
                                   type: item.data2[0].account_name,
                                   name: item.sub_account_name, 
                                   amount: item.sub_account_fee === 0 ? Number(amounts[item._id]) : item.sub_account_fee ,
-                                  userId: '63e4484b3a663c0b8d277141',                                   
+                                  userId: session.user.id,                                   
                                   
                           },
                           

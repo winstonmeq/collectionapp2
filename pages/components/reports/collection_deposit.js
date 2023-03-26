@@ -15,6 +15,9 @@ import ReactToPrint from "react-to-print";
     TableContainer, useDisclosure, Button, Modal, ModalBody, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalFooter
   } from '@chakra-ui/react'
 import AddLCR from '../LCR/addLCR';
+import { useSession } from 'next-auth/react';
+
+
 
 const Collection_deposit = () => {
 
@@ -27,43 +30,32 @@ const Collection_deposit = () => {
 
 
 
-    const tableRef = useRef(null);
+    const tableRef = useRef(null);  
+    const [userId, setuserId] = useState('');
 
+
+    const { data: session} = useSession();
+
+    // useEffect(() => {
+    //   if (session) {
+    //     setuserId(session.user.id);
+
+    //   }
+    // }, [session]);
+
+    
 
     useEffect(() => {
 
-        // async function fetchIssuesOR() {
-            
-        //     const { data } = await axios.get(process.env.NEXTAUTH_URL + '/api/or/fetchOR');
-          
-        //     setdatalist(data);
-        // }
-
-        // async function fetchNoIssuesOR() {
-        //     const { data } = await axios.get( process.env.NEXTAUTH_URL + `/api/or/fetch_no_orUse`)          
-        //     setdatalist2(data)
-           
-        // }
-
-        // async function fetch_allOR() {
-        //     const { data } = await axios.get(process.env.NEXTAUTH_URL + '/api/or/fetch_or_payment');
-        //     setdatalist3(data)
-           
-        // }
-
-        async function getORreport() {
-            const { data } = await axios.get(process.env.NEXTAUTH_URL + '/api/orReport/get_or_report');
+            async function getORreport() {
+            const { data } = await axios.get(process.env.NEXTAUTH_URL + `/api/orReport/get_or_report?userId=${session.user.id}`);
             setdatalist4(data)
            
         }
   
         getORreport();
-        // fetch_allOR();
-        // fetchIssuesOR();
-        // fetchNoIssuesOR();
-      
-
-    }, []);
+     
+    }, [session.user.id]);
 
 
     const total = datalist.reduce((acc, item) => acc + item.totalAmount, 0);
@@ -74,7 +66,7 @@ const Collection_deposit = () => {
         
 
 <Flex  direction={"column"} align={"center"}>
-{console.log(datalist4)}   
+{console.log(userId)}   
  
 
 

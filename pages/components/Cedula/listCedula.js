@@ -13,7 +13,7 @@ import {
   import { useState } from 'react';
   import { useEffect } from 'react';
   import Link from 'next/link';
-   //import Cedula from './addCedulaView';
+   import { useSession } from 'next-auth/react';
    import Cedula from '../Cedula/addCedulaView'
 
 
@@ -21,14 +21,34 @@ import {
 
 const ListCedula = () => {
 
+  const { data: session, status } = useSession();
+
   const [data, setdata] = useState([]);
-  const [userId, setuserId] = useState('63e4484b3a663c0b8d277141');
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure()  
+  
+  
+  if (status === 'loading') {
+    return <div>Loading...</div>;
+  }
 
 
-  const getListCedula = async (userId) => {     
+  if (!session) {
 
-    const payload = {userId}
+    return   <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "30vh" }}>
+    <div style={{ textAlign: "center" }}>
+      <h1>Please Login</h1>
+      <p>You need to be authenticated to access this page.</p>
+    </div>
+  </div>
+  }
+
+ 
+
+
+
+  const getListCedula = async () => {     
+
+    const payload = {userId:session.user.id}
 
     
     const cedulalist = await listCedula(payload);
@@ -51,11 +71,13 @@ const ListCedula = () => {
 
       }
 
-      useEffect(() => {             
+      useEffect(() => {          
         
-        getListCedula(userId)   
+  
+        
+        getListCedula()   
            
-          }, [userId]);
+          }, [session.user.id]);
 
 
     return (

@@ -16,7 +16,8 @@ import {
   import { useEffect } from "react";
   import axios from 'axios';
   import Router, { useRouter } from "next/router";
-  
+  import { useSession } from 'next-auth/react';
+
   
   const GenerateReport = () => {
    
@@ -29,10 +30,13 @@ import {
       const [reportTag, setreportTag] = useState('');
       const [userId, setuserId] = useState('63e4484b3a663c0b8d277141')
 
+      const { data: session} = useSession();
+
                  
   
    async function fetchData() {
-              const { data } = await axios.get( process.env.NEXTAUTH_URL + `/api/orReport/fetch_report`)
+
+              const { data } = await axios.get( process.env.NEXTAUTH_URL + `/api/orReport/fetch_report?userId=${session.user.id}`)
             
               setdatalist(data);             
               
@@ -40,7 +44,7 @@ import {
 
    
     async function fetchData2() {
-      const { data } = await axios.get( process.env.NEXTAUTH_URL + `/api/LCR/fetch_report`)
+      const { data } = await axios.get( process.env.NEXTAUTH_URL + `/api/LCR/fetch_report?userId=${session.user.id}`)
     
       setdatalist2(data);             
       
@@ -48,7 +52,7 @@ import {
 
 
    async function fetchORData2() {
-    const { data } = await axios.get( process.env.NEXTAUTH_URL + `/api/ORdata/fetchUseOR`)
+    const { data } = await axios.get( process.env.NEXTAUTH_URL + `/api/ORdata/fetchUseOR?userId=${session.user.id}`)
   
     setdatalist4(data);             
     
@@ -64,9 +68,7 @@ import {
     }, [datalist, reportTag]);
 
       
-
-
-          const handleSave = async () => {
+         const handleSave = async () => {
             try {
           
                 const datalistWithDate = datalist.map((data) => {
@@ -117,32 +119,6 @@ import {
 
           }
 
-
-
-
-          // const SaveORdata2 = async () => {
-          //   try {
-          
-          //       const ORdatalist = datalist4.map((data) => {
-          //           return {
-          //             ...data,
-          //             reportName: reportTag,
-
-          //           };
-          //         });
-                  
-          //         const response = await axios.post(process.env.NEXTAUTH_URL + '/api/ORdata2/addOR', { datalist4: ORdatalist });                  
-          //         console.log('Success Save ORdata2')
-
-          //   } catch (error) {
-          //     console.log(error)
-          //   }
-
-
-          //      //delete data per _id
-          //   await axios.get( process.env.NEXTAUTH_URL + `/api/ORdata/delete_table`)
-
-          // }
 
 
           const SaveORdata2 = async () => {

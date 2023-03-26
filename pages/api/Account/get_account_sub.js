@@ -18,10 +18,10 @@ export default async function handler(req, res) {
       
        const getdata = await Account.aggregate([
             
-        { 
-            $match : { userId: require('mongoose').Types.ObjectId('63e4484b3a663c0b8d277141')}, 
+        // { 
+        //     $match : { userId: require('mongoose').Types.ObjectId('63e4484b3a663c0b8d277141')}, 
 
-        },
+        // },
             
         {                
             $lookup: {

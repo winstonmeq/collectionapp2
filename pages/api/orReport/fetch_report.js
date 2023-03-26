@@ -9,7 +9,7 @@ export default async function handler(req, res) {
 
       try {
 
-    //     const {id} = req.query;
+       const {userId} = req.query;
 
     //   console.log(' payment api transacId ang',id)
 
@@ -19,7 +19,7 @@ export default async function handler(req, res) {
        const data = await ORreport.aggregate([
         {
           $match: {
-            userId: require('mongoose').Types.ObjectId('63e4484b3a663c0b8d277141')
+            userId: require('mongoose').Types.ObjectId(userId)
            
           }
         }

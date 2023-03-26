@@ -18,11 +18,16 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import axios from 'axios';
 import Savepayment2 from "../payments/savepayment2";
-
+import { useSession } from "next-auth/react";
 
 
 
 const Cedula = () => {
+
+
+
+  const { data: session} = useSession();
+
 
   const router = useRouter();
 
@@ -75,7 +80,7 @@ const Cedula = () => {
   const [orBB, setorBB] = useState(0);
   const [orNumber, setorNumber] = useState(0);
   const [orNumber2, setorNumber2] = useState(0);
-  const [userId, setuserId] = useState('63e4484b3a663c0b8d277141')
+  const [userId, setuserId] = useState(session.user.id)
   const [customerName, setcustomerName] = useState('');
 
 
@@ -103,10 +108,12 @@ const Cedula = () => {
 
 
   useEffect(() => {
+    
+   
 
     async function fetchData() {
 
-      const { data } = await axios.get(process.env.NEXTAUTH_URL + `/api/Cedula/fetch_cedula`)
+      const { data } = await axios.get(process.env.NEXTAUTH_URL + `/api/Cedula/fetch_cedula?userId=${userId}`)
 
       setdatalist(data);
 
@@ -139,7 +146,7 @@ const Cedula = () => {
     trasacId();
     fetchData();
 
-  }, []);
+  }, [userId]);
 
 
 
@@ -518,7 +525,7 @@ const Cedula = () => {
 
     <Flex direction={"column"} align={"center"} >
 
-      {console.log('data', datalist)}
+      {console.log('userId', userId)}
 
 
       <Box>

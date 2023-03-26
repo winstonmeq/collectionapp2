@@ -31,7 +31,7 @@ const Header = () => {
 <Stack direction={'row'}>
 
 <Button size={'sm'}>
-<Link href={'/components/login/signIn'} >
+<Link href={'/login'} >
 <Text fontWeight={'bold'} fontSize={'md'}>Sign In</Text>
 </Link>
 </Button>
