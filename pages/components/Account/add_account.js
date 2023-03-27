@@ -10,23 +10,43 @@ import DataTable from 'react-data-table-component';
 
 
 
-
-
-
-
-
 const Add_account = () => {
 
     const [account_name, setAccount_name] = useState('');
     const [account_code, setAccount_code] = useState('');
     const [account_description, setAccount_description] = useState('');
-    const [userId, setuserId] = useState('63e4484b3a663c0b8d277141')
+    const [userId, setuserId] = useState()
     const { isOpen, onOpen, onClose } = useDisclosure()
     const [datalist, setdatalist] = useState([]);    
 
 
 
     const router = useRouter();
+
+ 
+
+
+      
+    useEffect(() => {   
+
+
+      async function fetchData() {
+
+        const { data } = await axios.get( process.env.NEXTAUTH_URL + '/api/Account/getAccount')
+       
+        console.log('datalist',data)
+  
+        setdatalist(data);
+       
+    }
+ 
+      fetchData();
+      
+      }, []);
+
+
+
+
 
     const add_account_db = async () => {
 
@@ -58,19 +78,7 @@ const Add_account = () => {
 
 
     
-    
-    useEffect(() => {   
-
-      async function fetchData() {
-          const { data } = await axios.get( process.env.NEXTAUTH_URL + `/api/Account/getAccount`)
-          setdatalist(data);
-
-         
-      }
-
-      fetchData();
-      }, []);
-
+  
       const columns = [
     
         {
@@ -175,6 +183,8 @@ const Add_account = () => {
 
 
         </Flex>
+
+
     )
 }
 

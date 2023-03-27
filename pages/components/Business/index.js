@@ -39,20 +39,6 @@ const Business_tax = () => {
 
 
   const { data: session, status } = useSession();
-  
-  if (status === 'loading') {
-    return <div>Loading...</div>;
-  }
-
-
-  if (!session) {
-    return   <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "30vh" }}>
-    <div style={{ textAlign: "center" }}>
-      <h1>Please Login</h1>
-      <p>You need to be authenticated to access this page.</p>
-    </div>
-  </div>
-  }
 
 
   
@@ -65,10 +51,6 @@ const Business_tax = () => {
     }
 
      trasacId();
-
-    //  setdatalist2([{ transacId: 1, name: 'Business_tax' , amount: 0,  type: 'Business',
-    //  userId: '63e4484b3a663c0b8d277141' }, { transacId: 2 , name: 'Fines/Penalty' , amount: 0,  type: 'Fines/Penalty',
-    //  userId: '63e4484b3a663c0b8d277141', }])
    
   
   }, []);
@@ -80,8 +62,7 @@ const Business_tax = () => {
         const { data } = await axios.get( process.env.NEXTAUTH_URL + `/api/Sub_account/get_sub_account`)
         setdatalist2(data);
          
-    }
-   
+    }   
       fetchData2();
       }, []);
 
@@ -142,6 +123,22 @@ const Business_tax = () => {
 
 
   const totalAmount = datalist.reduce((acc, item) => acc + item.amount, 0);
+
+
+    
+  if (status === 'loading') {
+    return <div>Loading...</div>;
+  }
+
+
+  if (!session) {
+    return   <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "30vh" }}>
+    <div style={{ textAlign: "center" }}>
+      <h1>Please Login</h1>
+      <p>You need to be authenticated to access this page.</p>
+    </div>
+  </div>
+  }
 
   
 
@@ -211,7 +208,7 @@ const Business_tax = () => {
                   return (                
                          <Tr key={item._id}>
                           <Td style={{width:'200px'}}>{item.sub_account_name}</Td>
-                          <Td style={{width:'180px'}}>{item.sub_account_fee === 0 ? (<Input type='text' required={'true'} placeholder="0" value={amounts[item._id] || ''} 
+                          <Td style={{width:'350px'}}>{item.sub_account_fee === 0 ? (<Input type='text' size={'sm'} required={'true'} variant='filled' placeholder='0' value={amounts[item._id] || ''} 
                           onChange={(e) => handleAmountChange(item._id, e.target.value)} />) : (item.sub_account_fee) }</Td>
 
                           

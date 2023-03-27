@@ -24,12 +24,16 @@ const IndexLab = () => {
 
 
     useEffect(() => {
+
         async function fetchData() {
+
             const { data } = await axios.get(process.env.NEXTAUTH_URL + '/api/laboratory/lab_payment_list');
 
             console.log(data)
+            
             setPaymentList(data);
         }
+        
         fetchData();
     }, []);
 

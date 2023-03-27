@@ -66,7 +66,6 @@ import {
 
 
 
-
         
         useEffect(() => {   
   
@@ -128,10 +127,9 @@ import {
             console.log(error)
   
           }  
-
           
-        }
-      
+        }     
+        router.replace("/")
 
       }
 

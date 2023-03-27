@@ -53,9 +53,13 @@ const CollectionDeposit = () => {
             setdatalist2(data)
            
         } 
+
+   
        
         if (userId) {
+
             fetchdatareport();
+            
         }  
 
     }, [userId]);
@@ -71,11 +75,13 @@ const CollectionDeposit = () => {
         const {data} = await axios.get( process.env.NEXTAUTH_URL +  `/api/Freport/collectionDeposit?userId=${userId}&report=${reportCode}`);
         setdatalist4(data);
 
-        
-
         const response = await axios.get(process.env.NEXTAUTH_URL + `/api/ORdata2/ORfetch?userId=${userId}&report=${reportCode}`);
         const dd = response.data
         setdatalist(dd);
+
+        const response3 = await axios.get(process.env.NEXTAUTH_URL + `/api/ORdata2/fetch_sef?userId=${userId}&orType=${'SEF'}&report=${reportCode}`);
+        const dd3 = response.data
+        setdatalist3(dd3);
 
       };
 
@@ -94,7 +100,11 @@ const CollectionDeposit = () => {
 const formattedDate = currentDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
 
 
- const ComponentToPrint = () => {
+const seftotal = datalist3.reduce((acc, item) => acc + item.totalAmount, 0);
+
+
+
+const ComponentToPrint = () => {
 
     return (
         <Box ref={tableRef} fontFamily={'Arial'} fontSize={'12px'}>
@@ -185,8 +195,8 @@ const formattedDate = currentDate.toLocaleDateString('en-US', { month: 'long', d
           
  </tr>
  <tr>
-            <td style={{border: '1px solid black', height:'20px', width:'200px'}}></td>
-            <td style={{border: '1px solid black',width:'160px'}}></td>
+            <td style={{border: '1px solid black', height:'20px', width:'200px'}}>SEF</td>
+            <td style={{border: '1px solid black',width:'160px'}}>{seftotal/2}</td>
           
  </tr>
  <tr>

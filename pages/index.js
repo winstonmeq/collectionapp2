@@ -14,7 +14,7 @@ export default function Home() {
     return <div>Loading...</div>;
   }
 
-  function login() {
+  async function login() {
     router.replace('/login')
   }
 
