@@ -59,7 +59,7 @@ const Print = () => {
 
 
   return (
-    <Flex  direction={"column"} align={"center"}  fontFamily={'Arial'}>
+    <>
       <ReactToPrint
         trigger={() => <Button>Print!</Button>}
         content={() => tableRef.current}
@@ -70,8 +70,8 @@ const Print = () => {
 <button onClick={handlePrint}>Print PDF</button>
 
 
-      <Box ref={tableRef} align={"left"} >
-        <table style={{fontSize:'11px'}} width='350px' >
+      <>
+        <table ref={tableRef} style={{fontSize:'14px'}} width='350px' >
          
           <tbody>
           {paymentList.map((item, i) => {
@@ -84,37 +84,37 @@ const Print = () => {
             </tr> 
 
             <tr >             
-              <td style={{paddingLeft:'30px'}}>{moment(item.createdAt).format('MM/DD/YYYY')}</td>
+              <td style={{paddingLeft:'40px'}}>{moment(item.createdAt).format('MM/DD/YYYY')}</td>
               <td></td>
               <td></td>            
             </tr>
 
             <tr>
-            <td height={'15px'}></td>
+            <td height={'20px'}></td>
             <td></td>
             <td></td>
             </tr>  
 
             <tr>
-              <td style={{paddingLeft:'30px'}} >MTO</td>
+              <td style={{paddingLeft:'40px'}} >MTO</td>
               <td></td>
               <td></td>
             </tr>
 
             <tr>
-            <td height={'15px'}></td>
+            <td height={'20px'}></td>
             <td></td>
             <td></td>
             </tr>  
 
             <tr>
-              <td style={{paddingLeft:'30px'}}>{item.customerName}</td>
+              <td style={{paddingLeft:'40px'}}>{item.customerName}</td>
               <td></td>
               <td></td>
             </tr>
 
             <tr>
-            <td height={'35px'}></td>
+            <td height={'30px'}></td>
             <td></td>
             <td></td>
             </tr>  
@@ -125,7 +125,7 @@ const Print = () => {
             {item.data2.map((item2,j) => (
                      <tr key={j}>
                    <td width={'180px'} >{item2.name}</td>
-                   <td width={'70px'}></td>
+                   <td width={'60px'}></td>
                    <td width={'100px'}>{item2.amount.toFixed(2)}</td>
                     </tr>
             ))}
@@ -135,22 +135,29 @@ const Print = () => {
             </tr> 
 
             <tr>
-            <td></td>
-            <td></td>
-            <td>{item.amount.toFixed(2)}</td>
+            <td colspan='3'>
+            <tr >
+                   <td width={'180px'} ></td>
+                   <td width={'60px'}></td>
+                   <td width={'100px'}>{item.amount.toFixed(2)}</td>
+                    </tr>
+
+
+
+            </td>
+           
             </tr>  
 
             <tr>
-            <td height={'25px'}></td>
+            <td height={'15px'}></td>
             <td></td>
             <td></td>
             </tr>  
 
 
             <tr>
-              <td >{converter.toWords(item.amount)}</td>
-              <td></td>
-              <td></td>
+              <td colspan='3'>{converter.toWords(item.amount)}</td>
+              
             </tr>
 
 
@@ -163,30 +170,10 @@ const Print = () => {
           })}
           </tbody>
         </table>
-        <style jsx>{`
-        @media print {
-            /* Add your print styles here */
-            body {
-              font-size: 1.4vw; /* responsive font size */
-            }
-            h1 {
-              font-size: 2vw; /* responsive font size */
-              text-align: center;
-            }
-            table {
-              width: 90vw; /* responsive table width */
-            }
-            td {
-              font-size: 1.2vw; /* responsive font size */
-            }
-            /* ... */
-          }
-
-        
-
-      `}</style>
-      </Box>
-    </Flex>
+ 
+      </>
+      
+    </>
   );
 };
 
