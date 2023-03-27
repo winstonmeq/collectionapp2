@@ -21,47 +21,59 @@ import {
 import Fetch_no_orUse from "./fetch_no_orUse";
   import moment from "moment/moment";
 import Collection_deposit from "../reports/collection_deposit";
+import { useSession } from "next-auth/react";
 
 
 
   const SaveORdata = () => {
   
-
-    const [datalist,setdatalist] = useState([])
+    const { data: session, status} = useSession();  
+    
+     const [datalist,setdatalist] = useState([])
     const [orType, setorType] = useState('');
-
-
     const [orFrom, setorFrom] = useState(0)
     const [orTo, setorTo] = useState(0)
     const [orUse, setorUse] = useState(0)
     const [orBB, setorBB] = useState(0)
-    const [userId, setuserId] = useState('63e4484b3a663c0b8d277141')
+    const [userId, setuserId] = useState('')
     const [orGenId, setorGenId] = useState('')
     const [orFund, setorFund] = useState('')
   
     const router = useRouter()
 
+   
+
     const ORgenerateId = () => {
       setorGenId(`or${Math.floor(Math.random() * 10000)}`)
-    }
 
+    }
 
     useEffect(() => {   
 
-      // async function fetchOR() {
-      //     const { data } = await axios.get( process.env.NEXTAUTH_URL + `/api/or/fetchOR`)          
-      //     setdatalist(data)
-       
-      // }
-      
-    
-      
-
-      //fetchOR();
       ORgenerateId();
   
   
       }, []);
+
+  
+    
+      if (status === 'loading') {
+        return <div>Loading...</div>;
+      }
+    
+    
+      if (!session) {
+        return   <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "30vh" }}>
+        <div style={{ textAlign: "center" }}>
+          <h1>Please Login</h1>
+          <p>You need to be authenticated to access this page.</p>
+        </div>
+      </div>
+      }
+
+
+  
+   
 
     
 // function fetchORdata() {
@@ -91,7 +103,7 @@ import Collection_deposit from "../reports/collection_deposit";
         for (let orNumber = num1; orNumber <= num2; orNumber++) {
             try {
     
-                const payload = {orType, orFund, orGenId, orFrom,orTo,orNumber,orUse,orBB, userId}
+                const payload = {orType, orFund, orGenId, orFrom,orTo,orNumber,orUse,orBB, userId:session.user.id}
       
                 console.log('browser', payload)         
           
@@ -120,7 +132,7 @@ import Collection_deposit from "../reports/collection_deposit";
     
                 const payload = {orGenId:orGenIdd, orFund:orFundV, formType:orTypeV, orDate:tdate, qty1:null, bgFrom:null, bgTo:null, 
                                  qty2:(rcTo-rcFrom + 1), rcFrom:rcFrom, rcTo:rcTo, 
-                                 qty3:null, isFrom:null, isTo:null, qty4:(rcTo-rcFrom + 1), ebFrom:rcFrom, ebTo:rcTo, userId}
+                                 qty3:null, isFrom:null, isTo:null, qty4:(rcTo-rcFrom + 1), ebFrom:rcFrom, ebTo:rcTo, userId:session.user.id}
       
                 console.log('orReport', payload)         
           
@@ -143,6 +155,7 @@ import Collection_deposit from "../reports/collection_deposit";
       <div>
        
        <Flex direction={'row'} justify={'center'}>
+       {console.log('sdfsdf',session.user.id)}
        <Box>
           <label>OR Type</label>
           <Select value={orType} required onChange={(e) => {setorType(e.target.value)}} >

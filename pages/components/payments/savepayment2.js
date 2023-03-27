@@ -30,7 +30,7 @@ import {
     //   const [orGenId, setorGenId] = useState('');
     //const [or_id, setor_id] = useState('');
    
-      const [orUse, setorUse] = useState(1);
+     const [orUse, setorUse] = useState(1);
      const [userId, setuserId] = useState('63e4484b3a663c0b8d277141')
 
      

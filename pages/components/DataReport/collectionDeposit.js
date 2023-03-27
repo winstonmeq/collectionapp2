@@ -15,6 +15,7 @@ import ReactToPrint from "react-to-print";
     TableContainer, useDisclosure, Button, Modal, ModalBody, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalFooter
   } from '@chakra-ui/react'
 import AddLCR from '../LCR/addLCR';
+import { useSession } from 'next-auth/react';
 
 
 
@@ -27,60 +28,56 @@ const CollectionDeposit = () => {
     const [datalist2, setdatalist2] = useState([]);
     const [datalist3, setdatalist3] = useState([]);
     const [datalist4, setdatalist4] = useState([]);
+    const [reportName,setreportName] = useState(null);
     const { isOpen, onOpen, onClose } = useDisclosure()
-    // const [reportCode, setreportCode] = useState('');
+    const [userId,setuserId] = useState(null)
+    const [orFund, setorFund] = useState(null);
+
+    const { data: session} = useSession();
+
+
+   
+
+    useEffect(() => {
+        if (session) {
+            setuserId(session.user.id);
+          
+        }
+    }, [session]);
+
+
+    useEffect(() => {    
+
+        async function fetchdatareport() {
+            const { data } = await axios.get( process.env.NEXTAUTH_URL + `/api/Freport/fetch_report?userId=${userId}`)          
+            setdatalist2(data)
+           
+        } 
+       
+        if (userId) {
+            fetchdatareport();
+        }  
+
+    }, [userId]);
 
 
 
     const tableRef = useRef(null);
 
 
-    useEffect(() => {
-
-        async function fetchData() {
-            
-            const { data} = await axios.get(process.env.NEXTAUTH_URL + '/api/ORdata2/ORfetch');          
-            setdatalist(data);
-        }
-
-        async function fetchdatareport() {
-            const { data } = await axios.get( process.env.NEXTAUTH_URL + `/api/Freport/fetch_report`)          
-            setdatalist2(data)
-           
-        }
-
- 
-        // async function getORreport() {
-        //     const { data } = await axios.get(process.env.NEXTAUTH_URL + '/api/Freport/collectionDeposit');
-        //     setdatalist4(data)
-           
-        // }
-  
-       // getORreport();
-        fetchdatareport()
-        fetchData();
-      
-
-    }, []);
-
-
-
-
 
 
     const handleSearchButtonClick = async (reportCode) => {
-        const {data} = await axios.get( process.env.NEXTAUTH_URL +  `/api/Freport/collectionDeposit?report=${reportCode}`);
+        const {data} = await axios.get( process.env.NEXTAUTH_URL +  `/api/Freport/collectionDeposit?userId=${userId}&report=${reportCode}`);
         setdatalist4(data);
 
         
 
-        const response = await axios.get(process.env.NEXTAUTH_URL + `/api/ORdata2/ORfetch?report=${reportCode}`);
+        const response = await axios.get(process.env.NEXTAUTH_URL + `/api/ORdata2/ORfetch?userId=${userId}&report=${reportCode}`);
         const dd = response.data
         setdatalist(dd);
 
       };
-
-
 
 
       
@@ -90,14 +87,17 @@ const CollectionDeposit = () => {
   };
   
 
-  const total = 0
-  //const total = datalist.reduce((acc, item) => acc + item.totalAmount, 0);
+ 
+  const total = datalist.reduce((acc, item) => acc + item.totalAmount, 0);
+
+ const currentDate = new Date();
+const formattedDate = currentDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
 
 
  const ComponentToPrint = () => {
 
     return (
-        <Box ref={tableRef} fontFamily={'Arial'} fontSize={'11px'}>
+        <Box ref={tableRef} fontFamily={'Arial'} fontSize={'12px'}>
 
 <Box textAlign={'center'} >Report of Collection and Deposits</Box>
 <Box textAlign={'center'}>PRESIDENT ROXAS, COTABATO</Box>
@@ -108,17 +108,17 @@ const CollectionDeposit = () => {
     <tbody>
         <tr >
             <td style={{border: '1px solid black'}}>Fund</td>
-            <td style={{border: '1px solid black'}}>General Fund</td>
+            <td style={{border: '1px solid black'}}>{orFund}</td>
             <td style={{ width: "40px" }}></td>
             <td style={{border: '1px solid black'}}>Date:</td>
-            <td style={{border: '1px solid black'}}>January 23, 2023</td>
+            <td style={{border: '1px solid black'}}>{formattedDate}</td>
         </tr>
         <tr>
             <td style={{border: '1px solid black'}}>Name of Accountable Officer</td>
-            <td style={{border: '1px solid black'}}>HAROLD KIM B. UDANI</td>
+            <td style={{border: '1px solid black'}}>{session == null ? "":session.user.name}</td>
             <td style={{ width: "40px" }}></td>
             <td style={{border: '1px solid black'}}>Report No</td>
-            <td style={{border: '1px solid black'}}>DTC-2023-01-003</td>
+            <td style={{border: '1px solid black'}}>{reportName}</td>
         </tr>
     </tbody>
 </table>
@@ -269,6 +269,8 @@ const CollectionDeposit = () => {
    return (
     <>
 
+    
+
     <tr key={i} style={{ width: "60px", fontSize:'10px' }}>
    <td style={{border: '1px solid black',width:'73px'}}>{items.formType}</td>
 
@@ -281,7 +283,8 @@ const CollectionDeposit = () => {
    <td style={{border: '1px solid black',width:'54px'}}>{items.rcFrom}</td>
    <td style={{border: '1px solid black',width:'56px'}}>{items.rcTo}</td>
 
-   
+   {setreportName(items.reportNum)}
+   {setorFund(items.orFund)}
    
    <td style={{border: '1px solid black',width:'39px'}}>{items.qty3}</td>
    <td style={{border: '1px solid black',width:'54px'}}>{items.isFrom}</td>
@@ -393,17 +396,17 @@ const CollectionDeposit = () => {
     </tr>
 
     <tr style={{ textAlign: 'center' }}>
-    <td colSpan='2' style={{border: '1px solid black',width:'39px'}}>HAROLD KIM B. UDANI</td>
-    <td colSpan='2'style={{border: '1px solid black',width:'39px'}}>FEB. 14, 2023</td>
+    <td colSpan='2' style={{border: '1px solid black',width:'39px'}}>{session == null ? "" : session.user.name}</td>
+    <td colSpan='2'style={{border: '1px solid black',width:'39px'}}>{formattedDate}</td>
     <td colSpan='2' style={{border: '1px solid black',width:'39px'}}>MARIA FE E. DALISAY</td>
-    <td style={{border: '1px solid black',width:'39px'}}>FEB. 14, 2023</td>
+    <td style={{border: '1px solid black',width:'39px'}}>{formattedDate}</td>
 
     </tr>
     <tr style={{ textAlign: 'center' }}>
     <td colSpan='2' style={{border: '1px solid black',width:'39px'}}>Name & Signature</td>
     <td colSpan='2'style={{border: '1px solid black',width:'39px'}}>Date</td>
     <td colSpan='2'style={{border: '1px solid black',width:'39px'}}>Name & Signature</td>
-    <td style={{border: '1px solid black',width:'39px'}}>FEB. 14, 2023</td>
+    <td style={{border: '1px solid black',width:'39px'}}>{formattedDate}</td>
 
     </tr>
 

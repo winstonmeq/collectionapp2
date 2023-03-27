@@ -16,7 +16,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import axios from 'axios';
 import { useRouter } from "next/router";
-
+import { useSession } from "next-auth/react";
 
 const Savepayment = ({ transacId, orFund, orType, amount, savehandle }) => {
 
@@ -29,7 +29,7 @@ const Savepayment = ({ transacId, orFund, orType, amount, savehandle }) => {
   const [orBB, setorBB] = useState(0);
   const [orNumber, setorNumber] = useState(0);
   const [orNumber2, setorNumber2] = useState(0);
-  const [userId, setuserId] = useState('63e4484b3a663c0b8d277141')
+  const [userId, setuserId] = useState('')
   const [orGenId, setorGenId] = useState('');
 
 
@@ -45,6 +45,7 @@ const Savepayment = ({ transacId, orFund, orType, amount, savehandle }) => {
   const dateToday = `${currentDate.getMonth() + 1}/${currentDate.getDate()}/${currentDate.getFullYear()}`;
 
 
+  const { data: session} = useSession();
 
   useEffect(() => {
 
@@ -53,7 +54,7 @@ const Savepayment = ({ transacId, orFund, orType, amount, savehandle }) => {
 
     async function fetchData() {
 
-      const payload = { orFund, orType, userId }
+      const payload = { orFund, orType, userId:session.user.id }
 
       const { data } = await axios.post(process.env.NEXTAUTH_URL + `/api/or/fetch_fund`, payload)
 
@@ -76,7 +77,7 @@ const Savepayment = ({ transacId, orFund, orType, amount, savehandle }) => {
     }
 
     fetchData();
-  }, []);
+  }, [session.user.id]);
 
 
 
@@ -86,7 +87,7 @@ const Savepayment = ({ transacId, orFund, orType, amount, savehandle }) => {
 
     try {
 
-      const payload = { or_id, orUse, userId }
+      const payload = { or_id, orUse, userId:session.user.id }
 
       const response = await axios.put(process.env.NEXTAUTH_URL + '/api/ORdata/updateOR', payload);
 
@@ -105,7 +106,7 @@ const Savepayment = ({ transacId, orFund, orType, amount, savehandle }) => {
   const handleSavePayment = async () => {
     try {
 
-      const payload = { transacId, orFund, orType, customerName, amount, orGenId, orNumber, userId }
+      const payload = { transacId, orFund, orType, customerName, amount, orGenId, orNumber, userId:session.user.id }
 
       console.log('browser', payload)
 
@@ -173,7 +174,7 @@ const Savepayment = ({ transacId, orFund, orType, amount, savehandle }) => {
 
         qty3: (orNumV - rcFrom + 1), isFrom: rcFrom, isTo: orNumV,
 
-        qty4: qtty, ebFrom: orNum2, ebTo: rcTo2, userId
+        qty4: qtty, ebFrom: orNum2, ebTo: rcTo2, userId:session.user.id
       }
 
       console.log('orReport', payload)
@@ -218,7 +219,7 @@ const Savepayment = ({ transacId, orFund, orType, amount, savehandle }) => {
 
         qty3: (orNumV - rcFrom + 1), isFrom: rcFrom, isTo: orNumV,
 
-        qty4: qtty, ebFrom: orNum2, ebTo: rcTo2, userId
+        qty4: qtty, ebFrom: orNum2, ebTo: rcTo2, userId:session.user.id
       }
 
       console.log('orReport', payload)
@@ -244,7 +245,7 @@ const Savepayment = ({ transacId, orFund, orType, amount, savehandle }) => {
 
       <Button onClick={onOpen}>Pay</Button>
 
-      {console.log(or_id)}
+      {console.log('ffff',session.user)}
 
       <Modal closeOnOverlayClick={false} isOpen={isOpen} onClose={onClose} size={'xl'}  >
         <ModalOverlay />

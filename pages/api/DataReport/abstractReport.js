@@ -10,7 +10,7 @@ export default async function handler(req, res) {
       try {
 
        // const { date1, date2, } = req.query;
-       const { reportName } = req.query;
+       const { userId,reportName } = req.query;
 
 
        await dbConnect();  
@@ -26,7 +26,7 @@ export default async function handler(req, res) {
                   //   $lte: new Date(date2)
                   // },
                                     
-                  userId: require('mongoose').Types.ObjectId('63e4484b3a663c0b8d277141'), reportName:reportName}, 
+                  userId: require('mongoose').Types.ObjectId(userId), reportName:reportName}, 
             },
            
 

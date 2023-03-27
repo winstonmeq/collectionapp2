@@ -28,12 +28,15 @@ const Print = () => {
   console.log(id);
 
   useEffect(() => {        
-    async function fetchData(id) {
+    async function fetchData() {
       const { data } = await axios.get(process.env.NEXTAUTH_URL + `/api/Payment/${id}`);           
       setPaymentList(data);
     }
-    fetchData(id);
-  }, []);
+    if(id){
+      fetchData();
+    }
+    
+  }, [id]);
 
   const tableRef = useRef(null);
   var converter = require('number-to-words');
@@ -70,8 +73,13 @@ const Print = () => {
 <button onClick={handlePrint}>Print PDF</button>
 
 
+<<<<<<< HEAD
       <>
         <table ref={tableRef} style={{fontSize:'14px'}} width='350px' >
+=======
+      <Box ref={tableRef} align={"left"} >
+        <table style={{fontSize:'12px'}} width='350px' >
+>>>>>>> 693b02d6126548284793de323230adafaf6c89e4
          
           <tbody>
           {paymentList.map((item, i) => {
@@ -133,6 +141,7 @@ const Print = () => {
             </td>
            
             </tr> 
+<<<<<<< HEAD
 
             <tr>
             <td colspan='3'>
@@ -146,6 +155,17 @@ const Print = () => {
 
             </td>
            
+=======
+          
+            <tr>            
+                <td colspan='3'>
+                    <tr>
+                      <td width={'180px'} ></td>
+                      <td width={'70px'}></td>
+                      <td width={'100px'}> {item.amount.toFixed(2)}</td>
+                      </tr>
+                </td>
+>>>>>>> 693b02d6126548284793de323230adafaf6c89e4
             </tr>  
 
             <tr>
